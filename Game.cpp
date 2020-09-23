@@ -23,7 +23,9 @@ void Game::update() {
     }
     if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)){
         auto pos = sf::Mouse::getPosition(*window);
-        sand->addElement(Materials::sand, pos.x, pos.y);
+        if (pos.x>0 && pos.y>0 && pos.x<videoMode.width && pos.y<videoMode.height){
+            sand->addElement(Materials::sand, pos.x, pos.y);
+        }
     }
     sand->update();
     image.create(videoMode.width, videoMode.height, sand->getPixelData());
