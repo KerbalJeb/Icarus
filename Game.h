@@ -10,18 +10,22 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Network.hpp>
+#include <iostream>
 #include "FallingSand.h"
+#include <chrono>
 
 class Game{
 private:
 
     sf::RenderWindow* window = nullptr;
-    sf::VideoMode videoMode {600, 800};
+    sf::VideoMode videoMode {480, 320};
     sf::Image image{};
     sf::Sprite background{};
     sf::Texture backgroundTexture{};
     sf::Event ev{};
     FallingSand* sand;
+    double average_time{};
+    static constexpr double N{50};
 
     void init_window();
 public:

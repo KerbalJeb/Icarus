@@ -25,7 +25,7 @@ class FallingSand {
 private:
     uint32_t* pixel_data;
     Point* points;
-    Point edgePoint{Materials::solid, false};
+    Point edgePoint{Materials::solid};
     const unsigned int x_dim;
     const unsigned int y_dim;
 
@@ -89,12 +89,13 @@ public:
         points = new Point [x*y]();
 
         for (int i = 0; i < x_dim * y_dim; ++i) {
-            if (i%x_dim==0 || i%x_dim==(x_dim-1) || i/y_dim == 0 || i/y_dim == (y_dim-1)){
+            auto x_p = i%x_dim;
+            auto y_p = i/x_dim;
+            if (x_p==0 || x_p==(x_dim-1) || y_p == 0 || y_p == (y_dim-1)){
                 points[i].material=Materials::solid;
             } else{
                 points[i].material=Materials::empty;
             }
-            pixel_data[i] = 0x000000FF;
         }
     }
 

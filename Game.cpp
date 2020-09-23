@@ -18,6 +18,7 @@ void Game::update() {
         switch (ev.type) {
             case sf::Event::Closed:
                 window->close();
+                std::cout<<"Average Time: "<<average_time*1000<<"ms"<<std::endl;
                 break;
         }
     }
@@ -27,7 +28,18 @@ void Game::update() {
             sand->addElement(Materials::sand, pos.x, pos.y);
         }
     }
+    auto start = std::chrono::high_resolution_clock::now();
     sand->update();
+    auto finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> delta = finish-start;
+    if (average_time==0){
+        average_time = delta.count();
+    } else{
+        average_time -= average_time/N;
+        average_time += delta.count()/N;
+    }
+
+
     image.create(videoMode.width, videoMode.height, sand->getPixelData());
 }
 
