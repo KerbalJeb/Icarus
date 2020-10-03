@@ -1,0 +1,17 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "src": "/Assets/Scripts"
+        }
+      ],
+      "dest": "obj/docfx/api/dotnet",
+      "shouldSkipMarkup": true
+    }
+  ],
+  "dest": "_site"
+}
