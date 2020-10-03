@@ -8,12 +8,12 @@ env:
 install:
   - nuget install docfx.console -Version 2.44.0 -ExcludeVersion
 script:
-  - $DOCFX_TOOL metadata docfx.json
-  - $DOCFX_TOOL build docfx.json
+  - $DOCFX_TOOL metadata Documentation/docfx.json
+  - $DOCFX_TOOL build    Documentation/docfx.json
 deploy:
   provider: pages
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  github_token: $GITHUB_TOKEN
   keep_history: true
   local-dir: _site
   on:

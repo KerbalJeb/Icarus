@@ -20,11 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78b0d985-ce45-4d85-a770-06cc4737011f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GridTesting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GridTesting.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileGrid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerInput.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerInput.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerInput.inputactions" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/PlayerInput.inputactions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docfx.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,11 +41,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Tests/Tests.asmdef.meta" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Tests/GridTests.cs.meta" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Tests/Tests.asmdef" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/TileGrid.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Tests/GridTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/A9810827-DCE3-444A-8E5C-4E9F3F5E0828/26/d608f0fb/Mesh.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/ShipBuildTesting.unity" root0="FORCE_HIGHLIGHTING" />
@@ -55,10 +56,9 @@
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GridTesting.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/PlayerInput.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/68BC8E07-A1AC-48AC-9973-83B31E11C74F/69/f2540fd9/02000004pdb.il" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/PlayerInput.inputactions" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/IL/68BC8E07-A1AC-48AC-9973-83B31E11C74F/5e/e41775fd/02000002pdb.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Documentation/docfx.json" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock:///TileGrid.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///GridTesting.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -66,10 +66,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/GridDrawer.cs" />
-        <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/.gitattributes" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TileGrid.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/GridTesting.cs" />
+        <option value="$PROJECT_DIR$/docfx.json" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/Documentation/docfx.json" />
       </list>
     </option>
   </component>
@@ -127,7 +129,7 @@
       <workItem from="1601604809046" duration="6043000" />
       <workItem from="1601696871249" duration="2882000" />
       <workItem from="1601699878242" duration="5113000" />
-      <workItem from="1601739562392" duration="13292000" />
+      <workItem from="1601739562392" duration="16590000" />
     </task>
     <task id="LOCAL-00001" summary="Added collider generation and highlighting">
       <created>1601749808520</created>
@@ -136,7 +138,28 @@
       <option name="project" value="LOCAL" />
       <updated>1601749808520</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Commented and refactored TileGrid.cs to use consistent naming">
+      <created>1601764915766</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1601764915766</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Testing Travis CI integration">
+      <created>1601765153274</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1601765153274</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added docfx.json">
+      <created>1601765917122</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1601765917122</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,7 +183,10 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="Added collider generation and highlighting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added collider generation and highlighting" />
+    <MESSAGE value="Commented and refactored TileGrid.cs to use consistent naming" />
+    <MESSAGE value="Testing Travis CI integration" />
+    <MESSAGE value="Added docfx.json" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added docfx.json" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -282,10 +308,11 @@
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="1512" y="255" key="Rider.ProjectTemplateDialog.Size/0.0.2560.1040@0.0.2560.1040" timestamp="1601743553682" />
-    <state x="607" y="229" key="RiderGenerateDialog" timestamp="1601574336515">
-      <screen x="0" y="0" width="1680" height="1010" />
+    <state x="925" y="236" key="RiderGenerateDialog" timestamp="1601764899093">
+      <screen x="0" y="0" width="2560" height="1040" />
     </state>
     <state x="607" y="229" key="RiderGenerateDialog/-265.1050.1440.933/0.0.1680.1010@0.0.1680.1010" timestamp="1601574336515" />
+    <state x="925" y="236" key="RiderGenerateDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1601764899093" />
     <state x="768" y="73" width="1645" height="916" key="SettingsEditor" timestamp="1601698959477">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
@@ -296,10 +323,10 @@
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="92" y="92" width="1496" height="826" key="VCS.FileHistoryDialog/-265.1050.1440.933/0.0.1680.1010@0.0.1680.1010" timestamp="1601570183016" />
-    <state x="872" y="240" key="Vcs.Push.Dialog.v2" timestamp="1601749814188">
+    <state x="872" y="240" key="Vcs.Push.Dialog.v2" timestamp="1601765918590">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>
-    <state x="872" y="240" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1601749814188" />
+    <state x="872" y="240" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1601765918590" />
     <state width="1288" height="528" key="XDebugger.FullValuePopup" timestamp="1601610395503">
       <screen x="0" y="0" width="2560" height="1040" />
     </state>

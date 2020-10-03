@@ -72,14 +72,14 @@ public class TileGrid
         }
     }
 
-    /// <summary>
+    /// <value>
     ///     Returns the mesh used to render the tiles
-    /// </summary>
+    /// </value>
     public Mesh RenderMesh { get; }
 
-    /// <summary>
+    /// <value>
     ///     The height/width of individual tiles
-    /// </summary>
+    /// </value>
     public float TileSize { get; }
 
     /// <summary>
