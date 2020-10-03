@@ -14,6 +14,7 @@ public class PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction    m_Player_Look;
     private readonly InputAction    m_Player_Move;
     private readonly InputAction    m_Player_PlaceBlock;
+    private readonly InputAction    m_Player_UpdateMesh;
 
     // UI
     private readonly InputActionMap m_UI;
@@ -64,6 +65,14 @@ public class PlayerInput : IInputActionCollection, IDisposable
                     ""name"": ""PlaceBlock"",
                     ""type"": ""Button"",
                     ""id"": ""e59284ef-7476-479d-ad73-a1516aadbda6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""UpdateMesh"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d56a112-21f0-4fca-9aed-dbddab17a9d2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -287,6 +296,17 @@ public class PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""XR"",
                     ""action"": ""PlaceBlock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7da8c156-34ca-4396-8488-fd1c0dec0b01"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""UpdateMesh"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -867,6 +887,7 @@ public class PlayerInput : IInputActionCollection, IDisposable
         m_Player_Move       = m_Player.FindAction("Move",       true);
         m_Player_Look       = m_Player.FindAction("Look",       true);
         m_Player_PlaceBlock = m_Player.FindAction("PlaceBlock", true);
+        m_Player_UpdateMesh = m_Player.FindAction("UpdateMesh", true);
         // UI
         m_UI                          = asset.FindActionMap("UI", true);
         m_UI_Navigate                 = m_UI.FindAction("Navigate",                 true);
@@ -994,11 +1015,11 @@ public class PlayerInput : IInputActionCollection, IDisposable
             m_Wrapper = wrapper;
         }
 
-        public InputAction Move       => m_Wrapper.m_Player_Move;
-        public InputAction Look       => m_Wrapper.m_Player_Look;
-        public InputAction PlaceBlock => m_Wrapper.m_Player_PlaceBlock;
-
-        public InputActionMap Get() => m_Wrapper.m_Player;
+        public InputAction    Move       => m_Wrapper.m_Player_Move;
+        public InputAction    Look       => m_Wrapper.m_Player_Look;
+        public InputAction    PlaceBlock => m_Wrapper.m_Player_PlaceBlock;
+        public InputAction    UpdateMesh => m_Wrapper.m_Player_UpdateMesh;
+        public InputActionMap Get()      => m_Wrapper.m_Player;
 
         public void Enable()
         {
@@ -1010,8 +1031,7 @@ public class PlayerInput : IInputActionCollection, IDisposable
             Get().Disable();
         }
 
-        public bool enabled => Get().enabled;
-
+        public                          bool enabled                      => Get().enabled;
         public static implicit operator InputActionMap(PlayerActions set) => set.Get();
 
         public void SetCallbacks(IPlayerActions instance)
@@ -1027,6 +1047,9 @@ public class PlayerInput : IInputActionCollection, IDisposable
                 PlaceBlock.started   -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceBlock;
                 PlaceBlock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceBlock;
                 PlaceBlock.canceled  -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPlaceBlock;
+                UpdateMesh.started   -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUpdateMesh;
+                UpdateMesh.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUpdateMesh;
+                UpdateMesh.canceled  -= m_Wrapper.m_PlayerActionsCallbackInterface.OnUpdateMesh;
             }
 
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
@@ -1041,6 +1064,9 @@ public class PlayerInput : IInputActionCollection, IDisposable
                 PlaceBlock.started   += instance.OnPlaceBlock;
                 PlaceBlock.performed += instance.OnPlaceBlock;
                 PlaceBlock.canceled  += instance.OnPlaceBlock;
+                UpdateMesh.started   += instance.OnUpdateMesh;
+                UpdateMesh.performed += instance.OnUpdateMesh;
+                UpdateMesh.canceled  += instance.OnUpdateMesh;
             }
         }
     }
@@ -1054,18 +1080,17 @@ public class PlayerInput : IInputActionCollection, IDisposable
             m_Wrapper = wrapper;
         }
 
-        public InputAction Navigate                 => m_Wrapper.m_UI_Navigate;
-        public InputAction Submit                   => m_Wrapper.m_UI_Submit;
-        public InputAction Cancel                   => m_Wrapper.m_UI_Cancel;
-        public InputAction Point                    => m_Wrapper.m_UI_Point;
-        public InputAction Click                    => m_Wrapper.m_UI_Click;
-        public InputAction ScrollWheel              => m_Wrapper.m_UI_ScrollWheel;
-        public InputAction MiddleClick              => m_Wrapper.m_UI_MiddleClick;
-        public InputAction RightClick               => m_Wrapper.m_UI_RightClick;
-        public InputAction TrackedDevicePosition    => m_Wrapper.m_UI_TrackedDevicePosition;
-        public InputAction TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
-
-        public InputActionMap Get() => m_Wrapper.m_UI;
+        public InputAction    Navigate                 => m_Wrapper.m_UI_Navigate;
+        public InputAction    Submit                   => m_Wrapper.m_UI_Submit;
+        public InputAction    Cancel                   => m_Wrapper.m_UI_Cancel;
+        public InputAction    Point                    => m_Wrapper.m_UI_Point;
+        public InputAction    Click                    => m_Wrapper.m_UI_Click;
+        public InputAction    ScrollWheel              => m_Wrapper.m_UI_ScrollWheel;
+        public InputAction    MiddleClick              => m_Wrapper.m_UI_MiddleClick;
+        public InputAction    RightClick               => m_Wrapper.m_UI_RightClick;
+        public InputAction    TrackedDevicePosition    => m_Wrapper.m_UI_TrackedDevicePosition;
+        public InputAction    TrackedDeviceOrientation => m_Wrapper.m_UI_TrackedDeviceOrientation;
+        public InputActionMap Get()                    => m_Wrapper.m_UI;
 
         public void Enable()
         {
@@ -1077,8 +1102,7 @@ public class PlayerInput : IInputActionCollection, IDisposable
             Get().Disable();
         }
 
-        public bool enabled => Get().enabled;
-
+        public                          bool enabled                  => Get().enabled;
         public static implicit operator InputActionMap(UIActions set) => set.Get();
 
         public void SetCallbacks(IUIActions instance)
@@ -1159,6 +1183,7 @@ public class PlayerInput : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext       context);
         void OnLook(InputAction.CallbackContext       context);
         void OnPlaceBlock(InputAction.CallbackContext context);
+        void OnUpdateMesh(InputAction.CallbackContext context);
     }
 
     public interface IUIActions

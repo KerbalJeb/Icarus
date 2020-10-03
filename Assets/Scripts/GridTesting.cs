@@ -3,22 +3,20 @@ using UnityEngine.InputSystem;
 
 public class GridTesting : MonoBehaviour
 {
-    private                  Vector2[] blockUV;
-    private                  Vector2[] blueBlock;
-    private                  Camera    cam;
-    private                  Vector2[] emptyBlock;
-    private                  Vector2[] grayBlock;
-    [SerializeField] private float     gridSize = 1f;
-    private                  Mesh      mesh;
-    private                  TileGrid  tileGrid;
+    private                  bool           blockFilled;
+    private                  Vector2[]      blockUV;
+    private                  Vector2[]      blueBlock;
+    private                  Camera         cam;
+    private                  Vector2[]      emptyBlock;
+    private                  Vector2[]      grayBlock;
+    [SerializeField] private int            gridDims = 5;
+    [SerializeField] private float          gridSize = 1f;
+    private                  (int x, int y) lastPos;
+    private                  Mesh           mesh;
+    private                  TileGrid       tileGrid;
 
     private void Start()
     {
-        tileGrid                        = new TileGrid(15, 15, gridSize, transform);
-        cam                             = Camera.main;
-        mesh                            = tileGrid.GenerateMesh();
-        GetComponent<MeshFilter>().mesh = mesh;
-
         var texture   = GetComponent<MeshRenderer>().material.mainTexture;
         var texWidth  = texture.width;
         var texHeight = texture.height;
@@ -46,34 +44,74 @@ public class GridTesting : MonoBehaviour
             new Vector2(0, 0),
             new Vector2(0, 0),
         };
+
+        tileGrid = new TileGrid(gridDims, gridDims, gridSize, transform, emptyBlock, false);
+        cam      = Camera.main;
+
+        GetComponent<MeshFilter>().mesh = tileGrid.RenderMesh;
     }
 
     private void Update()
     {
+        var mousePos = Mouse.current.position;
+        var worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
+
         if (Mouse.current.leftButton.isPressed)
         {
-            blockUV = blueBlock;
-        }
-        else if (Mouse.current.rightButton.isPressed)
-        {
-            blockUV = grayBlock;
+            blockUV     = grayBlock;
+            blockFilled = true;
         }
         else if (Mouse.current.middleButton.isPressed)
         {
-            blockUV = emptyBlock;
+            blockUV     = emptyBlock;
+            blockFilled = false;
         }
         else
+        {
+            var (x, y) = tileGrid.GetXY(worldPos);
+            if (x == lastPos.x && y == lastPos.y)
+            {
+                return;
+            }
+
+            if (!tileGrid.InBounds(x, y))
+            {
+                tileGrid.UpdateBlock(lastPos.x, lastPos.y);
+                return;
+            }
+
+            tileGrid.UpdateUV(x, y, blueBlock);
+            tileGrid.UpdateBlock(lastPos.x, lastPos.y);
+            lastPos = (x, y);
+            return;
+        }
+
+
+        tileGrid.UpdateBlock(worldPos, new GridData(blockUV, blockFilled));
+    }
+
+    public void GenerateCollider(InputAction.CallbackContext ctx)
+    {
+        if (!ctx.performed)
         {
             return;
         }
 
-        var mousePos = Mouse.current.position;
-        var worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(),
-                                                          mousePos.y.ReadValue()));
-
-        if (tileGrid.InBounds(worldPos))
+        var collider2Ds = GetComponents<BoxCollider2D>();
+        foreach (var boxCollider in collider2Ds)
         {
-            tileGrid.UpdateUV(worldPos, blockUV, ref mesh);
+            Destroy(boxCollider);
+        }
+
+        var boxes = tileGrid.FilledBoxes;
+        var size  = new Vector2(tileGrid.GridSize, tileGrid.GridSize);
+        foreach (var box in boxes)
+        {
+            var newBoxCollider2D = gameObject.AddComponent<BoxCollider2D>();
+            var offset           = box * tileGrid.GridSize + new Vector2(1, 1) * 0.5f * tileGrid.GridSize;
+            newBoxCollider2D.offset          = offset;
+            newBoxCollider2D.size            = size;
+            newBoxCollider2D.usedByComposite = true;
         }
     }
 }

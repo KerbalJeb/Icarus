@@ -1,25 +1,24 @@
-﻿using Unity.Mathematics;
+﻿using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class TileGrid
 {
-    [SerializeField] private readonly float       gridSize;
-    private readonly                  GridData[,] gridArray;
-    private readonly                  int         height;
+    private readonly GridData[,] gridArray;
+    private readonly int         height;
+    private readonly Transform   parentTransform;
 
-    private readonly Transform parentTransform;
+    private readonly Vector2[] uvMap;
+    private readonly int       width;
     private          int       textureHeight;
+    private          int       textureWidth;
 
-    private int       textureWidth;
-    private Vector2[] uvMap;
-
-    private readonly int width;
-
-    public TileGrid(int xMax, int yMax, float gridSize, Transform transform)
+    public TileGrid(int xMax, int yMax, float gridSize, Transform transform, Vector2[] defaultUV, bool defaultFilled)
     {
         width           = 2 * xMax;
         height          = 2 * yMax;
-        this.gridSize   = gridSize;
+        GridSize        = gridSize;
         parentTransform = transform;
 
         gridArray = new GridData[width, height];
@@ -28,60 +27,84 @@ public class TileGrid
         {
             for (var y = 0; y < height; y++)
             {
-                gridArray[x, y].Empty = true;
+                gridArray[x, y] = new GridData(defaultUV, defaultFilled);
             }
         }
+
+        uvMap      = GenerateUV(defaultUV);
+        RenderMesh = new Mesh {vertices = GenerateVerts(), uv = uvMap, triangles = GenerateTris()};
     }
+
+    public Vector2[] FilledBoxes
+    {
+        get
+        {
+            var boxesList = new List<Vector2>();
+            for (var x = -width / 2; x < width / 2; x++)
+            {
+                for (var y = -height / 2; y < height / 2; y++)
+                {
+                    var (xIdx, yIdx) = CartesianToIdx(x, y);
+                    var gridData = gridArray[xIdx, yIdx];
+                    if (gridData.Filled)
+                    {
+                        boxesList.Add(new Vector2(x, y));
+                    }
+                }
+            }
+
+            return boxesList.ToArray();
+        }
+    }
+
+    public Mesh RenderMesh { get; }
+
+    public float GridSize { get; }
 
     private Vector3 GetWorldPosition(int x, int y)
     {
         var rotation  = parentTransform.rotation;
         var globalPos = parentTransform.position;
-        var localPos  = new float3(x, y, 0f) * gridSize;
+        var localPos  = new float3(x, y, 0f) * GridSize;
         return rotation * localPos + globalPos;
     }
 
-    private (int x, int y) GetXY(Vector3 position)
+    public (int x, int y) GetXY(Vector3 position)
     {
         var invRotation = Quaternion.Inverse(parentTransform.rotation);
         var objectPos   = parentTransform.position;
         var localPos    = invRotation * (position - objectPos);
 
-        var x = Mathf.FloorToInt(localPos.x / gridSize);
-        var y = Mathf.FloorToInt(localPos.y / gridSize);
+        var x = Mathf.FloorToInt(localPos.x / GridSize);
+        var y = Mathf.FloorToInt(localPos.y / GridSize);
         return (x, y);
     }
 
-    public ref GridData GetValue(Vector3 position)
+    public GridData GetValue(Vector3 position)
     {
         var (x, y) = GetXY(position);
-        return ref GetValue(x, y);
+        return GetValue(x, y);
     }
 
-    public ref GridData GetValue(int x, int y)
+    public GridData GetValue(int x, int y)
     {
+        if (!InBounds(x, y))
+        {
+            return default;
+        }
+
         (x, y) = CartesianToIdx(x, y);
-        return ref gridArray[x, y];
+        return gridArray[x, y];
     }
 
     public bool InBounds(Vector3 position)
     {
         var (x, y) = GetXY(position);
         (x, y)     = CartesianToIdx(x, y);
-        return x >= 0 && y >= 0 && x < width && y < width;
+        return InBounds(x, y);
     }
 
-    private TextMesh CreateText(string text, Vector3 offset, int fontSize, Color color)
-    {
-        var gameObject = new GameObject("TextObject", typeof(TextMesh));
-        var transform  = gameObject.transform;
-        transform.localPosition = offset;
-        var textMesh = gameObject.GetComponent<TextMesh>();
-        textMesh.text     = text;
-        textMesh.color    = color;
-        textMesh.fontSize = fontSize;
-        return textMesh;
-    }
+    public bool InBounds(int x, int y) => x >= -width / 2 && x < width / 2 && y >= -height / 2 && y < height / 2;
 
     private Vector3[] GenerateVerts()
     {
@@ -92,10 +115,10 @@ public class TileGrid
             for (var y = -width / 2; y < height / 2; y++)
             {
                 var i = 4 * CordsToIdx(x, y);
-                verts[i + 0] = new Vector3((x + 0) * gridSize, (y + 0) * gridSize);
-                verts[i + 1] = new Vector3((x + 1) * gridSize, (y + 0) * gridSize);
-                verts[i + 2] = new Vector3((x + 1) * gridSize, (y + 1) * gridSize);
-                verts[i + 3] = new Vector3((x + 0) * gridSize, (y + 1) * gridSize);
+                verts[i + 0] = new Vector3((x + 0) * GridSize, (y + 0) * GridSize);
+                verts[i + 1] = new Vector3((x + 1) * GridSize, (y + 0) * GridSize);
+                verts[i + 2] = new Vector3((x + 1) * GridSize, (y + 1) * GridSize);
+                verts[i + 3] = new Vector3((x + 0) * GridSize, (y + 1) * GridSize);
             }
         }
 
@@ -125,57 +148,83 @@ public class TileGrid
         return tris;
     }
 
-    private Vector2[] GenerateUV()
+    private Vector2[] GenerateUV(Vector2[] defaltUV)
     {
         var uvs = new Vector2[4 * width * height];
+        Assert.AreEqual(defaltUV.Length, 4);
 
-        for (var x = -width / 2; x < width / 2; x++)
+        for (var i = 0; i < uvs.Length; i++)
         {
-            for (var y = -width / 2; y < height / 2; y++)
-            {
-                var i = 4 * CordsToIdx(x, y);
-                uvs[i + 0] = new Vector2(0,          0);
-                uvs[i + 1] = new Vector2(64f / 135f, 0);
-                uvs[i + 2] = new Vector2(64f / 135f, 1);
-                uvs[i + 3] = new Vector2(0,          1);
-            }
+            uvs[i] = defaltUV[i % 4];
         }
 
         return uvs;
-    }
-
-    public Mesh GenerateMesh()
-    {
-        uvMap = GenerateUV();
-        var mesh = new Mesh {vertices = GenerateVerts(), uv = uvMap, triangles = GenerateTris()};
-
-        return mesh;
     }
 
     private int CordsToIdx(int x, int y) => x + width / 2 + (y + width / 2) * width;
 
     private (int, int) CartesianToIdx(int x, int y) => (x + width / 2, y + width / 2);
 
-    public void UpdateUV(Vector3 pos, Vector2[] uvMaps, ref Mesh mesh)
+    public void UpdateUV(Vector3 pos, Vector2[] uvMaps)
     {
         var (x, y) = GetXY(pos);
-        UpdateUV(x, y, uvMaps, ref mesh);
+        UpdateUV(x, y, uvMaps);
     }
 
-    private void UpdateUV(int x, int y, Vector2[] uvMaps, ref Mesh mesh)
+    public void UpdateUV(int x, int y, Vector2[] uvMaps)
     {
-        var idx = 4 * CordsToIdx(x, y);
+        if (!InBounds(x, y))
+        {
+            return;
+        }
 
+        var idx = 4 * CordsToIdx(x, y);
         for (var i = 0; i < 4; i++)
         {
             uvMap[idx + i] = uvMaps[i];
         }
 
-        mesh.uv = uvMap;
+        RenderMesh.uv = uvMap;
+    }
+
+    public void UpdateBlock(Vector3 pos, GridData gridData)
+    {
+        var (x, y) = GetXY(pos);
+        UpdateBlock(x, y, gridData);
+    }
+
+    public void UpdateBlock(int x, int y, GridData gridData)
+    {
+        if (!InBounds(x, y))
+        {
+            return;
+        }
+
+        var (xIdx, yIdx)      = CartesianToIdx(x, y);
+        gridArray[xIdx, yIdx] = gridData;
+        UpdateUV(x, y, gridData.UVCords);
+    }
+
+    public void UpdateBlock(int x, int y)
+    {
+        if (!InBounds(x, y))
+        {
+            return;
+        }
+
+        var (xIdx, yIdx) = CartesianToIdx(x, y);
+        UpdateUV(x, y, gridArray[xIdx, yIdx].UVCords);
     }
 }
 
 public struct GridData
 {
-    public bool Empty;
+    public bool      Filled;
+    public Vector2[] UVCords;
+
+    public GridData(Vector2[] uvCords, bool filled)
+    {
+        Filled  = filled;
+        UVCords = uvCords;
+    }
 }
