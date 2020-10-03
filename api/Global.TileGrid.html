@@ -1,0 +1,772 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TileGrid
+   | Example Unity documentation </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TileGrid
+   | Example Unity documentation ">
+    <meta name="generator" content="docfx 2.44.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list"></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Global.TileGrid">
+  
+  
+  <h1 id="Global_TileGrid" data-uid="Global.TileGrid" class="text-break">Class TileGrid
+  </h1>
+  <div class="markdown level0 summary"><p>A Class for storing and managing grids of tiles</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">TileGrid</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Global.html">Global</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Global_TileGrid_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TileGrid : object</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid__ctor_System_Int32_System_Int32_System_Single_Transform_TileData_.md&amp;value=---%0Auid%3A%20Global.TileGrid.%23ctor(System.Int32%2CSystem.Int32%2CSystem.Single%2CTransform%2CTileData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L28">View Source</a>
+  </span>
+  <a id="Global_TileGrid__ctor_" data-uid="Global.TileGrid.#ctor*"></a>
+  <h4 id="Global_TileGrid__ctor_System_Int32_System_Int32_System_Single_Transform_TileData_" data-uid="Global.TileGrid.#ctor(System.Int32,System.Int32,System.Single,Transform,TileData)">TileGrid(Int32, Int32, Single, Transform, TileData)</h4>
+  <div class="markdown level1 summary"><p>Constructor for creating a cartesian grid of tiles</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TileGrid(int xMax, int yMax, float tileSize, Transform transform, TileData defaultData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">xMax</span></td>
+        <td><p>The width of positive half of the cartesian plane (total width of 2*xMax)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">yMax</span></td>
+        <td><p>The height of positive half of the cartesian plane (total width of 2*yMax)</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">tileSize</span></td>
+        <td><p>The width and height of a single square tile</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Transform</span></td>
+        <td><span class="parametername">transform</span></td>
+        <td><p>The transform of the game object that is generating the grid</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Global.TileData.html">TileData</a></td>
+        <td><span class="parametername">defaultData</span></td>
+        <td><p>The default data to populate the tiles with </p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_FilledBoxes.md&amp;value=---%0Auid%3A%20Global.TileGrid.FilledBoxes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L53">View Source</a>
+  </span>
+  <a id="Global_TileGrid_FilledBoxes_" data-uid="Global.TileGrid.FilledBoxes*"></a>
+  <h4 id="Global_TileGrid_FilledBoxes" data-uid="Global.TileGrid.FilledBoxes">FilledBoxes</h4>
+  <div class="markdown level1 summary"><p>Returns a list of Vector2s containing the cartesian coordinates of tiles that are occupied (tile.Filled is True)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2[] FilledBoxes { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_RenderMesh.md&amp;value=---%0Auid%3A%20Global.TileGrid.RenderMesh%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L78">View Source</a>
+  </span>
+  <a id="Global_TileGrid_RenderMesh_" data-uid="Global.TileGrid.RenderMesh*"></a>
+  <h4 id="Global_TileGrid_RenderMesh" data-uid="Global.TileGrid.RenderMesh">RenderMesh</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Mesh RenderMesh { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Mesh</span></td>
+        <td><p>Returns the mesh used to render the tiles</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_TileSize.md&amp;value=---%0Auid%3A%20Global.TileGrid.TileSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L83">View Source</a>
+  </span>
+  <a id="Global_TileGrid_TileSize_" data-uid="Global.TileGrid.TileSize*"></a>
+  <h4 id="Global_TileGrid_TileSize" data-uid="Global.TileGrid.TileSize">TileSize</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TileSize { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><p>The height/width of individual tiles</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_Get_XY_Vector3_.md&amp;value=---%0Auid%3A%20Global.TileGrid.Get_XY(Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L104">View Source</a>
+  </span>
+  <a id="Global_TileGrid_Get_XY_" data-uid="Global.TileGrid.Get_XY*"></a>
+  <h4 id="Global_TileGrid_Get_XY_Vector3_" data-uid="Global.TileGrid.Get_XY(Vector3)">Get_XY(Vector3)</h4>
+  <div class="markdown level1 summary"><p>Get the cartesian index of the block at a position in world coordinates (does not check bounds)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public (int x, int y)Get_XY(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The world postion</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetuple-2">ValueTuple</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>, <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a>&gt;</td>
+        <td><p>The cartesian index as a tuple</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_GetValue_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Global.TileGrid.GetValue(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L132">View Source</a>
+  </span>
+  <a id="Global_TileGrid_GetValue_" data-uid="Global.TileGrid.GetValue*"></a>
+  <h4 id="Global_TileGrid_GetValue_System_Int32_System_Int32_" data-uid="Global.TileGrid.GetValue(System.Int32,System.Int32)">GetValue(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets teh value of a tile from its cartesian indexes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TileData GetValue(int x, int y)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>The x cartesian index</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>The y cartesian index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.TileData.html">TileData</a></td>
+        <td><p>The TileData of the tile at the given position, returns a default value if out of range</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_GetValue_Vector3_.md&amp;value=---%0Auid%3A%20Global.TileGrid.GetValue(Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L120">View Source</a>
+  </span>
+  <a id="Global_TileGrid_GetValue_" data-uid="Global.TileGrid.GetValue*"></a>
+  <h4 id="Global_TileGrid_GetValue_Vector3_" data-uid="Global.TileGrid.GetValue(Vector3)">GetValue(Vector3)</h4>
+  <div class="markdown level1 summary"><p>Gets the value of a tile at a position in the world</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TileData GetValue(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The position in world cordinates</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Global.TileData.html">TileData</a></td>
+        <td><p>The TileData of the tile at the given position, returns a default value if out of range</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_InGridBounds_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Global.TileGrid.InGridBounds(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L161">View Source</a>
+  </span>
+  <a id="Global_TileGrid_InGridBounds_" data-uid="Global.TileGrid.InGridBounds*"></a>
+  <h4 id="Global_TileGrid_InGridBounds_System_Int32_System_Int32_" data-uid="Global.TileGrid.InGridBounds(System.Int32,System.Int32)">InGridBounds(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Checks if a cartesian index is inside teh grid</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool InGridBounds(int x, int y)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>The x cartesian index</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>y</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>true if in the position is inside the grid, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_InGridBounds_Vector3_.md&amp;value=---%0Auid%3A%20Global.TileGrid.InGridBounds(Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L148">View Source</a>
+  </span>
+  <a id="Global_TileGrid_InGridBounds_" data-uid="Global.TileGrid.InGridBounds*"></a>
+  <h4 id="Global_TileGrid_InGridBounds_Vector3_" data-uid="Global.TileGrid.InGridBounds(Vector3)">InGridBounds(Vector3)</h4>
+  <div class="markdown level1 summary"><p>Checks if a world position is inside the grid</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool InGridBounds(Vector3 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The world position to check</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>true if in the position is inside the grid, false otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_RefreshTile_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Global.TileGrid.RefreshTile(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L318">View Source</a>
+  </span>
+  <a id="Global_TileGrid_RefreshTile_" data-uid="Global.TileGrid.RefreshTile*"></a>
+  <h4 id="Global_TileGrid_RefreshTile_System_Int32_System_Int32_" data-uid="Global.TileGrid.RefreshTile(System.Int32,System.Int32)">RefreshTile(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Updates the UV mapping of a tile based on the current data for that tile</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RefreshTile(int x, int y)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>The x cartesian index</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>The y cartesian index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_Update_UV_System_Int32_System_Int32_Vector2___.md&amp;value=---%0Auid%3A%20Global.TileGrid.Update_UV(System.Int32%2CSystem.Int32%2CVector2%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L268">View Source</a>
+  </span>
+  <a id="Global_TileGrid_Update_UV_" data-uid="Global.TileGrid.Update_UV*"></a>
+  <h4 id="Global_TileGrid_Update_UV_System_Int32_System_Int32_Vector2___" data-uid="Global.TileGrid.Update_UV(System.Int32,System.Int32,Vector2[])">Update_UV(Int32, Int32, Vector2[])</h4>
+  <div class="markdown level1 summary"><p>Update the UV mapping of a tile, ignores invalid positions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Update_UV(int x, int y, Vector2[] uvMaps)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>The x cartesian index</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>The y cartesian index</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector2</span>[]</td>
+        <td><span class="parametername">uvMaps</span></td>
+        <td><p>The new UV mapping (Array must have EXACTLY 4 elements)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_Update_UV_Vector3_Vector2___.md&amp;value=---%0Auid%3A%20Global.TileGrid.Update_UV(Vector3%2CVector2%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L256">View Source</a>
+  </span>
+  <a id="Global_TileGrid_Update_UV_" data-uid="Global.TileGrid.Update_UV*"></a>
+  <h4 id="Global_TileGrid_Update_UV_Vector3_Vector2___" data-uid="Global.TileGrid.Update_UV(Vector3,Vector2[])">Update_UV(Vector3, Vector2[])</h4>
+  <div class="markdown level1 summary"><p>Update the UV mapping of a tile at a position in world space, ignores invalid positions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Update_UV(Vector3 pos, Vector2[] uvMaps)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">pos</span></td>
+        <td><p>The world postion</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector2</span>[]</td>
+        <td><span class="parametername">uvMaps</span></td>
+        <td><p>The new UV mapping (Array must have EXACTLY 4 elements)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_UpdateTile_System_Int32_System_Int32_TileData_.md&amp;value=---%0Auid%3A%20Global.TileGrid.UpdateTile(System.Int32%2CSystem.Int32%2CTileData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L301">View Source</a>
+  </span>
+  <a id="Global_TileGrid_UpdateTile_" data-uid="Global.TileGrid.UpdateTile*"></a>
+  <h4 id="Global_TileGrid_UpdateTile_System_Int32_System_Int32_TileData_" data-uid="Global.TileGrid.UpdateTile(System.Int32,System.Int32,TileData)">UpdateTile(Int32, Int32, TileData)</h4>
+  <div class="markdown level1 summary"><p>Updates the data of a tile (updates UV mapping as well), ignores invalid positions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateTile(int x, int y, TileData tileData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">x</span></td>
+        <td><p>The x cartesian index</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">y</span></td>
+        <td><p>The y cartesian index</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Global.TileData.html">TileData</a></td>
+        <td><span class="parametername">tileData</span></td>
+        <td><p>The new data for the tile</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid_UpdateTile_Vector3_TileData_.md&amp;value=---%0Auid%3A%20Global.TileGrid.UpdateTile(Vector3%2CTileData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L289">View Source</a>
+  </span>
+  <a id="Global_TileGrid_UpdateTile_" data-uid="Global.TileGrid.UpdateTile*"></a>
+  <h4 id="Global_TileGrid_UpdateTile_Vector3_TileData_" data-uid="Global.TileGrid.UpdateTile(Vector3,TileData)">UpdateTile(Vector3, TileData)</h4>
+  <div class="markdown level1 summary"><p>Updates the data of a tile (updates UV mapping as well), ignores invalid positions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateTile(Vector3 pos, TileData tileData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">pos</span></td>
+        <td><p>The world position</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Global.TileData.html">TileData</a></td>
+        <td><span class="parametername">tileData</span></td>
+        <td><p>The new data for the tile</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/KerbalJeb/Icarus/new/adcda6b5bba510281ffdf0808edf290e2f361820/apiSpec/new?filename=Global_TileGrid.md&amp;value=---%0Auid%3A%20Global.TileGrid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/KerbalJeb/Icarus/blob/adcda6b5bba510281ffdf0808edf290e2f361820/Assets/Scripts/TileGrid.cs/#L9" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            Example Unity documentation
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
