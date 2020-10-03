@@ -1,32 +1,32 @@
-﻿﻿using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using UnityEngine;
 
 public class TileGrid
 {
-    [SerializeField] private readonly float gridSize;
+    [SerializeField] private readonly float       gridSize;
+    private readonly                  GridData[,] gridArray;
+    private readonly                  int         height;
 
-    private Transform parentTransform;
+    private readonly Transform parentTransform;
+    private          int       textureHeight;
+
+    private int       textureWidth;
     private Vector2[] uvMap;
 
-    private int width;
-    private int height;
-    private GridData[,] gridArray;
-
-    private int textureWidth;
-    private int textureHeight;
+    private readonly int width;
 
     public TileGrid(int xMax, int yMax, float gridSize, Transform transform)
     {
-        this.width = 2*xMax;
-        this.height = 2*yMax;
-        this.gridSize = gridSize;
-        this.parentTransform = transform;
+        width           = 2 * xMax;
+        height          = 2 * yMax;
+        this.gridSize   = gridSize;
+        parentTransform = transform;
 
         gridArray = new GridData[width, height];
 
-        for (int x = 0; x < this.width; x++)
+        for (var x = 0; x < width; x++)
         {
-            for (int y = 0; y < this.height; y++)
+            for (var y = 0; y < height; y++)
             {
                 gridArray[x, y].Empty = true;
             }
@@ -35,17 +35,17 @@ public class TileGrid
 
     private Vector3 GetWorldPosition(int x, int y)
     {
-        var rotation = parentTransform.rotation;
+        var rotation  = parentTransform.rotation;
         var globalPos = parentTransform.position;
-        var localPos = new float3(x, y, 0f) * gridSize;
-        return (rotation * localPos) + globalPos;
+        var localPos  = new float3(x, y, 0f) * gridSize;
+        return rotation * localPos + globalPos;
     }
 
     private (int x, int y) GetXY(Vector3 position)
     {
         var invRotation = Quaternion.Inverse(parentTransform.rotation);
-        var objectPos = parentTransform.position;
-        var localPos = invRotation * (position - objectPos);
+        var objectPos   = parentTransform.position;
+        var localPos    = invRotation * (position - objectPos);
 
         var x = Mathf.FloorToInt(localPos.x / gridSize);
         var y = Mathf.FloorToInt(localPos.y / gridSize);
@@ -67,18 +67,18 @@ public class TileGrid
     public bool InBounds(Vector3 position)
     {
         var (x, y) = GetXY(position);
-        (x, y) = CartesianToIdx(x, y);
+        (x, y)     = CartesianToIdx(x, y);
         return x >= 0 && y >= 0 && x < width && y < width;
     }
 
     private TextMesh CreateText(string text, Vector3 offset, int fontSize, Color color)
     {
         var gameObject = new GameObject("TextObject", typeof(TextMesh));
-        var transform = gameObject.transform;
+        var transform  = gameObject.transform;
         transform.localPosition = offset;
         var textMesh = gameObject.GetComponent<TextMesh>();
-        textMesh.text = text;
-        textMesh.color = color;
+        textMesh.text     = text;
+        textMesh.color    = color;
         textMesh.fontSize = fontSize;
         return textMesh;
     }
@@ -87,15 +87,15 @@ public class TileGrid
     {
         var verts = new Vector3[4 * width * height];
 
-        for (int x = -width/2; x < width/2; x++)
+        for (var x = -width / 2; x < width / 2; x++)
         {
-            for (int y = -width/2; y < height/2; y++)
+            for (var y = -width / 2; y < height / 2; y++)
             {
                 var i = 4 * CordsToIdx(x, y);
-                verts[i+0] = new Vector3((x+0) * gridSize, (y+0) * gridSize);
-                verts[i+1] = new Vector3((x+1) * gridSize, (y+0) * gridSize);
-                verts[i+2] = new Vector3((x+1) * gridSize, (y+1) * gridSize);
-                verts[i+3] = new Vector3((x+0) * gridSize, (y+1) * gridSize);
+                verts[i + 0] = new Vector3((x + 0) * gridSize, (y + 0) * gridSize);
+                verts[i + 1] = new Vector3((x + 1) * gridSize, (y + 0) * gridSize);
+                verts[i + 2] = new Vector3((x + 1) * gridSize, (y + 1) * gridSize);
+                verts[i + 3] = new Vector3((x + 0) * gridSize, (y + 1) * gridSize);
             }
         }
 
@@ -105,9 +105,9 @@ public class TileGrid
     private int[] GenerateTris()
     {
         var tris = new int[6 * width * height];
-        for (int x = -width/2; x < width/2; x++)
+        for (var x = -width / 2; x < width / 2; x++)
         {
-            for (int y = -width/2; y < height/2; y++)
+            for (var y = -width / 2; y < height / 2; y++)
             {
                 var i = 6 * CordsToIdx(x, y);
                 var j = 4 * CordsToIdx(x, y);
@@ -129,18 +129,18 @@ public class TileGrid
     {
         var uvs = new Vector2[4 * width * height];
 
-        for (int x = -width/2; x < width/2; x++)
+        for (var x = -width / 2; x < width / 2; x++)
         {
-            for (int y = -width/2; y < height/2; y++)
+            for (var y = -width / 2; y < height / 2; y++)
             {
                 var i = 4 * CordsToIdx(x, y);
-                uvs[i+0] = new Vector2(0,0);
-                uvs[i+1] = new Vector2(64f/135f,0);
-                uvs[i+2] = new Vector2(64f/135f,1);
-                uvs[i+3] = new Vector2(0,1);
+                uvs[i + 0] = new Vector2(0,          0);
+                uvs[i + 1] = new Vector2(64f / 135f, 0);
+                uvs[i + 2] = new Vector2(64f / 135f, 1);
+                uvs[i + 3] = new Vector2(0,          1);
             }
         }
-        
+
         return uvs;
     }
 

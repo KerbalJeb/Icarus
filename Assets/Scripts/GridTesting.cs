@@ -12,7 +12,7 @@ public class GridTesting : MonoBehaviour
     private                  Mesh      mesh;
     private                  TileGrid  tileGrid;
 
-    void Start()
+    private void Start()
     {
         tileGrid                        = new TileGrid(15, 15, gridSize, transform);
         cam                             = Camera.main;
