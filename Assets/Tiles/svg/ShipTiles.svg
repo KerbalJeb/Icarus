@@ -9,16 +9,16 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="35.454166mm"
-   height="16.842779mm"
-   viewBox="0 0 35.454166 16.842779"
+   width="34.924999mm"
+   height="16.933334mm"
+   viewBox="0 0 34.924999 16.933334"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
    sodipodi:docname="ShipTiles.svg"
    inkscape:export-filename="C:\Users\Ben\Documents\ECE356\Icarus\Assets\Tiles\ShipTiles.png"
-   inkscape:export-xdpi="96.516129"
-   inkscape:export-ydpi="96.516129">
+   inkscape:export-xdpi="95.999992"
+   inkscape:export-ydpi="95.999992">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -28,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="6.326396"
-     inkscape:cx="58.011943"
-     inkscape:cy="37.902711"
+     inkscape:zoom="4.4734375"
+     inkscape:cx="65.883216"
+     inkscape:cy="33.473043"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -59,11 +59,11 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-280.15721)">
+     transform="translate(0,-280.06666)">
     <g
        id="g872"
-       transform="matrix(1.1487649,0,0,1.1487649,0,-44.183174)"
-       style="stroke-width:0.87050015">
+       transform="matrix(1.1487649,0,0,1.1549411,0,-46.017502)"
+       style="stroke-width:0.86816949">
       <rect
          ry="1.3229166"
          y="282.33835"
@@ -71,9 +71,9 @@
          height="14.661642"
          width="14.740469"
          id="rect10"
-         style="opacity:1;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.23031981;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="opacity:1;fill:#666666;fill-opacity:1;stroke:none;stroke-width:0.22970316;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <rect
-         style="opacity:1;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.23068252;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="opacity:1;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.2300649;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect14"
          width="12.415101"
          height="12.348709"
@@ -82,11 +82,11 @@
          ry="1.1142212" />
     </g>
     <g
-       style="stroke-width:0.87050015"
-       transform="matrix(1.1487649,0,0,1.1487649,18.520833,-44.183174)"
+       style="stroke-width:0.86816949"
+       transform="matrix(1.1487649,0,0,1.1549411,17.991666,-46.017502)"
        id="g878">
       <rect
-         style="opacity:1;fill:#464986;fill-opacity:1;stroke:none;stroke-width:0.23031981;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         style="opacity:1;fill:#464986;fill-opacity:1;stroke:none;stroke-width:0.22970316;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
          id="rect874"
          width="14.740469"
          height="14.661642"
@@ -100,7 +100,7 @@
          height="12.348709"
          width="12.415101"
          id="rect876"
-         style="opacity:1;fill:#585ca8;fill-opacity:1;stroke:none;stroke-width:0.23068252;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="opacity:1;fill:#585ca8;fill-opacity:1;stroke:none;stroke-width:0.2300649;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
   </g>
 </svg>

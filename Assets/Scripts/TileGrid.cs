@@ -1,15 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Security;
-using Unity.Mathematics;
+﻿﻿using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class TileGrid
 {
     [SerializeField] private readonly float gridSize;
 
     private Transform parentTransform;
+    private Vector2[] uvMap;
 
     private int width;
     private int height;
@@ -18,29 +15,22 @@ public class TileGrid
     private int textureWidth;
     private int textureHeight;
 
-    public TileGrid(int xMax, int yMax, float gridSize, Transform transform, Texture texture)
+    public TileGrid(int xMax, int yMax, float gridSize, Transform transform)
     {
         this.width = 2*xMax;
         this.height = 2*yMax;
         this.gridSize = gridSize;
-        this.textureWidth = texture.width;
-        this.textureHeight = texture.height;
         this.parentTransform = transform;
 
-        gridArray = new GridData[this.width, this.height];
+        gridArray = new GridData[width, height];
 
         for (int x = 0; x < this.width; x++)
         {
             for (int y = 0; y < this.height; y++)
             {
                 gridArray[x, y].Empty = true;
-                // Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x, y + 1), Color.white, 100f);
-                // Debug.DrawLine(GetWorldPosition(x, y), GetWorldPosition(x + 1, y), Color.white, 100f);
             }
         }
-
-        // Debug.DrawLine(GetWorldPosition(0, height), GetWorldPosition(width, height), Color.white, 100f);
-        // Debug.DrawLine(GetWorldPosition(width, 0), GetWorldPosition(width, height), Color.white, 100f);
     }
 
     private Vector3 GetWorldPosition(int x, int y)
@@ -156,19 +146,32 @@ public class TileGrid
 
     public Mesh GenerateMesh()
     {
-        var mesh = new Mesh {vertices = GenerateVerts(), uv = GenerateUV(), triangles = GenerateTris()};
+        uvMap = GenerateUV();
+        var mesh = new Mesh {vertices = GenerateVerts(), uv = uvMap, triangles = GenerateTris()};
 
         return mesh;
     }
-    
-    private int CordsToIdx(int x, int y)
+
+    private int CordsToIdx(int x, int y) => x + width / 2 + (y + width / 2) * width;
+
+    private (int, int) CartesianToIdx(int x, int y) => (x + width / 2, y + width / 2);
+
+    public void UpdateUV(Vector3 pos, Vector2[] uvMaps, ref Mesh mesh)
     {
-        return (x + width / 2) + (y + width / 2) * width;
+        var (x, y) = GetXY(pos);
+        UpdateUV(x, y, uvMaps, ref mesh);
     }
 
-    private (int, int) CartesianToIdx(int x, int y)
+    private void UpdateUV(int x, int y, Vector2[] uvMaps, ref Mesh mesh)
     {
-        return (x + (width / 2), y + (width / 2));
+        var idx = 4 * CordsToIdx(x, y);
+
+        for (var i = 0; i < 4; i++)
+        {
+            uvMap[idx + i] = uvMaps[i];
+        }
+
+        mesh.uv = uvMap;
     }
 }
 
