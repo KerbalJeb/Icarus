@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78b0d985-ce45-4d85-a770-06cc4737011f" name="Default Changelist" comment="" />
+    <list default="true" id="78b0d985-ce45-4d85-a770-06cc4737011f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Assembly-CSharp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Assembly-CSharp.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -131,6 +133,7 @@
       <workItem from="1601780626975" duration="3012000" />
       <workItem from="1601784193586" duration="1240000" />
       <workItem from="1601787355330" duration="59000" />
+      <workItem from="1601788177621" duration="758000" />
     </task>
     <task id="LOCAL-00001" summary="Added collider generation and highlighting">
       <created>1601749808520</created>
