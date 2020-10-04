@@ -18,4 +18,4 @@ deploy:
   keep_history: true
   local-dir: _site
   on:
-    branch: ShipTiles
+    branch: master

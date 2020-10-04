@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class GridTesting : MonoBehaviour
+public class GridTesting : MonoBehaviour, ITransform
 {
+    [SerializeField] private int            gridDims = 5;
+    [SerializeField] private float          gridSize = 1f;
     private                  bool           blockFilled;
     private                  Vector2[]      blockUV;
     private                  Vector2[]      blueBlock;
     private                  Camera         cam;
     private                  Vector2[]      emptyBlock;
     private                  Vector2[]      grayBlock;
-    [SerializeField] private int            gridDims = 5;
-    [SerializeField] private float          gridSize = 1f;
     private                  (int x, int y) lastPos;
     private                  Mesh           mesh;
     private                  TileGrid       tileGrid;
@@ -45,7 +45,7 @@ public class GridTesting : MonoBehaviour
             new Vector2(0, 0),
         };
 
-        tileGrid = new TileGrid(gridDims, gridDims, gridSize, transform, new TileData(emptyBlock, false));
+        tileGrid = new TileGrid(gridDims, gridDims, gridSize, this, new TileData(emptyBlock, false));
         cam      = Camera.main;
 
         GetComponent<MeshFilter>().mesh = tileGrid.RenderMesh;
@@ -89,6 +89,9 @@ public class GridTesting : MonoBehaviour
 
         tileGrid.UpdateTile(worldPos, new TileData(blockUV, blockFilled));
     }
+
+    public Quaternion Rotation => transform.rotation;
+    public Vector3    Position => transform.position;
 
     public void GenerateCollider(InputAction.CallbackContext ctx)
     {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -10,7 +9,7 @@ public class TileGrid
 {
     private readonly int         gridHeight;
     private readonly int         gridWidth;
-    private readonly Transform   parentTransform;
+    private readonly ITransform  parentTransform;
     private readonly TileData[,] tileArray;
 
     private readonly Vector2[] uvMap;
@@ -25,7 +24,7 @@ public class TileGrid
     /// <param name="tileSize">The width and height of a single square tile</param>
     /// <param name="transform">The transform of the game object that is generating the grid</param>
     /// <param name="defaultData"> The default data to populate the tiles with </param>
-    public TileGrid(int xMax, int yMax, float tileSize, Transform transform, TileData defaultData)
+    public TileGrid(int xMax, int yMax, float tileSize, ITransform transform, TileData defaultData)
     {
         Assert.AreEqual(defaultData.UVCords.Length, 4);
         gridWidth       = 2 * xMax;
@@ -88,11 +87,11 @@ public class TileGrid
     /// <param name="x">The cartesian x index of the tile</param>
     /// <param name="y">The cartesian y index of the tile</param>
     /// <returns>The world position as a Vector3</returns>
-    private Vector3 GetWorldPosition(int x, int y)
+    public Vector3 GetWorldPosition(int x, int y)
     {
-        var rotation  = parentTransform.rotation;
-        var globalPos = parentTransform.position;
-        var localPos  = new float3(x, y, 0f) * TileSize;
+        var rotation  = parentTransform.Rotation;
+        var globalPos = parentTransform.Position;
+        var localPos  = new Vector3(x, y, 0f) * TileSize;
         return rotation * localPos + globalPos;
     }
 
@@ -103,8 +102,8 @@ public class TileGrid
     /// <returns>The cartesian index as a tuple</returns>
     public (int x, int y) Get_XY(Vector3 position)
     {
-        var invRotation = Quaternion.Inverse(parentTransform.rotation);
-        var objectPos   = parentTransform.position;
+        var invRotation = Quaternion.Inverse(parentTransform.Rotation);
+        var objectPos   = parentTransform.Position;
         var localPos    = invRotation * (position - objectPos);
 
         var x = Mathf.FloorToInt(localPos.x / TileSize);
@@ -340,4 +339,10 @@ public struct TileData
         Filled  = filled;
         UVCords = uvCords;
     }
+}
+
+public interface ITransform
+{
+    Quaternion Rotation { get; }
+    Vector3    Position { get; }
 }
