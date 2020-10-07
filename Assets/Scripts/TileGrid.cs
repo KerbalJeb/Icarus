@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Rendering;
 
 /// <summary>
 ///     A Class for storing and managing grids of tiles
@@ -26,7 +28,6 @@ public class TileGrid
     /// <param name="defaultData"> The default data to populate the tiles with </param>
     public TileGrid(int xMax, int yMax, float tileSize, ITransform transform, TileData defaultData)
     {
-        Assert.AreEqual(defaultData.UVCords.Length, 4);
         gridWidth       = 2 * xMax;
         gridHeight      = 2 * yMax;
         TileSize        = tileSize;
@@ -42,32 +43,96 @@ public class TileGrid
             }
         }
 
-        uvMap      = Generate_UV(defaultData.UVCords);
-        RenderMesh = new Mesh {vertices = GenerateVertices(), uv = uvMap, triangles = GenerateTris()};
+        uvMap = Generate_UV(TileDataMapping.SpriteMapping[defaultData.Sprite]);
+        RenderMesh = new Mesh
+        {
+            indexFormat = IndexFormat.UInt32, vertices = GenerateVertices(), triangles = GenerateTris(), uv = uvMap,
+        };
     }
 
+    /*
+     * todo: Try to clean up this code a bit
+     * todo: Return only outer polygon (Doesn't currently work with more than one closed edge)
+     * todo: See about improving performance
+     */
+
+
     /// <summary>
-    ///     Returns a list of Vector2s containing the cartesian coordinates of tiles that are occupied (tile.Filled is True)
+    ///     Returns a list of all the polygons (list of x,y points) that make up the object
     /// </summary>
-    public Vector2[] FilledBoxes
+    public List<List<(int x, int y)>> Polygons
     {
         get
         {
-            var tileList = new List<Vector2>();
+            var edgeList = new List<((int x, int y) p1, (int x, int y) p2)>();
             for (var x = -gridWidth / 2; x < gridWidth / 2; x++)
             {
                 for (var y = -gridHeight / 2; y < gridHeight / 2; y++)
                 {
                     var (xIdx, yIdx) = CartesianToIdx(x, y);
                     var tileData = tileArray[xIdx, yIdx];
-                    if (tileData.Filled)
+
+                    if (tileData.Type == TileData.TileTypes.Empty)
                     {
-                        tileList.Add(new Vector2(x, y));
+                        continue;
+                    }
+
+                    if (xIdx > 0)
+                    {
+                        var leftNeighbor = tileArray[xIdx - 1, yIdx];
+                        if (leftNeighbor.Type == TileData.TileTypes.Empty)
+                        {
+                            edgeList.Add(((x, y), (x, y + 1)));
+                        }
+                    }
+                    else
+                    {
+                        edgeList.Add(((x, y), (x, y + 1)));
+                    }
+
+                    if (xIdx < gridWidth - 1)
+                    {
+                        var rightNeighbor = tileArray[xIdx + 1, yIdx];
+                        if (rightNeighbor.Type == TileData.TileTypes.Empty)
+                        {
+                            edgeList.Add(((x + 1, y), (x + 1, y + 1)));
+                        }
+                    }
+                    else
+                    {
+                        edgeList.Add(((x + 1, y), (x + 1, y + 1)));
+                    }
+
+                    if (yIdx > 0)
+                    {
+                        var leftNeighbor = tileArray[xIdx, yIdx - 1];
+                        if (leftNeighbor.Type == TileData.TileTypes.Empty)
+                        {
+                            edgeList.Add(((x, y), (x + 1, y)));
+                        }
+                    }
+                    else
+                    {
+                        edgeList.Add(((x, y), (x + 1, y)));
+                    }
+
+                    if (yIdx < gridWidth - 1)
+                    {
+                        var leftNeighbor = tileArray[xIdx, yIdx + 1];
+                        if (leftNeighbor.Type == TileData.TileTypes.Empty)
+                        {
+                            edgeList.Add(((x, y + 1), (x + 1, y + 1)));
+                        }
+                    }
+                    else
+                    {
+                        edgeList.Add(((x, y + 1), (x + 1, y + 1)));
                     }
                 }
             }
 
-            return tileList.ToArray();
+            SimplifyEdges(ref edgeList);
+            return EdgeListToPoints(edgeList);
         }
     }
 
@@ -80,6 +145,165 @@ public class TileGrid
     ///     The height/width of individual tiles
     /// </value>
     public float TileSize { get; }
+
+    /// <summary>
+    /// Converts a list of edges into a list of polygons (a list of ordered points)
+    /// </summary>
+    /// <param name="list">The list of edges</param>
+    /// <returns>The list of polygons</returns>
+    private List<List<(int x, int y)>> EdgeListToPoints(List<((int x, int y) p1, (int x, int y) p2)> list)
+    {
+        var verts = new Dictionary<(int x, int y), List<((int x, int y) p1, (int x, int y) p2)>>();
+        foreach (var edge in list)
+        {
+            if (!verts.ContainsKey(edge.p1))
+            {
+                verts[edge.p1] = new List<((int x, int y) p1, (int x, int y) p2)>();
+            }
+
+            if (!verts.ContainsKey(edge.p2))
+            {
+                verts[edge.p2] = new List<((int x, int y) p1, (int x, int y) p2)>();
+            }
+
+            verts[edge.p1].Add(edge);
+            verts[edge.p2].Add(edge);
+        }
+
+        var polygons = new List<List<(int x, int y)>>();
+
+        while (verts.Count > 0)
+        {
+            polygons.Add(new List<(int x, int y)>());
+            var p = verts.Keys.ToArray()[0];
+
+            var usedVerts = new List<(int x, int y)>();
+
+            while (true)
+            {
+                if (usedVerts.Contains(p))
+                {
+                    break;
+                }
+
+                polygons[0].Add(p);
+                usedVerts.Add(p);
+
+                foreach (var (p1, p2) in verts[p])
+                {
+                    if (p1 != p && !usedVerts.Contains(p1))
+                    {
+                        p = p1;
+                        break;
+                    }
+
+                    if (p2 != p && !usedVerts.Contains(p2))
+                    {
+                        p = p2;
+                        break;
+                    }
+                }
+            }
+
+            foreach (var vert in usedVerts)
+            {
+                verts.Remove(vert);
+            }
+        }
+
+        return polygons;
+    }
+
+    /// <summary>
+    /// Removes redundant vertices from an edge list
+    /// </summary>
+    /// <param name="list">The list to simplify</param>
+    private void SimplifyEdges(ref List<((int x, int y) p1, (int x, int y) p2)> list)
+    {
+        var xMapping = new Dictionary<int, List<((int x, int y) p1, (int x, int y) p2)>>();
+        var yMapping = new Dictionary<int, List<((int x, int y) p1, (int x, int y) p2)>>();
+
+        foreach (var edge in list)
+        {
+            if (edge.p1.x == edge.p2.x)
+            {
+                if (!xMapping.ContainsKey(edge.p1.x))
+                {
+                    xMapping[edge.p1.x] = new List<((int x, int y) p1, (int x, int y) p2)>();
+                }
+
+                xMapping[edge.p1.x].Add(edge);
+            }
+
+            if (edge.p1.y == edge.p2.y)
+            {
+                if (!yMapping.ContainsKey(edge.p1.y))
+                {
+                    yMapping[edge.p1.y] = new List<((int x, int y) p1, (int x, int y) p2)>();
+                }
+
+                yMapping[edge.p1.y].Add(edge);
+            }
+        }
+
+        list = SimplifyDim(xMapping);
+        list.AddRange(SimplifyDim(yMapping));
+    }
+
+    /// <summary>
+    /// Helper function used to simplify all lines in a single direction
+    /// </summary>
+    /// <param name="mapping">A vert map</param>
+    /// <returns>A list of simplified edges</returns>
+    private List<((int x, int y) p1, (int x, int y) p2)> SimplifyDim(
+        Dictionary<int, List<((int x, int y) p1, (int x, int y) p2)>> mapping)
+    {
+        var simplifiedEdges = new List<((int x, int y) p1, (int x, int y) p2)>();
+
+        foreach (var newEdge in mapping.Select(keyValue => keyValue.Value).SelectMany(newEdges => newEdges))
+        {
+            bool updatedEdge = false;
+            for (int i = 0; i < simplifiedEdges.Count; i++)
+            {
+                var (p1, p2) = simplifiedEdges[i];
+
+                if (p1 == newEdge.p1)
+                {
+                    simplifiedEdges[i] = (p2, newEdge.p2);
+                    updatedEdge        = true;
+                    break;
+                }
+
+                if (p2 == newEdge.p2)
+                {
+                    simplifiedEdges[i] = (p1, newEdge.p1);
+                    updatedEdge        = true;
+                    break;
+                }
+
+                if (p1 == newEdge.p2)
+                {
+                    simplifiedEdges[i] = (p2, newEdge.p1);
+                    updatedEdge        = true;
+                    break;
+                }
+
+                if (p2 == newEdge.p1)
+                {
+                    simplifiedEdges[i] = (p1, newEdge.p2);
+                    updatedEdge        = true;
+                    break;
+                }
+            }
+
+            if (!updatedEdge)
+            {
+                simplifiedEdges.Add(newEdge);
+            }
+        }
+
+        return simplifiedEdges;
+    }
 
     /// <summary>
     ///     Gets the world position of the lower left corner of a tile
@@ -152,10 +376,10 @@ public class TileGrid
     }
 
     /// <summary>
-    ///     Checks if a cartesian index is inside teh grid
+    ///     Checks if a cartesian index is inside the grid
     /// </summary>
     /// <param name="x">The x cartesian index</param>
-    /// <param name="y">y</param>
+    /// <param name="y">The y cartesian index</param>
     /// <returns>true if in the position is inside the grid, false otherwise</returns>
     public bool InGridBounds(int x, int y) =>
         x >= -gridWidth / 2 && x < gridWidth / 2 && y >= -gridHeight / 2 && y < gridHeight / 2;
@@ -251,11 +475,11 @@ public class TileGrid
     ///     Update the UV mapping of a tile at a position in world space, ignores invalid positions
     /// </summary>
     /// <param name="pos">The world postion</param>
-    /// <param name="uvMaps">The new UV mapping (Array must have EXACTLY 4 elements)</param>
-    public void Update_UV(Vector3 pos, Vector2[] uvMaps)
+    /// <param name="sprite">The sprite to use for this tile</param>
+    public void Update_UV(Vector3 pos, TileData.TileSprites sprite)
     {
         var (x, y) = Get_XY(pos);
-        Update_UV(x, y, uvMaps);
+        Update_UV(x, y, sprite);
     }
 
     /// <summary>
@@ -263,21 +487,34 @@ public class TileGrid
     /// </summary>
     /// <param name="x">The x cartesian index</param>
     /// <param name="y">The y cartesian index</param>
-    /// <param name="uvMaps">The new UV mapping (Array must have EXACTLY 4 elements)</param>
-    public void Update_UV(int x, int y, Vector2[] uvMaps)
+    /// <param name="sprite">The sprite to use for this tile</param>
+    public void Update_UV(int x, int y, TileData.TileSprites sprite)
     {
         if (!InGridBounds(x, y))
         {
             return;
         }
 
-        var idx = 4 * CordsTo1D_Idx(x, y);
+        var idx    = 4 * CordsTo1D_Idx(x, y);
+        var uvMaps = TileDataMapping.SpriteMapping[sprite];
         for (var i = 0; i < 4; i++)
         {
             uvMap[idx + i] = uvMaps[i];
         }
 
         RenderMesh.uv = uvMap;
+    }
+
+    public ref TileData GetTile(Vector3 pos)
+    {
+        var (x, y) = Get_XY(pos);
+        return ref GetTile(x, y);
+    }
+
+    public ref TileData GetTile(int x, int y)
+    {
+        (x, y) = CartesianToIdx(x, y);
+        return ref tileArray[x, y];
     }
 
     /// <summary>
@@ -306,7 +543,7 @@ public class TileGrid
 
         var (xIdx, yIdx)      = CartesianToIdx(x, y);
         tileArray[xIdx, yIdx] = tileData;
-        Update_UV(x, y, tileData.UVCords);
+        Update_UV(x, y, tileData.Sprite);
     }
 
     /// <summary>
@@ -322,22 +559,7 @@ public class TileGrid
         }
 
         var (xIdx, yIdx) = CartesianToIdx(x, y);
-        Update_UV(x, y, tileArray[xIdx, yIdx].UVCords);
-    }
-}
-
-/// <summary>
-///     The basic data structure used for all tiles
-/// </summary>
-public struct TileData
-{
-    public bool      Filled;
-    public Vector2[] UVCords;
-
-    public TileData(Vector2[] uvCords, bool filled)
-    {
-        Filled  = filled;
-        UVCords = uvCords;
+        Update_UV(x, y, tileArray[xIdx, yIdx].Sprite);
     }
 }
 

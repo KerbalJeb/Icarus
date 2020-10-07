@@ -1,19 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class GridTesting : MonoBehaviour, ITransform
 {
-    [SerializeField] private int            gridDims = 5;
-    [SerializeField] private float          gridSize = 1f;
-    private                  bool           blockFilled;
-    private                  Vector2[]      blockUV;
-    private                  Vector2[]      blueBlock;
-    private                  Camera         cam;
-    private                  Vector2[]      emptyBlock;
-    private                  Vector2[]      grayBlock;
-    private                  (int x, int y) lastPos;
-    private                  Mesh           mesh;
-    private                  TileGrid       tileGrid;
+    [SerializeField] private int                  gridDims = 5;
+    [SerializeField] private float                gridSize = 1f;
+    private                  bool                 blockFilled;
+    private                  Camera               cam;
+    private                  (int x, int y)       lastPos;
+    private                  Mesh                 mesh;
+    private                  TileGrid             tileGrid;
+    private                  TileData.TileSprites tileSprite;
+    private                  TileData.TileTypes   tileType;
 
     private void Start()
     {
@@ -21,32 +20,9 @@ public class GridTesting : MonoBehaviour, ITransform
         var texWidth  = texture.width;
         var texHeight = texture.height;
 
-        grayBlock = new[]
-        {
-            new Vector2(0,              0),
-            new Vector2(64f / texWidth, 0),
-            new Vector2(64f / texWidth, 64f / texHeight),
-            new Vector2(0,              64f / texHeight),
-        };
-
-        blueBlock = new[]
-        {
-            new Vector2(68f  / texWidth, 0),
-            new Vector2(132f / texWidth, 0),
-            new Vector2(132f / texWidth, 64f / texHeight),
-            new Vector2(68f  / texWidth, 64f / texHeight),
-        };
-
-        emptyBlock = new[]
-        {
-            new Vector2(0, 0),
-            new Vector2(0, 0),
-            new Vector2(0, 0),
-            new Vector2(0, 0),
-        };
-
-        tileGrid = new TileGrid(gridDims, gridDims, gridSize, this, new TileData(emptyBlock, false));
-        cam      = Camera.main;
+        tileGrid = new TileGrid(gridDims, gridDims, gridSize, this,
+                                new TileData(sprite: TileData.TileSprites.GrayHull, type: TileData.TileTypes.Hull));
+        cam = Camera.main;
 
         GetComponent<MeshFilter>().mesh = tileGrid.RenderMesh;
     }
@@ -55,20 +31,20 @@ public class GridTesting : MonoBehaviour, ITransform
     {
         var mousePos = Mouse.current.position;
         var worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
+        var (x, y) = tileGrid.Get_XY(worldPos);
 
         if (Mouse.current.leftButton.isPressed)
         {
-            blockUV     = grayBlock;
-            blockFilled = true;
+            tileSprite = TileData.TileSprites.GrayHull;
+            tileType   = TileData.TileTypes.Hull;
         }
         else if (Mouse.current.middleButton.isPressed)
         {
-            blockUV     = emptyBlock;
-            blockFilled = false;
+            tileSprite = TileData.TileSprites.Empty;
+            tileType   = TileData.TileTypes.Empty;
         }
         else
         {
-            var (x, y) = tileGrid.Get_XY(worldPos);
             if (x == lastPos.x && y == lastPos.y)
             {
                 return;
@@ -80,14 +56,19 @@ public class GridTesting : MonoBehaviour, ITransform
                 return;
             }
 
-            tileGrid.Update_UV(x, y, blueBlock);
+            tileGrid.Update_UV(x, y, TileData.TileSprites.BlueHull);
             tileGrid.RefreshTile(lastPos.x, lastPos.y);
             lastPos = (x, y);
             return;
         }
 
-
-        tileGrid.UpdateTile(worldPos, new TileData(blockUV, blockFilled));
+        if (tileGrid.InGridBounds(x, y))
+        {
+            ref var tile = ref tileGrid.GetTile(x, y);
+            tile.Sprite = tileSprite;
+            tile.Type   = tileType;
+            tileGrid.RefreshTile(x, y);
+        }
     }
 
     public Quaternion Rotation => transform.rotation;
@@ -100,21 +81,22 @@ public class GridTesting : MonoBehaviour, ITransform
             return;
         }
 
-        var collider2Ds = GetComponents<BoxCollider2D>();
-        foreach (var boxCollider in collider2Ds)
+        Debug.Log("Generating Collider");
+
+        var polygons = tileGrid.Polygons;
+
+        var colliders = GetComponents<PolygonCollider2D>();
+
+        foreach (var polygonCollider2D in colliders)
         {
-            Destroy(boxCollider);
+            Destroy(polygonCollider2D);
         }
 
-        var boxes = tileGrid.FilledBoxes;
-        var size  = new Vector2(tileGrid.TileSize, tileGrid.TileSize);
-        foreach (var box in boxes)
+        foreach (var polygon in polygons)
         {
-            var newBoxCollider2D = gameObject.AddComponent<BoxCollider2D>();
-            var offset           = box * tileGrid.TileSize + new Vector2(1, 1) * 0.5f * tileGrid.TileSize;
-            newBoxCollider2D.offset          = offset;
-            newBoxCollider2D.size            = size;
-            newBoxCollider2D.usedByComposite = true;
+            var collider = gameObject.AddComponent<PolygonCollider2D>();
+            collider.points          = polygon.Select(p => new Vector2(p.x, p.y) * tileGrid.TileSize).ToArray();
+            collider.usedByComposite = true;
         }
     }
 }

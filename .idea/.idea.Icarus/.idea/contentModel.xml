@@ -12,6 +12,7 @@
         <e p="Scripts" t="Include">
           <e p="GameCode.asmdef" t="Include" />
           <e p="GridTesting.cs" t="Include" />
+          <e p="TileData.cs" t="Include" />
           <e p="TileGrid.cs" t="Include" />
         </e>
         <e p="Tests" t="Include">

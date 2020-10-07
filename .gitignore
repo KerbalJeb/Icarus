@@ -33,7 +33,7 @@
 ExportedObj/
 .consulo/
 *.csproj
-!Assembly-CSharp.csproj
+#!Assembly-CSharp.csproj
 *.unityproj
 *.sln
 *.suo
