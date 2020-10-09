@@ -4,24 +4,21 @@ using UnityEngine.InputSystem;
 
 public class GridTesting : MonoBehaviour, ITransform
 {
-    [SerializeField] private int                  gridDims = 5;
-    [SerializeField] private float                gridSize = 1f;
-    private                  bool                 blockFilled;
-    private                  Camera               cam;
-    private                  (int x, int y)       lastPos;
-    private                  Mesh                 mesh;
-    private                  TileGrid             tileGrid;
-    private                  TileData.TileSprites tileSprite;
-    private                  TileData.TileTypes   tileType;
+    [SerializeField] private int gridDims = 5;
+    [SerializeField] private float gridSize = 1f;
+    private Camera cam;
+    private (int x, int y) lastPos;
+    private TileGrid tileGrid;
+    private ushort typeID;
 
     private void Start()
     {
-        var texture   = GetComponent<MeshRenderer>().material.mainTexture;
-        var texWidth  = texture.width;
+        var texture = GetComponent<MeshRenderer>().material.mainTexture;
+        var texWidth = texture.width;
         var texHeight = texture.height;
 
-        tileGrid = new TileGrid(gridDims, gridDims, gridSize, this,
-                                new TileData(sprite: TileData.TileSprites.GrayHull, type: TileData.TileTypes.Hull));
+        tileGrid = new TileGrid(gridDims, gridDims, gridSize, this, new StructuralTileSet("Tiles"),
+            new TileData(typeID: 0));
         cam = Camera.main;
 
         GetComponent<MeshFilter>().mesh = tileGrid.RenderMesh;
@@ -35,20 +32,15 @@ public class GridTesting : MonoBehaviour, ITransform
 
         if (Mouse.current.leftButton.isPressed)
         {
-            tileSprite = TileData.TileSprites.GrayHull;
-            tileType   = TileData.TileTypes.Hull;
+            typeID = tileGrid.TileSet.NameMapping["Basic Armor"];
         }
         else if (Mouse.current.middleButton.isPressed)
         {
-            tileSprite = TileData.TileSprites.Empty;
-            tileType   = TileData.TileTypes.Empty;
+            typeID = tileGrid.TileSet.NameMapping["Empty"];
         }
         else
         {
-            if (x == lastPos.x && y == lastPos.y)
-            {
-                return;
-            }
+            if (x == lastPos.x && y == lastPos.y) return;
 
             if (!tileGrid.InGridBounds(x, y))
             {
@@ -56,7 +48,8 @@ public class GridTesting : MonoBehaviour, ITransform
                 return;
             }
 
-            tileGrid.Update_UV(x, y, TileData.TileSprites.BlueHull);
+            var id = tileGrid.TileSet.NameMapping["Blue Armor"];
+            tileGrid.Update_UV(x, y, tileGrid.TileSet.IDMapping[id].UVMapping);
             tileGrid.RefreshTile(lastPos.x, lastPos.y);
             lastPos = (x, y);
             return;
@@ -65,21 +58,17 @@ public class GridTesting : MonoBehaviour, ITransform
         if (tileGrid.InGridBounds(x, y))
         {
             ref var tile = ref tileGrid.GetTile(x, y);
-            tile.Sprite = tileSprite;
-            tile.Type   = tileType;
+            tile.TypeID = typeID;
             tileGrid.RefreshTile(x, y);
         }
     }
 
     public Quaternion Rotation => transform.rotation;
-    public Vector3    Position => transform.position;
+    public Vector3 Position => transform.position;
 
     public void GenerateCollider(InputAction.CallbackContext ctx)
     {
-        if (!ctx.performed)
-        {
-            return;
-        }
+        if (!ctx.performed) return;
 
         Debug.Log("Generating Collider");
 
@@ -87,16 +76,13 @@ public class GridTesting : MonoBehaviour, ITransform
 
         var colliders = GetComponents<PolygonCollider2D>();
 
-        foreach (var polygonCollider2D in colliders)
-        {
-            Destroy(polygonCollider2D);
-        }
+        foreach (var polygonCollider2D in colliders) Destroy(polygonCollider2D);
 
         foreach (var polygon in polygons)
         {
-            var collider = gameObject.AddComponent<PolygonCollider2D>();
-            collider.points          = polygon.Select(p => new Vector2(p.x, p.y) * tileGrid.TileSize).ToArray();
-            collider.usedByComposite = true;
+            var polygonCollider2D = gameObject.AddComponent<PolygonCollider2D>();
+            polygonCollider2D.points = polygon.Select(p => new Vector2(p.x, p.y) * tileGrid.TileSize).ToArray();
+            polygonCollider2D.usedByComposite = true;
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 ///     The basic data structure used for all tiles
@@ -9,76 +6,52 @@ using UnityEngine;
 public struct TileData
 {
     // Health
-    public byte Health;
-
-    // Deform
-    public sbyte DeformX;
-
-    public sbyte DeformY;
+    public ushort Health;
 
     // Temp
-    public short Temp;
+    public ushort Temp;
 
     // Type
-    public TileSprites Sprite;
-    public TileTypes   Type;
+    public ushort TypeID;
 
-    public TileData(byte        health  = default,
-                    sbyte       deformX = default,
-                    sbyte       deformY = default,
-                    short       temp    = default,
-                    TileSprites sprite  = TileSprites.Empty,
-                    TileTypes   type    = default)
+    public TileData(ushort health = default,
+        ushort temp = default,
+        ushort typeID = default)
     {
-        Health  = health;
-        DeformX = deformX;
-        DeformY = deformY;
-        Temp    = temp;
-        Sprite  = sprite;
-        Type    = type;
+        Health = health;
+        Temp = temp;
+        TypeID = typeID;
     }
 
-    public enum TileSprites : short
+    public bool Equals(TileData other)
     {
-        Empty,
-        GrayHull,
-        BlueHull,
+        return Health == other.Health && Temp == other.Temp && TypeID == other.TypeID;
     }
 
-    public enum TileTypes : byte
+    public override bool Equals(object obj)
     {
-        Empty,
-        Hull,
+        return obj is TileData other && Equals(other);
     }
 
-    public bool Equals(TileData other) => Health == other.Health && DeformX == other.DeformX && DeformY == other.DeformY && Temp == other.Temp && Sprite == other.Sprite && Type == other.Type;
-
-    public override bool Equals(object obj) => obj is TileData other && Equals(other);
-
-    public override int GetHashCode() => (Health, Sprite, Temp, Type, DeformX, DeformY).GetHashCode();
+    public override int GetHashCode()
+    {
+        return (Health, Temp, Type: TypeID).GetHashCode();
+    }
 }
 
-public static class TileDataMapping
+public static class TileDataHelper
 {
-    private const int texWidth  = 2048;
+    private const int texWidth = 2048;
     private const int texHeight = 2048;
 
-    public static readonly Dictionary<TileData.TileSprites, Vector2[]> SpriteMapping =
-        new Dictionary<TileData.TileSprites, Vector2[]>
-        {
-            {TileData.TileSprites.GrayHull, PixelsToUV(0,  0, 64, 64)},
-            {TileData.TileSprites.Empty, PixelsToUV(0,     0, 0,  0)},
-            {TileData.TileSprites.BlueHull, PixelsToUV(64, 0, 64, 64)},
-        };
-
-    private static Vector2[] PixelsToUV(int x, int y, int w, int h)
+    public static Vector2[] PixelsToUV(uint x, uint y, uint w, uint h)
     {
         return new[]
         {
             new Vector2((float) (x + 0) / texWidth, (float) (y + h) / texHeight),
             new Vector2((float) (x + w) / texWidth, (float) (y + h) / texHeight),
             new Vector2((float) (x + w) / texWidth, (float) (y + 0) / texHeight),
-            new Vector2((float) (x + 0) / texWidth, (float) (y + 0) / texHeight),
+            new Vector2((float) (x + 0) / texWidth, (float) (y + 0) / texHeight)
         };
     }
 }

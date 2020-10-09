@@ -9,14 +9,12 @@ using UnityEngine.Rendering;
 /// </summary>
 public class TileGrid
 {
-    private readonly int         gridHeight;
-    private readonly int         gridWidth;
-    private readonly ITransform  parentTransform;
+    private readonly int gridHeight;
+    private readonly int gridWidth;
+    private readonly ITransform parentTransform;
     private readonly TileData[,] tileArray;
-
+    public readonly StructuralTileSet TileSet;
     private readonly Vector2[] uvMap;
-    private          int       textureHeight;
-    private          int       textureWidth;
 
     /// <summary>
     ///     Constructor for creating a cartesian grid of tiles
@@ -25,28 +23,27 @@ public class TileGrid
     /// <param name="yMax">The height of positive half of the cartesian plane (total width of 2*yMax)</param>
     /// <param name="tileSize">The width and height of a single square tile</param>
     /// <param name="transform">The transform of the game object that is generating the grid</param>
-    /// <param name="defaultData"> The default data to populate the tiles with </param>
-    public TileGrid(int xMax, int yMax, float tileSize, ITransform transform, TileData defaultData)
+    /// <param name="tileSet">The Tile set being used</param>
+    /// <param name="defaultData"></param>
+    public TileGrid(int xMax, int yMax, float tileSize, ITransform transform, StructuralTileSet tileSet,
+        TileData defaultData)
     {
-        gridWidth       = 2 * xMax;
-        gridHeight      = 2 * yMax;
-        TileSize        = tileSize;
+        gridWidth = 2 * xMax;
+        gridHeight = 2 * yMax;
+        TileSize = tileSize;
         parentTransform = transform;
+        TileSet = tileSet;
 
         tileArray = new TileData[gridWidth, gridHeight];
 
         for (var x = 0; x < gridWidth; x++)
-        {
-            for (var y = 0; y < gridHeight; y++)
-            {
-                tileArray[x, y] = defaultData;
-            }
-        }
+        for (var y = 0; y < gridHeight; y++)
+            tileArray[x, y] = defaultData;
 
-        uvMap = Generate_UV(TileDataMapping.SpriteMapping[defaultData.Sprite]);
+        uvMap = Generate_UV(defaultData.TypeID);
         RenderMesh = new Mesh
         {
-            indexFormat = IndexFormat.UInt32, vertices = GenerateVertices(), triangles = GenerateTris(), uv = uvMap,
+            indexFormat = IndexFormat.UInt32, vertices = GenerateVertices(), triangles = GenerateTris(), uv = uvMap
         };
     }
 
@@ -66,68 +63,52 @@ public class TileGrid
         {
             var edgeList = new List<((int x, int y) p1, (int x, int y) p2)>();
             for (var x = -gridWidth / 2; x < gridWidth / 2; x++)
+            for (var y = -gridHeight / 2; y < gridHeight / 2; y++)
             {
-                for (var y = -gridHeight / 2; y < gridHeight / 2; y++)
+                var (xIdx, yIdx) = CartesianToIdx(x, y);
+                var tileData = tileArray[xIdx, yIdx];
+
+                if (tileData.TypeID == TileSet.NameMapping["Empty"]) continue;
+
+                if (xIdx > 0)
                 {
-                    var (xIdx, yIdx) = CartesianToIdx(x, y);
-                    var tileData = tileArray[xIdx, yIdx];
+                    var leftNeighbor = tileArray[xIdx - 1, yIdx];
+                    if (leftNeighbor.TypeID == TileSet.NameMapping["Empty"]) edgeList.Add(((x, y), (x, y + 1)));
+                }
+                else
+                {
+                    edgeList.Add(((x, y), (x, y + 1)));
+                }
 
-                    if (tileData.Type == TileData.TileTypes.Empty)
-                    {
-                        continue;
-                    }
-
-                    if (xIdx > 0)
-                    {
-                        var leftNeighbor = tileArray[xIdx - 1, yIdx];
-                        if (leftNeighbor.Type == TileData.TileTypes.Empty)
-                        {
-                            edgeList.Add(((x, y), (x, y + 1)));
-                        }
-                    }
-                    else
-                    {
-                        edgeList.Add(((x, y), (x, y + 1)));
-                    }
-
-                    if (xIdx < gridWidth - 1)
-                    {
-                        var rightNeighbor = tileArray[xIdx + 1, yIdx];
-                        if (rightNeighbor.Type == TileData.TileTypes.Empty)
-                        {
-                            edgeList.Add(((x + 1, y), (x + 1, y + 1)));
-                        }
-                    }
-                    else
-                    {
+                if (xIdx < gridWidth - 1)
+                {
+                    var rightNeighbor = tileArray[xIdx + 1, yIdx];
+                    if (rightNeighbor.TypeID == TileSet.NameMapping["Empty"])
                         edgeList.Add(((x + 1, y), (x + 1, y + 1)));
-                    }
+                }
+                else
+                {
+                    edgeList.Add(((x + 1, y), (x + 1, y + 1)));
+                }
 
-                    if (yIdx > 0)
-                    {
-                        var leftNeighbor = tileArray[xIdx, yIdx - 1];
-                        if (leftNeighbor.Type == TileData.TileTypes.Empty)
-                        {
-                            edgeList.Add(((x, y), (x + 1, y)));
-                        }
-                    }
-                    else
-                    {
-                        edgeList.Add(((x, y), (x + 1, y)));
-                    }
+                if (yIdx > 0)
+                {
+                    var leftNeighbor = tileArray[xIdx, yIdx - 1];
+                    if (leftNeighbor.TypeID == TileSet.NameMapping["Empty"]) edgeList.Add(((x, y), (x + 1, y)));
+                }
+                else
+                {
+                    edgeList.Add(((x, y), (x + 1, y)));
+                }
 
-                    if (yIdx < gridWidth - 1)
-                    {
-                        var leftNeighbor = tileArray[xIdx, yIdx + 1];
-                        if (leftNeighbor.Type == TileData.TileTypes.Empty)
-                        {
-                            edgeList.Add(((x, y + 1), (x + 1, y + 1)));
-                        }
-                    }
-                    else
-                    {
-                        edgeList.Add(((x, y + 1), (x + 1, y + 1)));
-                    }
+                if (yIdx < gridWidth - 1)
+                {
+                    var leftNeighbor = tileArray[xIdx, yIdx + 1];
+                    if (leftNeighbor.TypeID == TileSet.NameMapping["Empty"]) edgeList.Add(((x, y + 1), (x + 1, y + 1)));
+                }
+                else
+                {
+                    edgeList.Add(((x, y + 1), (x + 1, y + 1)));
                 }
             }
 
@@ -147,7 +128,7 @@ public class TileGrid
     public float TileSize { get; }
 
     /// <summary>
-    /// Converts a list of edges into a list of polygons (a list of ordered points)
+    ///     Converts a list of edges into a list of polygons (a list of ordered points)
     /// </summary>
     /// <param name="list">The list of edges</param>
     /// <returns>The list of polygons</returns>
@@ -156,15 +137,9 @@ public class TileGrid
         var verts = new Dictionary<(int x, int y), List<((int x, int y) p1, (int x, int y) p2)>>();
         foreach (var edge in list)
         {
-            if (!verts.ContainsKey(edge.p1))
-            {
-                verts[edge.p1] = new List<((int x, int y) p1, (int x, int y) p2)>();
-            }
+            if (!verts.ContainsKey(edge.p1)) verts[edge.p1] = new List<((int x, int y) p1, (int x, int y) p2)>();
 
-            if (!verts.ContainsKey(edge.p2))
-            {
-                verts[edge.p2] = new List<((int x, int y) p1, (int x, int y) p2)>();
-            }
+            if (!verts.ContainsKey(edge.p2)) verts[edge.p2] = new List<((int x, int y) p1, (int x, int y) p2)>();
 
             verts[edge.p1].Add(edge);
             verts[edge.p2].Add(edge);
@@ -181,10 +156,7 @@ public class TileGrid
 
             while (true)
             {
-                if (usedVerts.Contains(p))
-                {
-                    break;
-                }
+                if (usedVerts.Contains(p)) break;
 
                 polygons[0].Add(p);
                 usedVerts.Add(p);
@@ -205,17 +177,14 @@ public class TileGrid
                 }
             }
 
-            foreach (var vert in usedVerts)
-            {
-                verts.Remove(vert);
-            }
+            foreach (var vert in usedVerts) verts.Remove(vert);
         }
 
         return polygons;
     }
 
     /// <summary>
-    /// Removes redundant vertices from an edge list
+    ///     Removes redundant vertices from an edge list
     /// </summary>
     /// <param name="list">The list to simplify</param>
     private void SimplifyEdges(ref List<((int x, int y) p1, (int x, int y) p2)> list)
@@ -228,9 +197,7 @@ public class TileGrid
             if (edge.p1.x == edge.p2.x)
             {
                 if (!xMapping.ContainsKey(edge.p1.x))
-                {
                     xMapping[edge.p1.x] = new List<((int x, int y) p1, (int x, int y) p2)>();
-                }
 
                 xMapping[edge.p1.x].Add(edge);
             }
@@ -238,9 +205,7 @@ public class TileGrid
             if (edge.p1.y == edge.p2.y)
             {
                 if (!yMapping.ContainsKey(edge.p1.y))
-                {
                     yMapping[edge.p1.y] = new List<((int x, int y) p1, (int x, int y) p2)>();
-                }
 
                 yMapping[edge.p1.y].Add(edge);
             }
@@ -251,7 +216,7 @@ public class TileGrid
     }
 
     /// <summary>
-    /// Helper function used to simplify all lines in a single direction
+    ///     Helper function used to simplify all lines in a single direction
     /// </summary>
     /// <param name="mapping">A vert map</param>
     /// <returns>A list of simplified edges</returns>
@@ -262,44 +227,41 @@ public class TileGrid
 
         foreach (var newEdge in mapping.Select(keyValue => keyValue.Value).SelectMany(newEdges => newEdges))
         {
-            bool updatedEdge = false;
-            for (int i = 0; i < simplifiedEdges.Count; i++)
+            var updatedEdge = false;
+            for (var i = 0; i < simplifiedEdges.Count; i++)
             {
                 var (p1, p2) = simplifiedEdges[i];
 
                 if (p1 == newEdge.p1)
                 {
                     simplifiedEdges[i] = (p2, newEdge.p2);
-                    updatedEdge        = true;
+                    updatedEdge = true;
                     break;
                 }
 
                 if (p2 == newEdge.p2)
                 {
                     simplifiedEdges[i] = (p1, newEdge.p1);
-                    updatedEdge        = true;
+                    updatedEdge = true;
                     break;
                 }
 
                 if (p1 == newEdge.p2)
                 {
                     simplifiedEdges[i] = (p2, newEdge.p1);
-                    updatedEdge        = true;
+                    updatedEdge = true;
                     break;
                 }
 
                 if (p2 == newEdge.p1)
                 {
                     simplifiedEdges[i] = (p1, newEdge.p2);
-                    updatedEdge        = true;
+                    updatedEdge = true;
                     break;
                 }
             }
 
-            if (!updatedEdge)
-            {
-                simplifiedEdges.Add(newEdge);
-            }
+            if (!updatedEdge) simplifiedEdges.Add(newEdge);
         }
 
         return simplifiedEdges;
@@ -313,9 +275,9 @@ public class TileGrid
     /// <returns>The world position as a Vector3</returns>
     public Vector3 GetWorldPosition(int x, int y)
     {
-        var rotation  = parentTransform.Rotation;
+        var rotation = parentTransform.Rotation;
         var globalPos = parentTransform.Position;
-        var localPos  = new Vector3(x, y, 0f) * TileSize;
+        var localPos = new Vector3(x, y, 0f) * TileSize;
         return rotation * localPos + globalPos;
     }
 
@@ -327,8 +289,8 @@ public class TileGrid
     public (int x, int y) Get_XY(Vector3 position)
     {
         var invRotation = Quaternion.Inverse(parentTransform.Rotation);
-        var objectPos   = parentTransform.Position;
-        var localPos    = invRotation * (position - objectPos);
+        var objectPos = parentTransform.Position;
+        var localPos = invRotation * (position - objectPos);
 
         var x = Mathf.FloorToInt(localPos.x / TileSize);
         var y = Mathf.FloorToInt(localPos.y / TileSize);
@@ -354,10 +316,7 @@ public class TileGrid
     /// <returns>The TileData of the tile at the given position, returns a default value if out of range</returns>
     public TileData GetValue(int x, int y)
     {
-        if (!InGridBounds(x, y))
-        {
-            return default;
-        }
+        if (!InGridBounds(x, y)) return default;
 
         (x, y) = CartesianToIdx(x, y);
         return tileArray[x, y];
@@ -371,7 +330,7 @@ public class TileGrid
     public bool InGridBounds(Vector3 position)
     {
         var (x, y) = Get_XY(position);
-        (x, y)     = CartesianToIdx(x, y);
+        (x, y) = CartesianToIdx(x, y);
         return InGridBounds(x, y);
     }
 
@@ -381,8 +340,10 @@ public class TileGrid
     /// <param name="x">The x cartesian index</param>
     /// <param name="y">The y cartesian index</param>
     /// <returns>true if in the position is inside the grid, false otherwise</returns>
-    public bool InGridBounds(int x, int y) =>
-        x >= -gridWidth / 2 && x < gridWidth / 2 && y >= -gridHeight / 2 && y < gridHeight / 2;
+    public bool InGridBounds(int x, int y)
+    {
+        return x >= -gridWidth / 2 && x < gridWidth / 2 && y >= -gridHeight / 2 && y < gridHeight / 2;
+    }
 
     /// <summary>
     ///     Generates vertices for a quad in each grid position (Used to generate the mesh)
@@ -393,15 +354,13 @@ public class TileGrid
         var verts = new Vector3[4 * gridWidth * gridHeight];
 
         for (var x = -gridWidth / 2; x < gridWidth / 2; x++)
+        for (var y = -gridWidth / 2; y < gridHeight / 2; y++)
         {
-            for (var y = -gridWidth / 2; y < gridHeight / 2; y++)
-            {
-                var i = 4 * CordsTo1D_Idx(x, y);
-                verts[i + 0] = new Vector3((x + 0) * TileSize, (y + 0) * TileSize);
-                verts[i + 1] = new Vector3((x + 1) * TileSize, (y + 0) * TileSize);
-                verts[i + 2] = new Vector3((x + 1) * TileSize, (y + 1) * TileSize);
-                verts[i + 3] = new Vector3((x + 0) * TileSize, (y + 1) * TileSize);
-            }
+            var i = 4 * CordsTo1D_Idx(x, y);
+            verts[i + 0] = new Vector3((x + 0) * TileSize, (y + 0) * TileSize);
+            verts[i + 1] = new Vector3((x + 1) * TileSize, (y + 0) * TileSize);
+            verts[i + 2] = new Vector3((x + 1) * TileSize, (y + 1) * TileSize);
+            verts[i + 3] = new Vector3((x + 0) * TileSize, (y + 1) * TileSize);
         }
 
         return verts;
@@ -418,20 +377,18 @@ public class TileGrid
     {
         var tris = new int[6 * gridWidth * gridHeight];
         for (var x = -gridWidth / 2; x < gridWidth / 2; x++)
+        for (var y = -gridWidth / 2; y < gridHeight / 2; y++)
         {
-            for (var y = -gridWidth / 2; y < gridHeight / 2; y++)
-            {
-                var i = 6 * CordsTo1D_Idx(x, y);
-                var j = 4 * CordsTo1D_Idx(x, y);
+            var i = 6 * CordsTo1D_Idx(x, y);
+            var j = 4 * CordsTo1D_Idx(x, y);
 
-                tris[i + 0] = j + 0;
-                tris[i + 1] = j + 3;
-                tris[i + 2] = j + 1;
+            tris[i + 0] = j + 0;
+            tris[i + 1] = j + 3;
+            tris[i + 2] = j + 1;
 
-                tris[i + 3] = j + 1;
-                tris[i + 4] = j + 3;
-                tris[i + 5] = j + 2;
-            }
+            tris[i + 3] = j + 1;
+            tris[i + 4] = j + 3;
+            tris[i + 5] = j + 2;
         }
 
         return tris;
@@ -440,17 +397,15 @@ public class TileGrid
     /// <summary>
     ///     Generates the UV mapping for the vertices of the mesh
     /// </summary>
-    /// <param name="defaltUV">The UV mapping to use, Must an array of EXACTLY 4 Vector2s</param>
+    /// <param name="defaultID"></param>
     /// <returns>The generated UV mappings</returns>
-    private Vector2[] Generate_UV(Vector2[] defaltUV)
+    private Vector2[] Generate_UV(ushort defaultID)
     {
         var uvs = new Vector2[4 * gridWidth * gridHeight];
-        Assert.AreEqual(defaltUV.Length, 4);
+        var defaultUV = TileSet.IDMapping[defaultID].UVMapping;
+        Assert.AreEqual(defaultUV.Length, 4);
 
-        for (var i = 0; i < uvs.Length; i++)
-        {
-            uvs[i] = defaltUV[i % 4];
-        }
+        for (var i = 0; i < uvs.Length; i++) uvs[i] = defaultUV[i % 4];
 
         return uvs;
     }
@@ -461,7 +416,10 @@ public class TileGrid
     /// <param name="x">The x cartesian index</param>
     /// <param name="y">The y cartesian index</param>
     /// <returns>The 1D index</returns>
-    private int CordsTo1D_Idx(int x, int y) => x + gridWidth / 2 + (y + gridWidth / 2) * gridWidth;
+    private int CordsTo1D_Idx(int x, int y)
+    {
+        return x + gridWidth / 2 + (y + gridWidth / 2) * gridWidth;
+    }
 
     /// <summary>
     ///     Converts cartesian indexes to positive indexes that can be used with the tileArray
@@ -469,17 +427,20 @@ public class TileGrid
     /// <param name="x">The x cartesian index</param>
     /// <param name="y">The y cartesian index</param>
     /// <returns>The positive indexes in a tuple (x, y)</returns>
-    private (int x, int y) CartesianToIdx(int x, int y) => (x + gridWidth / 2, y + gridWidth / 2);
+    private (int x, int y) CartesianToIdx(int x, int y)
+    {
+        return (x + gridWidth / 2, y + gridWidth / 2);
+    }
 
     /// <summary>
     ///     Update the UV mapping of a tile at a position in world space, ignores invalid positions
     /// </summary>
     /// <param name="pos">The world postion</param>
-    /// <param name="sprite">The sprite to use for this tile</param>
-    public void Update_UV(Vector3 pos, TileData.TileSprites sprite)
+    /// <param name="newUVMap">The UV Mapping to use</param>
+    public void Update_UV(Vector3 pos, Vector2[] newUVMap)
     {
         var (x, y) = Get_XY(pos);
-        Update_UV(x, y, sprite);
+        Update_UV(x, y, newUVMap);
     }
 
     /// <summary>
@@ -487,20 +448,13 @@ public class TileGrid
     /// </summary>
     /// <param name="x">The x cartesian index</param>
     /// <param name="y">The y cartesian index</param>
-    /// <param name="sprite">The sprite to use for this tile</param>
-    public void Update_UV(int x, int y, TileData.TileSprites sprite)
+    /// <param name="newUVMap">The UV Mapping to use</param>
+    public void Update_UV(int x, int y, Vector2[] newUVMap)
     {
-        if (!InGridBounds(x, y))
-        {
-            return;
-        }
+        if (!InGridBounds(x, y)) return;
 
-        var idx    = 4 * CordsTo1D_Idx(x, y);
-        var uvMaps = TileDataMapping.SpriteMapping[sprite];
-        for (var i = 0; i < 4; i++)
-        {
-            uvMap[idx + i] = uvMaps[i];
-        }
+        var idx = 4 * CordsTo1D_Idx(x, y);
+        for (var i = 0; i < 4; i++) uvMap[idx + i] = newUVMap[i];
 
         RenderMesh.uv = uvMap;
     }
@@ -536,14 +490,11 @@ public class TileGrid
     /// <param name="tileData">The new data for the tile</param>
     public void UpdateTile(int x, int y, TileData tileData)
     {
-        if (!InGridBounds(x, y))
-        {
-            return;
-        }
+        if (!InGridBounds(x, y)) return;
 
-        var (xIdx, yIdx)      = CartesianToIdx(x, y);
+        var (xIdx, yIdx) = CartesianToIdx(x, y);
         tileArray[xIdx, yIdx] = tileData;
-        Update_UV(x, y, tileData.Sprite);
+        Update_UV(x, y, TileSet.IDMapping[tileData.TypeID].UVMapping);
     }
 
     /// <summary>
@@ -553,18 +504,16 @@ public class TileGrid
     /// <param name="y">The y cartesian index</param>
     public void RefreshTile(int x, int y)
     {
-        if (!InGridBounds(x, y))
-        {
-            return;
-        }
+        if (!InGridBounds(x, y)) return;
 
         var (xIdx, yIdx) = CartesianToIdx(x, y);
-        Update_UV(x, y, tileArray[xIdx, yIdx].Sprite);
+
+        Update_UV(x, y, TileSet.IDMapping[tileArray[xIdx, yIdx].TypeID].UVMapping);
     }
 }
 
 public interface ITransform
 {
     Quaternion Rotation { get; }
-    Vector3    Position { get; }
+    Vector3 Position { get; }
 }
