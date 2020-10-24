@@ -10,15 +10,14 @@
           <e p="PlayerInput.cs" t="Include" />
         </e>
         <e p="Scripts" t="Include">
+          <e p="Damage.cs" t="Include" />
           <e p="GameCode.asmdef" t="Include" />
-          <e p="GridTesting.cs" t="Include" />
-          <e p="StructuralTileSet.cs" t="Include" />
+          <e p="LineDmgTester.cs" t="Include" />
+          <e p="ShipManager.cs" t="Include" />
           <e p="TileData.cs" t="Include" />
-          <e p="TileGrid.cs" t="Include" />
-        </e>
-        <e p="Tests" t="Include">
-          <e p="GridTileTests.cs" t="Include" />
-          <e p="Tests.asmdef" t="Include" />
+          <e p="TileManager.cs" t="Include" />
+          <e p="TileMapTesting.cs" t="Include" />
+          <e p="TileSet.cs" t="Include" />
         </e>
       </e>
       <e p="GameCode.csproj" t="IncludeRecursive" />
@@ -26,7 +25,6 @@
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
       <e p="Temp\bin" t="ExcludeRecursive" />
-      <e p="Tests.csproj" t="IncludeRecursive" />
     </e>
   </component>
 </project>

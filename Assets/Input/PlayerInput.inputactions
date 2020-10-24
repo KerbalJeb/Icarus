@@ -36,6 +36,14 @@
           "expectedControlType": "Button",
           "processors": "",
           "interactions": ""
+        },
+        {
+          "name": "DmgTest",
+          "type": "Button",
+          "id": "b8957742-07ba-4978-85fa-64cd33a1571a",
+          "expectedControlType": "Button",
+          "processors": "",
+          "interactions": ""
         }
       ],
       "bindings": [
@@ -267,6 +275,17 @@
           "processors": "",
           "groups": "Keyboard&Mouse",
           "action": "UpdateMesh",
+          "isComposite": false,
+          "isPartOfComposite": false
+        },
+        {
+          "name": "",
+          "id": "44f08a4c-e7ef-4fc4-8ab2-0aeca87b18f0",
+          "path": "<Mouse>/rightButton",
+          "interactions": "",
+          "processors": "",
+          "groups": "Keyboard&Mouse",
+          "action": "DmgTest",
           "isComposite": false,
           "isPartOfComposite": false
         }
