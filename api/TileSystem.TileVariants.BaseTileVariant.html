@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Interface PlayerInput.IUIActions
+    <title>Class BaseTileVariant
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Interface PlayerInput.IUIActions
+    <meta name="title" content="Class BaseTileVariant
    ">
     <meta name="generator" content="docfx 2.44.0.0">
     
@@ -95,8 +95,8 @@
                           <li class="">
                             <a href="Global.PlayerInput.IPlayerActions.html" title="PlayerInput.IPlayerActions" class="">PlayerInput.IPlayerActions</a>
                           </li>
-                          <li class="active">
-                            <a href="Global.PlayerInput.IUIActions.html" title="PlayerInput.IUIActions" class="active">PlayerInput.IUIActions</a>
+                          <li class="">
+                            <a href="Global.PlayerInput.IUIActions.html" title="PlayerInput.IUIActions" class="">PlayerInput.IUIActions</a>
                           </li>
                           <li class="">
                             <a href="Global.PlayerInput.PlayerActions.html" title="PlayerInput.PlayerActions" class="">PlayerInput.PlayerActions</a>
@@ -137,8 +137,8 @@
                           <li class="">
                             <a href="TileSystem.TileVariants.ArmorVariant.html" title="ArmorVariant" class="">ArmorVariant</a>
                           </li>
-                          <li class="">
-                            <a href="TileSystem.TileVariants.BaseTileVariant.html" title="BaseTileVariant" class="">BaseTileVariant</a>
+                          <li class="active">
+                            <a href="TileSystem.TileVariants.BaseTileVariant.html" title="BaseTileVariant" class="active">BaseTileVariant</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileVariants.EngineVariant.html" title="EngineVariant" class="">EngineVariant</a>
@@ -157,30 +157,38 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="Global.PlayerInput.IUIActions">
+            <article class="content wrap" id="_content" data-uid="TileSystem.TileVariants.BaseTileVariant">
   
   
-  <h1 id="Global_PlayerInput_IUIActions" data-uid="Global.PlayerInput.IUIActions" class="text-break">Interface PlayerInput.IUIActions
+  <h1 id="TileSystem_TileVariants_BaseTileVariant" data-uid="TileSystem.TileVariants.BaseTileVariant" class="text-break">Class BaseTileVariant
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>The base for all tile variant classes. Contains the common TileBase, ID and Name fields.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="Global.html">Global</a></h6>
-  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
-  <h5 id="Global_PlayerInput_IUIActions_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public interface IUIActions</code></pre>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">BaseTileVariant</span></div>
+      <div class="level2"><a class="xref" href="TileSystem.TileVariants.FunctionalTileVariant.html">FunctionalTileVariant</a></div>
+      <div class="level2"><a class="xref" href="TileSystem.TileVariants.StructuralTileVariant.html">StructuralTileVariant</a></div>
   </div>
-  <h3 id="methods">Methods
+  <h6><strong>Namespace</strong>: <a class="xref" href="TileSystem.TileVariants.html">TileSystem.TileVariants</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="TileSystem_TileVariants_BaseTileVariant_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class BaseTileVariant</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
   </h3>
   
   
-  <a id="Global_PlayerInput_IUIActions_OnCancel_" data-uid="Global.PlayerInput.IUIActions.OnCancel*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnCancel_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnCancel(InputAction.CallbackContext)">OnCancel(InputAction.CallbackContext)</h4>
+  <a id="TileSystem_TileVariants_BaseTileVariant__ctor_" data-uid="TileSystem.TileVariants.BaseTileVariant.#ctor*"></a>
+  <h4 id="TileSystem_TileVariants_BaseTileVariant__ctor_System_String_" data-uid="TileSystem.TileVariants.BaseTileVariant.#ctor(System.String)">BaseTileVariant(String)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnCancel(InputAction.CallbackContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">public BaseTileVariant(string jsonText)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -193,251 +201,109 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">jsonText</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="TileSystem_TileVariants_BaseTileVariant_ID" data-uid="TileSystem.TileVariants.BaseTileVariant.ID">ID</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort ID</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="Global_PlayerInput_IUIActions_OnClick_" data-uid="Global.PlayerInput.IUIActions.OnClick*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnClick_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnClick(InputAction.CallbackContext)">OnClick(InputAction.CallbackContext)</h4>
+  <h4 id="TileSystem_TileVariants_BaseTileVariant_Name" data-uid="TileSystem.TileVariants.BaseTileVariant.Name">Name</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnClick(InputAction.CallbackContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">public string Name</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
+        <td><span class="xref">System.String</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="Global_PlayerInput_IUIActions_OnMiddleClick_" data-uid="Global.PlayerInput.IUIActions.OnMiddleClick*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnMiddleClick_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnMiddleClick(InputAction.CallbackContext)">OnMiddleClick(InputAction.CallbackContext)</h4>
+  <h4 id="TileSystem_TileVariants_BaseTileVariant_TileBase" data-uid="TileSystem.TileVariants.BaseTileVariant.TileBase">TileBase</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnMiddleClick(InputAction.CallbackContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">public readonly TileBase TileBase</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
+        <td><span class="xref">TileBase</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h3 id="properties">Properties
+  </h3>
   
   
-  <a id="Global_PlayerInput_IUIActions_OnNavigate_" data-uid="Global.PlayerInput.IUIActions.OnNavigate*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnNavigate_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnNavigate(InputAction.CallbackContext)">OnNavigate(InputAction.CallbackContext)</h4>
+  <a id="TileSystem_TileVariants_BaseTileVariant_IdIDx_" data-uid="TileSystem.TileVariants.BaseTileVariant.IdIDx*"></a>
+  <h4 id="TileSystem_TileVariants_BaseTileVariant_IdIDx" data-uid="TileSystem.TileVariants.BaseTileVariant.IdIDx">IdIDx</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnNavigate(InputAction.CallbackContext context)</code></pre>
+    <pre><code class="lang-csharp hljs">public static ushort IdIDx { get; set; }</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Global_PlayerInput_IUIActions_OnPoint_" data-uid="Global.PlayerInput.IUIActions.OnPoint*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnPoint_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnPoint(InputAction.CallbackContext)">OnPoint(InputAction.CallbackContext)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnPoint(InputAction.CallbackContext context)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Global_PlayerInput_IUIActions_OnRightClick_" data-uid="Global.PlayerInput.IUIActions.OnRightClick*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnRightClick_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnRightClick(InputAction.CallbackContext)">OnRightClick(InputAction.CallbackContext)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnRightClick(InputAction.CallbackContext context)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Global_PlayerInput_IUIActions_OnScrollWheel_" data-uid="Global.PlayerInput.IUIActions.OnScrollWheel*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnScrollWheel_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnScrollWheel(InputAction.CallbackContext)">OnScrollWheel(InputAction.CallbackContext)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnScrollWheel(InputAction.CallbackContext context)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Global_PlayerInput_IUIActions_OnSubmit_" data-uid="Global.PlayerInput.IUIActions.OnSubmit*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnSubmit_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnSubmit(InputAction.CallbackContext)">OnSubmit(InputAction.CallbackContext)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnSubmit(InputAction.CallbackContext context)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Global_PlayerInput_IUIActions_OnTrackedDeviceOrientation_" data-uid="Global.PlayerInput.IUIActions.OnTrackedDeviceOrientation*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnTrackedDeviceOrientation_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnTrackedDeviceOrientation(InputAction.CallbackContext)">OnTrackedDeviceOrientation(InputAction.CallbackContext)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnTrackedDeviceOrientation(InputAction.CallbackContext context)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="Global_PlayerInput_IUIActions_OnTrackedDevicePosition_" data-uid="Global.PlayerInput.IUIActions.OnTrackedDevicePosition*"></a>
-  <h4 id="Global_PlayerInput_IUIActions_OnTrackedDevicePosition_InputAction_CallbackContext_" data-uid="Global.PlayerInput.IUIActions.OnTrackedDevicePosition(InputAction.CallbackContext)">OnTrackedDevicePosition(InputAction.CallbackContext)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void OnTrackedDevicePosition(InputAction.CallbackContext context)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">InputAction.CallbackContext</span></td>
-        <td><span class="parametername">context</span></td>
+        <td><span class="xref">System.UInt16</span></td>
         <td></td>
       </tr>
     </tbody>

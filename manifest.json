@@ -1,34 +1,27 @@
 {
-  "sitemap": {
-    "fileOptions": {
-      "api/*": {
-        "baseUrl": "https://normanderwan.github.io/DocFxForUnity/",
-        "changefreq": "daily"
-      }
-    },
-    "baseUrl": "https://normanderwan.github.io/DocFxForUnity/",
-    "changefreq": "weekly"
-  },
   "homepages": [],
   "source_base_path": "/home/travis/build/KerbalJeb/Icarus/Documentation",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
-      "type": "Resource",
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.Damage.yml",
       "output": {
-        "resource": {
-          "relative_path": "index.json"
+        ".html": {
+          "relative_path": "api/Global.Damage.html",
+          "hash": "GxXvI+M5XQtht6BGKGm86g=="
         }
       },
-      "is_incremental": false
+      "is_incremental": false,
+      "version": ""
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Global.GridTesting.yml",
+      "source_relative_path": "api/Global.LineDmgTester.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Global.GridTesting.html",
-          "hash": "u52wCAPVYfQmMzMYpSflCQ=="
+          "relative_path": "api/Global.LineDmgTester.html",
+          "hash": "SOAZHULj+ddJfm45hUH1Xw=="
         }
       },
       "is_incremental": false,
@@ -40,7 +33,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.IPlayerActions.html",
-          "hash": "i3/gmlDJGgLQDs2WLrLXZA=="
+          "hash": "o/9Sbm7T3mDCJXsIUEzSHQ=="
         }
       },
       "is_incremental": false,
@@ -52,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.IUIActions.html",
-          "hash": "eduZmODtvY4yRPyZz2xs7g=="
+          "hash": "S0tD2ZqrepgXEiLzECdyug=="
         }
       },
       "is_incremental": false,
@@ -64,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.PlayerActions.html",
-          "hash": "pQG9Jl/kX4RB+9Y4STrj/w=="
+          "hash": "hYR1QUUcO8eyWptRRSU/FQ=="
         }
       },
       "is_incremental": false,
@@ -76,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.UIActions.html",
-          "hash": "SA0gAeR8xU1mnx91UrqbGQ=="
+          "hash": "yQsHFYfF8/BozLsNdQyE/A=="
         }
       },
       "is_incremental": false,
@@ -88,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.html",
-          "hash": "L8a9woF+PA/KPoGdCRLNbQ=="
+          "hash": "1bRTvzDmm5zNzIIKqUDtaA=="
         }
       },
       "is_incremental": false,
@@ -96,23 +89,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/Global.TileData.yml",
+      "source_relative_path": "api/Global.ShipManager.yml",
       "output": {
         ".html": {
-          "relative_path": "api/Global.TileData.html",
-          "hash": "wV05HEdwZzCYJPjVmQ1Yxg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/Global.TileGrid.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/Global.TileGrid.html",
-          "hash": "reu8e1mJf2OCx6fJVC5MAQ=="
+          "relative_path": "api/Global.ShipManager.html",
+          "hash": "u80N2wNPVY3ulbxjDz1MVQ=="
         }
       },
       "is_incremental": false,
@@ -124,19 +105,151 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.html",
-          "hash": "s+g3IirPngcXcamDpEyRZQ=="
+          "hash": "CccYt8dlv3aciODmGI7zCQ=="
         }
       },
       "is_incremental": false,
       "version": ""
     },
     {
-      "type": "Toc",
-      "source_relative_path": "api/toc.yml",
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.FunctionalTileData.yml",
       "output": {
         ".html": {
-          "relative_path": "api/toc.html",
-          "hash": "upsVUkKyVPeFd/YZbowStw=="
+          "relative_path": "api/TileSystem.FunctionalTileData.html",
+          "hash": "BNxo59MWo7Fs0Xs0P16j8Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.StructuralTileData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.StructuralTileData.html",
+          "hash": "vVvIdlsBf/TCIPrnjwJlEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.TileManager.TileStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.TileManager.TileStatus.html",
+          "hash": "f1rwtjvcSbmPLCp9AncAsA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.TileManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.TileManager.html",
+          "hash": "UGiwRcS7Kp+z8Y+xMt4yHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.TileSet.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.TileSet.html",
+          "hash": "2jTog1ajlDTkFMUndm7+Kg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.TileVariants.ArmorVariant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.TileVariants.ArmorVariant.html",
+          "hash": "ilKJyzZQbZDQKC4QZrXPDA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.TileVariants.BaseTileVariant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.TileVariants.BaseTileVariant.html",
+          "hash": "J9vEEGYK+9shO9/Cl8VRCA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.TileVariants.EngineVariant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.TileVariants.EngineVariant.html",
+          "hash": "Yj8oQsRbf+nKTzfr9aUQiA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.TileVariants.FunctionalTileVariant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.TileVariants.FunctionalTileVariant.html",
+          "hash": "H3f2hkchp+uZHMhbqLWQ2w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.TileVariants.StructuralTileVariant.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.TileVariants.StructuralTileVariant.html",
+          "hash": "kiAOFOe8V87pDO3jgpCdqg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.TileVariants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.TileVariants.html",
+          "hash": "qlC2f/Izl3HczY34BLcTVg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.html",
+          "hash": "kGCGiz0WqaIl1OUpuNMY1A=="
         }
       },
       "is_incremental": false,
@@ -144,11 +257,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "manual/coniunctis.md",
+      "source_relative_path": "api/index.md",
       "output": {
         ".html": {
-          "relative_path": "manual/coniunctis.html",
-          "hash": "pIXpZkHF7VDMcOTqUAmVjQ=="
+          "relative_path": "api/index.html",
+          "hash": "mncjXzKW12rum/DFMpxu9Q=="
         }
       },
       "is_incremental": false,
@@ -156,35 +269,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "manual/etiam.md",
+      "source_relative_path": "index.md",
       "output": {
         ".html": {
-          "relative_path": "manual/etiam.html",
-          "hash": "YpC55W2j1f+qtbnzQkYJoA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "manual/toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "manual/toc.html",
-          "hash": "51UaEWne9HNrZHwJzKW0iA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Toc",
-      "source_relative_path": "toc.yml",
-      "output": {
-        ".html": {
-          "relative_path": "toc.html",
-          "hash": "mhVSMJbw9lqV20i6HEmt+Q=="
+          "relative_path": "index.html",
+          "hash": "cRetyca+MwOlwXK1P5KqPg=="
         }
       },
       "is_incremental": false,
@@ -218,7 +307,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 9,
+          "total_file_count": 21,
           "skipped_file_count": 0
         }
       }
@@ -226,7 +315,7 @@
     {
       "status": {
         "can_incremental": false,
-        "details": "Cannot support incremental post processing, the reason is: should not trace intermediate info.",
+        "details": "Cannot support incremental post processing, the reason is: last post processor info is null.",
         "incrementalPhase": "postProcessing",
         "total_file_count": 0,
         "skipped_file_count": 0
