@@ -3,13 +3,13 @@ using UnityEngine.InputSystem;
 
 public class LineDmgTester : MonoBehaviour
 {
+    private readonly RaycastHit2D[] hits = new RaycastHit2D[20];
     private Camera cam;
     private Vector3 endPos;
-    private RaycastHit2D[] hits = new RaycastHit2D[20];
-    private bool pressed = false;
+    private bool pressed;
     private Vector3 startPos;
 
-    void Start()
+    private void Start()
     {
         cam = Camera.main;
     }
@@ -35,12 +35,15 @@ public class LineDmgTester : MonoBehaviour
             var numHits = Physics2D.RaycastNonAlloc(startPos, dir, hits);
             var dmg = new Damage(startPos, endPos, 1250f);
 
-            for (int i = 0; i < numHits; i++)
+            for (var i = 0; i < numHits; i++)
             {
                 var hit = hits[i];
 
                 var ship = hit.transform?.gameObject.GetComponentInParent<ShipManager>();
-                ship?.ApplyDamage(dmg);
+                if (ship != null)
+                {
+                    ship.ApplyDamage(dmg);
+                }
             }
         }
     }

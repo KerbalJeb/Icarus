@@ -1,6 +1,6 @@
 ﻿{
   "Name": "Basic Armor",
-  "Category": "Armor",
+  "TileType": "Armor",
   "DamageResistance": 0.8,
   "MaxHealth": 1000,
   "TilePath": "Tiles\\ShipTiles\\ShipTiles_0"

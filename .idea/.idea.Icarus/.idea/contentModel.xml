@@ -11,12 +11,21 @@
         </e>
         <e p="Scripts" t="Include">
           <e p="Damage.cs" t="Include" />
+          <e p="FunctionalTileData.cs" t="Include" />
           <e p="GameCode.asmdef" t="Include" />
           <e p="LineDmgTester.cs" t="Include" />
           <e p="ShipManager.cs" t="Include" />
-          <e p="TileData.cs" t="Include" />
+          <e p="StructuralTileData.cs" t="Include" />
+          <e p="TileClasses" t="Include">
+            <e p="Armor.cs" t="Include" />
+            <e p="BaseTile.cs" t="Include" />
+            <e p="Engine.cs" t="Include" />
+            <e p="FunctionalTile.cs" t="Include" />
+            <e p="JsonTile.cs" t="Include" />
+            <e p="StructuralTile.cs" t="Include" />
+            <e p="TileClass.cs" t="Include" />
+          </e>
           <e p="TileManager.cs" t="Include" />
-          <e p="TileMapTesting.cs" t="Include" />
           <e p="TileSet.cs" t="Include" />
         </e>
       </e>

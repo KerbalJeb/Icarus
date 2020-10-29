@@ -1,72 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using TileClasses;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 public class TileSet
 {
     private static readonly Dictionary<string, TileSet> TileSets = new Dictionary<string, TileSet>();
-    public readonly ReadOnlyCollection<TileType> TileTypes;
-    public readonly ReadOnlyDictionary<string, TileType> TileTypesDict;
+
+    public readonly ReadOnlyDictionary<ushort, FunctionalTile> FunctionalTiles;
+
+    public readonly ReadOnlyDictionary<string, FunctionalTile> FunctionalTilesDict;
+    public readonly ReadOnlyDictionary<ushort, StructuralTile> StructuralTiles;
+    public readonly ReadOnlyDictionary<string, StructuralTile> StructuralTilesDict;
 
     private TileSet(string path)
     {
         var jsonData = Resources.LoadAll<TextAsset>(path);
-        var tileTypes = new List<TileType>();
-        var tileTypesDict = new Dictionary<string, TileType>();
+
+        var functionalTiles = new Dictionary<ushort, FunctionalTile>();
+        var structuralTiles = new Dictionary<ushort, StructuralTile>();
+
+        var functionalTilesDict = new Dictionary<string, FunctionalTile>();
+        var structuralTilesDict = new Dictionary<string, StructuralTile>();
+
         foreach (var file in jsonData)
         {
-            var jsonTile = JsonUtility.FromJson<JsonTile>(file.text);
-            int id = tileTypes.Count;
-            var tileType = new TileType(id, jsonTile.DamageResistance, jsonTile.MaxHealth, jsonTile.TilePath);
-            tileTypesDict[tileType.TileBase.name] = tileType;
-            tileTypes.Add(tileType);
+            var jsonTile = new JsonTile(file.text);
+            BaseTile tile;
+
+            switch (jsonTile.TileClass)
+            {
+                case TileClass.Armor:
+                    tile = new Armor(file.text);
+                    break;
+                case TileClass.Engine:
+                    tile = new Engine(file.text);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            switch (tile)
+            {
+                case FunctionalTile functionalTile:
+                    functionalTiles[tile.ID] = functionalTile;
+                    functionalTilesDict[functionalTile.TileBase.name] = functionalTile;
+                    break;
+                case StructuralTile structuralTile:
+                    structuralTiles[tile.ID] = structuralTile;
+                    structuralTilesDict[structuralTile.TileBase.name] = structuralTile;
+                    break;
+            }
         }
 
-        TileTypes = new ReadOnlyCollection<TileType>(tileTypes);
-        TileTypesDict = new ReadOnlyDictionary<string, TileType>(tileTypesDict);
         TileSets[path] = this;
+        FunctionalTiles = new ReadOnlyDictionary<ushort, FunctionalTile>(functionalTiles);
+        StructuralTiles = new ReadOnlyDictionary<ushort, StructuralTile>(structuralTiles);
+        FunctionalTilesDict = new ReadOnlyDictionary<string, FunctionalTile>(functionalTilesDict);
+        StructuralTilesDict = new ReadOnlyDictionary<string, StructuralTile>(structuralTilesDict);
     }
 
     public static TileSet GetTileSet(string path)
     {
-        if (!TileSets.ContainsKey(path))
-        {
-            TileSets[path] = new TileSet(path);
-        }
+        if (!TileSets.ContainsKey(path)) TileSets[path] = new TileSet(path);
 
         return TileSets[path];
-    }
-
-    [Serializable]
-    private struct JsonTile
-    {
-        public float DamageResistance;
-        public short MaxHealth;
-        public string TilePath;
-
-        private JsonTile(float damageResistance, short maxHealth, string tilePath)
-        {
-            DamageResistance = damageResistance;
-            MaxHealth = maxHealth;
-            TilePath = tilePath;
-        }
-    }
-
-    public class TileType
-    {
-        public float DamageResistance;
-        public ushort ID;
-        public short MaxHealth;
-        public TileBase TileBase;
-
-        public TileType(int id, float damageResistance, short maxHealth, string tilePath)
-        {
-            DamageResistance = damageResistance;
-            MaxHealth = maxHealth;
-            TileBase = Resources.Load<TileBase>(tilePath);
-            ID = (ushort) id;
-        }
     }
 }
