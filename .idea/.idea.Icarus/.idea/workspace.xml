@@ -20,48 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78b0d985-ce45-4d85-a770-06cc4737011f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Tiles/json/Engines/basic.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/FunctionalTileData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/FunctionalTileData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/StructuralTileData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/Armor.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/Armor.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/BaseTile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/BaseTile.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/Engine.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/Engine.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/FunctionalTile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/FunctionalTile.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/JsonTile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/JsonTile.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/StructuralTile.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/StructuralTile.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/TileClass.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/TileClasses/TileClass.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Input/PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Input/PlayerInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Grid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Grid.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Tiles/json/BasicArmor.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Tiles/json/BasicArmor.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Tiles/json/BlueArmor.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Tiles/json/BlueArmor.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/ShipBuildTesting.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/ShipBuildTesting.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/LineDmgTester.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/LineDmgTester.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ShipManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ShipManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/StructuralTileData.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileMapTesting.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileMapTesting.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TileSet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TileSet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tiles/Materials/ShipTiles.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tiles/Materials/ShipTiles.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tiles/Palettes/ShipTiles.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tiles/Palettes/ShipTiles.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tiles/ShipTiles.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tiles/ShipTiles.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tiles/ShipTiles.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tiles/ShipTiles.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tiles/ShipTiles.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tiles/ShipTiles.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tiles/svg/ShipTiles.svg" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Tiles/svg/ShipTiles.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentation/docfx.json" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/docfx.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentation/filterConfig.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/filterConfig.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +61,6 @@
         <option value="$PROJECT_DIR$/.gitattributes" />
         <option value="$PROJECT_DIR$/docfx.json" />
         <option value="$PROJECT_DIR$/.travis.yml" />
-        <option value="$PROJECT_DIR$/Documentation/docfx.json" />
         <option value="$PROJECT_DIR$/Assets/Tests/TileGridTests.cs" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Assets/Tiles/BasicArmor.json" />
@@ -141,9 +101,10 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/TileClasses/FunctionalTile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TileClasses/JsonTile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TileClasses/Engine.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/TileSet.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ShipManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TileManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/TileSet.cs" />
+        <option value="$PROJECT_DIR$/Documentation/docfx.json" />
       </list>
     </option>
   </component>
@@ -241,7 +202,7 @@
       <workItem from="1603839489961" duration="10765000" />
       <workItem from="1603860777857" duration="5045000" />
       <workItem from="1603896693148" duration="4393000" />
-      <workItem from="1603911732141" duration="10799000" />
+      <workItem from="1603911732141" duration="11865000" />
     </task>
     <task id="LOCAL-00001" summary="Added collider generation and highlighting">
       <created>1601749808520</created>
@@ -292,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603520739786</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added Support for Functional Tiles">
+      <created>1603930489981</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1603930489981</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -336,7 +304,8 @@
     <MESSAGE value="Added Unit Tests" />
     <MESSAGE value="Updated Interface and started to improve collision mesh generation" />
     <MESSAGE value="Updated Tiles to use Unity Tilemaps" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Tiles to use Unity Tilemaps" />
+    <MESSAGE value="Added Support for Functional Tiles" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Support for Functional Tiles" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -480,10 +449,10 @@
     </state>
     <state x="92" y="92" width="1496" height="826" key="VCS.FileHistoryDialog/-265.1050.1440.933/0.0.1680.1010@0.0.1680.1010" timestamp="1602204075338" />
     <state x="140" y="95" width="2280" height="851" key="VCS.FileHistoryDialog/0.0.2560.1040@0.0.2560.1040" timestamp="1601791476411" />
-    <state x="572" y="233" key="Vcs.Push.Dialog.v2" timestamp="1603520747739">
+    <state x="572" y="233" key="Vcs.Push.Dialog.v2" timestamp="1603930532467">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
-    <state x="572" y="233" key="Vcs.Push.Dialog.v2/-265.1050.1440.933/0.0.1680.1010@0.0.1680.1010" timestamp="1603520747739" />
+    <state x="572" y="233" key="Vcs.Push.Dialog.v2/-265.1050.1440.933/0.0.1680.1010@0.0.1680.1010" timestamp="1603930532467" />
     <state x="872" y="240" key="Vcs.Push.Dialog.v2/0.0.2560.1040@0.0.2560.1040" timestamp="1602068287127" />
     <state width="846" height="513" key="XDebugger.FullValuePopup" timestamp="1603470485121">
       <screen x="0" y="0" width="1680" height="1010" />
