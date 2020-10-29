@@ -52,3 +52,11 @@
 *.meta linguist-generated
 *.prefab linguist-generated
 *.unity linguist-generated
+
+*.asmdef linguist-generated=true
+*.html    linguist-generated=true
+*.xml     linguist-generated=true 
+*.svg    linguist-generated=true 
+*.yml    linguist-generated=true 
+*.json    linguist-generated=true 
+.travis.yml linguist-generated=false 

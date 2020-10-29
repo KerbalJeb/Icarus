@@ -1,0 +1,36 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../Assets",
+          "files": [
+            "**.cs"
+          ]
+        }
+      ],
+      "dest": "api",
+      "globalNamespaceId": "Global",
+      "filter": "filterconfig.yml"
+    }
+  ],
+  "build": {
+    "template": [
+      "statictoc"
+    ],
+    "content": [
+      {
+        "src": "api",
+        "files": [ "**.yml", "index.md" ],
+        "dest": "api"
+      },
+      {
+        "files": [
+          "*.md",
+          "toc.yml"
+        ]
+      }
+    ],
+    "dest": "../_site"
+  }
+}
