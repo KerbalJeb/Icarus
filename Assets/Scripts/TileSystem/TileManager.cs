@@ -106,7 +106,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Trys to get the structural tile at the given cords
+        ///     Trys to get the structural tile at the given cords
         /// </summary>
         /// <param name="cords">The coordinates of the position to check</param>
         /// <param name="tileData">Sets to the value of the tile data (default if none)</param>
@@ -124,7 +124,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Trys to get the structural tile at a world position
+        ///     Trys to get the structural tile at a world position
         /// </summary>
         /// <param name="pos">The world position to check</param>
         /// <param name="tileData">Sets to the value of the tile data (default if none)</param>
@@ -136,7 +136,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Trys to get the functional tile at the given cords
+        ///     Trys to get the functional tile at the given cords
         /// </summary>
         /// <param name="cords">The coordinates of the position to check</param>
         /// <param name="tileData">Sets to the value of the tile data (default if none)</param>
@@ -154,7 +154,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Trys to get the functional tile at a world position
+        ///     Trys to get the functional tile at a world position
         /// </summary>
         /// <param name="pos">The world position to check</param>
         /// <param name="tileData">Sets to the value of the tile data (default if none)</param>
@@ -166,12 +166,13 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Set a tile at the given coordinates
+        ///     Set a tile at the given coordinates
         /// </summary>
         /// <param name="cords">The coordinates of the tile to set</param>
-        /// <param name="tileVariant">The tile class/variant to use</param>
-        public void SetTile(Vector3Int cords, BaseTileVariant tileVariant)
+        /// <param name="tileVariantID">The tile variant to use</param>
+        public void SetTile(Vector3Int cords, ushort tileVariantID)
         {
+            BaseTileVariant tileVariant = TileSet.TileVariants[tileVariantID];
             switch (tileVariant)
             {
                 case FunctionalTileVariant functionalTile:
@@ -186,53 +187,55 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Sets a tile at a position in world space
+        ///     Sets a tile at a position in world space
         /// </summary>
         /// <param name="pos">The position in world space</param>
         /// <param name="structuralTiles">The tile variant to be placed</param>
         public void SetStructuralTiles(Vector3Int[] pos, StructuralTileVariant[] structuralTiles)
         {
-            var newTiles = structuralTiles.Select(tile=>tile.TileBase).ToArray();
+            var newTiles = structuralTiles.Select(tile => tile.TileBase).ToArray();
 
-            for (int i = 0; i < pos.Length; i++)
+            for (var i = 0; i < pos.Length; i++)
             {
                 StructuralTileVariant tileVariant = structuralTiles[i];
-                Vector3Int     cords        = pos[i];
+                Vector3Int            cords       = pos[i];
                 structuralTileData[cords] = new StructuralTileData(tileVariant);
             }
+
             structuralTilemap.SetTiles(pos, newTiles);
         }
 
         /// <summary>
-        /// Set an array of tiles at the given coordinates
+        ///     Set an array of tiles at the given coordinates
         /// </summary>
         /// <param name="cords">The list of coordinates in the tilemap</param>
         /// <param name="functionalTile">The list of tile variants to be placed</param>
         public void SetFunctionalTiles(Vector3Int[] cords, FunctionalTileVariant[] functionalTile)
         {
-            var newTiles = functionalTile.Select(tile=>tile.TileBase).ToArray();
+            var newTiles = functionalTile.Select(tile => tile.TileBase).ToArray();
 
-            for (int i = 0; i < cords.Length; i++)
+            for (var i = 0; i < cords.Length; i++)
             {
                 FunctionalTileVariant tileVariant = functionalTile[i];
-                Vector3Int     cord        = cords[i];
+                Vector3Int            cord        = cords[i];
                 functionalTileData[cord] = new FunctionalTileData(tileVariant);
             }
+
             functionalTilemap.SetTiles(cords, newTiles);
         }
 
         /// <summary>
-        /// Sets a tile at the given postion in world space
+        ///     Sets a tile at the given position in world space
         /// </summary>
         /// <param name="pos">The position in world space</param>
-        /// <param name="tileVariant">The tile variant to be placed</param>
-        public void SetTile(Vector3 pos, BaseTileVariant tileVariant)
+        /// <param name="tileVariantID">The tile variant to be placed</param>
+        public void SetTile(Vector3 pos, ushort tileVariantID)
         {
-            SetTile(PositionToCords(pos), tileVariant);
+            SetTile(PositionToCords(pos), tileVariantID);
         }
 
         /// <summary>
-        /// Remove the tile at the given coordinates
+        ///     Remove the tile at the given coordinates
         /// </summary>
         /// <param name="cords">The coordinates to remove the tile at</param>
         /// <param name="structural">Only removes functional tile if false, removes structural and functional otherwise</param>
@@ -252,7 +255,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Remove the tile at a position in world space
+        ///     Remove the tile at a position in world space
         /// </summary>
         /// <param name="pos">The position in world space</param>
         /// <param name="structural">Only removes functional tile if false, removes structural and functional otherwise</param>
@@ -262,7 +265,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Checks what tiles are present at a given coordinate
+        ///     Checks what tiles are present at a given coordinate
         /// </summary>
         /// <param name="cords">The coordinate to check</param>
         /// <returns>The type(s) of tiles present</returns>
@@ -274,14 +277,14 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Checks what tiles are present at a given position in world space
+        ///     Checks what tiles are present at a given position in world space
         /// </summary>
         /// <param name="pos">The position in world space</param>
         /// <returns>The type(s) of tiles present</returns>
         public TileStatus TilesAt(Vector3 pos) => TilesAt(PositionToCords(pos));
 
         /// <summary>
-        /// Updates the internal tile data to match the tiles in Unity's tilemaps
+        ///     Updates the internal tile data to match the tiles in Unity's tilemaps
         /// </summary>
         private void SyncFromTilemap()
         {
@@ -294,16 +297,18 @@ namespace TileSystem
                 if (!structuralTilemap.HasTile(pos)) continue;
 
                 TileBase tile = structuralTilemap.GetTile(pos);
-                structuralTileData[pos] = new StructuralTileData(TileSet.StructuralTilesDict[tile.name]);
+                ushort   id   = TileSet.TilemapNameToID[tile.name];
+                structuralTileData[pos] = new StructuralTileData(TileSet.TileVariants[id] as StructuralTileVariant);
                 if (!functionalTilemap.HasTile(pos)) continue;
 
-                TileBase funcTile = functionalTilemap.GetTile(pos);
-                functionalTileData[pos] = new FunctionalTileData(TileSet.FunctionalTilesDict[funcTile.name]);
+                tile                    = functionalTilemap.GetTile(pos);
+                id                      = TileSet.TilemapNameToID[tile.name];
+                functionalTileData[pos] = new FunctionalTileData(TileSet.TileVariants[id] as FunctionalTileVariant);
             }
         }
 
         /// <summary>
-        /// Applies damage to the tilemap
+        ///     Applies damage to the tilemap
         /// </summary>
         /// <param name="dmg">A description of the damage to apply</param>
         public void ApplyDamage(Damage dmg)
@@ -318,7 +323,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Damages a tile at the given coordinates
+        ///     Damages a tile at the given coordinates
         /// </summary>
         /// <param name="cords">The coordinates to damage the tile at</param>
         /// <param name="baseDamage">The base damage to use</param>
@@ -326,9 +331,9 @@ namespace TileSystem
         {
             if (TilesAt(cords) == TileStatus.Empty) return;
 
-            StructuralTileData tile     = structuralTileData[cords];
-            StructuralTileVariant     tileVariantType = TileSet.StructuralTiles[tile.ID];
-            var                damage   = (ushort) (tileVariantType.DamageResistance * baseDamage);
+            StructuralTileData tile            = structuralTileData[cords];
+            var                tileVariantType = TileSet.TileVariants[tile.ID] as StructuralTileVariant;
+            var                damage          = (ushort) (tileVariantType.DamageResistance * baseDamage);
             if (tile.Health <= damage)
             {
                 RemoveTile(cords);
@@ -342,7 +347,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Clears all stored data and resets the tilemaps
+        ///     Clears all stored data and resets the tilemaps
         /// </summary>
         public void ResetTiles()
         {
@@ -353,7 +358,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Used to apply an action to every tile in a line between two points
+        ///     Used to apply an action to every tile in a line between two points
         /// </summary>
         /// <param name="p0">The starting point</param>
         /// <param name="p1">The end point</param>
@@ -392,7 +397,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Finds Islands of unconnected tiles
+        ///     Finds Islands of unconnected tiles
         /// </summary>
         /// <returns>A list of the islands, each containing a list of the coordinate positions that make up the island</returns>
         private List<List<Vector3Int>> FindIslands()
@@ -446,7 +451,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Splits the tilemap into multiple objects if there are unconnected reagons
+        ///     Splits the tilemap into multiple objects if there are unconnected reagons
         /// </summary>
         private void Split()
         {
@@ -474,10 +479,10 @@ namespace TileSystem
                 foreach (Vector3Int cords in island)
                 {
                     if (!GetTile(cords, out StructuralTileData stcTile)) continue;
-                    structuralTiles.Add(TileSet.StructuralTiles[stcTile.ID]);
+                    structuralTiles.Add(TileSet.TileVariants[stcTile.ID] as StructuralTileVariant);
 
                     if (!GetTile(cords, out FunctionalTileData funTile)) continue;
-                    functionalTiles.Add(TileSet.FunctionalTiles[funTile.ID]);
+                    functionalTiles.Add(TileSet.TileVariants[funTile.ID] as FunctionalTileVariant);
                     functionalCords.Add(cords);
                 }
 

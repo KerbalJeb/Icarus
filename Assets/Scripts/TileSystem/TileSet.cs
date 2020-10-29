@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reflection;
 using TileSystem.TileVariants;
 using UnityEngine;
 
@@ -10,63 +12,90 @@ namespace TileSystem
     {
         private static readonly Dictionary<string, TileSet> TileSets = new Dictionary<string, TileSet>();
 
-        public readonly ReadOnlyDictionary<ushort, FunctionalTileVariant> FunctionalTiles;
-        public readonly ReadOnlyDictionary<string, FunctionalTileVariant> FunctionalTilesDict;
-        public readonly ReadOnlyDictionary<ushort, StructuralTileVariant> StructuralTiles;
-        public readonly ReadOnlyDictionary<string, StructuralTileVariant> StructuralTilesDict;
+        private readonly ReadOnlyCollection<Type> tileVariantTypes =
+            new ReadOnlyCollection<Type>(GetAllDerived(typeof(BaseTileVariant)).ToList());
 
+        /// <value>
+        /// Maps the name of a TileBase object to the ID of the tile variant that uses it
+        /// </value>
+        public readonly ReadOnlyDictionary<string, ushort> TilemapNameToID;
+
+        /// <value>
+        /// A list of all the tile variants contained in this tile set, the variant's ID corresponds to its index in the list
+        /// </value>
+        public readonly ReadOnlyCollection<BaseTileVariant> TileVariants;
+
+        /// <value>
+        /// Maps the name of a tile variant given in the JSON file to the variant's ID
+        /// </value>
+        public readonly ReadOnlyDictionary<string, ushort> VariantNameToID;
+
+        /// <summary>
+        /// Creates a new TileSet for a given path
+        /// </summary>
+        /// <param name="path">The path containing the JSON file</param>
         private TileSet(string path)
         {
+            BaseTileVariant.IdIDx = 0;
             var jsonData = Resources.LoadAll<TextAsset>(path);
 
-            var functionalTiles = new Dictionary<ushort, FunctionalTileVariant>();
-            var structuralTiles = new Dictionary<ushort, StructuralTileVariant>();
-
-            var functionalTilesDict = new Dictionary<string, FunctionalTileVariant>();
-            var structuralTilesDict = new Dictionary<string, StructuralTileVariant>();
+            var tileVariants                = new List<BaseTileVariant>(jsonData.Length);
+            var tileVariantsTileNameDict    = new Dictionary<string, ushort>();
+            var tileVariantsVariantNameDict = new Dictionary<string, ushort>();
 
             foreach (TextAsset file in jsonData)
             {
-                var      jsonTile = new JsonTile(file.text);
-                BaseTileVariant tileVariant;
+                var jsonTile     = JsonUtility.FromJson<JsonTile>(file.text);
+                var variantTypes = tileVariantTypes.Where(type => type.Name == jsonTile.TileType).ToArray();
 
-                switch (jsonTile.TileVariant)
+                if (variantTypes.Length != 1)
                 {
-                    case TileVariants.TileVariants.Armor:
-                        tileVariant = new ArmorVariant(file.text);
-                        break;
-                    case TileVariants.TileVariants.Engine:
-                        tileVariant = new EngineVariant(file.text);
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                    Debug.LogWarning("Found " + variantTypes.Length + " Matches for " + jsonTile.TileType);
+                    continue;
                 }
 
-                switch (tileVariant)
-                {
-                    case FunctionalTileVariant functionalTile:
-                        functionalTiles[tileVariant.ID]                   = functionalTile;
-                        functionalTilesDict[functionalTile.TileBase.name] = functionalTile;
-                        break;
-                    case StructuralTileVariant structuralTile:
-                        structuralTiles[tileVariant.ID]                   = structuralTile;
-                        structuralTilesDict[structuralTile.TileBase.name] = structuralTile;
-                        break;
-                }
+                Type variantType = variantTypes[0];
+                var  variant     = Activator.CreateInstance(variantType, file.text) as BaseTileVariant;
+                if (variant == null) continue;
+
+                tileVariants.Add(variant);
+                tileVariantsTileNameDict[variant.TileBase.name] = variant.ID;
+                tileVariantsVariantNameDict[variant.Name]       = variant.ID;
             }
 
-            TileSets[path]      = this;
-            FunctionalTiles     = new ReadOnlyDictionary<ushort, FunctionalTileVariant>(functionalTiles);
-            StructuralTiles     = new ReadOnlyDictionary<ushort, StructuralTileVariant>(structuralTiles);
-            FunctionalTilesDict = new ReadOnlyDictionary<string, FunctionalTileVariant>(functionalTilesDict);
-            StructuralTilesDict = new ReadOnlyDictionary<string, StructuralTileVariant>(structuralTilesDict);
+            TileSets[path]  = this;
+            TileVariants    = new ReadOnlyCollection<BaseTileVariant>(tileVariants);
+            TilemapNameToID = new ReadOnlyDictionary<string, ushort>(tileVariantsTileNameDict);
+            VariantNameToID = new ReadOnlyDictionary<string, ushort>(tileVariantsVariantNameDict);
         }
 
+        /// <summary>
+        /// Gets (or creates) based on all the json files present in the given path. A TileSet will only be created once per path, all subsequent calls will return a reference to the original instance
+        /// </summary>
+        /// <param name="path">A path containing json files</param>
+        /// <returns>A TileSet that contains all tile variants created from the json files in path</returns>
         public static TileSet GetTileSet(string path)
         {
             if (!TileSets.ContainsKey(path)) TileSets[path] = new TileSet(path);
 
             return TileSets[path];
+        }
+
+        /// <summary>
+        /// Gets all the classes that inherit from a class
+        /// </summary>
+        /// <param name="baseClass">The base class</param>
+        /// <returns>The Type for each class that inherits from baseClass</returns>
+        private static IEnumerable<Type> GetAllDerived(Type baseClass)
+        {
+            return Assembly.GetAssembly(baseClass).GetTypes()
+                           .Where(theType => theType.IsClass && !theType.IsAbstract && theType.IsSubclassOf(baseClass));
+        }
+
+        [Serializable]
+        private class JsonTile
+        {
+            public string TileType;
         }
     }
 }

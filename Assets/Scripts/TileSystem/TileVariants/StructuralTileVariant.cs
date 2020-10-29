@@ -3,10 +3,13 @@ using UnityEngine;
 
 namespace TileSystem.TileVariants
 {
+    /// <summary>
+    /// The base class for all structural tiles (Have health, don't consume power)
+    /// </summary>
     public class StructuralTileVariant : BaseTileVariant
     {
-        public readonly float  DamageResistance;
-        public readonly int    MaxHealth;
+        public readonly float DamageResistance;
+        public readonly int   MaxHealth;
 
         public StructuralTileVariant(string jsonText) : base(jsonText)
         {

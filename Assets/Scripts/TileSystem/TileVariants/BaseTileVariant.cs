@@ -4,9 +4,11 @@ using UnityEngine.Tilemaps;
 
 namespace TileSystem.TileVariants
 {
-    public class BaseTileVariant 
+    /// <summary>
+    ///  The base for all tile variant classes. Contains the common TileBase, ID and Name fields.
+    /// </summary>
+    public class BaseTileVariant
     {
-        private static  ushort   idIdx;
         public readonly TileBase TileBase;
         public          ushort   ID;
         public          string   Name;
@@ -15,10 +17,12 @@ namespace TileSystem.TileVariants
         {
             var json = JsonUtility.FromJson<Json>(jsonText);
             TileBase = Resources.Load<TileBase>(json.TilePath);
-            ID       = idIdx;
+            ID       = IdIDx;
             Name     = json.Name;
-            idIdx++;
+            IdIDx++;
         }
+
+        public static ushort IdIDx { get; set; }
 
         [Serializable]
         private class Json

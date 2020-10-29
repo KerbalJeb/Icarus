@@ -9,7 +9,7 @@ namespace TileSystem
     {
         public FunctionalTileData(FunctionalTileVariant baseTileVariant)
         {
-            ID        = baseTileVariant.ID;
+            ID = baseTileVariant.ID;
         }
 
         /// <value>

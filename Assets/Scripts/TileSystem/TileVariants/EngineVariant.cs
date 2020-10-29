@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace TileSystem.TileVariants
 {
+    /// <summary>
+    /// The class for engine variants
+    /// </summary>
     public class EngineVariant : FunctionalTileVariant
     {
         public readonly float Thrust;

@@ -3,7 +3,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
+/// <summary>
+/// Used to connect all components needed for a ship
+/// </summary>
 [RequireComponent(typeof(Grid))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(TileManager))]
 public class ShipManager : MonoBehaviour
 {
     private Camera      cam;
@@ -23,7 +28,7 @@ public class ShipManager : MonoBehaviour
             {
                 Vector2Control mousePos = Mouse.current.position;
                 Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-                tileManager.SetTile(worldPos, tileManager.TileSet.StructuralTiles[0]);
+                tileManager.SetTile(worldPos, tileManager.TileSet.VariantNameToID["Basic Armor"]);
             }
             else if (Mouse.current.middleButton.isPressed)
             {

@@ -9,8 +9,8 @@ namespace TileSystem
     {
         public StructuralTileData(StructuralTileVariant tileVariantType)
         {
-            Health    = (ushort) tileVariantType.MaxHealth;
-            ID        = tileVariantType.ID;
+            Health = (ushort) tileVariantType.MaxHealth;
+            ID     = tileVariantType.ID;
         }
 
         /// <value>
@@ -21,6 +21,6 @@ namespace TileSystem
         /// <value>
         ///     The ID of the structural tile
         /// </value>
-        public ushort ID { get;}
+        public ushort ID { get; }
     }
 }
