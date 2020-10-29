@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TileClasses
+namespace TileSystem.TileClasses
 {
     public class Engine : FunctionalTile
     {

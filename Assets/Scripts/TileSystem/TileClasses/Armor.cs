@@ -1,4 +1,4 @@
-﻿namespace TileClasses
+﻿namespace TileSystem.TileClasses
 {
     public class Armor : StructuralTile
     {

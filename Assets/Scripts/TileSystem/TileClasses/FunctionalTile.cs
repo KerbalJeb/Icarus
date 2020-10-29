@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TileClasses
+namespace TileSystem.TileClasses
 {
     public class FunctionalTile : BaseTile
     {
-        private static ushort idIdx = 0;
-        public readonly float PowerGeneration;
+        private static  ushort idIdx = 0;
+        public readonly float  PowerGeneration;
 
         public FunctionalTile(string jsonText) : base(jsonText, idIdx)
         {

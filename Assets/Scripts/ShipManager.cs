@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿using TileSystem;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Grid))]
 public class ShipManager : MonoBehaviour
 {
-    private Camera cam;
+    private Camera      cam;
     private TileManager tileManager;
 
     private void Awake()
     {
-        cam = Camera.main;
+        cam         = Camera.main;
         tileManager = GetComponent<TileManager>();
     }
 

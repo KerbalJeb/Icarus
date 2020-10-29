@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TileClasses
+namespace TileSystem.TileClasses
 {
     public class JsonTile
     {
@@ -9,7 +9,7 @@ namespace TileClasses
 
         public JsonTile(string jsonText)
         {
-            var json = JsonUtility.FromJson<Json>(jsonText);
+            var json       = JsonUtility.FromJson<Json>(jsonText);
             var validClass = Enum.TryParse(json.TileType, out tileClass);
 
             if (!validClass)
