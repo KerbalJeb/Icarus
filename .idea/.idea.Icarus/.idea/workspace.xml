@@ -20,9 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="78b0d985-ce45-4d85-a770-06cc4737011f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Documentation/toc.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Icarus/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Documentation/docfx.json" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/docfx.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documentation/filterConfig.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/filterConfig.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documentation/filterConfig.yml" beforeDir="false" afterPath="$PROJECT_DIR$/Documentation/filterconfig.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +62,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/GridDrawer.cs" />
         <option value="$PROJECT_DIR$/.gitattributes" />
         <option value="$PROJECT_DIR$/docfx.json" />
-        <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/Assets/Tests/TileGridTests.cs" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Assets/Tiles/BasicArmor.json" />
         <option value="$PROJECT_DIR$/Assets/Tiles/TileDescriptors/BasicArmor.json" />
         <option value="$PROJECT_DIR$/Assets/Scripts/StructuralTile.cs" />
@@ -104,6 +104,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/ShipManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TileManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/TileSet.cs" />
+        <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/Documentation/toc.yml" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/Documentation/index.md" />
+        <option value="$PROJECT_DIR$/Documentation/api/index.md" />
         <option value="$PROJECT_DIR$/Documentation/docfx.json" />
       </list>
     </option>
@@ -202,7 +207,7 @@
       <workItem from="1603839489961" duration="10765000" />
       <workItem from="1603860777857" duration="5045000" />
       <workItem from="1603896693148" duration="4393000" />
-      <workItem from="1603911732141" duration="11865000" />
+      <workItem from="1603911732141" duration="16110000" />
     </task>
     <task id="LOCAL-00001" summary="Added collider generation and highlighting">
       <created>1601749808520</created>

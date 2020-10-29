@@ -125,6 +125,11 @@ Temporary Items
 
 _site/
 
-Documentation/api/
+Documentation/api/*.yml
+Documentation/api/*.manifest
 
 Documentation/obj/
+
+Assets/Input/obj/
+
+Assets/Input/obj.meta
