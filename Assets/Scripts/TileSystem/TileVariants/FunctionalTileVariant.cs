@@ -1,24 +1,22 @@
 ﻿using System;
 using UnityEngine;
 
-namespace TileSystem.TileClasses
+namespace TileSystem.TileVariants
 {
-    public class FunctionalTile : BaseTile
+    public class FunctionalTileVariant : BaseTileVariant
     {
-        private static  ushort idIdx = 0;
         public readonly float  PowerGeneration;
 
-        public FunctionalTile(string jsonText) : base(jsonText, idIdx)
+        public FunctionalTileVariant(string jsonText) : base(jsonText)
         {
             var json = JsonUtility.FromJson<Json>(jsonText);
             PowerGeneration = json.PowerGeneration;
-            idIdx++;
         }
 
         [Serializable]
         private class Json
         {
-            public float PowerGeneration = 0f;
+            public float PowerGeneration;
         }
     }
 }

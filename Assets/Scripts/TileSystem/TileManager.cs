@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using TileSystem.TileClasses;
+using System.Linq;
+using TileSystem.TileVariants;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace TileSystem
 {
+    /// <summary>
+    ///     Used to manage and update Unity tile maps and store tile data
+    /// </summary>
     public class TileManager : MonoBehaviour
     {
         public enum TileStatus
         {
             Functional,
             Structural,
-            Empty
+            Empty,
         }
 
         private static readonly ReadOnlyCollection<Vector3Int> ConnectionRules = new ReadOnlyCollection<Vector3Int>(
@@ -22,11 +26,11 @@ namespace TileSystem
              new Vector3Int(1,  0,  0),
              new Vector3Int(0,  1,  0),
              new Vector3Int(-1, 0,  0),
-             new Vector3Int(0,  -1, 0)
+             new Vector3Int(0,  -1, 0),
          });
 
-        [SerializeField] private string     tilePath = null;
-        [SerializeField] private GameObject template = null;
+        [SerializeField] private string     tilePath;
+        [SerializeField] private GameObject template;
 
         private readonly Dictionary<Vector3Int, FunctionalTileData> functionalTileData =
             new Dictionary<Vector3Int, FunctionalTileData>();
@@ -43,16 +47,16 @@ namespace TileSystem
         public  TileSet   TileSet { get; private set; }
         private BoundsInt Bounds  => structuralTilemap.cellBounds;
 
+        /// <value>
+        ///     Will enable or disable physics for this tilemap (Splits tile map on enable)
+        /// </value>
         public bool PhysicsEnabled
         {
             set
             {
                 physics          = value;
                 rb2D.isKinematic = !value;
-                if (value)
-                {
-                    Split();
-                }
+                if (value) Split();
             }
             get => physics;
         }
@@ -60,7 +64,7 @@ namespace TileSystem
         public void Awake()
         {
             var tileMaps = GetComponentsInChildren<Tilemap>();
-            foreach (var map in tileMaps)
+            foreach (Tilemap map in tileMaps)
             {
                 switch (map.gameObject.name)
                 {
@@ -85,160 +89,250 @@ namespace TileSystem
             SyncFromTilemap();
         }
 
+        /// <summary>
+        ///     Converts a world position to coordinates in the tilemap
+        /// </summary>
+        /// <param name="vec">The world position vector</param>
+        /// <returns>The coordinate position in the tilemap</returns>
         public Vector3Int PositionToCords(Vector3 vec)
         {
-            var invRotation = Quaternion.Inverse(transform.rotation);
-            var objectPos   = transform.position;
-            var localPos    = invRotation * (vec - objectPos);
+            Quaternion invRotation = Quaternion.Inverse(transform.rotation);
+            Vector3    objectPos   = transform.position;
+            Vector3    localPos    = invRotation * (vec - objectPos);
 
-            var x = Mathf.FloorToInt(localPos.x / tileSize);
-            var y = Mathf.FloorToInt(localPos.y / tileSize);
+            int x = Mathf.FloorToInt(localPos.x / tileSize);
+            int y = Mathf.FloorToInt(localPos.y / tileSize);
             return new Vector3Int(x, y, 0);
         }
 
-        public StructuralTileData GetStructuralTile(Vector3Int cords)
+        /// <summary>
+        /// Trys to get the structural tile at the given cords
+        /// </summary>
+        /// <param name="cords">The coordinates of the position to check</param>
+        /// <param name="tileData">Sets to the value of the tile data (default if none)</param>
+        /// <returns>True if there is a structural tile at cords, False otherwise</returns>
+        public bool GetTile(Vector3Int cords, out StructuralTileData tileData)
         {
-            return structuralTileData[cords];
-        }
-
-        public StructuralTileData GetStructuralTile(Vector3 pos)
-        {
-            var cords = PositionToCords(pos);
-            return GetStructuralTile(cords);
-        }
-
-        public FunctionalTileData GetFunctionalTile(Vector3Int cords)
-        {
-            return functionalTileData[cords];
-        }
-
-        public FunctionalTileData GetFunctionalTile(Vector3 pos)
-        {
-            var cords = PositionToCords(pos);
-            return GetFunctionalTile(cords);
-        }
-
-        public void SetTile(Vector3Int cords, BaseTile tileTemplate)
-        {
-            switch (tileTemplate)
+            if (TilesAt(cords) != TileStatus.Empty)
             {
-                case FunctionalTile functionalTile:
+                tileData = structuralTileData[cords];
+                return true;
+            }
+
+            tileData = new StructuralTileData();
+            return false;
+        }
+
+        /// <summary>
+        /// Trys to get the structural tile at a world position
+        /// </summary>
+        /// <param name="pos">The world position to check</param>
+        /// <param name="tileData">Sets to the value of the tile data (default if none)</param>
+        /// <returns>True if there is a structural tile at cords, False otherwise</returns>
+        public bool GetTile(Vector3 pos, out StructuralTileData tileData)
+        {
+            Vector3Int cords = PositionToCords(pos);
+            return GetTile(cords, out tileData);
+        }
+
+        /// <summary>
+        /// Trys to get the functional tile at the given cords
+        /// </summary>
+        /// <param name="cords">The coordinates of the position to check</param>
+        /// <param name="tileData">Sets to the value of the tile data (default if none)</param>
+        /// <returns>True if there is a functional tile at cords, False otherwise</returns>
+        public bool GetTile(Vector3Int cords, out FunctionalTileData tileData)
+        {
+            if (TilesAt(cords) == TileStatus.Functional)
+            {
+                tileData = functionalTileData[cords];
+                return true;
+            }
+
+            tileData = new FunctionalTileData();
+            return false;
+        }
+
+        /// <summary>
+        /// Trys to get the functional tile at a world position
+        /// </summary>
+        /// <param name="pos">The world position to check</param>
+        /// <param name="tileData">Sets to the value of the tile data (default if none)</param>
+        /// <returns>True if there is a functional tile at cords, False otherwise</returns>
+        public bool GetTile(Vector3 pos, out FunctionalTileData tileData)
+        {
+            Vector3Int cords = PositionToCords(pos);
+            return GetTile(cords, out tileData);
+        }
+
+        /// <summary>
+        /// Set a tile at the given coordinates
+        /// </summary>
+        /// <param name="cords">The coordinates of the tile to set</param>
+        /// <param name="tileVariant">The tile class/variant to use</param>
+        public void SetTile(Vector3Int cords, BaseTileVariant tileVariant)
+        {
+            switch (tileVariant)
+            {
+                case FunctionalTileVariant functionalTile:
                     functionalTileData[cords] = new FunctionalTileData(functionalTile);
                     functionalTilemap.SetTile(cords, functionalTile.TileBase);
                     break;
-                case StructuralTile structuralTile:
+                case StructuralTileVariant structuralTile:
                     structuralTileData[cords] = new StructuralTileData(structuralTile);
                     structuralTilemap.SetTile(cords, structuralTile.TileBase);
                     break;
             }
         }
 
-        public void SetTiles(Vector3Int[] pos, BaseTile[] tileTemplates)
+        /// <summary>
+        /// Sets a tile at a position in world space
+        /// </summary>
+        /// <param name="pos">The position in world space</param>
+        /// <param name="structuralTiles">The tile variant to be placed</param>
+        public void SetStructuralTiles(Vector3Int[] pos, StructuralTileVariant[] structuralTiles)
         {
-            var newTiles = new TileBase[pos.Length];
+            var newTiles = structuralTiles.Select(tile=>tile.TileBase).ToArray();
 
-            for (var i = 0; i < pos.Length; i++)
+            for (int i = 0; i < pos.Length; i++)
             {
-                var tileTemplate = tileTemplates[i];
-                var cords        = pos[i];
-                switch (tileTemplate)
-                {
-                    case FunctionalTile functionalTile:
-                        functionalTileData[cords] = new FunctionalTileData(functionalTile);
-                        break;
-                    case StructuralTile structuralTile:
-                        structuralTileData[cords] = new StructuralTileData(structuralTile);
-                        break;
-                }
-
-                newTiles[i] = tileTemplate.TileBase;
+                StructuralTileVariant tileVariant = structuralTiles[i];
+                Vector3Int     cords        = pos[i];
+                structuralTileData[cords] = new StructuralTileData(tileVariant);
             }
-
             structuralTilemap.SetTiles(pos, newTiles);
         }
 
-        public void SetTile(Vector3 pos, BaseTile tileTemplate)
+        /// <summary>
+        /// Set an array of tiles at the given coordinates
+        /// </summary>
+        /// <param name="cords">The list of coordinates in the tilemap</param>
+        /// <param name="functionalTile">The list of tile variants to be placed</param>
+        public void SetFunctionalTiles(Vector3Int[] cords, FunctionalTileVariant[] functionalTile)
         {
-            SetTile(PositionToCords(pos), tileTemplate);
+            var newTiles = functionalTile.Select(tile=>tile.TileBase).ToArray();
+
+            for (int i = 0; i < cords.Length; i++)
+            {
+                FunctionalTileVariant tileVariant = functionalTile[i];
+                Vector3Int     cord        = cords[i];
+                functionalTileData[cord] = new FunctionalTileData(tileVariant);
+            }
+            functionalTilemap.SetTiles(cords, newTiles);
         }
 
+        /// <summary>
+        /// Sets a tile at the given postion in world space
+        /// </summary>
+        /// <param name="pos">The position in world space</param>
+        /// <param name="tileVariant">The tile variant to be placed</param>
+        public void SetTile(Vector3 pos, BaseTileVariant tileVariant)
+        {
+            SetTile(PositionToCords(pos), tileVariant);
+        }
+
+        /// <summary>
+        /// Remove the tile at the given coordinates
+        /// </summary>
+        /// <param name="cords">The coordinates to remove the tile at</param>
+        /// <param name="structural">Only removes functional tile if false, removes structural and functional otherwise</param>
         public void RemoveTile(Vector3Int cords, bool structural = true)
         {
-            if (structural)
+            if (structural && TilesAt(cords) == TileStatus.Structural)
             {
                 structuralTileData.Remove(cords);
                 structuralTilemap.SetTile(cords, null);
             }
 
-            functionalTilemap.SetTile(cords, null);
-            functionalTileData.Remove(cords);
+            if (TilesAt(cords) == TileStatus.Functional)
+            {
+                functionalTilemap.SetTile(cords, null);
+                functionalTileData.Remove(cords);
+            }
         }
 
+        /// <summary>
+        /// Remove the tile at a position in world space
+        /// </summary>
+        /// <param name="pos">The position in world space</param>
+        /// <param name="structural">Only removes functional tile if false, removes structural and functional otherwise</param>
         public void RemoveTile(Vector3 pos, bool structural = true)
         {
             RemoveTile(PositionToCords(pos), structural);
         }
 
-        public TileStatus HasTile(Vector3Int cords)
+        /// <summary>
+        /// Checks what tiles are present at a given coordinate
+        /// </summary>
+        /// <param name="cords">The coordinate to check</param>
+        /// <returns>The type(s) of tiles present</returns>
+        public TileStatus TilesAt(Vector3Int cords)
         {
-            if (functionalTileData.ContainsKey(cords))
-            {
-                return TileStatus.Functional;
-            }
+            if (functionalTileData.ContainsKey(cords)) return TileStatus.Functional;
 
             return structuralTileData.ContainsKey(cords) ? TileStatus.Structural : TileStatus.Empty;
         }
 
-        public TileStatus HasTile(Vector3 pos)
-        {
-            return HasTile(PositionToCords(pos));
-        }
+        /// <summary>
+        /// Checks what tiles are present at a given position in world space
+        /// </summary>
+        /// <param name="pos">The position in world space</param>
+        /// <returns>The type(s) of tiles present</returns>
+        public TileStatus TilesAt(Vector3 pos) => TilesAt(PositionToCords(pos));
 
+        /// <summary>
+        /// Updates the internal tile data to match the tiles in Unity's tilemaps
+        /// </summary>
         private void SyncFromTilemap()
         {
-            var cellBounds = structuralTilemap.cellBounds;
+            BoundsInt cellBounds = structuralTilemap.cellBounds;
 
-            for (var x = cellBounds.xMin; x <= cellBounds.xMax; x++)
-            for (var y = cellBounds.yMin; y <= cellBounds.yMax; y++)
+            for (int x = cellBounds.xMin; x <= cellBounds.xMax; x++)
+            for (int y = cellBounds.yMin; y <= cellBounds.yMax; y++)
             {
                 var pos = new Vector3Int(x, y, 0);
                 if (!structuralTilemap.HasTile(pos)) continue;
-                var tile = structuralTilemap.GetTile(pos);
+
+                TileBase tile = structuralTilemap.GetTile(pos);
                 structuralTileData[pos] = new StructuralTileData(TileSet.StructuralTilesDict[tile.name]);
                 if (!functionalTilemap.HasTile(pos)) continue;
-                var funcTile = functionalTilemap.GetTile(pos);
+
+                TileBase funcTile = functionalTilemap.GetTile(pos);
                 functionalTileData[pos] = new FunctionalTileData(TileSet.FunctionalTilesDict[funcTile.name]);
             }
         }
 
+        /// <summary>
+        /// Applies damage to the tilemap
+        /// </summary>
+        /// <param name="dmg">A description of the damage to apply</param>
         public void ApplyDamage(Damage dmg)
         {
-            if (!physics)
-            {
-                return;
-            }
+            if (!physics) return;
 
-            var start = PositionToCords(dmg.StartPos);
-            var end   = PositionToCords(dmg.EndPos);
+            Vector3Int start = PositionToCords(dmg.StartPos);
+            Vector3Int end   = PositionToCords(dmg.EndPos);
 
             ApplyInLine(start, end, cords => DamageTile(cords, dmg.BaseDamage));
             Split();
         }
 
+        /// <summary>
+        /// Damages a tile at the given coordinates
+        /// </summary>
+        /// <param name="cords">The coordinates to damage the tile at</param>
+        /// <param name="baseDamage">The base damage to use</param>
         private void DamageTile(Vector3Int cords, float baseDamage)
         {
-            if (HasTile(cords) == TileStatus.Empty) return;
+            if (TilesAt(cords) == TileStatus.Empty) return;
 
-            var tile     = structuralTileData[cords];
-            var tileType = TileSet.StructuralTiles[tile.ID];
-            var damage   = (ushort) (tileType.DamageResistance * baseDamage);
+            StructuralTileData tile     = structuralTileData[cords];
+            StructuralTileVariant     tileVariantType = TileSet.StructuralTiles[tile.ID];
+            var                damage   = (ushort) (tileVariantType.DamageResistance * baseDamage);
             if (tile.Health <= damage)
             {
                 RemoveTile(cords);
-                if (structuralTileData.Count == 0)
-                {
-                    Destroy(transform.gameObject);
-                }
+                if (structuralTileData.Count == 0) Destroy(transform.gameObject);
 
                 return;
             }
@@ -247,29 +341,41 @@ namespace TileSystem
             structuralTileData[cords] =  tile;
         }
 
+        /// <summary>
+        /// Clears all stored data and resets the tilemaps
+        /// </summary>
         public void ResetTiles()
         {
             structuralTilemap.ClearAllTiles();
+            functionalTilemap.ClearAllTiles();
+            structuralTileData.Clear();
+            functionalTileData.Clear();
         }
 
+        /// <summary>
+        /// Used to apply an action to every tile in a line between two points
+        /// </summary>
+        /// <param name="p0">The starting point</param>
+        /// <param name="p1">The end point</param>
+        /// <param name="callback">A delegate action that takes a Vector3Int that will be calle for every point on the line</param>
         private static void ApplyInLine(Vector3Int p0, Vector3Int p1, Action<Vector3Int> callback)
         {
             // Bresenham's line algorithm (https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#All_cases)
-            var dx  = Math.Abs(p1.x - p0.x);
-            var sx  = p0.x < p1.x ? 1 : -1;
-            var dy  = -Math.Abs(p1.y - p0.y);
-            var sy  = p0.y < p1.y ? 1 : -1;
-            var err = dx + dy;
+            int dx  = Math.Abs(p1.x - p0.x);
+            int sx  = p0.x < p1.x ? 1 : -1;
+            int dy  = -Math.Abs(p1.y - p0.y);
+            int sy  = p0.y < p1.y ? 1 : -1;
+            int err = dx + dy;
 
-            var x = p0.x;
-            var y = p0.y;
+            int x = p0.x;
+            int y = p0.y;
 
             while (true)
             {
                 callback(new Vector3Int(x, y, 0));
                 if (x == p1.x && y == p1.y) break;
 
-                var e2 = 2 * err;
+                int e2 = 2 * err;
 
                 if (e2 >= dy)
                 {
@@ -285,17 +391,21 @@ namespace TileSystem
             }
         }
 
+        /// <summary>
+        /// Finds Islands of unconnected tiles
+        /// </summary>
+        /// <returns>A list of the islands, each containing a list of the coordinate positions that make up the island</returns>
         private List<List<Vector3Int>> FindIslands()
         {
-            var width  = Bounds.xMax - Bounds.xMin;
-            var height = Bounds.yMax - Bounds.yMin;
+            int width  = Bounds.xMax - Bounds.xMin;
+            int height = Bounds.yMax - Bounds.yMin;
 
             var checkedCells = new bool[width, height];
 
             var islands = new List<List<Vector3Int>>();
 
-            for (var x = Bounds.xMin; x < Bounds.xMax; x++)
-            for (var y = Bounds.yMin; y < Bounds.yMax; y++)
+            for (int x = Bounds.xMin; x < Bounds.xMax; x++)
+            for (int y = Bounds.yMin; y < Bounds.yMax; y++)
             {
                 var cords = new Vector3Int(x, y, 0);
                 if (!CheckTile(cords)) continue;
@@ -309,11 +419,11 @@ namespace TileSystem
 
                 while (posToCheck.Count > 0)
                 {
-                    var cordToCheck = posToCheck.Dequeue();
+                    Vector3Int cordToCheck = posToCheck.Dequeue();
 
-                    foreach (var offset in ConnectionRules)
+                    foreach (Vector3Int offset in ConnectionRules)
                     {
-                        var neighbor = cordToCheck + offset;
+                        Vector3Int neighbor = cordToCheck + offset;
                         if (!CheckTile(neighbor)) continue;
 
                         island.Add(neighbor);
@@ -326,15 +436,18 @@ namespace TileSystem
 
             bool CheckTile(Vector3Int cords)
             {
-                var xIdx = cords.x - Bounds.xMin;
-                var yIdx = cords.y - Bounds.yMin;
+                int xIdx = cords.x - Bounds.xMin;
+                int yIdx = cords.y - Bounds.yMin;
                 if (!Bounds.Contains(cords) || checkedCells[xIdx, yIdx]) return false;
 
                 checkedCells[xIdx, yIdx] = true;
-                return HasTile(cords) != TileStatus.Empty;
+                return TilesAt(cords) != TileStatus.Empty;
             }
         }
 
+        /// <summary>
+        /// Splits the tilemap into multiple objects if there are unconnected reagons
+        /// </summary>
         private void Split()
         {
             var islands = FindIslands();
@@ -342,40 +455,36 @@ namespace TileSystem
 
             foreach (var island in islands)
             {
-                var obj            = Instantiate(template);
-                var newTileManager = obj.GetComponent<TileManager>();
-                var newRb2D        = obj.GetComponent<Rigidbody2D>();
+                GameObject obj            = Instantiate(template);
+                var        newTileManager = obj.GetComponent<TileManager>();
+                var        newRb2D        = obj.GetComponent<Rigidbody2D>();
 
                 newTileManager.ResetTiles();
 
-                var thisTransform = transform;
-                var tileTransform = newTileManager.transform;
+                Transform thisTransform = transform;
+                Transform tileTransform = newTileManager.transform;
 
                 tileTransform.position = thisTransform.position;
                 tileTransform.rotation = thisTransform.rotation;
 
-                var tiles = new List<BaseTile>();
+                var structuralTiles = new List<StructuralTileVariant>();
+                var functionalTiles = new List<FunctionalTileVariant>();
+                var functionalCords = new List<Vector3Int>();
 
-                foreach (var cords in island)
+                foreach (Vector3Int cords in island)
                 {
-                    switch (HasTile(cords))
-                    {
-                        case TileStatus.Functional:
-                            var funTile = GetFunctionalTile(cords);
-                            tiles.Add(TileSet.FunctionalTiles[funTile.ID]);
-                            goto case TileStatus.Structural;
-                        case TileStatus.Structural:
-                            var stcTile = GetStructuralTile(cords);
-                            tiles.Add(TileSet.StructuralTiles[stcTile.ID]);
-                            break;
-                        case TileStatus.Empty:
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
+                    if (!GetTile(cords, out StructuralTileData stcTile)) continue;
+                    structuralTiles.Add(TileSet.StructuralTiles[stcTile.ID]);
+
+                    if (!GetTile(cords, out FunctionalTileData funTile)) continue;
+                    functionalTiles.Add(TileSet.FunctionalTiles[funTile.ID]);
+                    functionalCords.Add(cords);
                 }
 
-                newTileManager.SetTiles(island.ToArray(), tiles.ToArray());
+                newTileManager.SetFunctionalTiles(functionalCords.ToArray(), functionalTiles.ToArray());
+                newTileManager.SetStructuralTiles(island.ToArray(), structuralTiles.ToArray());
                 if (!physics) continue;
+
                 newTileManager.PhysicsEnabled = true;
                 newRb2D.velocity              = rb2D.velocity;
                 newRb2D.angularVelocity       = rb2D.angularVelocity;

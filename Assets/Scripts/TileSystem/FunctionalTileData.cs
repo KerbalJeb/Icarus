@@ -1,16 +1,20 @@
-﻿using TileSystem.TileClasses;
+﻿using TileSystem.TileVariants;
 
 namespace TileSystem
 {
+    /// <summary>
+    ///     This struct is used to store data about 'instances' of functional tiles
+    /// </summary>
     public struct FunctionalTileData
     {
-        public FunctionalTileData(FunctionalTile baseTile)
+        public FunctionalTileData(FunctionalTileVariant baseTileVariant)
         {
-            ID        = baseTile.ID;
-            TileClass = baseTile.TileClass;
+            ID        = baseTileVariant.ID;
         }
 
-        public ushort    ID;
-        public TileClass TileClass;
+        /// <value>
+        ///     The ID of the functional tile
+        /// </value>
+        public ushort ID { get; }
     }
 }
