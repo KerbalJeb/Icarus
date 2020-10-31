@@ -7,10 +7,11 @@ namespace TileSystem
     /// </summary>
     public struct StructuralTileData
     {
-        public StructuralTileData(StructuralTileVariant tileVariantType)
+        public StructuralTileData(StructuralTileVariant tileVariantType, TileRotation rotation=TileRotation.Up)
         {
-            Health = (ushort) tileVariantType.MaxHealth;
-            ID     = tileVariantType.ID;
+            Health   = (ushort) tileVariantType.MaxHealth;
+            ID       = tileVariantType.ID;
+            Rotation = rotation;
         }
 
         /// <value>
@@ -22,5 +23,10 @@ namespace TileSystem
         ///     The ID of the structural tile
         /// </value>
         public ushort ID { get; }
+        
+        /// <value>
+        /// The Rotation of this tile
+        /// </value>
+        public TileRotation Rotation;
     }
 }

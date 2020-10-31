@@ -44,6 +44,9 @@ namespace TileSystem
 
         private Tilemap   structuralTilemap;
         private float     tileSize;
+
+        public float TileSize => tileSize;
+
         public  TileSet   TileSet { get; private set; }
         private BoundsInt Bounds  => structuralTilemap.cellBounds;
 
@@ -82,6 +85,7 @@ namespace TileSystem
             TileSet          = TileSet.GetTileSet(tilePath);
             rb2D             = GetComponent<Rigidbody2D>();
             rb2D.isKinematic = true;
+            MathFortran.BVTEST();
         }
 
         public void Start()
@@ -496,6 +500,18 @@ namespace TileSystem
             }
 
             Destroy(gameObject);
+        }
+
+        public void GetTilesByVariant<T>(out List<(Vector3Int cords, StructuralTileData data)> tiles)
+        {
+            var IDs    = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BaseTileVariant).ID));
+            tiles = structuralTileData.Where(x => IDs.Contains(x.Value.ID)).Select(x=> (x.Key, x.Value)).ToList();
+        }
+        
+        public void GetTilesByVariant<T>(out List<(Vector3Int cords, FunctionalTileData data)> tiles)
+        {
+            var IDs = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BaseTileVariant).ID));
+            tiles = functionalTileData.Where(x => IDs.Contains(x.Value.ID)).Select(x=> (x.Key, x.Value)).ToList();
         }
     }
 }
