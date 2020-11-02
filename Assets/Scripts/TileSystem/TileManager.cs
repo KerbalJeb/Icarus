@@ -29,8 +29,8 @@ namespace TileSystem
              new Vector3Int(0,  -1, 0),
          });
 
-        [SerializeField] private string     tilePath;
-        [SerializeField] private GameObject template;
+        // ReSharper disable once RedundantDefaultMemberInitializer
+        [SerializeField] private string tilePath = null;
 
         private readonly Dictionary<Vector3Int, FunctionalTileData> functionalTileData =
             new Dictionary<Vector3Int, FunctionalTileData>();
@@ -38,31 +38,15 @@ namespace TileSystem
         private readonly Dictionary<Vector3Int, StructuralTileData> structuralTileData =
             new Dictionary<Vector3Int, StructuralTileData>();
 
-        private Tilemap     functionalTilemap;
-        private bool        physics;
-        private Rigidbody2D rb2D;
+        private Tilemap functionalTilemap;
 
-        private Tilemap   structuralTilemap;
-        private float     tileSize;
+        private Tilemap structuralTilemap;
 
-        public float TileSize => tileSize;
+        public float TileSize { get; private set; }
 
         public  TileSet   TileSet { get; private set; }
         private BoundsInt Bounds  => structuralTilemap.cellBounds;
 
-        /// <value>
-        ///     Will enable or disable physics for this tilemap (Splits tile map on enable)
-        /// </value>
-        public bool PhysicsEnabled
-        {
-            set
-            {
-                physics          = value;
-                rb2D.isKinematic = !value;
-                if (value) Split();
-            }
-            get => physics;
-        }
 
         public void Awake()
         {
@@ -81,11 +65,8 @@ namespace TileSystem
             }
 
             var grid = GetComponent<Grid>();
-            tileSize         = grid.cellSize.x;
-            TileSet          = TileSet.GetTileSet(tilePath);
-            rb2D             = GetComponent<Rigidbody2D>();
-            rb2D.isKinematic = true;
-            MathFortran.BVTEST();
+            TileSize = grid.cellSize.x;
+            TileSet  = TileSet.GetTileSet(tilePath);
         }
 
         public void Start()
@@ -104,8 +85,8 @@ namespace TileSystem
             Vector3    objectPos   = transform.position;
             Vector3    localPos    = invRotation * (vec - objectPos);
 
-            int x = Mathf.FloorToInt(localPos.x / tileSize);
-            int y = Mathf.FloorToInt(localPos.y / tileSize);
+            int x = Mathf.FloorToInt(localPos.x / TileSize);
+            int y = Mathf.FloorToInt(localPos.y / TileSize);
             return new Vector3Int(x, y, 0);
         }
 
@@ -254,7 +235,9 @@ namespace TileSystem
             if (TilesAt(cords) == TileStatus.Functional)
             {
                 functionalTilemap.SetTile(cords, null);
+                structuralTilemap.SetTile(cords, null);
                 functionalTileData.Remove(cords);
+                structuralTileData.Remove(cords);
             }
         }
 
@@ -315,15 +298,14 @@ namespace TileSystem
         ///     Applies damage to the tilemap
         /// </summary>
         /// <param name="dmg">A description of the damage to apply</param>
-        public void ApplyDamage(Damage dmg)
+        public bool ApplyDamage(Damage dmg)
         {
-            if (!physics) return;
-
             Vector3Int start = PositionToCords(dmg.StartPos);
             Vector3Int end   = PositionToCords(dmg.EndPos);
+            bool        destroyedTile =false;
 
-            ApplyInLine(start, end, cords => DamageTile(cords, dmg.BaseDamage));
-            Split();
+            ApplyInLine(start, end, cords => DamageTile(cords, dmg.BaseDamage, ref destroyedTile));
+            return destroyedTile;
         }
 
         /// <summary>
@@ -331,7 +313,8 @@ namespace TileSystem
         /// </summary>
         /// <param name="cords">The coordinates to damage the tile at</param>
         /// <param name="baseDamage">The base damage to use</param>
-        private void DamageTile(Vector3Int cords, float baseDamage)
+        /// <param name="destroyed">Will be set to true if a tile is destroyed (unchanged otherwise)</param>
+        private void DamageTile(Vector3Int cords, float baseDamage, ref bool destroyed)
         {
             if (TilesAt(cords) == TileStatus.Empty) return;
 
@@ -342,12 +325,13 @@ namespace TileSystem
             {
                 RemoveTile(cords);
                 if (structuralTileData.Count == 0) Destroy(transform.gameObject);
-
+                destroyed = true;
                 return;
             }
 
             tile.Health               -= damage;
             structuralTileData[cords] =  tile;
+            return;
         }
 
         /// <summary>
@@ -404,7 +388,7 @@ namespace TileSystem
         ///     Finds Islands of unconnected tiles
         /// </summary>
         /// <returns>A list of the islands, each containing a list of the coordinate positions that make up the island</returns>
-        private List<List<Vector3Int>> FindIslands()
+        public List<List<Vector3Int>> FindIslands()
         {
             int width  = Bounds.xMax - Bounds.xMin;
             int height = Bounds.yMax - Bounds.yMin;
@@ -454,64 +438,17 @@ namespace TileSystem
             }
         }
 
-        /// <summary>
-        ///     Splits the tilemap into multiple objects if there are unconnected reagons
-        /// </summary>
-        private void Split()
-        {
-            var islands = FindIslands();
-            if (islands.Count <= 1) return;
-
-            foreach (var island in islands)
-            {
-                GameObject obj            = Instantiate(template);
-                var        newTileManager = obj.GetComponent<TileManager>();
-                var        newRb2D        = obj.GetComponent<Rigidbody2D>();
-
-                newTileManager.ResetTiles();
-
-                Transform thisTransform = transform;
-                Transform tileTransform = newTileManager.transform;
-
-                tileTransform.position = thisTransform.position;
-                tileTransform.rotation = thisTransform.rotation;
-
-                var structuralTiles = new List<StructuralTileVariant>();
-                var functionalTiles = new List<FunctionalTileVariant>();
-                var functionalCords = new List<Vector3Int>();
-
-                foreach (Vector3Int cords in island)
-                {
-                    if (!GetTile(cords, out StructuralTileData stcTile)) continue;
-                    structuralTiles.Add(TileSet.TileVariants[stcTile.ID] as StructuralTileVariant);
-
-                    if (!GetTile(cords, out FunctionalTileData funTile)) continue;
-                    functionalTiles.Add(TileSet.TileVariants[funTile.ID] as FunctionalTileVariant);
-                    functionalCords.Add(cords);
-                }
-
-                newTileManager.SetFunctionalTiles(functionalCords.ToArray(), functionalTiles.ToArray());
-                newTileManager.SetStructuralTiles(island.ToArray(), structuralTiles.ToArray());
-                if (!physics) continue;
-
-                newTileManager.PhysicsEnabled = true;
-                newRb2D.velocity              = rb2D.velocity;
-                newRb2D.angularVelocity       = rb2D.angularVelocity;
-            }
-
-            Destroy(gameObject);
-        }
 
         public void GetTilesByVariant<T>(out List<(Vector3Int cords, StructuralTileData data)> tiles)
         {
-            var IDs    = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BaseTileVariant).ID));
-            tiles = structuralTileData.Where(x => IDs.Contains(x.Value.ID)).Select(x=> (x.Key, x.Value)).ToList();
+            var IDs = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BaseTileVariant).ID));
+            tiles = structuralTileData.Where(x => IDs.Contains(x.Value.ID)).Select(x => (x.Key, x.Value)).ToList();
         }
-        
+
         public void GetTilesByVariant<T>(out List<(Vector3Int cords, FunctionalTileData data)> tiles)
         {
             var IDs = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BaseTileVariant).ID));
-            tiles = functionalTileData.Where(x => IDs.Contains(x.Value.ID)).Select(x=> (x.Key, x.Value)).ToList();
+            tiles = functionalTileData.Where(x => IDs.Contains(x.Value.ID)).Select(x => (x.Key, x.Value)).ToList();
         }
     }
 }

@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace TileSystem.TileVariants
 {
     /// <summary>
-    ///  The base for all tile variant classes. Contains the common TileBase, ID and Name fields.
+    ///     The base for all tile variant classes. Contains the common TileBase, ID and Name fields.
     /// </summary>
     public class BaseTileVariant
     {
@@ -25,10 +26,11 @@ namespace TileSystem.TileVariants
         public static ushort IdIDx { get; set; }
 
         [Serializable]
+        [SuppressMessage("ReSharper", "RedundantDefaultMemberInitializer")]
         private class Json
         {
-            public string TilePath;
-            public string Name;
+            public string TilePath = null;
+            public string Name     = null;
         }
     }
 }

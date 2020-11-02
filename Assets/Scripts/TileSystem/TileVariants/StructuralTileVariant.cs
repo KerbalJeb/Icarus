@@ -4,7 +4,7 @@ using UnityEngine;
 namespace TileSystem.TileVariants
 {
     /// <summary>
-    /// The base class for all structural tiles (Have health, don't consume power)
+    ///     The base class for all structural tiles (Have health, don't consume power)
     /// </summary>
     public class StructuralTileVariant : BaseTileVariant
     {
@@ -21,8 +21,8 @@ namespace TileSystem.TileVariants
         [Serializable]
         private class Json
         {
-            public int   MaxHealth;
-            public float DamageResistance;
+            public int   MaxHealth        = 0;
+            public float DamageResistance = 0;
         }
     }
 }

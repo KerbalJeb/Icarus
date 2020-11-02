@@ -2015,9 +2015,10 @@ GameObject:
   - component: {fileID: 8273386219752798286}
   - component: {fileID: 8273386219752798287}
   - component: {fileID: 8273386219752798322}
+  - component: {fileID: 7918642493812172573}
   - component: {fileID: 8273386219752798320}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2063,6 +2064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3dc87e4cadc4a740a99907efa370d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  template: {fileID: 8273386219752798284}
 --- !u!114 &8273386219752798322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,6 +2079,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePath: Tiles/json
   template: {fileID: 8273386219752798284}
+--- !u!114 &7918642493812172573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8273386219752798284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b88d8a40111fe4a81e9e4f7c432a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &8273386219752798320
 Rigidbody2D:
   serializedVersion: 4
@@ -2091,8 +2105,8 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_AngularDrag: 0
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

@@ -1,6 +1,6 @@
 ﻿namespace TileSystem
 {
-    public enum TileRotation: byte
+    public enum TileRotation : byte
     {
         Up,
         Down,

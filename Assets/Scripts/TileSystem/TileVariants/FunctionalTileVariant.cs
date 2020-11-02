@@ -4,7 +4,7 @@ using UnityEngine;
 namespace TileSystem.TileVariants
 {
     /// <summary>
-    /// The base for all functional or non structural tiles (tiles that consume power and don't have health)
+    ///     The base for all functional or non structural tiles (tiles that consume power and don't have health)
     /// </summary>
     public class FunctionalTileVariant : BaseTileVariant
     {
@@ -19,7 +19,7 @@ namespace TileSystem.TileVariants
         [Serializable]
         private class Json
         {
-            public float PowerGeneration;
+            public float PowerGeneration=0f;
         }
     }
 }

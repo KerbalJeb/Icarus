@@ -1,6 +1,6 @@
 ﻿{
   "Name": "Basic Engine",
   "TileType": "EngineVariant",
-  "Thrust": 100,
+  "Thrust": 1.5,
   "TilePath": "Tiles\\ShipTiles\\ShipTiles_2"
 }
