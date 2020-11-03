@@ -333,9 +333,9 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2095474263}
-        m_TargetAssemblyTypeName: MovementManager, Assembly-CSharp
-        m_MethodName: Steer
+      - m_Target: {fileID: 159975326}
+        m_TargetAssemblyTypeName: ShipManager, Assembly-CSharp
+        m_MethodName: SteerShip
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -643,17 +643,6 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2095474260}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87b88d8a40111fe4a81e9e4f7c432a6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2095474263 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7918642493812172573, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
-  m_PrefabInstance: {fileID: 8273386219592957905}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095474260}
   m_Enabled: 1

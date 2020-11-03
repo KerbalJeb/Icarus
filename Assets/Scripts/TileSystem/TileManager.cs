@@ -24,7 +24,10 @@ namespace TileSystem
          });
 
         // ReSharper disable once RedundantDefaultMemberInitializer
-        [SerializeField] private string tilePath = null;
+        [SerializeField] private string     tilePath = null;
+        [SerializeField] private GameObject template =null;
+
+        private                  Rigidbody2D rb2D;
 
 
         private readonly Dictionary<Vector3Int, TileInstanceData> tileData =
@@ -36,7 +39,18 @@ namespace TileSystem
 
         public  TileSet   TileSet { get; private set; }
         private BoundsInt Bounds  => tilemapLayers[0].cellBounds;
-
+        private bool      physics = false;
+        public bool PhysicsEnabled
+        {
+            set
+            {
+                physics          = value;
+                rb2D.isKinematic = !value;
+                if (!value) return;
+                Split();           
+            }
+            get => physics;
+        }
 
         public void Awake()
         {
@@ -55,6 +69,7 @@ namespace TileSystem
             var grid = GetComponent<Grid>();
             TileSize = grid.cellSize.x;
             TileSet  = TileSet.GetTileSet(tilePath);
+            rb2D     = GetComponent<Rigidbody2D>();
         }
 
         public void Start()
@@ -173,6 +188,7 @@ namespace TileSystem
         ///     Remove the tile at the given coordinates
         /// </summary>
         /// <param name="cords">The coordinates to remove the tile at</param>
+        /// <param name="allTiles">Deletes all tiles at xy cords if true (default)</param>
         public void RemoveTile(Vector3Int cords, bool allTiles=true)
         {
             if (allTiles)
@@ -274,6 +290,10 @@ namespace TileSystem
             bool        destroyedTile =false;
 
             ApplyInLine(start, end, cords => DamageTile(cords, dmg.BaseDamage, ref destroyedTile));
+            if (destroyedTile)
+            {
+                Split();
+            }
             return destroyedTile;
         }
 
@@ -407,10 +427,65 @@ namespace TileSystem
             }
         }
 
+        /// <summary>
+        /// Gets all the tiles of a particular variant type
+        /// </summary>
+        /// <param name="tiles">A list of all the tiles of that variant type</param>
+        /// <typeparam name="T">The variant type (Must inherit from BaseTileVariant or will throw null reference)</typeparam>
         public void GetTilesByVariant<T>(out List<(Vector3Int cords, TileInstanceData data)> tiles)
         {
-            var IDs = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BaseTileVariant).ID));
-            tiles = tileData.Where(x => IDs.Contains(x.Value.ID)).Select(x => (x.Key, x.Value)).ToList();
+            var ids = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BaseTileVariant).ID));
+            tiles = tileData.Where(x => ids.Contains(x.Value.ID)).Select(x => (x.Key, x.Value)).ToList();
+        }
+        
+        /// <summary>
+        ///     Splits the tilemap into multiple objects if there are unconnected reagons
+        /// </summary>
+        private void Split()
+        {
+            var islands = FindIslands();
+            if (islands.Count <= 1) return;
+
+            foreach (var island in islands)
+            {
+                GameObject obj            = Instantiate(template);
+                var        newTileManager = obj.GetComponent<TileManager>();
+                var        newRb2D        = obj.GetComponent<Rigidbody2D>();
+
+                newTileManager.ResetTiles();
+
+                Transform thisTransform = transform;
+                Transform tileTransform = newTileManager.transform;
+
+                tileTransform.position = thisTransform.position;
+                tileTransform.rotation = thisTransform.rotation;
+
+                var tiles        = new List<TileInstanceData>();
+                var cordsList    = new List<Vector3Int>();
+                var instanceData = new TileInstanceData();
+
+                foreach (int i in TileSet.ActiveLayers)
+                {
+                    tiles.Clear();
+                    cordsList.Clear();
+                    foreach (Vector3Int cords in island)
+                    {
+                        Vector3Int c = cords;
+                        c.z = i;
+                        if (!GetTile(c, ref instanceData)) continue;
+                        tiles.Add(instanceData);
+                        cordsList.Add(c);
+                    }
+                    newTileManager.SetTiles(cordsList.ToArray(), tiles.ToArray());
+                }
+
+                if (!PhysicsEnabled) continue;
+
+                newTileManager.PhysicsEnabled = true;
+                newRb2D.velocity              = rb2D.velocity;
+                newRb2D.angularVelocity       = rb2D.angularVelocity;
+            }
+            Destroy(gameObject);
         }
     }
 }

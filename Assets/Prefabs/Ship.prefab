@@ -2064,7 +2064,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3dc87e4cadc4a740a99907efa370d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  template: {fileID: 8273386219752798284}
 --- !u!114 &8273386219752798322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2078,6 +2077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePath: Tiles/json
+  template: {fileID: 8273386219752798284}
 --- !u!114 &7918642493812172573
 MonoBehaviour:
   m_ObjectHideFlags: 0

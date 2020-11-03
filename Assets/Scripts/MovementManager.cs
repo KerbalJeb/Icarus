@@ -208,14 +208,13 @@ public class MovementManager : MonoBehaviour
         netThrust = new Vector3(result[0], result[1], result[2]);
     }
     
-    public void Steer(InputAction.CallbackContext ctx)
+    public void Steer(Vector3 thrust)
     {
         if (!physics)
         {
             return;
         }
 
-        var thrust = ctx.ReadValue<Vector3>();
         SetThrust(thrust);
         currentInput       = thrust;
         if (thrust.z == 0)

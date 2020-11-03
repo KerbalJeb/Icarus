@@ -13,38 +13,32 @@ using UnityEngine.InputSystem.Controls;
 [RequireComponent(typeof(TileManager))]
 public class ShipManager : MonoBehaviour
 {
-    [SerializeField] private GameObject      template =null;
     private                  Camera          cam;
     private                  MovementManager movementManager;
-    private                  bool            physics = false;
-    private                  Rigidbody2D     rb2D;
     private                  TileManager     tileManager;
 
     /// <value>
-    ///     Will enable or disable physics for this tilemap (Splits tile map on enable)
+    ///     Will enable or disable physics for this ship
     /// </value>
     public bool PhysicsEnabled
     {
         set
         {
-            physics          = value;
-            rb2D.isKinematic = !value;
             if (!value) return;
-            Split();           
-            movementManager.UpdatePhysics();
+            tileManager.PhysicsEnabled = transform;
+            UpdatePhysics();
         }
-        get => physics;
+        get => tileManager.PhysicsEnabled;
     }
 
 
     private void Awake()
     {
-        cam               =  Camera.main;
-        tileManager       =  GetComponent<TileManager>();
-        movementManager   =  GetComponent<MovementManager>();
-        rb2D              =  GetComponent<Rigidbody2D>();
-        rb2D              =  GetComponent<Rigidbody2D>();
-        rb2D.isKinematic  =  true;
+        cam             = Camera.main;
+        tileManager     = GetComponent<TileManager>();
+        movementManager = GetComponent<MovementManager>();
+        PhysicsEnabled  = tileManager.PhysicsEnabled;
+
     }
 
     private void Update()
@@ -70,7 +64,17 @@ public class ShipManager : MonoBehaviour
     {
         if (!PhysicsEnabled) return;
         if (!tileManager.ApplyDamage(dmg)) return;
-        Split();
+        UpdatePhysics();
+    }
+
+    public void SteerShip(InputAction.CallbackContext ctx)
+    {
+        var thrust = ctx.ReadValue<Vector3>();
+        movementManager.Steer(thrust);
+    }
+
+    private void UpdatePhysics()
+    {
         movementManager.UpdatePhysics();
     }
 
@@ -78,59 +82,8 @@ public class ShipManager : MonoBehaviour
     {
         if (!PhysicsEnabled)
         {
-            PhysicsEnabled = true;
+            PhysicsEnabled             = true;
+            tileManager.PhysicsEnabled = true;
         }
-    }
-
-    /// <summary>
-    ///     Splits the tilemap into multiple objects if there are unconnected reagons
-    /// </summary>
-    private void Split()
-    {
-        var islands = tileManager.FindIslands();
-        if (islands.Count <= 1) return;
-
-        foreach (var island in islands)
-        {
-            GameObject obj            = Instantiate(template);
-            var        newTileManager = obj.GetComponent<TileManager>();
-            var        newShipManager = obj.GetComponent<ShipManager>();
-            var        newRb2D        = obj.GetComponent<Rigidbody2D>();
-
-            newTileManager.ResetTiles();
-
-            Transform thisTransform = transform;
-            Transform tileTransform = newTileManager.transform;
-
-            tileTransform.position = thisTransform.position;
-            tileTransform.rotation = thisTransform.rotation;
-
-            var tiles        = new List<TileInstanceData>();
-            var cordsList    = new List<Vector3Int>();
-            var instanceData = new TileInstanceData();
-
-            foreach (int i in tileManager.TileSet.ActiveLayers)
-            {
-                tiles.Clear();
-                cordsList.Clear();
-                foreach (Vector3Int cords in island)
-                {
-                    Vector3Int c = cords;
-                    c.z = i;
-                    if (!tileManager.GetTile(c, ref instanceData)) continue;
-                    tiles.Add(instanceData);
-                    cordsList.Add(c);
-                }
-                newTileManager.SetTiles(cordsList.ToArray(), tiles.ToArray());
-            }
-
-            if (!PhysicsEnabled) continue;
-
-            newShipManager.PhysicsEnabled = true;
-            newRb2D.velocity              = rb2D.velocity;
-            newRb2D.angularVelocity       = rb2D.angularVelocity;
-        }
-
-        Destroy(gameObject);
     }
 }
