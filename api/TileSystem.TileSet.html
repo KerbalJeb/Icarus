@@ -90,6 +90,9 @@
                             <a href="Global.LineDmgTester.html" title="LineDmgTester" class="">LineDmgTester</a>
                           </li>
                           <li class="">
+                            <a href="Global.MovementManager.html" title="MovementManager" class="">MovementManager</a>
+                          </li>
+                          <li class="">
                             <a href="Global.PlayerInput.html" title="PlayerInput" class="">PlayerInput</a>
                           </li>
                           <li class="">
@@ -114,16 +117,16 @@
                         
                         <ul class="nav level2">
                           <li class="">
-                            <a href="TileSystem.FunctionalTileData.html" title="FunctionalTileData" class="">FunctionalTileData</a>
+                            <a href="TileSystem.Directions.html" title="Directions" class="">Directions</a>
                           </li>
                           <li class="">
-                            <a href="TileSystem.StructuralTileData.html" title="StructuralTileData" class="">StructuralTileData</a>
+                            <a href="TileSystem.TileInfo.html" title="TileInfo" class="">TileInfo</a>
+                          </li>
+                          <li class="">
+                            <a href="TileSystem.TileInstanceData.html" title="TileInstanceData" class="">TileInstanceData</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileManager.html" title="TileManager" class="">TileManager</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileManager.TileStatus.html" title="TileManager.TileStatus" class="">TileManager.TileStatus</a>
                           </li>
                           <li class="active">
                             <a href="TileSystem.TileSet.html" title="TileSet" class="active">TileSet</a>
@@ -145,9 +148,6 @@
                           </li>
                           <li class="">
                             <a href="TileSystem.TileVariants.FunctionalTileVariant.html" title="FunctionalTileVariant" class="">FunctionalTileVariant</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileVariants.StructuralTileVariant.html" title="StructuralTileVariant" class="">StructuralTileVariant</a>
                           </li>
                         </ul>  </li>
                   </ul>        </div>
@@ -177,6 +177,30 @@
   </div>
   <h3 id="fields">Fields
   </h3>
+  
+  
+  <h4 id="TileSystem_TileSet_ActiveLayers" data-uid="TileSystem.TileSet.ActiveLayers">ActiveLayers</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly HashSet&lt;int&gt; ActiveLayers</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">HashSet</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   
   
   <h4 id="TileSystem_TileSet_TilemapNameToID" data-uid="TileSystem.TileSet.TilemapNameToID">TilemapNameToID</h4>
@@ -258,7 +282,8 @@
   
   <a id="TileSystem_TileSet_GetTileSet_" data-uid="TileSystem.TileSet.GetTileSet*"></a>
   <h4 id="TileSystem_TileSet_GetTileSet_System_String_" data-uid="TileSystem.TileSet.GetTileSet(System.String)">GetTileSet(String)</h4>
-  <div class="markdown level1 summary"><p>Gets (or creates) based on all the json files present in the given path. A TileSet will only be created once per path, all subsequent calls will return a reference to the original instance</p>
+  <div class="markdown level1 summary"><p>Gets (or creates) based on all the json files present in the given path. A TileSet will only be created once per
+path, all subsequent calls will return a reference to the original instance</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

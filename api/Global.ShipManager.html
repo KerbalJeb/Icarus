@@ -90,6 +90,9 @@
                             <a href="Global.LineDmgTester.html" title="LineDmgTester" class="">LineDmgTester</a>
                           </li>
                           <li class="">
+                            <a href="Global.MovementManager.html" title="MovementManager" class="">MovementManager</a>
+                          </li>
+                          <li class="">
                             <a href="Global.PlayerInput.html" title="PlayerInput" class="">PlayerInput</a>
                           </li>
                           <li class="">
@@ -114,16 +117,16 @@
                         
                         <ul class="nav level2">
                           <li class="">
-                            <a href="TileSystem.FunctionalTileData.html" title="FunctionalTileData" class="">FunctionalTileData</a>
+                            <a href="TileSystem.Directions.html" title="Directions" class="">Directions</a>
                           </li>
                           <li class="">
-                            <a href="TileSystem.StructuralTileData.html" title="StructuralTileData" class="">StructuralTileData</a>
+                            <a href="TileSystem.TileInfo.html" title="TileInfo" class="">TileInfo</a>
+                          </li>
+                          <li class="">
+                            <a href="TileSystem.TileInstanceData.html" title="TileInstanceData" class="">TileInstanceData</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileManager.html" title="TileManager" class="">TileManager</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileManager.TileStatus.html" title="TileManager.TileStatus" class="">TileManager.TileStatus</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileSet.html" title="TileSet" class="">TileSet</a>
@@ -145,9 +148,6 @@
                           </li>
                           <li class="">
                             <a href="TileSystem.TileVariants.FunctionalTileVariant.html" title="FunctionalTileVariant" class="">FunctionalTileVariant</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileVariants.StructuralTileVariant.html" title="StructuralTileVariant" class="">StructuralTileVariant</a>
                           </li>
                         </ul>  </li>
                   </ul>        </div>
@@ -176,6 +176,34 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class ShipManager : MonoBehaviour</code></pre>
   </div>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="Global_ShipManager_PhysicsEnabled_" data-uid="Global.ShipManager.PhysicsEnabled*"></a>
+  <h4 id="Global_ShipManager_PhysicsEnabled" data-uid="Global.ShipManager.PhysicsEnabled">PhysicsEnabled</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool PhysicsEnabled { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>Will enable or disable physics for this ship</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   
@@ -201,6 +229,33 @@
       <tr>
         <td><a class="xref" href="Global.Damage.html">Damage</a></td>
         <td><span class="parametername">dmg</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_ShipManager_SteerShip_" data-uid="Global.ShipManager.SteerShip*"></a>
+  <h4 id="Global_ShipManager_SteerShip_InputAction_CallbackContext_" data-uid="Global.ShipManager.SteerShip(InputAction.CallbackContext)">SteerShip(InputAction.CallbackContext)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SteerShip(InputAction.CallbackContext ctx)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputAction.CallbackContext</span></td>
+        <td><span class="parametername">ctx</span></td>
         <td></td>
       </tr>
     </tbody>

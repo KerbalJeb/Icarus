@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Struct FunctionalTileData
+    <title>Class TileInfo
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Struct FunctionalTileData
+    <meta name="title" content="Class TileInfo
    ">
     <meta name="generator" content="docfx 2.44.0.0">
     
@@ -90,6 +90,9 @@
                             <a href="Global.LineDmgTester.html" title="LineDmgTester" class="">LineDmgTester</a>
                           </li>
                           <li class="">
+                            <a href="Global.MovementManager.html" title="MovementManager" class="">MovementManager</a>
+                          </li>
+                          <li class="">
                             <a href="Global.PlayerInput.html" title="PlayerInput" class="">PlayerInput</a>
                           </li>
                           <li class="">
@@ -113,17 +116,17 @@
                       <a href="TileSystem.html" title="TileSystem" class="">TileSystem</a>
                         
                         <ul class="nav level2">
+                          <li class="">
+                            <a href="TileSystem.Directions.html" title="Directions" class="">Directions</a>
+                          </li>
                           <li class="active">
-                            <a href="TileSystem.FunctionalTileData.html" title="FunctionalTileData" class="active">FunctionalTileData</a>
+                            <a href="TileSystem.TileInfo.html" title="TileInfo" class="active">TileInfo</a>
                           </li>
                           <li class="">
-                            <a href="TileSystem.StructuralTileData.html" title="StructuralTileData" class="">StructuralTileData</a>
+                            <a href="TileSystem.TileInstanceData.html" title="TileInstanceData" class="">TileInstanceData</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileManager.html" title="TileManager" class="">TileManager</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileManager.TileStatus.html" title="TileManager.TileStatus" class="">TileManager.TileStatus</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileSet.html" title="TileSet" class="">TileSet</a>
@@ -146,9 +149,6 @@
                           <li class="">
                             <a href="TileSystem.TileVariants.FunctionalTileVariant.html" title="FunctionalTileVariant" class="">FunctionalTileVariant</a>
                           </li>
-                          <li class="">
-                            <a href="TileSystem.TileVariants.StructuralTileVariant.html" title="StructuralTileVariant" class="">StructuralTileVariant</a>
-                          </li>
                         </ul>  </li>
                   </ul>        </div>
               </div>
@@ -157,62 +157,60 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="TileSystem.FunctionalTileData">
+            <article class="content wrap" id="_content" data-uid="TileSystem.TileInfo">
   
   
-  <h1 id="TileSystem_FunctionalTileData" data-uid="TileSystem.FunctionalTileData" class="text-break">Struct FunctionalTileData
+  <h1 id="TileSystem_TileInfo" data-uid="TileSystem.TileInfo" class="text-break">Class TileInfo
   </h1>
-  <div class="markdown level0 summary"><p>This struct is used to store data about &apos;instances&apos; of functional tiles</p>
-</div>
+  <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">TileInfo</span></div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="TileSystem.html">TileSystem</a></h6>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
-  <h5 id="TileSystem_FunctionalTileData_syntax">Syntax</h5>
+  <h5 id="TileSystem_TileInfo_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public struct FunctionalTileData</code></pre>
+    <pre><code class="lang-csharp hljs">public static class TileInfo</code></pre>
   </div>
-  <h3 id="constructors">Constructors
+  <h3 id="fields">Fields
   </h3>
   
   
-  <a id="TileSystem_FunctionalTileData__ctor_" data-uid="TileSystem.FunctionalTileData.#ctor*"></a>
-  <h4 id="TileSystem_FunctionalTileData__ctor_FunctionalTileVariant_" data-uid="TileSystem.FunctionalTileData.#ctor(FunctionalTileVariant)">FunctionalTileData(FunctionalTileVariant)</h4>
+  <h4 id="TileSystem_TileInfo_Directions" data-uid="TileSystem.TileInfo.Directions">Directions</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public FunctionalTileData(FunctionalTileVariant baseTileVariant)</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly ReadOnlyDictionary&lt;Directions, Vector2&gt; Directions</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
         <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">FunctionalTileVariant</span></td>
-        <td><span class="parametername">baseTileVariant</span></td>
+        <td><span class="xref">ReadOnlyDictionary</span>&lt;<a class="xref" href="TileSystem.Directions.html">Directions</a>, <span class="xref">Vector2</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h3 id="properties">Properties
-  </h3>
   
   
-  <a id="TileSystem_FunctionalTileData_ID_" data-uid="TileSystem.FunctionalTileData.ID*"></a>
-  <h4 id="TileSystem_FunctionalTileData_ID" data-uid="TileSystem.FunctionalTileData.ID">ID</h4>
+  <h4 id="TileSystem_TileInfo_TransformMatrix" data-uid="TileSystem.TileInfo.TransformMatrix">TransformMatrix</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public ushort ID { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public static readonly ReadOnlyDictionary&lt;Directions, Matrix4x4&gt; TransformMatrix</code></pre>
   </div>
-  <h5 class="propertyValue">Property Value</h5>
+  <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -222,9 +220,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.UInt16</span></td>
-        <td><p>The ID of the functional tile</p>
-</td>
+        <td><span class="xref">ReadOnlyDictionary</span>&lt;<a class="xref" href="TileSystem.Directions.html">Directions</a>, <span class="xref">Matrix4x4</span>&gt;</td>
+        <td></td>
       </tr>
     </tbody>
   </table>

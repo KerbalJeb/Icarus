@@ -89,6 +89,9 @@
                           <li class="">
                             <a href="Global.LineDmgTester.html" title="LineDmgTester" class="">LineDmgTester</a>
                           </li>
+                          <li class="">
+                            <a href="Global.MovementManager.html" title="MovementManager" class="">MovementManager</a>
+                          </li>
                           <li class="active">
                             <a href="Global.PlayerInput.html" title="PlayerInput" class="active">PlayerInput</a>
                           </li>
@@ -114,16 +117,16 @@
                         
                         <ul class="nav level2">
                           <li class="">
-                            <a href="TileSystem.FunctionalTileData.html" title="FunctionalTileData" class="">FunctionalTileData</a>
+                            <a href="TileSystem.Directions.html" title="Directions" class="">Directions</a>
                           </li>
                           <li class="">
-                            <a href="TileSystem.StructuralTileData.html" title="StructuralTileData" class="">StructuralTileData</a>
+                            <a href="TileSystem.TileInfo.html" title="TileInfo" class="">TileInfo</a>
+                          </li>
+                          <li class="">
+                            <a href="TileSystem.TileInstanceData.html" title="TileInstanceData" class="">TileInstanceData</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileManager.html" title="TileManager" class="">TileManager</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileManager.TileStatus.html" title="TileManager.TileStatus" class="">TileManager.TileStatus</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileSet.html" title="TileSet" class="">TileSet</a>
@@ -145,9 +148,6 @@
                           </li>
                           <li class="">
                             <a href="TileSystem.TileVariants.FunctionalTileVariant.html" title="FunctionalTileVariant" class="">FunctionalTileVariant</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileVariants.StructuralTileVariant.html" title="StructuralTileVariant" class="">StructuralTileVariant</a>
                           </li>
                         </ul>  </li>
                   </ul>        </div>
@@ -173,7 +173,7 @@
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
   <h5 id="Global_PlayerInput_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PlayerInput : IInputActionCollection, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">public class PlayerInput : IInputActionCollection2, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -235,6 +235,31 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Nullable</span>&lt;<span class="xref">InputBinding</span>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_PlayerInput_bindings_" data-uid="Global.PlayerInput.bindings*"></a>
+  <h4 id="Global_PlayerInput_bindings" data-uid="Global.PlayerInput.bindings">bindings</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IEnumerable&lt;InputBinding&gt; bindings { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<span class="xref">InputBinding</span>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -538,6 +563,100 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Enable()</code></pre>
   </div>
+  
+  
+  <a id="Global_PlayerInput_FindAction_" data-uid="Global.PlayerInput.FindAction*"></a>
+  <h4 id="Global_PlayerInput_FindAction_System_String_System_Boolean_" data-uid="Global.PlayerInput.FindAction(System.String,System.Boolean)">FindAction(String, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">actionNameOrId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">throwIfNotFound</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputAction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_PlayerInput_FindBinding_" data-uid="Global.PlayerInput.FindBinding*"></a>
+  <h4 id="Global_PlayerInput_FindBinding_InputBinding_InputAction__" data-uid="Global.PlayerInput.FindBinding(InputBinding,InputAction@)">FindBinding(InputBinding, out InputAction)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int FindBinding(InputBinding bindingMask, out InputAction action)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">InputBinding</span></td>
+        <td><span class="parametername">bindingMask</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">InputAction</span></td>
+        <td><span class="parametername">action</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   
   
   <a id="Global_PlayerInput_GetEnumerator_" data-uid="Global.PlayerInput.GetEnumerator*"></a>

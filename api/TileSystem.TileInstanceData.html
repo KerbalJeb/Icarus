@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class StructuralTileVariant
+    <title>Struct TileInstanceData
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class StructuralTileVariant
+    <meta name="title" content="Struct TileInstanceData
    ">
     <meta name="generator" content="docfx 2.44.0.0">
     
@@ -90,6 +90,9 @@
                             <a href="Global.LineDmgTester.html" title="LineDmgTester" class="">LineDmgTester</a>
                           </li>
                           <li class="">
+                            <a href="Global.MovementManager.html" title="MovementManager" class="">MovementManager</a>
+                          </li>
+                          <li class="">
                             <a href="Global.PlayerInput.html" title="PlayerInput" class="">PlayerInput</a>
                           </li>
                           <li class="">
@@ -114,16 +117,16 @@
                         
                         <ul class="nav level2">
                           <li class="">
-                            <a href="TileSystem.FunctionalTileData.html" title="FunctionalTileData" class="">FunctionalTileData</a>
+                            <a href="TileSystem.Directions.html" title="Directions" class="">Directions</a>
                           </li>
                           <li class="">
-                            <a href="TileSystem.StructuralTileData.html" title="StructuralTileData" class="">StructuralTileData</a>
+                            <a href="TileSystem.TileInfo.html" title="TileInfo" class="">TileInfo</a>
+                          </li>
+                          <li class="active">
+                            <a href="TileSystem.TileInstanceData.html" title="TileInstanceData" class="active">TileInstanceData</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileManager.html" title="TileManager" class="">TileManager</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileManager.TileStatus.html" title="TileManager.TileStatus" class="">TileManager.TileStatus</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileSet.html" title="TileSet" class="">TileSet</a>
@@ -146,9 +149,6 @@
                           <li class="">
                             <a href="TileSystem.TileVariants.FunctionalTileVariant.html" title="FunctionalTileVariant" class="">FunctionalTileVariant</a>
                           </li>
-                          <li class="active">
-                            <a href="TileSystem.TileVariants.StructuralTileVariant.html" title="StructuralTileVariant" class="active">StructuralTileVariant</a>
-                          </li>
                         </ul>  </li>
                   </ul>        </div>
               </div>
@@ -157,53 +157,31 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="TileSystem.TileVariants.StructuralTileVariant">
+            <article class="content wrap" id="_content" data-uid="TileSystem.TileInstanceData">
   
   
-  <h1 id="TileSystem_TileVariants_StructuralTileVariant" data-uid="TileSystem.TileVariants.StructuralTileVariant" class="text-break">Class StructuralTileVariant
+  <h1 id="TileSystem_TileInstanceData" data-uid="TileSystem.TileInstanceData" class="text-break">Struct TileInstanceData
   </h1>
-  <div class="markdown level0 summary"><p>The base class for all structural tiles (Have health, don&apos;t consume power)</p>
+  <div class="markdown level0 summary"><p>This struct is used store data about &apos;instances&apos; of tiles</p>
 </div>
   <div class="markdown level0 conceptual"></div>
-  <div class="inheritance">
-    <h5>Inheritance</h5>
-    <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><a class="xref" href="TileSystem.TileVariants.BaseTileVariant.html">BaseTileVariant</a></div>
-    <div class="level2"><span class="xref">StructuralTileVariant</span></div>
-      <div class="level3"><a class="xref" href="TileSystem.TileVariants.ArmorVariant.html">ArmorVariant</a></div>
-  </div>
-  <div class="inheritedMembers">
-    <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_TileBase">BaseTileVariant.TileBase</a>
-    </div>
-    <div>
-      <a class="xref" href="TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_ID">BaseTileVariant.ID</a>
-    </div>
-    <div>
-      <a class="xref" href="TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_Name">BaseTileVariant.Name</a>
-    </div>
-    <div>
-      <a class="xref" href="TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_IdIDx">BaseTileVariant.IdIDx</a>
-    </div>
-  </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="TileSystem.TileVariants.html">TileSystem.TileVariants</a></h6>
+  <h6><strong>Namespace</strong>: <a class="xref" href="TileSystem.html">TileSystem</a></h6>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
-  <h5 id="TileSystem_TileVariants_StructuralTileVariant_syntax">Syntax</h5>
+  <h5 id="TileSystem_TileInstanceData_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class StructuralTileVariant : BaseTileVariant</code></pre>
+    <pre><code class="lang-csharp hljs">public struct TileInstanceData</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   
   
-  <a id="TileSystem_TileVariants_StructuralTileVariant__ctor_" data-uid="TileSystem.TileVariants.StructuralTileVariant.#ctor*"></a>
-  <h4 id="TileSystem_TileVariants_StructuralTileVariant__ctor_System_String_" data-uid="TileSystem.TileVariants.StructuralTileVariant.#ctor(System.String)">StructuralTileVariant(String)</h4>
+  <a id="TileSystem_TileInstanceData__ctor_" data-uid="TileSystem.TileInstanceData.#ctor*"></a>
+  <h4 id="TileSystem_TileInstanceData__ctor_BaseTileVariant_TileSystem_Directions_" data-uid="TileSystem.TileInstanceData.#ctor(BaseTileVariant,TileSystem.Directions)">TileInstanceData(BaseTileVariant, Directions)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public StructuralTileVariant(string jsonText)</code></pre>
+    <pre><code class="lang-csharp hljs">public TileInstanceData(BaseTileVariant tileVariantType, Directions rotation = Directions.Up)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -216,8 +194,13 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.String</span></td>
-        <td><span class="parametername">jsonText</span></td>
+        <td><span class="xref">BaseTileVariant</span></td>
+        <td><span class="parametername">tileVariantType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="TileSystem.Directions.html">Directions</a></td>
+        <td><span class="parametername">rotation</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -226,12 +209,12 @@
   </h3>
   
   
-  <h4 id="TileSystem_TileVariants_StructuralTileVariant_DamageResistance" data-uid="TileSystem.TileVariants.StructuralTileVariant.DamageResistance">DamageResistance</h4>
+  <h4 id="TileSystem_TileInstanceData_Health" data-uid="TileSystem.TileInstanceData.Health">Health</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly float DamageResistance</code></pre>
+    <pre><code class="lang-csharp hljs">public ushort Health</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -243,19 +226,20 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Single</span></td>
-        <td></td>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>The health of the tile</p>
+</td>
       </tr>
     </tbody>
   </table>
   
   
-  <h4 id="TileSystem_TileVariants_StructuralTileVariant_MaxHealth" data-uid="TileSystem.TileVariants.StructuralTileVariant.MaxHealth">MaxHealth</h4>
+  <h4 id="TileSystem_TileInstanceData_Rotation" data-uid="TileSystem.TileInstanceData.Rotation">Rotation</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public readonly int MaxHealth</code></pre>
+    <pre><code class="lang-csharp hljs">public Directions Rotation</code></pre>
   </div>
   <h5 class="fieldValue">Field Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -267,8 +251,37 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td></td>
+        <td><a class="xref" href="TileSystem.Directions.html">Directions</a></td>
+        <td><p>The Rotation of this tile</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  
+  
+  <a id="TileSystem_TileInstanceData_ID_" data-uid="TileSystem.TileInstanceData.ID*"></a>
+  <h4 id="TileSystem_TileInstanceData_ID" data-uid="TileSystem.TileInstanceData.ID">ID</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ushort ID { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.UInt16</span></td>
+        <td><p>The ID of the structural tile</p>
+</td>
       </tr>
     </tbody>
   </table>

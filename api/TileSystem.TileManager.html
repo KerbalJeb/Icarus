@@ -90,6 +90,9 @@
                             <a href="Global.LineDmgTester.html" title="LineDmgTester" class="">LineDmgTester</a>
                           </li>
                           <li class="">
+                            <a href="Global.MovementManager.html" title="MovementManager" class="">MovementManager</a>
+                          </li>
+                          <li class="">
                             <a href="Global.PlayerInput.html" title="PlayerInput" class="">PlayerInput</a>
                           </li>
                           <li class="">
@@ -114,16 +117,16 @@
                         
                         <ul class="nav level2">
                           <li class="">
-                            <a href="TileSystem.FunctionalTileData.html" title="FunctionalTileData" class="">FunctionalTileData</a>
+                            <a href="TileSystem.Directions.html" title="Directions" class="">Directions</a>
                           </li>
                           <li class="">
-                            <a href="TileSystem.StructuralTileData.html" title="StructuralTileData" class="">StructuralTileData</a>
+                            <a href="TileSystem.TileInfo.html" title="TileInfo" class="">TileInfo</a>
+                          </li>
+                          <li class="">
+                            <a href="TileSystem.TileInstanceData.html" title="TileInstanceData" class="">TileInstanceData</a>
                           </li>
                           <li class="active">
                             <a href="TileSystem.TileManager.html" title="TileManager" class="active">TileManager</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileManager.TileStatus.html" title="TileManager.TileStatus" class="">TileManager.TileStatus</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileSet.html" title="TileSet" class="">TileSet</a>
@@ -145,9 +148,6 @@
                           </li>
                           <li class="">
                             <a href="TileSystem.TileVariants.FunctionalTileVariant.html" title="FunctionalTileVariant" class="">FunctionalTileVariant</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.TileVariants.StructuralTileVariant.html" title="StructuralTileVariant" class="">StructuralTileVariant</a>
                           </li>
                         </ul>  </li>
                   </ul>        </div>
@@ -176,6 +176,11 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class TileManager : MonoBehaviour</code></pre>
   </div>
+  <h5 id="TileSystem_TileManager_remarks"><strong>Remarks</strong></h5>
+  <div class="markdown level0 remarks"><p>Can store multiple layers of tilemaps, these are gotten from the children of the grid. The sorting order of the
+tile renders must be sequential (ie. 1,2,3 is ok but 1,3,4 is not). Tiles are accessed using a Vector3Int, the X
+and Y cords correspond to the X and Y position of the tile and Z is used for the layer.</p>
+</div>
   <h3 id="properties">Properties
   </h3>
   
@@ -199,8 +204,7 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p>Will enable or disable physics for this tilemap (Splits tile map on enable)</p>
-</td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -229,6 +233,31 @@
       </tr>
     </tbody>
   </table>
+  
+  
+  <a id="TileSystem_TileManager_TileSize_" data-uid="TileSystem.TileManager.TileSize*"></a>
+  <h4 id="TileSystem_TileManager_TileSize" data-uid="TileSystem.TileManager.TileSize">TileSize</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TileSize { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   
@@ -240,7 +269,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void ApplyDamage(Damage dmg)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool ApplyDamage(Damage dmg)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -260,6 +289,21 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   
   
   <a id="TileSystem_TileManager_Awake_" data-uid="TileSystem.TileManager.Awake*"></a>
@@ -272,14 +316,100 @@
   </div>
   
   
-  <a id="TileSystem_TileManager_GetTile_" data-uid="TileSystem.TileManager.GetTile*"></a>
-  <h4 id="TileSystem_TileManager_GetTile_Vector3_TileSystem_FunctionalTileData__" data-uid="TileSystem.TileManager.GetTile(Vector3,TileSystem.FunctionalTileData@)">GetTile(Vector3, out FunctionalTileData)</h4>
-  <div class="markdown level1 summary"><p>Trys to get the functional tile at a world position</p>
+  <a id="TileSystem_TileManager_CordsToPosition_" data-uid="TileSystem.TileManager.CordsToPosition*"></a>
+  <h4 id="TileSystem_TileManager_CordsToPosition_Vector3Int_" data-uid="TileSystem.TileManager.CordsToPosition(Vector3Int)">CordsToPosition(Vector3Int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 CordsToPosition(Vector3Int cords)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3Int</span></td>
+        <td><span class="parametername">cords</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="TileSystem_TileManager_FindIslands_" data-uid="TileSystem.TileManager.FindIslands*"></a>
+  <h4 id="TileSystem_TileManager_FindIslands_System_Int32_" data-uid="TileSystem.TileManager.FindIslands(System.Int32)">FindIslands(Int32)</h4>
+  <div class="markdown level1 summary"><p>Finds Islands of unconnected tiles</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool GetTile(Vector3 pos, out FunctionalTileData tileData)</code></pre>
+    <pre><code class="lang-csharp hljs">public List&lt;List&lt;Vector3Int&gt;&gt; FindIslands(int layer = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">Vector3Int</span>&gt;&gt;</td>
+        <td><p>A list of the islands, each containing a list of the coordinate positions that make up the island</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="TileSystem_TileManager_GetTile_" data-uid="TileSystem.TileManager.GetTile*"></a>
+  <h4 id="TileSystem_TileManager_GetTile_Vector3_System_Boolean__" data-uid="TileSystem.TileManager.GetTile(Vector3,System.Boolean@)">GetTile(Vector3, out Boolean)</h4>
+  <div class="markdown level1 summary"><p>Trys to get the tile at a world position</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TileInstanceData GetTile(Vector3 pos, out bool foundTile)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -298,9 +428,9 @@
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="TileSystem.FunctionalTileData.html">FunctionalTileData</a></td>
-        <td><span class="parametername">tileData</span></td>
-        <td><p>Sets to the value of the tile data (default if none)</p>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">foundTile</span></td>
+        <td><p>True if there is a functional tile at cords, False otherwise</p>
 </td>
       </tr>
     </tbody>
@@ -315,8 +445,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><p>True if there is a functional tile at cords, False otherwise</p>
+        <td><a class="xref" href="TileSystem.TileInstanceData.html">TileInstanceData</a></td>
+        <td><p>Returns the value of the tile data (default if none)</p>
 </td>
       </tr>
     </tbody>
@@ -324,13 +454,156 @@
   
   
   <a id="TileSystem_TileManager_GetTile_" data-uid="TileSystem.TileManager.GetTile*"></a>
-  <h4 id="TileSystem_TileManager_GetTile_Vector3_TileSystem_StructuralTileData__" data-uid="TileSystem.TileManager.GetTile(Vector3,TileSystem.StructuralTileData@)">GetTile(Vector3, out StructuralTileData)</h4>
-  <div class="markdown level1 summary"><p>Trys to get the structural tile at a world position</p>
+  <h4 id="TileSystem_TileManager_GetTile_Vector3Int_System_Boolean__" data-uid="TileSystem.TileManager.GetTile(Vector3Int,System.Boolean@)">GetTile(Vector3Int, out Boolean)</h4>
+  <div class="markdown level1 summary"><p>Trys to get the tile at the given cords</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool GetTile(Vector3 pos, out StructuralTileData tileData)</code></pre>
+    <pre><code class="lang-csharp hljs">public TileInstanceData GetTile(Vector3Int cords, out bool foundTile)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3Int</span></td>
+        <td><span class="parametername">cords</span></td>
+        <td><p>The coordinates of the position to check</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">foundTile</span></td>
+        <td><p>True if there is a structural tile at cords, False otherwise</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="TileSystem.TileInstanceData.html">TileInstanceData</a></td>
+        <td><p>Returns to the value of the tile data (default if none)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="TileSystem_TileManager_GetTile_" data-uid="TileSystem.TileManager.GetTile*"></a>
+  <h4 id="TileSystem_TileManager_GetTile_Vector3Int_TileSystem_TileInstanceData__" data-uid="TileSystem.TileManager.GetTile(Vector3Int,TileSystem.TileInstanceData@)">GetTile(Vector3Int, ref TileInstanceData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool GetTile(Vector3Int cords, ref TileInstanceData instanceData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3Int</span></td>
+        <td><span class="parametername">cords</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="TileSystem.TileInstanceData.html">TileInstanceData</a></td>
+        <td><span class="parametername">instanceData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="TileSystem_TileManager_GetTilesByVariant_" data-uid="TileSystem.TileManager.GetTilesByVariant*"></a>
+  <h4 id="TileSystem_TileManager_GetTilesByVariant__1_System_Collections_Generic_List_System_ValueTuple_Vector3Int_TileSystem_TileInstanceData____" data-uid="TileSystem.TileManager.GetTilesByVariant``1(System.Collections.Generic.List{System.ValueTuple{Vector3Int,TileSystem.TileInstanceData}}@)">GetTilesByVariant&lt;T&gt;(out List&lt;(Vector3Int cords, TileInstanceData data)&gt;)</h4>
+  <div class="markdown level1 summary"><p>Gets all the tiles of a particular variant type</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetTilesByVariant&lt;T&gt;(out List&lt;(Vector3Int cords, TileInstanceData data)&gt; tiles)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<span class="xref">System.ValueTuple</span>&lt;<span class="xref">Vector3Int</span>, <a class="xref" href="TileSystem.TileInstanceData.html">TileInstanceData</a>&gt;&gt;</td>
+        <td><span class="parametername">tiles</span></td>
+        <td><p>A list of all the tiles of that variant type</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The variant type (Must inherit from BaseTileVariant or will throw null reference)</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="TileSystem_TileManager_HasTile_" data-uid="TileSystem.TileManager.HasTile*"></a>
+  <h4 id="TileSystem_TileManager_HasTile_Vector3_" data-uid="TileSystem.TileManager.HasTile(Vector3)">HasTile(Vector3)</h4>
+  <div class="markdown level1 summary"><p>Checks what tiles are present at a given position in world space</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasTile(Vector3 pos)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -345,13 +618,7 @@
       <tr>
         <td><span class="xref">Vector3</span></td>
         <td><span class="parametername">pos</span></td>
-        <td><p>The world position to check</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="TileSystem.StructuralTileData.html">StructuralTileData</a></td>
-        <td><span class="parametername">tileData</span></td>
-        <td><p>Sets to the value of the tile data (default if none)</p>
+        <td><p>The position in world space</p>
 </td>
       </tr>
     </tbody>
@@ -367,21 +634,21 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p>True if there is a structural tile at cords, False otherwise</p>
+        <td><p>The type(s) of tiles present</p>
 </td>
       </tr>
     </tbody>
   </table>
   
   
-  <a id="TileSystem_TileManager_GetTile_" data-uid="TileSystem.TileManager.GetTile*"></a>
-  <h4 id="TileSystem_TileManager_GetTile_Vector3Int_TileSystem_FunctionalTileData__" data-uid="TileSystem.TileManager.GetTile(Vector3Int,TileSystem.FunctionalTileData@)">GetTile(Vector3Int, out FunctionalTileData)</h4>
-  <div class="markdown level1 summary"><p>Trys to get the functional tile at the given cords</p>
+  <a id="TileSystem_TileManager_HasTile_" data-uid="TileSystem.TileManager.HasTile*"></a>
+  <h4 id="TileSystem_TileManager_HasTile_Vector3Int_" data-uid="TileSystem.TileManager.HasTile(Vector3Int)">HasTile(Vector3Int)</h4>
+  <div class="markdown level1 summary"><p>Checks what tiles are present at a given coordinate</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool GetTile(Vector3Int cords, out FunctionalTileData tileData)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool HasTile(Vector3Int cords)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -396,13 +663,7 @@
       <tr>
         <td><span class="xref">Vector3Int</span></td>
         <td><span class="parametername">cords</span></td>
-        <td><p>The coordinates of the position to check</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="TileSystem.FunctionalTileData.html">FunctionalTileData</a></td>
-        <td><span class="parametername">tileData</span></td>
-        <td><p>Sets to the value of the tile data (default if none)</p>
+        <td><p>The coordinate to check</p>
 </td>
       </tr>
     </tbody>
@@ -418,58 +679,7 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p>True if there is a functional tile at cords, False otherwise</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="TileSystem_TileManager_GetTile_" data-uid="TileSystem.TileManager.GetTile*"></a>
-  <h4 id="TileSystem_TileManager_GetTile_Vector3Int_TileSystem_StructuralTileData__" data-uid="TileSystem.TileManager.GetTile(Vector3Int,TileSystem.StructuralTileData@)">GetTile(Vector3Int, out StructuralTileData)</h4>
-  <div class="markdown level1 summary"><p>Trys to get the structural tile at the given cords</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool GetTile(Vector3Int cords, out StructuralTileData tileData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3Int</span></td>
-        <td><span class="parametername">cords</span></td>
-        <td><p>The coordinates of the position to check</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="TileSystem.StructuralTileData.html">StructuralTileData</a></td>
-        <td><span class="parametername">tileData</span></td>
-        <td><p>Sets to the value of the tile data (default if none)</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><p>True if there is a structural tile at cords, False otherwise</p>
+        <td><p>The type(s) of tiles present</p>
 </td>
       </tr>
     </tbody>
@@ -522,13 +732,13 @@
   
   
   <a id="TileSystem_TileManager_RemoveTile_" data-uid="TileSystem.TileManager.RemoveTile*"></a>
-  <h4 id="TileSystem_TileManager_RemoveTile_Vector3_System_Boolean_" data-uid="TileSystem.TileManager.RemoveTile(Vector3,System.Boolean)">RemoveTile(Vector3, Boolean)</h4>
+  <h4 id="TileSystem_TileManager_RemoveTile_Vector3_" data-uid="TileSystem.TileManager.RemoveTile(Vector3)">RemoveTile(Vector3)</h4>
   <div class="markdown level1 summary"><p>Remove the tile at a position in world space</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RemoveTile(Vector3 pos, bool structural = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RemoveTile(Vector3 pos)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -546,12 +756,6 @@
         <td><p>The position in world space</p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">structural</span></td>
-        <td><p>Only removes functional tile if false, removes structural and functional otherwise</p>
-</td>
-      </tr>
     </tbody>
   </table>
   
@@ -563,7 +767,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RemoveTile(Vector3Int cords, bool structural = true)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RemoveTile(Vector3Int cords, bool allTiles = true)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -583,8 +787,8 @@
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">structural</span></td>
-        <td><p>Only removes functional tile if false, removes structural and functional otherwise</p>
+        <td><span class="parametername">allTiles</span></td>
+        <td><p>Deletes all tiles at xy cords if true (default)</p>
 </td>
       </tr>
     </tbody>
@@ -600,76 +804,6 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ResetTiles()</code></pre>
   </div>
-  
-  
-  <a id="TileSystem_TileManager_SetFunctionalTiles_" data-uid="TileSystem.TileManager.SetFunctionalTiles*"></a>
-  <h4 id="TileSystem_TileManager_SetFunctionalTiles_Vector3Int___FunctionalTileVariant___" data-uid="TileSystem.TileManager.SetFunctionalTiles(Vector3Int[],FunctionalTileVariant[])">SetFunctionalTiles(Vector3Int[], FunctionalTileVariant[])</h4>
-  <div class="markdown level1 summary"><p>Set an array of tiles at the given coordinates</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetFunctionalTiles(Vector3Int[] cords, FunctionalTileVariant[] functionalTile)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3Int</span>[]</td>
-        <td><span class="parametername">cords</span></td>
-        <td><p>The list of coordinates in the tilemap</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">FunctionalTileVariant</span>[]</td>
-        <td><span class="parametername">functionalTile</span></td>
-        <td><p>The list of tile variants to be placed</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="TileSystem_TileManager_SetStructuralTiles_" data-uid="TileSystem.TileManager.SetStructuralTiles*"></a>
-  <h4 id="TileSystem_TileManager_SetStructuralTiles_Vector3Int___StructuralTileVariant___" data-uid="TileSystem.TileManager.SetStructuralTiles(Vector3Int[],StructuralTileVariant[])">SetStructuralTiles(Vector3Int[], StructuralTileVariant[])</h4>
-  <div class="markdown level1 summary"><p>Sets a tile at a position in world space</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetStructuralTiles(Vector3Int[] pos, StructuralTileVariant[] structuralTiles)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3Int</span>[]</td>
-        <td><span class="parametername">pos</span></td>
-        <td><p>The position in world space</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">StructuralTileVariant</span>[]</td>
-        <td><span class="parametername">structuralTiles</span></td>
-        <td><p>The tile variant to be placed</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   
   
   <a id="TileSystem_TileManager_SetTile_" data-uid="TileSystem.TileManager.SetTile*"></a>
@@ -742,6 +876,41 @@
   </table>
   
   
+  <a id="TileSystem_TileManager_SetTiles_" data-uid="TileSystem.TileManager.SetTiles*"></a>
+  <h4 id="TileSystem_TileManager_SetTiles_Vector3Int___TileSystem_TileInstanceData___" data-uid="TileSystem.TileManager.SetTiles(Vector3Int[],TileSystem.TileInstanceData[])">SetTiles(Vector3Int[], TileInstanceData[])</h4>
+  <div class="markdown level1 summary"><p>Set an array of tiles at the given coordinates</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTiles(Vector3Int[] cords, TileInstanceData[] tiles)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3Int</span>[]</td>
+        <td><span class="parametername">cords</span></td>
+        <td><p>The list of coordinates in the tilemap</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="TileSystem.TileInstanceData.html">TileInstanceData</a>[]</td>
+        <td><span class="parametername">tiles</span></td>
+        <td><p>The list of tile variants to be placed</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="TileSystem_TileManager_Start_" data-uid="TileSystem.TileManager.Start*"></a>
   <h4 id="TileSystem_TileManager_Start" data-uid="TileSystem.TileManager.Start">Start()</h4>
   <div class="markdown level1 summary"></div>
@@ -750,96 +919,6 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void Start()</code></pre>
   </div>
-  
-  
-  <a id="TileSystem_TileManager_TilesAt_" data-uid="TileSystem.TileManager.TilesAt*"></a>
-  <h4 id="TileSystem_TileManager_TilesAt_Vector3_" data-uid="TileSystem.TileManager.TilesAt(Vector3)">TilesAt(Vector3)</h4>
-  <div class="markdown level1 summary"><p>Checks what tiles are present at a given position in world space</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TileManager.TileStatus TilesAt(Vector3 pos)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3</span></td>
-        <td><span class="parametername">pos</span></td>
-        <td><p>The position in world space</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="TileSystem.TileManager.TileStatus.html">TileManager.TileStatus</a></td>
-        <td><p>The type(s) of tiles present</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  
-  
-  <a id="TileSystem_TileManager_TilesAt_" data-uid="TileSystem.TileManager.TilesAt*"></a>
-  <h4 id="TileSystem_TileManager_TilesAt_Vector3Int_" data-uid="TileSystem.TileManager.TilesAt(Vector3Int)">TilesAt(Vector3Int)</h4>
-  <div class="markdown level1 summary"><p>Checks what tiles are present at a given coordinate</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TileManager.TileStatus TilesAt(Vector3Int cords)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Vector3Int</span></td>
-        <td><span class="parametername">cords</span></td>
-        <td><p>The coordinate to check</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="TileSystem.TileManager.TileStatus.html">TileManager.TileStatus</a></td>
-        <td><p>The type(s) of tiles present</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
 </article>
           </div>
           

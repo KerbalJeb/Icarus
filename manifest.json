@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.Damage.html",
-          "hash": "GxXvI+M5XQtht6BGKGm86g=="
+          "hash": "RHbXOZIJ09jNc5uikvZEJg=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,19 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.LineDmgTester.html",
-          "hash": "SOAZHULj+ddJfm45hUH1Xw=="
+          "hash": "lr42nOK5vVM4H3atAv2gow=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.MovementManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.MovementManager.html",
+          "hash": "rN+TqDV11SbAqEjFF5LbtA=="
         }
       },
       "is_incremental": false,
@@ -33,7 +45,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.IPlayerActions.html",
-          "hash": "o/9Sbm7T3mDCJXsIUEzSHQ=="
+          "hash": "FFpAAD0qPrsNyncsm0EBqQ=="
         }
       },
       "is_incremental": false,
@@ -45,7 +57,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.IUIActions.html",
-          "hash": "S0tD2ZqrepgXEiLzECdyug=="
+          "hash": "tr2YSv89YxMxVoBEV7o7IQ=="
         }
       },
       "is_incremental": false,
@@ -57,7 +69,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.PlayerActions.html",
-          "hash": "hYR1QUUcO8eyWptRRSU/FQ=="
+          "hash": "JSYm5OcB5q7oAnhSjILYqg=="
         }
       },
       "is_incremental": false,
@@ -69,7 +81,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.UIActions.html",
-          "hash": "yQsHFYfF8/BozLsNdQyE/A=="
+          "hash": "AbBpGOC9oziBa4Cx45BOmA=="
         }
       },
       "is_incremental": false,
@@ -81,7 +93,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.html",
-          "hash": "1bRTvzDmm5zNzIIKqUDtaA=="
+          "hash": "Yrlz3+BHsVxt6pLlqPK7YQ=="
         }
       },
       "is_incremental": false,
@@ -93,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.ShipManager.html",
-          "hash": "u80N2wNPVY3ulbxjDz1MVQ=="
+          "hash": "d6u7Asn17rS/5Ebeqtg5pQ=="
         }
       },
       "is_incremental": false,
@@ -105,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.html",
-          "hash": "CccYt8dlv3aciODmGI7zCQ=="
+          "hash": "1gh+aa/ro9Ty65vQHfuI5Q=="
         }
       },
       "is_incremental": false,
@@ -113,11 +125,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/TileSystem.FunctionalTileData.yml",
+      "source_relative_path": "api/TileSystem.Directions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/TileSystem.FunctionalTileData.html",
-          "hash": "BNxo59MWo7Fs0Xs0P16j8Q=="
+          "relative_path": "api/TileSystem.Directions.html",
+          "hash": "9Mnw/2GSJpOEjFKpSESf+A=="
         }
       },
       "is_incremental": false,
@@ -125,11 +137,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/TileSystem.StructuralTileData.yml",
+      "source_relative_path": "api/TileSystem.TileInfo.yml",
       "output": {
         ".html": {
-          "relative_path": "api/TileSystem.StructuralTileData.html",
-          "hash": "vVvIdlsBf/TCIPrnjwJlEQ=="
+          "relative_path": "api/TileSystem.TileInfo.html",
+          "hash": "5DB8FEyJHNgtxoEgidXXqg=="
         }
       },
       "is_incremental": false,
@@ -137,11 +149,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/TileSystem.TileManager.TileStatus.yml",
+      "source_relative_path": "api/TileSystem.TileInstanceData.yml",
       "output": {
         ".html": {
-          "relative_path": "api/TileSystem.TileManager.TileStatus.html",
-          "hash": "f1rwtjvcSbmPLCp9AncAsA=="
+          "relative_path": "api/TileSystem.TileInstanceData.html",
+          "hash": "iJtQvZufHP1LvaAng4SCGw=="
         }
       },
       "is_incremental": false,
@@ -153,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileManager.html",
-          "hash": "UGiwRcS7Kp+z8Y+xMt4yHQ=="
+          "hash": "sn6vbA6IqEZ+hJwgHYNTUQ=="
         }
       },
       "is_incremental": false,
@@ -165,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileSet.html",
-          "hash": "2jTog1ajlDTkFMUndm7+Kg=="
+          "hash": "sYp8eOr2R0GQ5ma/RBQApw=="
         }
       },
       "is_incremental": false,
@@ -177,7 +189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileVariants.ArmorVariant.html",
-          "hash": "ilKJyzZQbZDQKC4QZrXPDA=="
+          "hash": "PuJgyHq1D/rk6d1+zykS4g=="
         }
       },
       "is_incremental": false,
@@ -189,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileVariants.BaseTileVariant.html",
-          "hash": "J9vEEGYK+9shO9/Cl8VRCA=="
+          "hash": "qW2Yq4ZYABx/P7o4/b/7Xw=="
         }
       },
       "is_incremental": false,
@@ -201,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileVariants.EngineVariant.html",
-          "hash": "Yj8oQsRbf+nKTzfr9aUQiA=="
+          "hash": "ZpQZMqbj2n7YaJrzN0Op0w=="
         }
       },
       "is_incremental": false,
@@ -213,19 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileVariants.FunctionalTileVariant.html",
-          "hash": "H3f2hkchp+uZHMhbqLWQ2w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/TileSystem.TileVariants.StructuralTileVariant.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/TileSystem.TileVariants.StructuralTileVariant.html",
-          "hash": "kiAOFOe8V87pDO3jgpCdqg=="
+          "hash": "pQ7ogfuLtQoLzdTnrJdzaA=="
         }
       },
       "is_incremental": false,
@@ -237,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileVariants.html",
-          "hash": "qlC2f/Izl3HczY34BLcTVg=="
+          "hash": "bBE9BeuCnAo8GBPL5m++xQ=="
         }
       },
       "is_incremental": false,
@@ -249,7 +249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.html",
-          "hash": "kGCGiz0WqaIl1OUpuNMY1A=="
+          "hash": "In5UKtonwhzgBhu4R5/+HA=="
         }
       },
       "is_incremental": false,
@@ -261,7 +261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "I3NxQfpYWMljQ7eoAh41iw=="
+          "hash": "iw9FqU6aFFCYUO8bHu7qtg=="
         }
       },
       "is_incremental": false,
@@ -273,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "nfqwMvIeDftWKBRBm2xgCw=="
+          "hash": "ptOKAHEBSYeR+UlynSG3Sg=="
         }
       },
       "is_incremental": false,
@@ -291,6 +291,13 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
@@ -301,13 +308,6 @@
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 21,
-          "skipped_file_count": 0
-        },
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }

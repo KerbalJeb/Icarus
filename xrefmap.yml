@@ -65,6 +65,38 @@ references:
   isSpec: "True"
   fullName: LineDmgTester.DrawLine
   nameWithType: LineDmgTester.DrawLine
+- uid: Global.MovementManager
+  name: MovementManager
+  href: api/Global.MovementManager.html
+  commentId: T:Global.MovementManager
+  fullName: MovementManager
+  nameWithType: MovementManager
+- uid: Global.MovementManager.Steer(Vector3)
+  name: Steer(Vector3)
+  href: api/Global.MovementManager.html#Global_MovementManager_Steer_Vector3_
+  commentId: M:Global.MovementManager.Steer(Vector3)
+  fullName: MovementManager.Steer(Vector3)
+  nameWithType: MovementManager.Steer(Vector3)
+- uid: Global.MovementManager.Steer*
+  name: Steer
+  href: api/Global.MovementManager.html#Global_MovementManager_Steer_
+  commentId: Overload:Global.MovementManager.Steer
+  isSpec: "True"
+  fullName: MovementManager.Steer
+  nameWithType: MovementManager.Steer
+- uid: Global.MovementManager.UpdatePhysics
+  name: UpdatePhysics()
+  href: api/Global.MovementManager.html#Global_MovementManager_UpdatePhysics
+  commentId: M:Global.MovementManager.UpdatePhysics
+  fullName: MovementManager.UpdatePhysics()
+  nameWithType: MovementManager.UpdatePhysics()
+- uid: Global.MovementManager.UpdatePhysics*
+  name: UpdatePhysics
+  href: api/Global.MovementManager.html#Global_MovementManager_UpdatePhysics_
+  commentId: Overload:Global.MovementManager.UpdatePhysics
+  isSpec: "True"
+  fullName: MovementManager.UpdatePhysics
+  nameWithType: MovementManager.UpdatePhysics
 - uid: Global.PlayerInput
   name: PlayerInput
   href: api/Global.PlayerInput.html
@@ -110,6 +142,19 @@ references:
   isSpec: "True"
   fullName: PlayerInput.bindingMask
   nameWithType: PlayerInput.bindingMask
+- uid: Global.PlayerInput.bindings
+  name: bindings
+  href: api/Global.PlayerInput.html#Global_PlayerInput_bindings
+  commentId: P:Global.PlayerInput.bindings
+  fullName: PlayerInput.bindings
+  nameWithType: PlayerInput.bindings
+- uid: Global.PlayerInput.bindings*
+  name: bindings
+  href: api/Global.PlayerInput.html#Global_PlayerInput_bindings_
+  commentId: Overload:Global.PlayerInput.bindings
+  isSpec: "True"
+  fullName: PlayerInput.bindings
+  nameWithType: PlayerInput.bindings
 - uid: Global.PlayerInput.Contains(InputAction)
   name: Contains(InputAction)
   href: api/Global.PlayerInput.html#Global_PlayerInput_Contains_InputAction_
@@ -188,6 +233,35 @@ references:
   isSpec: "True"
   fullName: PlayerInput.Enable
   nameWithType: PlayerInput.Enable
+- uid: Global.PlayerInput.FindAction(System.String,System.Boolean)
+  name: FindAction(String, Boolean)
+  href: api/Global.PlayerInput.html#Global_PlayerInput_FindAction_System_String_System_Boolean_
+  commentId: M:Global.PlayerInput.FindAction(System.String,System.Boolean)
+  fullName: PlayerInput.FindAction(System.String, System.Boolean)
+  nameWithType: PlayerInput.FindAction(String, Boolean)
+- uid: Global.PlayerInput.FindAction*
+  name: FindAction
+  href: api/Global.PlayerInput.html#Global_PlayerInput_FindAction_
+  commentId: Overload:Global.PlayerInput.FindAction
+  isSpec: "True"
+  fullName: PlayerInput.FindAction
+  nameWithType: PlayerInput.FindAction
+- uid: Global.PlayerInput.FindBinding(InputBinding,InputAction@)
+  name: FindBinding(InputBinding, out InputAction)
+  href: api/Global.PlayerInput.html#Global_PlayerInput_FindBinding_InputBinding_InputAction__
+  commentId: M:Global.PlayerInput.FindBinding(InputBinding,InputAction@)
+  name.vb: FindBinding(InputBinding, ByRef InputAction)
+  fullName: PlayerInput.FindBinding(InputBinding, out InputAction)
+  fullName.vb: PlayerInput.FindBinding(InputBinding, ByRef InputAction)
+  nameWithType: PlayerInput.FindBinding(InputBinding, out InputAction)
+  nameWithType.vb: PlayerInput.FindBinding(InputBinding, ByRef InputAction)
+- uid: Global.PlayerInput.FindBinding*
+  name: FindBinding
+  href: api/Global.PlayerInput.html#Global_PlayerInput_FindBinding_
+  commentId: Overload:Global.PlayerInput.FindBinding
+  isSpec: "True"
+  fullName: PlayerInput.FindBinding
+  nameWithType: PlayerInput.FindBinding
 - uid: Global.PlayerInput.GamepadScheme
   name: GamepadScheme
   href: api/Global.PlayerInput.html#Global_PlayerInput_GamepadScheme
@@ -919,6 +993,32 @@ references:
   isSpec: "True"
   fullName: ShipManager.ApplyDamage
   nameWithType: ShipManager.ApplyDamage
+- uid: Global.ShipManager.PhysicsEnabled
+  name: PhysicsEnabled
+  href: api/Global.ShipManager.html#Global_ShipManager_PhysicsEnabled
+  commentId: P:Global.ShipManager.PhysicsEnabled
+  fullName: ShipManager.PhysicsEnabled
+  nameWithType: ShipManager.PhysicsEnabled
+- uid: Global.ShipManager.PhysicsEnabled*
+  name: PhysicsEnabled
+  href: api/Global.ShipManager.html#Global_ShipManager_PhysicsEnabled_
+  commentId: Overload:Global.ShipManager.PhysicsEnabled
+  isSpec: "True"
+  fullName: ShipManager.PhysicsEnabled
+  nameWithType: ShipManager.PhysicsEnabled
+- uid: Global.ShipManager.SteerShip(InputAction.CallbackContext)
+  name: SteerShip(InputAction.CallbackContext)
+  href: api/Global.ShipManager.html#Global_ShipManager_SteerShip_InputAction_CallbackContext_
+  commentId: M:Global.ShipManager.SteerShip(InputAction.CallbackContext)
+  fullName: ShipManager.SteerShip(InputAction.CallbackContext)
+  nameWithType: ShipManager.SteerShip(InputAction.CallbackContext)
+- uid: Global.ShipManager.SteerShip*
+  name: SteerShip
+  href: api/Global.ShipManager.html#Global_ShipManager_SteerShip_
+  commentId: Overload:Global.ShipManager.SteerShip
+  isSpec: "True"
+  fullName: ShipManager.SteerShip
+  nameWithType: ShipManager.SteerShip
 - uid: Global.ShipManager.Test(InputAction.CallbackContext)
   name: Test(InputAction.CallbackContext)
   href: api/Global.ShipManager.html#Global_ShipManager_Test_InputAction_CallbackContext_
@@ -938,76 +1038,116 @@ references:
   commentId: N:TileSystem
   fullName: TileSystem
   nameWithType: TileSystem
-- uid: TileSystem.FunctionalTileData
-  name: FunctionalTileData
-  href: api/TileSystem.FunctionalTileData.html
-  commentId: T:TileSystem.FunctionalTileData
-  fullName: TileSystem.FunctionalTileData
-  nameWithType: FunctionalTileData
-- uid: TileSystem.FunctionalTileData.#ctor(FunctionalTileVariant)
-  name: FunctionalTileData(FunctionalTileVariant)
-  href: api/TileSystem.FunctionalTileData.html#TileSystem_FunctionalTileData__ctor_FunctionalTileVariant_
-  commentId: M:TileSystem.FunctionalTileData.#ctor(FunctionalTileVariant)
-  fullName: TileSystem.FunctionalTileData.FunctionalTileData(FunctionalTileVariant)
-  nameWithType: FunctionalTileData.FunctionalTileData(FunctionalTileVariant)
-- uid: TileSystem.FunctionalTileData.#ctor*
-  name: FunctionalTileData
-  href: api/TileSystem.FunctionalTileData.html#TileSystem_FunctionalTileData__ctor_
-  commentId: Overload:TileSystem.FunctionalTileData.#ctor
+- uid: TileSystem.Directions
+  name: Directions
+  href: api/TileSystem.Directions.html
+  commentId: T:TileSystem.Directions
+  fullName: TileSystem.Directions
+  nameWithType: Directions
+- uid: TileSystem.Directions.Down
+  name: Down
+  href: api/TileSystem.Directions.html#TileSystem_Directions_Down
+  commentId: F:TileSystem.Directions.Down
+  fullName: TileSystem.Directions.Down
+  nameWithType: Directions.Down
+- uid: TileSystem.Directions.Left
+  name: Left
+  href: api/TileSystem.Directions.html#TileSystem_Directions_Left
+  commentId: F:TileSystem.Directions.Left
+  fullName: TileSystem.Directions.Left
+  nameWithType: Directions.Left
+- uid: TileSystem.Directions.None
+  name: None
+  href: api/TileSystem.Directions.html#TileSystem_Directions_None
+  commentId: F:TileSystem.Directions.None
+  fullName: TileSystem.Directions.None
+  nameWithType: Directions.None
+- uid: TileSystem.Directions.Right
+  name: Right
+  href: api/TileSystem.Directions.html#TileSystem_Directions_Right
+  commentId: F:TileSystem.Directions.Right
+  fullName: TileSystem.Directions.Right
+  nameWithType: Directions.Right
+- uid: TileSystem.Directions.Up
+  name: Up
+  href: api/TileSystem.Directions.html#TileSystem_Directions_Up
+  commentId: F:TileSystem.Directions.Up
+  fullName: TileSystem.Directions.Up
+  nameWithType: Directions.Up
+- uid: TileSystem.Directions.ZDown
+  name: ZDown
+  href: api/TileSystem.Directions.html#TileSystem_Directions_ZDown
+  commentId: F:TileSystem.Directions.ZDown
+  fullName: TileSystem.Directions.ZDown
+  nameWithType: Directions.ZDown
+- uid: TileSystem.Directions.ZUp
+  name: ZUp
+  href: api/TileSystem.Directions.html#TileSystem_Directions_ZUp
+  commentId: F:TileSystem.Directions.ZUp
+  fullName: TileSystem.Directions.ZUp
+  nameWithType: Directions.ZUp
+- uid: TileSystem.TileInfo
+  name: TileInfo
+  href: api/TileSystem.TileInfo.html
+  commentId: T:TileSystem.TileInfo
+  fullName: TileSystem.TileInfo
+  nameWithType: TileInfo
+- uid: TileSystem.TileInfo.Directions
+  name: Directions
+  href: api/TileSystem.TileInfo.html#TileSystem_TileInfo_Directions
+  commentId: F:TileSystem.TileInfo.Directions
+  fullName: TileSystem.TileInfo.Directions
+  nameWithType: TileInfo.Directions
+- uid: TileSystem.TileInfo.TransformMatrix
+  name: TransformMatrix
+  href: api/TileSystem.TileInfo.html#TileSystem_TileInfo_TransformMatrix
+  commentId: F:TileSystem.TileInfo.TransformMatrix
+  fullName: TileSystem.TileInfo.TransformMatrix
+  nameWithType: TileInfo.TransformMatrix
+- uid: TileSystem.TileInstanceData
+  name: TileInstanceData
+  href: api/TileSystem.TileInstanceData.html
+  commentId: T:TileSystem.TileInstanceData
+  fullName: TileSystem.TileInstanceData
+  nameWithType: TileInstanceData
+- uid: TileSystem.TileInstanceData.#ctor(BaseTileVariant,TileSystem.Directions)
+  name: TileInstanceData(BaseTileVariant, Directions)
+  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData__ctor_BaseTileVariant_TileSystem_Directions_
+  commentId: M:TileSystem.TileInstanceData.#ctor(BaseTileVariant,TileSystem.Directions)
+  fullName: TileSystem.TileInstanceData.TileInstanceData(BaseTileVariant, TileSystem.Directions)
+  nameWithType: TileInstanceData.TileInstanceData(BaseTileVariant, Directions)
+- uid: TileSystem.TileInstanceData.#ctor*
+  name: TileInstanceData
+  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData__ctor_
+  commentId: Overload:TileSystem.TileInstanceData.#ctor
   isSpec: "True"
-  fullName: TileSystem.FunctionalTileData.FunctionalTileData
-  nameWithType: FunctionalTileData.FunctionalTileData
-- uid: TileSystem.FunctionalTileData.ID
-  name: ID
-  href: api/TileSystem.FunctionalTileData.html#TileSystem_FunctionalTileData_ID
-  commentId: P:TileSystem.FunctionalTileData.ID
-  fullName: TileSystem.FunctionalTileData.ID
-  nameWithType: FunctionalTileData.ID
-- uid: TileSystem.FunctionalTileData.ID*
-  name: ID
-  href: api/TileSystem.FunctionalTileData.html#TileSystem_FunctionalTileData_ID_
-  commentId: Overload:TileSystem.FunctionalTileData.ID
-  isSpec: "True"
-  fullName: TileSystem.FunctionalTileData.ID
-  nameWithType: FunctionalTileData.ID
-- uid: TileSystem.StructuralTileData
-  name: StructuralTileData
-  href: api/TileSystem.StructuralTileData.html
-  commentId: T:TileSystem.StructuralTileData
-  fullName: TileSystem.StructuralTileData
-  nameWithType: StructuralTileData
-- uid: TileSystem.StructuralTileData.#ctor(StructuralTileVariant)
-  name: StructuralTileData(StructuralTileVariant)
-  href: api/TileSystem.StructuralTileData.html#TileSystem_StructuralTileData__ctor_StructuralTileVariant_
-  commentId: M:TileSystem.StructuralTileData.#ctor(StructuralTileVariant)
-  fullName: TileSystem.StructuralTileData.StructuralTileData(StructuralTileVariant)
-  nameWithType: StructuralTileData.StructuralTileData(StructuralTileVariant)
-- uid: TileSystem.StructuralTileData.#ctor*
-  name: StructuralTileData
-  href: api/TileSystem.StructuralTileData.html#TileSystem_StructuralTileData__ctor_
-  commentId: Overload:TileSystem.StructuralTileData.#ctor
-  isSpec: "True"
-  fullName: TileSystem.StructuralTileData.StructuralTileData
-  nameWithType: StructuralTileData.StructuralTileData
-- uid: TileSystem.StructuralTileData.Health
+  fullName: TileSystem.TileInstanceData.TileInstanceData
+  nameWithType: TileInstanceData.TileInstanceData
+- uid: TileSystem.TileInstanceData.Health
   name: Health
-  href: api/TileSystem.StructuralTileData.html#TileSystem_StructuralTileData_Health
-  commentId: F:TileSystem.StructuralTileData.Health
-  fullName: TileSystem.StructuralTileData.Health
-  nameWithType: StructuralTileData.Health
-- uid: TileSystem.StructuralTileData.ID
+  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData_Health
+  commentId: F:TileSystem.TileInstanceData.Health
+  fullName: TileSystem.TileInstanceData.Health
+  nameWithType: TileInstanceData.Health
+- uid: TileSystem.TileInstanceData.ID
   name: ID
-  href: api/TileSystem.StructuralTileData.html#TileSystem_StructuralTileData_ID
-  commentId: P:TileSystem.StructuralTileData.ID
-  fullName: TileSystem.StructuralTileData.ID
-  nameWithType: StructuralTileData.ID
-- uid: TileSystem.StructuralTileData.ID*
+  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData_ID
+  commentId: P:TileSystem.TileInstanceData.ID
+  fullName: TileSystem.TileInstanceData.ID
+  nameWithType: TileInstanceData.ID
+- uid: TileSystem.TileInstanceData.ID*
   name: ID
-  href: api/TileSystem.StructuralTileData.html#TileSystem_StructuralTileData_ID_
-  commentId: Overload:TileSystem.StructuralTileData.ID
+  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData_ID_
+  commentId: Overload:TileSystem.TileInstanceData.ID
   isSpec: "True"
-  fullName: TileSystem.StructuralTileData.ID
-  nameWithType: StructuralTileData.ID
+  fullName: TileSystem.TileInstanceData.ID
+  nameWithType: TileInstanceData.ID
+- uid: TileSystem.TileInstanceData.Rotation
+  name: Rotation
+  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData_Rotation
+  commentId: F:TileSystem.TileInstanceData.Rotation
+  fullName: TileSystem.TileInstanceData.Rotation
+  nameWithType: TileInstanceData.Rotation
 - uid: TileSystem.TileManager
   name: TileManager
   href: api/TileSystem.TileManager.html
@@ -1040,42 +1180,59 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.Awake
   nameWithType: TileManager.Awake
-- uid: TileSystem.TileManager.GetTile(Vector3,TileSystem.FunctionalTileData@)
-  name: GetTile(Vector3, out FunctionalTileData)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_Vector3_TileSystem_FunctionalTileData__
-  commentId: M:TileSystem.TileManager.GetTile(Vector3,TileSystem.FunctionalTileData@)
-  name.vb: GetTile(Vector3, ByRef FunctionalTileData)
-  fullName: TileSystem.TileManager.GetTile(Vector3, out TileSystem.FunctionalTileData)
-  fullName.vb: TileSystem.TileManager.GetTile(Vector3, ByRef TileSystem.FunctionalTileData)
-  nameWithType: TileManager.GetTile(Vector3, out FunctionalTileData)
-  nameWithType.vb: TileManager.GetTile(Vector3, ByRef FunctionalTileData)
-- uid: TileSystem.TileManager.GetTile(Vector3,TileSystem.StructuralTileData@)
-  name: GetTile(Vector3, out StructuralTileData)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_Vector3_TileSystem_StructuralTileData__
-  commentId: M:TileSystem.TileManager.GetTile(Vector3,TileSystem.StructuralTileData@)
-  name.vb: GetTile(Vector3, ByRef StructuralTileData)
-  fullName: TileSystem.TileManager.GetTile(Vector3, out TileSystem.StructuralTileData)
-  fullName.vb: TileSystem.TileManager.GetTile(Vector3, ByRef TileSystem.StructuralTileData)
-  nameWithType: TileManager.GetTile(Vector3, out StructuralTileData)
-  nameWithType.vb: TileManager.GetTile(Vector3, ByRef StructuralTileData)
-- uid: TileSystem.TileManager.GetTile(Vector3Int,TileSystem.FunctionalTileData@)
-  name: GetTile(Vector3Int, out FunctionalTileData)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_Vector3Int_TileSystem_FunctionalTileData__
-  commentId: M:TileSystem.TileManager.GetTile(Vector3Int,TileSystem.FunctionalTileData@)
-  name.vb: GetTile(Vector3Int, ByRef FunctionalTileData)
-  fullName: TileSystem.TileManager.GetTile(Vector3Int, out TileSystem.FunctionalTileData)
-  fullName.vb: TileSystem.TileManager.GetTile(Vector3Int, ByRef TileSystem.FunctionalTileData)
-  nameWithType: TileManager.GetTile(Vector3Int, out FunctionalTileData)
-  nameWithType.vb: TileManager.GetTile(Vector3Int, ByRef FunctionalTileData)
-- uid: TileSystem.TileManager.GetTile(Vector3Int,TileSystem.StructuralTileData@)
-  name: GetTile(Vector3Int, out StructuralTileData)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_Vector3Int_TileSystem_StructuralTileData__
-  commentId: M:TileSystem.TileManager.GetTile(Vector3Int,TileSystem.StructuralTileData@)
-  name.vb: GetTile(Vector3Int, ByRef StructuralTileData)
-  fullName: TileSystem.TileManager.GetTile(Vector3Int, out TileSystem.StructuralTileData)
-  fullName.vb: TileSystem.TileManager.GetTile(Vector3Int, ByRef TileSystem.StructuralTileData)
-  nameWithType: TileManager.GetTile(Vector3Int, out StructuralTileData)
-  nameWithType.vb: TileManager.GetTile(Vector3Int, ByRef StructuralTileData)
+- uid: TileSystem.TileManager.CordsToPosition(Vector3Int)
+  name: CordsToPosition(Vector3Int)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_CordsToPosition_Vector3Int_
+  commentId: M:TileSystem.TileManager.CordsToPosition(Vector3Int)
+  fullName: TileSystem.TileManager.CordsToPosition(Vector3Int)
+  nameWithType: TileManager.CordsToPosition(Vector3Int)
+- uid: TileSystem.TileManager.CordsToPosition*
+  name: CordsToPosition
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_CordsToPosition_
+  commentId: Overload:TileSystem.TileManager.CordsToPosition
+  isSpec: "True"
+  fullName: TileSystem.TileManager.CordsToPosition
+  nameWithType: TileManager.CordsToPosition
+- uid: TileSystem.TileManager.FindIslands(System.Int32)
+  name: FindIslands(Int32)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_FindIslands_System_Int32_
+  commentId: M:TileSystem.TileManager.FindIslands(System.Int32)
+  fullName: TileSystem.TileManager.FindIslands(System.Int32)
+  nameWithType: TileManager.FindIslands(Int32)
+- uid: TileSystem.TileManager.FindIslands*
+  name: FindIslands
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_FindIslands_
+  commentId: Overload:TileSystem.TileManager.FindIslands
+  isSpec: "True"
+  fullName: TileSystem.TileManager.FindIslands
+  nameWithType: TileManager.FindIslands
+- uid: TileSystem.TileManager.GetTile(Vector3,System.Boolean@)
+  name: GetTile(Vector3, out Boolean)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_Vector3_System_Boolean__
+  commentId: M:TileSystem.TileManager.GetTile(Vector3,System.Boolean@)
+  name.vb: GetTile(Vector3, ByRef Boolean)
+  fullName: TileSystem.TileManager.GetTile(Vector3, out System.Boolean)
+  fullName.vb: TileSystem.TileManager.GetTile(Vector3, ByRef System.Boolean)
+  nameWithType: TileManager.GetTile(Vector3, out Boolean)
+  nameWithType.vb: TileManager.GetTile(Vector3, ByRef Boolean)
+- uid: TileSystem.TileManager.GetTile(Vector3Int,System.Boolean@)
+  name: GetTile(Vector3Int, out Boolean)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_Vector3Int_System_Boolean__
+  commentId: M:TileSystem.TileManager.GetTile(Vector3Int,System.Boolean@)
+  name.vb: GetTile(Vector3Int, ByRef Boolean)
+  fullName: TileSystem.TileManager.GetTile(Vector3Int, out System.Boolean)
+  fullName.vb: TileSystem.TileManager.GetTile(Vector3Int, ByRef System.Boolean)
+  nameWithType: TileManager.GetTile(Vector3Int, out Boolean)
+  nameWithType.vb: TileManager.GetTile(Vector3Int, ByRef Boolean)
+- uid: TileSystem.TileManager.GetTile(Vector3Int,TileSystem.TileInstanceData@)
+  name: GetTile(Vector3Int, ref TileInstanceData)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_Vector3Int_TileSystem_TileInstanceData__
+  commentId: M:TileSystem.TileManager.GetTile(Vector3Int,TileSystem.TileInstanceData@)
+  name.vb: GetTile(Vector3Int, ByRef TileInstanceData)
+  fullName: TileSystem.TileManager.GetTile(Vector3Int, ref TileSystem.TileInstanceData)
+  fullName.vb: TileSystem.TileManager.GetTile(Vector3Int, ByRef TileSystem.TileInstanceData)
+  nameWithType: TileManager.GetTile(Vector3Int, ref TileInstanceData)
+  nameWithType.vb: TileManager.GetTile(Vector3Int, ByRef TileInstanceData)
 - uid: TileSystem.TileManager.GetTile*
   name: GetTile
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_
@@ -1083,6 +1240,41 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.GetTile
   nameWithType: TileManager.GetTile
+- uid: TileSystem.TileManager.GetTilesByVariant*
+  name: GetTilesByVariant
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTilesByVariant_
+  commentId: Overload:TileSystem.TileManager.GetTilesByVariant
+  isSpec: "True"
+  fullName: TileSystem.TileManager.GetTilesByVariant
+  nameWithType: TileManager.GetTilesByVariant
+- uid: TileSystem.TileManager.GetTilesByVariant``1(System.Collections.Generic.List{System.ValueTuple{Vector3Int,TileSystem.TileInstanceData}}@)
+  name: GetTilesByVariant<T>(out List<(Vector3Int cords, TileInstanceData data)>)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTilesByVariant__1_System_Collections_Generic_List_System_ValueTuple_Vector3Int_TileSystem_TileInstanceData____
+  commentId: M:TileSystem.TileManager.GetTilesByVariant``1(System.Collections.Generic.List{System.ValueTuple{Vector3Int,TileSystem.TileInstanceData}}@)
+  name.vb: GetTilesByVariant(Of T)(ByRef List(Of (cords As Vector3Int, data As TileInstanceData)))
+  fullName: TileSystem.TileManager.GetTilesByVariant<T>(out System.Collections.Generic.List<System.ValueTuple<Vector3Int, TileSystem.TileInstanceData>>)
+  fullName.vb: TileSystem.TileManager.GetTilesByVariant(Of T)(ByRef System.Collections.Generic.List(Of System.ValueTuple(Of Vector3Int, TileSystem.TileInstanceData)))
+  nameWithType: TileManager.GetTilesByVariant<T>(out List<(Vector3Int cords, TileInstanceData data)>)
+  nameWithType.vb: TileManager.GetTilesByVariant(Of T)(ByRef List(Of (cords As Vector3Int, data As TileInstanceData)))
+- uid: TileSystem.TileManager.HasTile(Vector3)
+  name: HasTile(Vector3)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_HasTile_Vector3_
+  commentId: M:TileSystem.TileManager.HasTile(Vector3)
+  fullName: TileSystem.TileManager.HasTile(Vector3)
+  nameWithType: TileManager.HasTile(Vector3)
+- uid: TileSystem.TileManager.HasTile(Vector3Int)
+  name: HasTile(Vector3Int)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_HasTile_Vector3Int_
+  commentId: M:TileSystem.TileManager.HasTile(Vector3Int)
+  fullName: TileSystem.TileManager.HasTile(Vector3Int)
+  nameWithType: TileManager.HasTile(Vector3Int)
+- uid: TileSystem.TileManager.HasTile*
+  name: HasTile
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_HasTile_
+  commentId: Overload:TileSystem.TileManager.HasTile
+  isSpec: "True"
+  fullName: TileSystem.TileManager.HasTile
+  nameWithType: TileManager.HasTile
 - uid: TileSystem.TileManager.PhysicsEnabled
   name: PhysicsEnabled
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_PhysicsEnabled
@@ -1109,12 +1301,12 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.PositionToCords
   nameWithType: TileManager.PositionToCords
-- uid: TileSystem.TileManager.RemoveTile(Vector3,System.Boolean)
-  name: RemoveTile(Vector3, Boolean)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_RemoveTile_Vector3_System_Boolean_
-  commentId: M:TileSystem.TileManager.RemoveTile(Vector3,System.Boolean)
-  fullName: TileSystem.TileManager.RemoveTile(Vector3, System.Boolean)
-  nameWithType: TileManager.RemoveTile(Vector3, Boolean)
+- uid: TileSystem.TileManager.RemoveTile(Vector3)
+  name: RemoveTile(Vector3)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_RemoveTile_Vector3_
+  commentId: M:TileSystem.TileManager.RemoveTile(Vector3)
+  fullName: TileSystem.TileManager.RemoveTile(Vector3)
+  nameWithType: TileManager.RemoveTile(Vector3)
 - uid: TileSystem.TileManager.RemoveTile(Vector3Int,System.Boolean)
   name: RemoveTile(Vector3Int, Boolean)
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_RemoveTile_Vector3Int_System_Boolean_
@@ -1141,38 +1333,6 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.ResetTiles
   nameWithType: TileManager.ResetTiles
-- uid: TileSystem.TileManager.SetFunctionalTiles(Vector3Int[],FunctionalTileVariant[])
-  name: SetFunctionalTiles(Vector3Int[], FunctionalTileVariant[])
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetFunctionalTiles_Vector3Int___FunctionalTileVariant___
-  commentId: M:TileSystem.TileManager.SetFunctionalTiles(Vector3Int[],FunctionalTileVariant[])
-  name.vb: SetFunctionalTiles(Vector3Int(), FunctionalTileVariant())
-  fullName: TileSystem.TileManager.SetFunctionalTiles(Vector3Int[], FunctionalTileVariant[])
-  fullName.vb: TileSystem.TileManager.SetFunctionalTiles(Vector3Int(), FunctionalTileVariant())
-  nameWithType: TileManager.SetFunctionalTiles(Vector3Int[], FunctionalTileVariant[])
-  nameWithType.vb: TileManager.SetFunctionalTiles(Vector3Int(), FunctionalTileVariant())
-- uid: TileSystem.TileManager.SetFunctionalTiles*
-  name: SetFunctionalTiles
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetFunctionalTiles_
-  commentId: Overload:TileSystem.TileManager.SetFunctionalTiles
-  isSpec: "True"
-  fullName: TileSystem.TileManager.SetFunctionalTiles
-  nameWithType: TileManager.SetFunctionalTiles
-- uid: TileSystem.TileManager.SetStructuralTiles(Vector3Int[],StructuralTileVariant[])
-  name: SetStructuralTiles(Vector3Int[], StructuralTileVariant[])
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetStructuralTiles_Vector3Int___StructuralTileVariant___
-  commentId: M:TileSystem.TileManager.SetStructuralTiles(Vector3Int[],StructuralTileVariant[])
-  name.vb: SetStructuralTiles(Vector3Int(), StructuralTileVariant())
-  fullName: TileSystem.TileManager.SetStructuralTiles(Vector3Int[], StructuralTileVariant[])
-  fullName.vb: TileSystem.TileManager.SetStructuralTiles(Vector3Int(), StructuralTileVariant())
-  nameWithType: TileManager.SetStructuralTiles(Vector3Int[], StructuralTileVariant[])
-  nameWithType.vb: TileManager.SetStructuralTiles(Vector3Int(), StructuralTileVariant())
-- uid: TileSystem.TileManager.SetStructuralTiles*
-  name: SetStructuralTiles
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetStructuralTiles_
-  commentId: Overload:TileSystem.TileManager.SetStructuralTiles
-  isSpec: "True"
-  fullName: TileSystem.TileManager.SetStructuralTiles
-  nameWithType: TileManager.SetStructuralTiles
 - uid: TileSystem.TileManager.SetTile(Vector3,System.UInt16)
   name: SetTile(Vector3, UInt16)
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTile_Vector3_System_UInt16_
@@ -1192,6 +1352,22 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.SetTile
   nameWithType: TileManager.SetTile
+- uid: TileSystem.TileManager.SetTiles(Vector3Int[],TileSystem.TileInstanceData[])
+  name: SetTiles(Vector3Int[], TileInstanceData[])
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTiles_Vector3Int___TileSystem_TileInstanceData___
+  commentId: M:TileSystem.TileManager.SetTiles(Vector3Int[],TileSystem.TileInstanceData[])
+  name.vb: SetTiles(Vector3Int(), TileInstanceData())
+  fullName: TileSystem.TileManager.SetTiles(Vector3Int[], TileSystem.TileInstanceData[])
+  fullName.vb: TileSystem.TileManager.SetTiles(Vector3Int(), TileSystem.TileInstanceData())
+  nameWithType: TileManager.SetTiles(Vector3Int[], TileInstanceData[])
+  nameWithType.vb: TileManager.SetTiles(Vector3Int(), TileInstanceData())
+- uid: TileSystem.TileManager.SetTiles*
+  name: SetTiles
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTiles_
+  commentId: Overload:TileSystem.TileManager.SetTiles
+  isSpec: "True"
+  fullName: TileSystem.TileManager.SetTiles
+  nameWithType: TileManager.SetTiles
 - uid: TileSystem.TileManager.Start
   name: Start()
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_Start
@@ -1205,25 +1381,6 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.Start
   nameWithType: TileManager.Start
-- uid: TileSystem.TileManager.TilesAt(Vector3)
-  name: TilesAt(Vector3)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_TilesAt_Vector3_
-  commentId: M:TileSystem.TileManager.TilesAt(Vector3)
-  fullName: TileSystem.TileManager.TilesAt(Vector3)
-  nameWithType: TileManager.TilesAt(Vector3)
-- uid: TileSystem.TileManager.TilesAt(Vector3Int)
-  name: TilesAt(Vector3Int)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_TilesAt_Vector3Int_
-  commentId: M:TileSystem.TileManager.TilesAt(Vector3Int)
-  fullName: TileSystem.TileManager.TilesAt(Vector3Int)
-  nameWithType: TileManager.TilesAt(Vector3Int)
-- uid: TileSystem.TileManager.TilesAt*
-  name: TilesAt
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_TilesAt_
-  commentId: Overload:TileSystem.TileManager.TilesAt
-  isSpec: "True"
-  fullName: TileSystem.TileManager.TilesAt
-  nameWithType: TileManager.TilesAt
 - uid: TileSystem.TileManager.TileSet
   name: TileSet
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_TileSet
@@ -1237,36 +1394,31 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.TileSet
   nameWithType: TileManager.TileSet
-- uid: TileSystem.TileManager.TileStatus
-  name: TileManager.TileStatus
-  href: api/TileSystem.TileManager.TileStatus.html
-  commentId: T:TileSystem.TileManager.TileStatus
-  fullName: TileSystem.TileManager.TileStatus
-  nameWithType: TileManager.TileStatus
-- uid: TileSystem.TileManager.TileStatus.Empty
-  name: Empty
-  href: api/TileSystem.TileManager.TileStatus.html#TileSystem_TileManager_TileStatus_Empty
-  commentId: F:TileSystem.TileManager.TileStatus.Empty
-  fullName: TileSystem.TileManager.TileStatus.Empty
-  nameWithType: TileManager.TileStatus.Empty
-- uid: TileSystem.TileManager.TileStatus.Functional
-  name: Functional
-  href: api/TileSystem.TileManager.TileStatus.html#TileSystem_TileManager_TileStatus_Functional
-  commentId: F:TileSystem.TileManager.TileStatus.Functional
-  fullName: TileSystem.TileManager.TileStatus.Functional
-  nameWithType: TileManager.TileStatus.Functional
-- uid: TileSystem.TileManager.TileStatus.Structural
-  name: Structural
-  href: api/TileSystem.TileManager.TileStatus.html#TileSystem_TileManager_TileStatus_Structural
-  commentId: F:TileSystem.TileManager.TileStatus.Structural
-  fullName: TileSystem.TileManager.TileStatus.Structural
-  nameWithType: TileManager.TileStatus.Structural
+- uid: TileSystem.TileManager.TileSize
+  name: TileSize
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_TileSize
+  commentId: P:TileSystem.TileManager.TileSize
+  fullName: TileSystem.TileManager.TileSize
+  nameWithType: TileManager.TileSize
+- uid: TileSystem.TileManager.TileSize*
+  name: TileSize
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_TileSize_
+  commentId: Overload:TileSystem.TileManager.TileSize
+  isSpec: "True"
+  fullName: TileSystem.TileManager.TileSize
+  nameWithType: TileManager.TileSize
 - uid: TileSystem.TileSet
   name: TileSet
   href: api/TileSystem.TileSet.html
   commentId: T:TileSystem.TileSet
   fullName: TileSystem.TileSet
   nameWithType: TileSet
+- uid: TileSystem.TileSet.ActiveLayers
+  name: ActiveLayers
+  href: api/TileSystem.TileSet.html#TileSystem_TileSet_ActiveLayers
+  commentId: F:TileSystem.TileSet.ActiveLayers
+  fullName: TileSystem.TileSet.ActiveLayers
+  nameWithType: TileSet.ActiveLayers
 - uid: TileSystem.TileSet.GetTileSet(System.String)
   name: GetTileSet(String)
   href: api/TileSystem.TileSet.html#TileSystem_TileSet_GetTileSet_System_String_
@@ -1342,6 +1494,12 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileVariants.BaseTileVariant.BaseTileVariant
   nameWithType: BaseTileVariant.BaseTileVariant
+- uid: TileSystem.TileVariants.BaseTileVariant.DamageResistance
+  name: DamageResistance
+  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_DamageResistance
+  commentId: F:TileSystem.TileVariants.BaseTileVariant.DamageResistance
+  fullName: TileSystem.TileVariants.BaseTileVariant.DamageResistance
+  nameWithType: BaseTileVariant.DamageResistance
 - uid: TileSystem.TileVariants.BaseTileVariant.ID
   name: ID
   href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_ID
@@ -1361,6 +1519,18 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileVariants.BaseTileVariant.IdIDx
   nameWithType: BaseTileVariant.IdIDx
+- uid: TileSystem.TileVariants.BaseTileVariant.Layer
+  name: Layer
+  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_Layer
+  commentId: F:TileSystem.TileVariants.BaseTileVariant.Layer
+  fullName: TileSystem.TileVariants.BaseTileVariant.Layer
+  nameWithType: BaseTileVariant.Layer
+- uid: TileSystem.TileVariants.BaseTileVariant.MaxHealth
+  name: MaxHealth
+  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_MaxHealth
+  commentId: F:TileSystem.TileVariants.BaseTileVariant.MaxHealth
+  fullName: TileSystem.TileVariants.BaseTileVariant.MaxHealth
+  nameWithType: BaseTileVariant.MaxHealth
 - uid: TileSystem.TileVariants.BaseTileVariant.Name
   name: Name
   href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_Name
@@ -1423,34 +1593,3 @@ references:
   commentId: F:TileSystem.TileVariants.FunctionalTileVariant.PowerGeneration
   fullName: TileSystem.TileVariants.FunctionalTileVariant.PowerGeneration
   nameWithType: FunctionalTileVariant.PowerGeneration
-- uid: TileSystem.TileVariants.StructuralTileVariant
-  name: StructuralTileVariant
-  href: api/TileSystem.TileVariants.StructuralTileVariant.html
-  commentId: T:TileSystem.TileVariants.StructuralTileVariant
-  fullName: TileSystem.TileVariants.StructuralTileVariant
-  nameWithType: StructuralTileVariant
-- uid: TileSystem.TileVariants.StructuralTileVariant.#ctor(System.String)
-  name: StructuralTileVariant(String)
-  href: api/TileSystem.TileVariants.StructuralTileVariant.html#TileSystem_TileVariants_StructuralTileVariant__ctor_System_String_
-  commentId: M:TileSystem.TileVariants.StructuralTileVariant.#ctor(System.String)
-  fullName: TileSystem.TileVariants.StructuralTileVariant.StructuralTileVariant(System.String)
-  nameWithType: StructuralTileVariant.StructuralTileVariant(String)
-- uid: TileSystem.TileVariants.StructuralTileVariant.#ctor*
-  name: StructuralTileVariant
-  href: api/TileSystem.TileVariants.StructuralTileVariant.html#TileSystem_TileVariants_StructuralTileVariant__ctor_
-  commentId: Overload:TileSystem.TileVariants.StructuralTileVariant.#ctor
-  isSpec: "True"
-  fullName: TileSystem.TileVariants.StructuralTileVariant.StructuralTileVariant
-  nameWithType: StructuralTileVariant.StructuralTileVariant
-- uid: TileSystem.TileVariants.StructuralTileVariant.DamageResistance
-  name: DamageResistance
-  href: api/TileSystem.TileVariants.StructuralTileVariant.html#TileSystem_TileVariants_StructuralTileVariant_DamageResistance
-  commentId: F:TileSystem.TileVariants.StructuralTileVariant.DamageResistance
-  fullName: TileSystem.TileVariants.StructuralTileVariant.DamageResistance
-  nameWithType: StructuralTileVariant.DamageResistance
-- uid: TileSystem.TileVariants.StructuralTileVariant.MaxHealth
-  name: MaxHealth
-  href: api/TileSystem.TileVariants.StructuralTileVariant.html#TileSystem_TileVariants_StructuralTileVariant_MaxHealth
-  commentId: F:TileSystem.TileVariants.StructuralTileVariant.MaxHealth
-  fullName: TileSystem.TileVariants.StructuralTileVariant.MaxHealth
-  nameWithType: StructuralTileVariant.MaxHealth
