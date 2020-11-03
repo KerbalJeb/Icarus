@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using TileSystem.TileVariants;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -90,6 +91,11 @@ namespace TileSystem
             return new Vector3Int(x, y, 0);
         }
 
+        public Vector2 CordsToPosition(Vector3Int cords)
+        {
+            return new Vector2((cords.x+0.5f) * TileSize, (cords.y+0.5f) * TileSize);
+        }
+
         /// <summary>
         ///     Trys to get the structural tile at the given cords
         /// </summary>
@@ -172,41 +178,50 @@ namespace TileSystem
         }
 
         /// <summary>
-        ///     Sets a tile at a position in world space
+        ///     Set an array of tiles at the given coordinates
         /// </summary>
-        /// <param name="pos">The position in world space</param>
+        /// <param name="cords">The list of coordinates in the tilemap</param>
         /// <param name="structuralTiles">The tile variant to be placed</param>
-        public void SetStructuralTiles(Vector3Int[] pos, StructuralTileVariant[] structuralTiles)
+        public void SetStructuralTiles(Vector3Int[] cords, StructuralTileData[] structuralTiles)
         {
-            var newTiles = structuralTiles.Select(tile => tile.TileBase).ToArray();
+            var newTiles = structuralTiles.Select(tile => TileSet.TileVariants[tile.ID].TileBase).ToArray();
+            structuralTilemap.SetTiles(cords, newTiles);
 
-            for (var i = 0; i < pos.Length; i++)
+            for (var i = 0; i < cords.Length; i++)
             {
-                StructuralTileVariant tileVariant = structuralTiles[i];
-                Vector3Int            cords       = pos[i];
-                structuralTileData[cords] = new StructuralTileData(tileVariant);
+                Vector3Int cord     = cords[i];
+                var        tileData = structuralTiles[i];
+                structuralTileData[cord] = tileData;
+                if (tileData.Rotation != TileRotation.Up)
+                {
+                    structuralTilemap.SetTransformMatrix(cord, TileInfo.TransformMatrix[tileData.Rotation]);
+                }
             }
 
-            structuralTilemap.SetTiles(pos, newTiles);
+
         }
 
         /// <summary>
         ///     Set an array of tiles at the given coordinates
         /// </summary>
         /// <param name="cords">The list of coordinates in the tilemap</param>
-        /// <param name="functionalTile">The list of tile variants to be placed</param>
-        public void SetFunctionalTiles(Vector3Int[] cords, FunctionalTileVariant[] functionalTile)
+        /// <param name="functionalTiles">The list of tile variants to be placed</param>
+        public void SetFunctionalTiles(Vector3Int[] cords, FunctionalTileData[] functionalTiles)
         {
-            var newTiles = functionalTile.Select(tile => tile.TileBase).ToArray();
+            var newTiles = functionalTiles.Select(tile => TileSet.TileVariants[tile.ID].TileBase).ToArray();
+            functionalTilemap.SetTiles(cords, newTiles);
 
             for (var i = 0; i < cords.Length; i++)
             {
-                FunctionalTileVariant tileVariant = functionalTile[i];
-                Vector3Int            cord        = cords[i];
-                functionalTileData[cord] = new FunctionalTileData(tileVariant);
+                Vector3Int cord     = cords[i];
+                var        tileData = functionalTiles[i];
+                functionalTileData[cord] = tileData;
+                if (tileData.Rotation != TileRotation.Up)
+                {
+                    functionalTilemap.SetTransformMatrix(cord, TileInfo.TransformMatrix[tileData.Rotation]);
+                }
             }
 
-            functionalTilemap.SetTiles(cords, newTiles);
         }
 
         /// <summary>
@@ -285,12 +300,31 @@ namespace TileSystem
 
                 TileBase tile = structuralTilemap.GetTile(pos);
                 ushort   id   = TileSet.TilemapNameToID[tile.name];
-                structuralTileData[pos] = new StructuralTileData(TileSet.TileVariants[id] as StructuralTileVariant);
+                structuralTileData[pos] = new StructuralTileData(TileSet.TileVariants[id] as StructuralTileVariant,
+                                                                 GetTileRotation(structuralTilemap, pos));
                 if (!functionalTilemap.HasTile(pos)) continue;
 
                 tile                    = functionalTilemap.GetTile(pos);
                 id                      = TileSet.TilemapNameToID[tile.name];
-                functionalTileData[pos] = new FunctionalTileData(TileSet.TileVariants[id] as FunctionalTileVariant);
+                functionalTileData[pos] = new FunctionalTileData(TileSet.TileVariants[id] as FunctionalTileVariant,
+                                                                 GetTileRotation(functionalTilemap, pos));
+
+            }
+        }
+
+        private TileRotation GetTileRotation(Tilemap tilemap, Vector3Int pos)
+        {
+            var rot = tilemap.GetTransformMatrix(pos).rotation.eulerAngles.z;
+            switch (rot)
+            {
+                case 90f:
+                    return TileRotation.Left;
+                case 180f:
+                    return TileRotation.Down;
+                case 270f:
+                    return TileRotation.Right;
+                default:
+                    return TileRotation.Up;
             }
         }
 
@@ -437,7 +471,6 @@ namespace TileSystem
                 return TilesAt(cords) != TileStatus.Empty;
             }
         }
-
 
         public void GetTilesByVariant<T>(out List<(Vector3Int cords, StructuralTileData data)> tiles)
         {

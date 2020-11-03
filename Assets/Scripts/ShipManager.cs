@@ -13,7 +13,7 @@ using UnityEngine.InputSystem.Controls;
 [RequireComponent(typeof(TileManager))]
 public class ShipManager : MonoBehaviour
 {
-    [SerializeField] private GameObject      template=null;
+    [SerializeField] private GameObject      template =null;
     private                  Camera          cam;
     private                  MovementManager movementManager;
     private                  bool            physics = false;
@@ -39,12 +39,12 @@ public class ShipManager : MonoBehaviour
 
     private void Awake()
     {
-        cam              = Camera.main;
-        tileManager      = GetComponent<TileManager>();
-        movementManager  = GetComponent<MovementManager>();
-        rb2D             = GetComponent<Rigidbody2D>();
-        rb2D             = GetComponent<Rigidbody2D>();
-        rb2D.isKinematic = true;
+        cam               =  Camera.main;
+        tileManager       =  GetComponent<TileManager>();
+        movementManager   =  GetComponent<MovementManager>();
+        rb2D              =  GetComponent<Rigidbody2D>();
+        rb2D              =  GetComponent<Rigidbody2D>();
+        rb2D.isKinematic  =  true;
     }
 
     private void Update()
@@ -105,17 +105,17 @@ public class ShipManager : MonoBehaviour
             tileTransform.position = thisTransform.position;
             tileTransform.rotation = thisTransform.rotation;
 
-            var structuralTiles = new List<StructuralTileVariant>();
-            var functionalTiles = new List<FunctionalTileVariant>();
+            var structuralTiles = new List<StructuralTileData>();
+            var functionalTiles = new List<FunctionalTileData>();
             var functionalCords = new List<Vector3Int>();
 
             foreach (Vector3Int cords in island)
             {
                 if (!tileManager.GetTile(cords, out StructuralTileData stcTile)) continue;
-                structuralTiles.Add(tileManager.TileSet.TileVariants[stcTile.ID] as StructuralTileVariant);
+                structuralTiles.Add(stcTile);
 
                 if (!tileManager.GetTile(cords, out FunctionalTileData funTile)) continue;
-                functionalTiles.Add(tileManager.TileSet.TileVariants[funTile.ID] as FunctionalTileVariant);
+                functionalTiles.Add(funTile);
                 functionalCords.Add(cords);
             }
 
