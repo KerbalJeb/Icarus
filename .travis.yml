@@ -10,7 +10,6 @@ install:
 script:
   - $DOCFX_TOOL metadata Documentation/docfx.json
   - $DOCFX_TOOL build    Documentation/docfx.json
-  - mv _site/toc.html _site/index.html
 deploy:
   provider: pages
   skip_cleanup: true
