@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,6 +11,12 @@ namespace TileSystem
     /// <summary>
     ///     Used to manage and update Unity tile maps and store tile data
     /// </summary>
+    /// <remarks>
+    ///     Can store multiple layers of tilemaps, these are gotten from the children of the grid. The sorting order of the
+    ///     tile renders must be sequential (ie. 1,2,3 is ok but 1,3,4 is not). Tiles are accessed using a Vector3Int, the X
+    ///     and Y cords correspond to the X and Y position of the tile and Z is used for the layer.
+    /// </remarks>
+    [RequireComponent(typeof(Grid))]
     public class TileManager : MonoBehaviour
     {
         private static readonly ReadOnlyCollection<Vector3Int> ConnectionRules = new ReadOnlyCollection<Vector3Int>(
@@ -22,7 +28,6 @@ namespace TileSystem
              new Vector3Int(0,  -1, 0),
          });
 
-        // ReSharper disable once RedundantDefaultMemberInitializer
         [SerializeField] private string     tilePath = null;
         [SerializeField] private GameObject template = null;
 
@@ -152,10 +157,7 @@ namespace TileSystem
         /// <param name="tiles">The list of tile variants to be placed</param>
         public void SetTiles(Vector3Int[] cords, TileInstanceData[] tiles)
         {
-            if (cords.Length < 1)
-            {
-                return;
-            }
+            if (cords.Length < 1) return;
             Debug.Assert(cords.All(i => i.z == cords[0].z));
             int     layerID  = cords[0].z;
             var     newTiles = tiles.Select(tile => TileSet.TileVariants[tile.ID].TileBase).ToArray();
@@ -251,9 +253,15 @@ namespace TileSystem
             }
         }
 
-        private Directions GetTileRotation(Tilemap tilemap, Vector3Int pos)
+        /// <summary>
+        ///     Get the rotation of a tile at the given cords
+        /// </summary>
+        /// <param name="tilemap">The tilemap to use</param>
+        /// <param name="cords">The XYZ Coordinates of the tile</param>
+        /// <returns>The direction the tile is facing</returns>
+        private static Directions GetTileRotation(Tilemap tilemap, Vector3Int cords)
         {
-            float rot = tilemap.GetTransformMatrix(pos).rotation.eulerAngles.z;
+            float rot = tilemap.GetTransformMatrix(cords).rotation.eulerAngles.z;
             switch (rot)
             {
                 case 90f:
@@ -421,7 +429,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        ///     Splits the tilemap into multiple objects if there are unconnected reagons
+        ///     Splits the tilemap into multiple objects if there are unconnected regions
         /// </summary>
         private void Split()
         {

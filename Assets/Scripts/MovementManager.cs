@@ -1,44 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using MathNet.Numerics.LinearAlgebra;
 using TileSystem;
 using TileSystem.TileVariants;
 using UnityEngine;
 
+/// <summary>
+/// Used to manage movement and calculate the flight model based on engine placement
+/// </summary>
 [RequireComponent(typeof(TileManager))]
 public class MovementManager : MonoBehaviour
 {
     private const int OutputStateDim = 3;
 
-    private float[] a;
-    private float[] act;
-    private float[] bl;
-    private float[] bu;
 
-
-    private Vector2       com;
-    private Vector3       currentInput;
-    private Vector<float> engineInputs;
-
-    private List<ThrustVector> engineVectors;
-    private float              goalRot = 0f;
-    private int[]              istate;
-
-
-    private int           n;
-    private Vector3       netThrust;
-    private bool          physics = false;
-    private Rigidbody2D   rb2D;
-    private Matrix<float> thrustMatrix;
-
+    private float[]                                                           a;
+    private Vector2                                                           com;
+    private Vector3                                                           currentInput;
+    private Vector<float>                                                     engineInputs;
+    private List<ThrustVector>                                                engineVectors;
+    private float                                                             goalRot = 0f;
+    private int                                                               n;
+    private Vector3                                                           netThrust;
+    private bool                                                              physics = false;
+    private Rigidbody2D                                                       rb2D;
+    private Matrix<float>                                                     thrustMatrix;
     private Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
     private TileManager                                                       tileManager;
-    private bool                                                              turningActiveInput = false;
-    private float[]                                                           w;
-    private float[]                                                           x;
-    private float[]                                                           zz;
     private int                                                               m => OutputStateDim;
+
 
     private void Awake()
     {
@@ -63,21 +53,30 @@ public class MovementManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Stabilizes the rotation of the ship using a PD controller
+    /// </summary>
+    /// <param name="position">If true the controller will attempt to maintain the original rotation, otherwise it will only attempt to set the angular velocity to zero </param>
     private void StabilizeRotation(bool position = false)
     {
         float   angularVelocityError = rb2D.angularVelocity;
         Vector3 thrust               = currentInput;
+        // Position Controler
         if (position)
         {
             float rotationError = rb2D.rotation - goalRot;
             thrust.z = 0.3f * angularVelocityError + 0.05f * rotationError;
         }
+        // Velocity controller
         else
             thrust.z = 0.5f * angularVelocityError;
 
         SetThrust(thrust);
     }
 
+    /// <summary>
+    /// Gets the engine information from the TileManger and updates the flight model accordingly
+    /// </summary>
     public void UpdatePhysics()
     {
         rb2D = GetComponent<Rigidbody2D>();
@@ -90,15 +89,7 @@ public class MovementManager : MonoBehaviour
 
         if (n < 1) return;
 
-        /*bvls params*/
         a            = new float[n * m]; // Column Major form
-        bl           = Enumerable.Repeat(0f, n).ToArray();
-        bu           = Enumerable.Repeat(1f, n).ToArray();
-        x            = new float[n];
-        w            = new float[n];
-        act          = new float[m * (Math.Min(n, m) + 2)];
-        zz           = new float[m];
-        istate       = new int[n + 1];
         engineInputs = Vector<float>.Build.Dense(n);
 
         thrustMatrix = Matrix<float>.Build.Dense(m, n, a);
@@ -176,10 +167,6 @@ public class MovementManager : MonoBehaviour
                         }
 
                         break;
-                    case Directions.None:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
                 }
             }
 
@@ -189,16 +176,12 @@ public class MovementManager : MonoBehaviour
         physics = true;
     }
 
-    private void SetHeading(float[] dir)
-    {
-        Debug.Assert(dir.Length == m);
-        var loop = 0;
-        NativeMath.bvls(0, m, n, a, dir, bl, bu, x, w, act, zz, istate, ref loop, 0);
-        engineInputs = Vector<float>.Build.Dense(x);
-        var result = thrustMatrix * engineInputs;
-        netThrust = new Vector3(result[0], result[1], result[2]);
-    }
-
+    /// <summary>
+    /// Used to steer/move the ship in a given direction
+    /// </summary>
+    /// <param name="thrust">
+    /// The x and y components correspond to the x-y movement and the z component is used to indicate turning/toque. All components of the vectors should be in the range [-1,1]
+    /// </param>
     public void Steer(Vector3 thrust)
     {
         if (!physics) return;
@@ -208,6 +191,10 @@ public class MovementManager : MonoBehaviour
         if (thrust.z == 0) goalRot = rb2D.rotation;
     }
 
+    /// <summary>
+    /// Attempts to output the desired thrust vector with the constraints of engine placement.
+    /// </summary>
+    /// <param name="thrust">The x and y components correspond to the x-y movement and the z component is used to indicate turning/toque. All components of the vectors should be in the range [-1,1]</param>
     private void SetThrust(Vector3 thrust)
     {
         var direction = GetRotations(thrust);
@@ -222,6 +209,11 @@ public class MovementManager : MonoBehaviour
         netThrust = new Vector3(netEffect[0], netEffect[1], netEffect[2]);
     }
 
+    /// <summary>
+    /// Gets all the directions a engine thrusts in
+    /// </summary>
+    /// <param name="thrust">The engine thrust vector</param>
+    /// <returns></returns>
     private static IEnumerable<(Directions, float)> GetRotations(Vector3 thrust)
     {
         var         tileRot   = new List<(Directions, float)>();
@@ -237,6 +229,12 @@ public class MovementManager : MonoBehaviour
         return tileRot;
     }
 
+    /// <summary>
+    /// Creates a new thrust vector from the engine data
+    /// </summary>
+    /// <param name="cords">The location of the engine</param>
+    /// <param name="data">The instance data for the engine</param>
+    /// <returns></returns>
     private ThrustVector GetThrustVector(Vector3Int cords, TileInstanceData data)
     {
         Vector2 dir       = TileInfo.Directions[data.Rotation];
@@ -248,6 +246,9 @@ public class MovementManager : MonoBehaviour
         return new ThrustVector(thrust.x, thrust.y, toque, pos);
     }
 
+    /// <summary>
+    /// Used to represent the thrust from an engine.
+    /// </summary>
     private class ThrustVector
     {
         public readonly Vector3 Pos;
@@ -257,7 +258,6 @@ public class MovementManager : MonoBehaviour
             Pos       = pos;
             Data      = new[] {thrustX, thrustY, toque};
             NetThrust = new Vector3(thrustX, thrustY, toque);
-            Direction = NetThrust.normalized;
             var dir = new Vector3(thrustX, thrustY);
             ThrustDir = dir.normalized;
             Magnitude = Mathf.Sqrt(thrustX * thrustX + thrustY * thrustY);
@@ -268,7 +268,6 @@ public class MovementManager : MonoBehaviour
         public float   Toque     => Data[2];
         public float[] Data      { get; }
         public Vector3 NetThrust { get; }
-        public Vector3 Direction { get; }
         public Vector3 ThrustDir { get; }
         public float   Magnitude { get; }
 
