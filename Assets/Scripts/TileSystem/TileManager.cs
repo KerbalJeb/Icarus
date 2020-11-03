@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -152,6 +152,10 @@ namespace TileSystem
         /// <param name="tiles">The list of tile variants to be placed</param>
         public void SetTiles(Vector3Int[] cords, TileInstanceData[] tiles)
         {
+            if (cords.Length < 1)
+            {
+                return;
+            }
             Debug.Assert(cords.All(i => i.z == cords[0].z));
             int     layerID  = cords[0].z;
             var     newTiles = tiles.Select(tile => TileSet.TileVariants[tile.ID].TileBase).ToArray();
