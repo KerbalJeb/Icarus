@@ -19,7 +19,7 @@ namespace TileSystem.TileVariants
         [Serializable]
         private class Json
         {
-            public float PowerGeneration=0f;
+            public float PowerGeneration = 0f;
         }
     }
 }

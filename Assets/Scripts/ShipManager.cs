@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using TileSystem;
-using TileSystem.TileVariants;
+﻿using TileSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
@@ -13,9 +11,9 @@ using UnityEngine.InputSystem.Controls;
 [RequireComponent(typeof(TileManager))]
 public class ShipManager : MonoBehaviour
 {
-    private                  Camera          cam;
-    private                  MovementManager movementManager;
-    private                  TileManager     tileManager;
+    private Camera          cam;
+    private MovementManager movementManager;
+    private TileManager     tileManager;
 
     /// <value>
     ///     Will enable or disable physics for this ship
@@ -38,7 +36,6 @@ public class ShipManager : MonoBehaviour
         tileManager     = GetComponent<TileManager>();
         movementManager = GetComponent<MovementManager>();
         PhysicsEnabled  = tileManager.PhysicsEnabled;
-
     }
 
     private void Update()

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,11 +10,11 @@ namespace TileSystem.TileVariants
     public class BaseTileVariant
     {
         public readonly TileBase TileBase;
+        public          float    DamageResistance;
         public          ushort   ID;
-        public          string   Name;
         public          int      Layer;
         public          ushort   MaxHealth;
-        public          float    DamageResistance;
+        public          string   Name;
 
         public BaseTileVariant(string jsonText)
         {

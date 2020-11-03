@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using TileSystem.TileVariants;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -25,13 +24,15 @@ namespace TileSystem
 
         // ReSharper disable once RedundantDefaultMemberInitializer
         [SerializeField] private string     tilePath = null;
-        [SerializeField] private GameObject template =null;
-
-        private                  Rigidbody2D rb2D;
+        [SerializeField] private GameObject template = null;
 
 
         private readonly Dictionary<Vector3Int, TileInstanceData> tileData =
             new Dictionary<Vector3Int, TileInstanceData>();
+
+        private bool physics = false;
+
+        private Rigidbody2D rb2D;
 
         private Tilemap[] tilemapLayers;
 
@@ -39,7 +40,7 @@ namespace TileSystem
 
         public  TileSet   TileSet { get; private set; }
         private BoundsInt Bounds  => tilemapLayers[0].cellBounds;
-        private bool      physics = false;
+
         public bool PhysicsEnabled
         {
             set
@@ -47,7 +48,7 @@ namespace TileSystem
                 physics          = value;
                 rb2D.isKinematic = !value;
                 if (!value) return;
-                Split();           
+                Split();
             }
             get => physics;
         }
@@ -63,9 +64,7 @@ namespace TileSystem
 
             tilemapLayers = new Tilemap[pairs.Count];
             foreach ((Tilemap map, TilemapRenderer tilemapRenderer) in pairs)
-            {
                 tilemapLayers[tilemapRenderer.sortingOrder] = map;
-            }
             var grid = GetComponent<Grid>();
             TileSize = grid.cellSize.x;
             TileSet  = TileSet.GetTileSet(tilePath);
@@ -93,10 +92,8 @@ namespace TileSystem
             return new Vector3Int(x, y, 0);
         }
 
-        public Vector2 CordsToPosition(Vector3Int cords)
-        {
-            return new Vector2((cords.x+0.5f) * TileSize, (cords.y+0.5f) * TileSize);
-        }
+        public Vector2 CordsToPosition(Vector3Int cords) =>
+            new Vector2((cords.x + 0.5f) * TileSize, (cords.y + 0.5f) * TileSize);
 
         /// <summary>
         ///     Trys to get the tile at the given cords
@@ -155,23 +152,20 @@ namespace TileSystem
         /// <param name="tiles">The list of tile variants to be placed</param>
         public void SetTiles(Vector3Int[] cords, TileInstanceData[] tiles)
         {
-            Debug.Assert(cords.All(i=>i.z==cords[0].z));
-            int layerID  = cords[0].z;
-            var newTiles = tiles.Select(tile => TileSet.TileVariants[tile.ID].TileBase).ToArray();
-            var tilemap  = tilemapLayers[layerID];
+            Debug.Assert(cords.All(i => i.z == cords[0].z));
+            int     layerID  = cords[0].z;
+            var     newTiles = tiles.Select(tile => TileSet.TileVariants[tile.ID].TileBase).ToArray();
+            Tilemap tilemap  = tilemapLayers[layerID];
             tilemap.SetTiles(cords, newTiles);
 
             for (var i = 0; i < cords.Length; i++)
             {
-                Vector3Int cord     = cords[i];
-                var        data = tiles[i];
+                Vector3Int       cord = cords[i];
+                TileInstanceData data = tiles[i];
                 tileData[cord] = data;
                 if (data.Rotation != Directions.Up)
-                {
                     tilemap.SetTransformMatrix(cord, TileInfo.TransformMatrix[data.Rotation]);
-                }
             }
-
         }
 
         /// <summary>
@@ -189,20 +183,20 @@ namespace TileSystem
         /// </summary>
         /// <param name="cords">The coordinates to remove the tile at</param>
         /// <param name="allTiles">Deletes all tiles at xy cords if true (default)</param>
-        public void RemoveTile(Vector3Int cords, bool allTiles=true)
+        public void RemoveTile(Vector3Int cords, bool allTiles = true)
         {
             if (allTiles)
             {
-                for (int i = 0; i < tilemapLayers.Length; i++)
+                for (var i = 0; i < tilemapLayers.Length; i++)
                 {
                     cords.z = i;
                     tilemapLayers[i].SetTile(cords, null);
                     tileData.Remove(cords);
                 }
             }
+
             tileData.Remove(cords);
             tilemapLayers[cords.z].SetTile(cords, null);
-
         }
 
         /// <summary>
@@ -219,10 +213,7 @@ namespace TileSystem
         /// </summary>
         /// <param name="cords">The coordinate to check</param>
         /// <returns>The type(s) of tiles present</returns>
-        public bool HasTile(Vector3Int cords)
-        {
-            return tileData.ContainsKey(cords);
-        }
+        public bool HasTile(Vector3Int cords) => tileData.ContainsKey(cords);
 
         /// <summary>
         ///     Checks what tiles are present at a given position in world space
@@ -236,36 +227,29 @@ namespace TileSystem
         /// </summary>
         private void SyncFromTilemap()
         {
-            for(int i=0;i<tilemapLayers.Length;i++)
+            for (var i = 0; i < tilemapLayers.Length; i++)
             {
-                var tilemapLayer = tilemapLayers[i];
+                Tilemap tilemapLayer = tilemapLayers[i];
                 foreach (Vector3Int cords in tilemapLayer.cellBounds.allPositionsWithin)
                 {
-                    if (!tilemapLayer.HasTile(cords))
-                    {
-                        continue;
-                    }
+                    if (!tilemapLayer.HasTile(cords)) continue;
 
-                    var c2 = cords;
+                    Vector3Int c2 = cords;
                     c2.z = i;
-                    TileBase tile = tilemapLayer.GetTile(cords);
-                    var      rot  = GetTileRotation(tilemapLayer, cords);
+                    TileBase   tile = tilemapLayer.GetTile(cords);
+                    Directions rot  = GetTileRotation(tilemapLayer, cords);
 
                     tilemapLayer.SetTile(c2, tile);
-                    ushort id  = TileSet.TilemapNameToID[tile.name];
+                    ushort id = TileSet.TilemapNameToID[tile.name];
                     tileData[c2] = new TileInstanceData(TileSet.TileVariants[id], rot);
-                    if (rot != Directions.Up)
-                    {
-                        tilemapLayer.SetTransformMatrix(c2, TileInfo.TransformMatrix[rot]);
-                    }
+                    if (rot != Directions.Up) tilemapLayer.SetTransformMatrix(c2, TileInfo.TransformMatrix[rot]);
                 }
             }
-
         }
 
         private Directions GetTileRotation(Tilemap tilemap, Vector3Int pos)
         {
-            var rot = tilemap.GetTransformMatrix(pos).rotation.eulerAngles.z;
+            float rot = tilemap.GetTransformMatrix(pos).rotation.eulerAngles.z;
             switch (rot)
             {
                 case 90f:
@@ -285,15 +269,12 @@ namespace TileSystem
         /// <param name="dmg">A description of the damage to apply</param>
         public bool ApplyDamage(Damage dmg)
         {
-            Vector3Int start = PositionToCords(dmg.StartPos);
-            Vector3Int end   = PositionToCords(dmg.EndPos);
-            bool        destroyedTile =false;
+            Vector3Int start         = PositionToCords(dmg.StartPos);
+            Vector3Int end           = PositionToCords(dmg.EndPos);
+            var        destroyedTile = false;
 
             ApplyInLine(start, end, cords => DamageTile(cords, dmg.BaseDamage, ref destroyedTile));
-            if (destroyedTile)
-            {
-                Split();
-            }
+            if (destroyedTile) Split();
             return destroyedTile;
         }
 
@@ -308,8 +289,8 @@ namespace TileSystem
             if (!HasTile(cords)) return;
 
             TileInstanceData tile            = tileData[cords];
-            var      tileVariantType = TileSet.TileVariants[tile.ID];
-            var      damage          = (ushort) (tileVariantType.DamageResistance * baseDamage);
+            BaseTileVariant  tileVariantType = TileSet.TileVariants[tile.ID];
+            var              damage          = (ushort) (tileVariantType.DamageResistance * baseDamage);
             if (tile.Health <= damage)
             {
                 RemoveTile(cords);
@@ -327,10 +308,7 @@ namespace TileSystem
         /// </summary>
         public void ResetTiles()
         {
-            foreach (Tilemap tilemap in tilemapLayers)
-            {
-                tilemap.ClearAllTiles();
-            }
+            foreach (Tilemap tilemap in tilemapLayers) tilemap.ClearAllTiles();
             tileData.Clear();
         }
 
@@ -377,7 +355,7 @@ namespace TileSystem
         ///     Finds Islands of unconnected tiles
         /// </summary>
         /// <returns>A list of the islands, each containing a list of the coordinate positions that make up the island</returns>
-        public List<List<Vector3Int>> FindIslands(int layer=0)
+        public List<List<Vector3Int>> FindIslands(int layer = 0)
         {
             int width  = Bounds.xMax - Bounds.xMin;
             int height = Bounds.yMax - Bounds.yMin;
@@ -428,7 +406,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Gets all the tiles of a particular variant type
+        ///     Gets all the tiles of a particular variant type
         /// </summary>
         /// <param name="tiles">A list of all the tiles of that variant type</param>
         /// <typeparam name="T">The variant type (Must inherit from BaseTileVariant or will throw null reference)</typeparam>
@@ -437,7 +415,7 @@ namespace TileSystem
             var ids = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BaseTileVariant).ID));
             tiles = tileData.Where(x => ids.Contains(x.Value.ID)).Select(x => (x.Key, x.Value)).ToList();
         }
-        
+
         /// <summary>
         ///     Splits the tilemap into multiple objects if there are unconnected reagons
         /// </summary>
@@ -476,6 +454,7 @@ namespace TileSystem
                         tiles.Add(instanceData);
                         cordsList.Add(c);
                     }
+
                     newTileManager.SetTiles(cordsList.ToArray(), tiles.ToArray());
                 }
 
@@ -485,6 +464,7 @@ namespace TileSystem
                 newRb2D.velocity              = rb2D.velocity;
                 newRb2D.angularVelocity       = rb2D.angularVelocity;
             }
+
             Destroy(gameObject);
         }
     }

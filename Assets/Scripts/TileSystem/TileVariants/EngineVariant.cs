@@ -19,7 +19,7 @@ namespace TileSystem.TileVariants
         [Serializable]
         private class Json
         {
-            public float Thrust=0f;
+            public float Thrust = 0f;
         }
     }
 }

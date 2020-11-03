@@ -12,6 +12,8 @@ namespace TileSystem
     {
         private static readonly Dictionary<string, TileSet> TileSets = new Dictionary<string, TileSet>();
 
+        public readonly HashSet<int> ActiveLayers = new HashSet<int>();
+
         /// <value>
         ///     Maps the name of a TileBase object to the ID of the tile variant that uses it
         /// </value>
@@ -29,8 +31,6 @@ namespace TileSystem
         ///     Maps the name of a tile variant given in the JSON file to the variant's ID
         /// </value>
         public readonly ReadOnlyDictionary<string, ushort> VariantNameToID;
-
-        public readonly HashSet<int> ActiveLayers = new HashSet<int>();
 
         /// <summary>
         ///     Creates a new TileSet for a given path
@@ -99,7 +99,7 @@ namespace TileSystem
         [Serializable]
         private class JsonTile
         {
-            public string TileType=null;
+            public string TileType = null;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TileSystem
     {
         public TileInstanceData(BaseTileVariant tileVariantType, Directions rotation = Directions.Up)
         {
-            Health   = (ushort) tileVariantType.MaxHealth;
+            Health   = tileVariantType.MaxHealth;
             ID       = tileVariantType.ID;
             Rotation = rotation;
         }
