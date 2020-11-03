@@ -12,26 +12,28 @@ namespace TileSystem
     {
         private static readonly Dictionary<string, TileSet> TileSets = new Dictionary<string, TileSet>();
 
-        private readonly ReadOnlyCollection<Type> tileVariantTypes =
-            new ReadOnlyCollection<Type>(GetAllDerived(typeof(BaseTileVariant)).ToList());
+        public readonly HashSet<int> ActiveLayers = new HashSet<int>();
 
         /// <value>
-        /// Maps the name of a TileBase object to the ID of the tile variant that uses it
+        ///     Maps the name of a TileBase object to the ID of the tile variant that uses it
         /// </value>
         public readonly ReadOnlyDictionary<string, ushort> TilemapNameToID;
 
         /// <value>
-        /// A list of all the tile variants contained in this tile set, the variant's ID corresponds to its index in the list
+        ///     A list of all the tile variants contained in this tile set, the variant's ID corresponds to its index in the list
         /// </value>
         public readonly ReadOnlyCollection<BaseTileVariant> TileVariants;
 
+        private readonly ReadOnlyCollection<Type> tileVariantTypes =
+            new ReadOnlyCollection<Type>(GetAllDerived(typeof(BaseTileVariant)).ToList());
+
         /// <value>
-        /// Maps the name of a tile variant given in the JSON file to the variant's ID
+        ///     Maps the name of a tile variant given in the JSON file to the variant's ID
         /// </value>
         public readonly ReadOnlyDictionary<string, ushort> VariantNameToID;
 
         /// <summary>
-        /// Creates a new TileSet for a given path
+        ///     Creates a new TileSet for a given path
         /// </summary>
         /// <param name="path">The path containing the JSON file</param>
         private TileSet(string path)
@@ -59,6 +61,7 @@ namespace TileSystem
                 if (variant == null) continue;
 
                 tileVariants.Add(variant);
+                ActiveLayers.Add(variant.Layer);
                 tileVariantsTileNameDict[variant.TileBase.name] = variant.ID;
                 tileVariantsVariantNameDict[variant.Name]       = variant.ID;
             }
@@ -70,7 +73,8 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Gets (or creates) based on all the json files present in the given path. A TileSet will only be created once per path, all subsequent calls will return a reference to the original instance
+        ///     Gets (or creates) based on all the json files present in the given path. A TileSet will only be created once per
+        ///     path, all subsequent calls will return a reference to the original instance
         /// </summary>
         /// <param name="path">A path containing json files</param>
         /// <returns>A TileSet that contains all tile variants created from the json files in path</returns>
@@ -82,7 +86,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Gets all the classes that inherit from a class
+        ///     Gets all the classes that inherit from a class
         /// </summary>
         /// <param name="baseClass">The base class</param>
         /// <returns>The Type for each class that inherits from baseClass</returns>
@@ -95,7 +99,7 @@ namespace TileSystem
         [Serializable]
         private class JsonTile
         {
-            public string TileType;
+            public string TileType = null;
         }
     }
 }

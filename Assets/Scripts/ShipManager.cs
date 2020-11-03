@@ -4,25 +4,43 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
 /// <summary>
-/// Used to connect all components needed for a ship
+///     Used to connect all components needed for a ship
 /// </summary>
 [RequireComponent(typeof(Grid))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(TileManager))]
 public class ShipManager : MonoBehaviour
 {
-    private Camera      cam;
-    private TileManager tileManager;
+    private Camera          cam;
+    private MovementManager movementManager;
+    private TileManager     tileManager;
+
+    /// <value>
+    ///     Will enable or disable physics for this ship
+    /// </value>
+    public bool PhysicsEnabled
+    {
+        set
+        {
+            if (!value) return;
+            tileManager.PhysicsEnabled = transform;
+            UpdatePhysics();
+        }
+        get => tileManager.PhysicsEnabled;
+    }
+
 
     private void Awake()
     {
-        cam         = Camera.main;
-        tileManager = GetComponent<TileManager>();
+        cam             = Camera.main;
+        tileManager     = GetComponent<TileManager>();
+        movementManager = GetComponent<MovementManager>();
+        PhysicsEnabled  = tileManager.PhysicsEnabled;
     }
 
     private void Update()
     {
-        if (!tileManager.PhysicsEnabled)
+        if (!PhysicsEnabled)
         {
             if (Mouse.current.leftButton.isPressed)
             {
@@ -41,11 +59,28 @@ public class ShipManager : MonoBehaviour
 
     public void ApplyDamage(Damage dmg)
     {
-        tileManager.ApplyDamage(dmg);
+        if (!PhysicsEnabled) return;
+        if (!tileManager.ApplyDamage(dmg)) return;
+        UpdatePhysics();
+    }
+
+    public void SteerShip(InputAction.CallbackContext ctx)
+    {
+        var thrust = ctx.ReadValue<Vector3>();
+        movementManager.Steer(thrust);
+    }
+
+    private void UpdatePhysics()
+    {
+        movementManager.UpdatePhysics();
     }
 
     public void Test(InputAction.CallbackContext ctx)
     {
-        tileManager.PhysicsEnabled = true;
+        if (!PhysicsEnabled)
+        {
+            PhysicsEnabled             = true;
+            tileManager.PhysicsEnabled = true;
+        }
     }
 }

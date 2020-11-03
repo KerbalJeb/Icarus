@@ -4,7 +4,7 @@ using UnityEngine;
 namespace TileSystem.TileVariants
 {
     /// <summary>
-    /// The class for engine variants
+    ///     The class for engine variants
     /// </summary>
     public class EngineVariant : FunctionalTileVariant
     {
@@ -19,7 +19,7 @@ namespace TileSystem.TileVariants
         [Serializable]
         private class Json
         {
-            public float Thrust;
+            public float Thrust = 0f;
         }
     }
 }
