@@ -105,22 +105,25 @@ public class ShipManager : MonoBehaviour
             tileTransform.position = thisTransform.position;
             tileTransform.rotation = thisTransform.rotation;
 
-            var structuralTiles = new List<StructuralTileData>();
-            var functionalTiles = new List<FunctionalTileData>();
-            var functionalCords = new List<Vector3Int>();
+            var tiles        = new List<TileInstanceData>();
+            var cordsList    = new List<Vector3Int>();
+            var instanceData = new TileInstanceData();
 
-            foreach (Vector3Int cords in island)
+            foreach (int i in tileManager.TileSet.ActiveLayers)
             {
-                if (!tileManager.GetTile(cords, out StructuralTileData stcTile)) continue;
-                structuralTiles.Add(stcTile);
-
-                if (!tileManager.GetTile(cords, out FunctionalTileData funTile)) continue;
-                functionalTiles.Add(funTile);
-                functionalCords.Add(cords);
+                tiles.Clear();
+                cordsList.Clear();
+                foreach (Vector3Int cords in island)
+                {
+                    Vector3Int c = cords;
+                    c.z = i;
+                    if (!tileManager.GetTile(c, ref instanceData)) continue;
+                    tiles.Add(instanceData);
+                    cordsList.Add(c);
+                }
+                newTileManager.SetTiles(cordsList.ToArray(), tiles.ToArray());
             }
 
-            newTileManager.SetFunctionalTiles(functionalCords.ToArray(), functionalTiles.ToArray());
-            newTileManager.SetStructuralTiles(island.ToArray(), structuralTiles.ToArray());
             if (!PhysicsEnabled) continue;
 
             newShipManager.PhysicsEnabled = true;

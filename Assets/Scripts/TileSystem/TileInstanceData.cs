@@ -3,11 +3,11 @@
 namespace TileSystem
 {
     /// <summary>
-    ///     This struct is used store data about 'instances' of structural tiles
+    ///     This struct is used store data about 'instances' of tiles
     /// </summary>
-    public struct StructuralTileData
+    public struct TileInstanceData
     {
-        public StructuralTileData(StructuralTileVariant tileVariantType, TileRotation rotation = TileRotation.Up)
+        public TileInstanceData(BaseTileVariant tileVariantType, Directions rotation = Directions.Up)
         {
             Health   = (ushort) tileVariantType.MaxHealth;
             ID       = tileVariantType.ID;
@@ -27,6 +27,6 @@ namespace TileSystem
         /// <value>
         ///     The Rotation of this tile
         /// </value>
-        public TileRotation Rotation;
+        public Directions Rotation;
     }
 }

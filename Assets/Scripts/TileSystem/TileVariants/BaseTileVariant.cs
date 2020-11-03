@@ -13,24 +13,32 @@ namespace TileSystem.TileVariants
         public readonly TileBase TileBase;
         public          ushort   ID;
         public          string   Name;
+        public          int      Layer;
+        public          ushort   MaxHealth;
+        public          float    DamageResistance;
 
         public BaseTileVariant(string jsonText)
         {
             var json = JsonUtility.FromJson<Json>(jsonText);
-            TileBase = Resources.Load<TileBase>(json.TilePath);
-            ID       = IdIDx;
-            Name     = json.Name;
+            TileBase         = Resources.Load<TileBase>(json.TilePath);
+            ID               = IdIDx;
+            Name             = json.Name;
+            Layer            = json.Layer;
+            MaxHealth        = json.MaxHealth;
+            DamageResistance = json.DamageResistance;
             IdIDx++;
         }
 
         public static ushort IdIDx { get; set; }
 
         [Serializable]
-        [SuppressMessage("ReSharper", "RedundantDefaultMemberInitializer")]
         private class Json
         {
-            public string TilePath = null;
-            public string Name     = null;
+            public string TilePath         = null;
+            public string Name             = null;
+            public int    Layer            = 0;
+            public ushort MaxHealth        = 0;
+            public float  DamageResistance = 1f;
         }
     }
 }

@@ -8,13 +8,14 @@ using TileSystem;
 using TileSystem.TileVariants;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TileData = UnityEngine.Tilemaps.TileData;
 
 [RequireComponent(typeof(TileManager))]
 public class MovementManager : MonoBehaviour
 {
     private const int OutputStateDim = 3;
 
-    private Dictionary<TileRotation, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
+    private Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
 
     private List<ThrustVector> engineVectors;
 
@@ -89,10 +90,10 @@ public class MovementManager : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         com  = rb2D.centerOfMass;
-        tileManager.GetTilesByVariant<EngineVariant>(out List<(Vector3Int cords, FunctionalTileData data)> engines);
+        tileManager.GetTilesByVariant<EngineVariant>(out List<(Vector3Int cords, TileInstanceData data)> engines);
         n = engines.Count;
         engineVectors = new List<ThrustVector>();
-        thrustProfiles = new Dictionary<TileRotation, (Vector3 netThrust, Vector<float> values)>();
+        thrustProfiles = new Dictionary<Directions, (Vector3 netThrust, Vector<float> values)>();
 
 
         if (n < 1) return;
@@ -112,12 +113,12 @@ public class MovementManager : MonoBehaviour
 
         for (var i = 0; i < n; i++)
         {
-            (Vector3Int cords, FunctionalTileData data) = engines[i];
+            (Vector3Int cords, TileInstanceData data) = engines[i];
             ThrustVector thrustVector = GetThrustVector(cords, data);
             engineVectors.Add(thrustVector);
             thrustMatrix.SetColumn(i, thrustVector.Data);
         }
-        foreach (TileRotation value in (TileRotation[])Enum.GetValues(typeof(TileRotation)))
+        foreach (Directions value in (Directions[])Enum.GetValues(typeof(Directions)))
         {
             var         engineVector      = Vector<float>.Build.Dense(n, 0);
             const float threshold      = 0.25f;
@@ -129,7 +130,7 @@ public class MovementManager : MonoBehaviour
                 var engine = engineVectors[i];
                 switch (value)
                 {
-                    case TileRotation.Up:
+                    case Directions.Up:
                         if (engine.ThrustY<=0)break;
 
                         if (engine.ThrustY/engine.Magnitude > threshold)
@@ -138,7 +139,7 @@ public class MovementManager : MonoBehaviour
                             engineVector[i]=1;
                         }
                         break;
-                    case TileRotation.Down:
+                    case Directions.Down:
                         if (engine.ThrustY>=0)
                         {
                             break;
@@ -149,7 +150,7 @@ public class MovementManager : MonoBehaviour
                             engineVector[i]=1;
                         }
                         break;
-                    case TileRotation.Left:
+                    case Directions.Left:
                         if (engine.ThrustX <= 0)
                         {
                             break;
@@ -160,7 +161,7 @@ public class MovementManager : MonoBehaviour
                             engineVector[i] =  1;
                         }
                         break;
-                    case TileRotation.Right:
+                    case Directions.Right:
                         if (engine.ThrustX >= 0)
                         {
                             break;
@@ -171,21 +172,21 @@ public class MovementManager : MonoBehaviour
                             engineVector[i] =  1;
                         }
                         break;
-                    case TileRotation.TurnUp:
+                    case Directions.ZUp:
                         if (engine.Toque >= toqueThreshold)
                         {
                             dirNetThrust    += engine.NetThrust;
                             engineVector[i] =  1;
                         }
                         break;
-                    case TileRotation.TurnDown:
+                    case Directions.ZDown:
                         if (engine.Toque <= toqueThreshold)
                         {
                             dirNetThrust    += engine.NetThrust;
                             engineVector[i] =  1;
                         }
                         break;
-                    case TileRotation.None:
+                    case Directions.None:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -227,7 +228,7 @@ public class MovementManager : MonoBehaviour
     {
         var direction  = GetRotations(thrust);
         engineInputs = Vector<float>.Build.Dense(n, 0);
-        foreach ((TileRotation tileRotation, float mag) in direction)
+        foreach ((Directions tileRotation, float mag) in direction)
         {
             var input =  thrustProfiles[tileRotation].values;
             for (int i = 0; i < n; i++)
@@ -240,40 +241,40 @@ public class MovementManager : MonoBehaviour
         netThrust = new Vector3(netEffect[0], netEffect[1], netEffect[2]);
     }
 
-    private static IEnumerable<(TileRotation, float)> GetRotations(Vector3 thrust)
+    private static IEnumerable<(Directions, float)> GetRotations(Vector3 thrust)
     {
-        var         tileRot   = new List<(TileRotation, float)>();
+        var         tileRot   = new List<(Directions, float)>();
         const float threshold = 0.1f;
         
         if (thrust.x > threshold)
         {
-            tileRot.Add((TileRotation.Left, Mathf.Abs(thrust.x)));
+            tileRot.Add((Directions.Left, Mathf.Abs(thrust.x)));
         }
         if (thrust.x < -threshold)
         {
-            tileRot.Add((TileRotation.Right, Mathf.Abs(thrust.x)));
+            tileRot.Add((Directions.Right, Mathf.Abs(thrust.x)));
         }
         if (thrust.y > threshold)
         {
-            tileRot.Add((TileRotation.Up, Mathf.Abs(thrust.y)));
+            tileRot.Add((Directions.Up, Mathf.Abs(thrust.y)));
         }
         if (thrust.y<-threshold)
         {
-            tileRot.Add((TileRotation.Down, Mathf.Abs(thrust.y)));
+            tileRot.Add((Directions.Down, Mathf.Abs(thrust.y)));
         }
         if (thrust.z>threshold)
         {
-            tileRot.Add((TileRotation.TurnDown, Mathf.Abs(thrust.z)));
+            tileRot.Add((Directions.ZDown, Mathf.Abs(thrust.z)));
         }
         if (thrust.z<-threshold)
         {
-            tileRot.Add((TileRotation.TurnUp, Mathf.Abs(thrust.z)));
+            tileRot.Add((Directions.ZUp, Mathf.Abs(thrust.z)));
         }
 
         return tileRot;
     }
 
-    private ThrustVector GetThrustVector(Vector3Int cords, FunctionalTileData data)
+    private ThrustVector GetThrustVector(Vector3Int cords, TileInstanceData data)
     {
         Vector2 dir       = TileInfo.Directions[data.Rotation];
         float   thrustMag = ((EngineVariant) tileManager.TileSet.TileVariants[data.ID]).Thrust;

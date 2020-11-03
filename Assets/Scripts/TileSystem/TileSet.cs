@@ -30,6 +30,8 @@ namespace TileSystem
         /// </value>
         public readonly ReadOnlyDictionary<string, ushort> VariantNameToID;
 
+        public readonly HashSet<int> ActiveLayers = new HashSet<int>();
+
         /// <summary>
         ///     Creates a new TileSet for a given path
         /// </summary>
@@ -59,6 +61,7 @@ namespace TileSystem
                 if (variant == null) continue;
 
                 tileVariants.Add(variant);
+                ActiveLayers.Add(variant.Layer);
                 tileVariantsTileNameDict[variant.TileBase.name] = variant.ID;
                 tileVariantsVariantNameDict[variant.Name]       = variant.ID;
             }
