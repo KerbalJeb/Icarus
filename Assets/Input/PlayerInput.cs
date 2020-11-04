@@ -66,6 +66,22 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""1a144744-219a-4f3e-8f42-164083e9334a"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""DeleteBlock"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7f6892b-cf82-4e4f-a02b-284aea966ded"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -255,6 +271,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53d4c204-363b-4e5f-9a2b-10af95bd74e9"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02d51384-0ee8-4e53-af92-d13256d8fb07"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DeleteBlock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -835,6 +873,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_PlaceBlock = m_Player.FindAction("PlaceBlock", throwIfNotFound: true);
         m_Player_UpdateMesh = m_Player.FindAction("UpdateMesh", throwIfNotFound: true);
         m_Player_DmgTest = m_Player.FindAction("DmgTest", throwIfNotFound: true);
+        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        m_Player_DeleteBlock = m_Player.FindAction("DeleteBlock", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -911,6 +951,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PlaceBlock;
     private readonly InputAction m_Player_UpdateMesh;
     private readonly InputAction m_Player_DmgTest;
+    private readonly InputAction m_Player_Zoom;
+    private readonly InputAction m_Player_DeleteBlock;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -920,6 +962,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @PlaceBlock => m_Wrapper.m_Player_PlaceBlock;
         public InputAction @UpdateMesh => m_Wrapper.m_Player_UpdateMesh;
         public InputAction @DmgTest => m_Wrapper.m_Player_DmgTest;
+        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+        public InputAction @DeleteBlock => m_Wrapper.m_Player_DeleteBlock;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -944,6 +988,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @DmgTest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDmgTest;
                 @DmgTest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDmgTest;
                 @DmgTest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDmgTest;
+                @Zoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @Zoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @Zoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @DeleteBlock.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteBlock;
+                @DeleteBlock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteBlock;
+                @DeleteBlock.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteBlock;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -963,6 +1013,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @DmgTest.started += instance.OnDmgTest;
                 @DmgTest.performed += instance.OnDmgTest;
                 @DmgTest.canceled += instance.OnDmgTest;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
+                @DeleteBlock.started += instance.OnDeleteBlock;
+                @DeleteBlock.performed += instance.OnDeleteBlock;
+                @DeleteBlock.canceled += instance.OnDeleteBlock;
             }
         }
     }
@@ -1124,6 +1180,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnPlaceBlock(InputAction.CallbackContext context);
         void OnUpdateMesh(InputAction.CallbackContext context);
         void OnDmgTest(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
+        void OnDeleteBlock(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
