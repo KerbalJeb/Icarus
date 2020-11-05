@@ -46,18 +46,18 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Zoom",
-                    "type": "Value",
-                    "id": "1a144744-219a-4f3e-8f42-164083e9334a",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "DeleteBlock",
                     "type": "Button",
                     "id": "d7f6892b-cf82-4e4f-a02b-284aea966ded",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "2e88d0d7-4c89-4790-b4f3-e9ba51ac1109",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 }
@@ -252,23 +252,23 @@
                 },
                 {
                     "name": "",
-                    "id": "53d4c204-363b-4e5f-9a2b-10af95bd74e9",
-                    "path": "<Mouse>/scroll/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Zoom",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "02d51384-0ee8-4e53-af92-d13256d8fb07",
                     "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "DeleteBlock",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "420f76e5-17fb-4a12-87fc-82ce0ecae166",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
