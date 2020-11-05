@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using TileSystem.TileVariants;
@@ -35,6 +34,8 @@ namespace TileSystem
         private readonly Dictionary<Vector3Int, TileInstanceData> tileData =
             new Dictionary<Vector3Int, TileInstanceData>();
 
+        private bool doneSplitting = false;
+
         private bool physics = false;
 
         private Rigidbody2D rb2D;
@@ -45,7 +46,6 @@ namespace TileSystem
 
         public  TileSet   TileSet { get; private set; }
         private BoundsInt Bounds  => tilemapLayers[0].cellBounds;
-        private bool      doneSplitting = false;
 
         public bool PhysicsEnabled
         {
@@ -277,29 +277,18 @@ namespace TileSystem
         }
 
         /// <summary>
-        ///     Applies damage to the tilemap
-        /// </summary>
-        /// <param name="dmg">A description of the damage to apply</param>
-        public bool ApplyDamage(Damage dmg)
-        {
-            Vector3Int start         = PositionToCords(dmg.StartPos);
-            Vector3Int end           = PositionToCords(dmg.EndPos);
-            var        destroyedTile = false;
-
-            ApplyInLine(start, end, cords => DamageTile(cords, dmg.BaseDamage, ref destroyedTile));
-            if (destroyedTile) Split();
-            return destroyedTile;
-        }
-
-        /// <summary>
         ///     Damages a tile at the given coordinates
         /// </summary>
         /// <param name="cords">The coordinates to damage the tile at</param>
         /// <param name="baseDamage">The base damage to use</param>
-        /// <param name="destroyed">Will be set to true if a tile is destroyed (unchanged otherwise)</param>
-        private void DamageTile(Vector3Int cords, float baseDamage, ref bool destroyed)
+        /// <param name="damageUsed">How much of the base damage was used to destroy the tile</param>
+        public void DamageTile(Vector3Int cords, float baseDamage, out float damageUsed)
         {
-            if (!HasTile(cords)) return;
+            if (!HasTile(cords))
+            {
+                damageUsed = 0;
+                return;
+            }
 
             TileInstanceData tile            = tileData[cords];
             BaseTileVariant  tileVariantType = TileSet.TileVariants[tile.ID];
@@ -308,12 +297,13 @@ namespace TileSystem
             {
                 RemoveTile(cords);
                 if (tileData.Count == 0) Destroy(transform.gameObject);
-                destroyed = true;
+                damageUsed = tile.Health / tileVariantType.DamageResistance;
                 return;
             }
 
             tile.Health     -= damage;
             tileData[cords] =  tile;
+            damageUsed      =  baseDamage;
         }
 
         /// <summary>
@@ -323,45 +313,6 @@ namespace TileSystem
         {
             foreach (Tilemap tilemap in tilemapLayers) tilemap.ClearAllTiles();
             tileData.Clear();
-        }
-
-        /// <summary>
-        ///     Used to apply an action to every tile in a line between two points
-        /// </summary>
-        /// <param name="p0">The starting point</param>
-        /// <param name="p1">The end point</param>
-        /// <param name="callback">A delegate action that takes a Vector3Int that will be calle for every point on the line</param>
-        private static void ApplyInLine(Vector3Int p0, Vector3Int p1, Action<Vector3Int> callback)
-        {
-            // Bresenham's line algorithm (https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#All_cases)
-            int dx  = Math.Abs(p1.x - p0.x);
-            int sx  = p0.x < p1.x ? 1 : -1;
-            int dy  = -Math.Abs(p1.y - p0.y);
-            int sy  = p0.y < p1.y ? 1 : -1;
-            int err = dx + dy;
-
-            int x = p0.x;
-            int y = p0.y;
-
-            while (true)
-            {
-                callback(new Vector3Int(x, y, 0));
-                if (x == p1.x && y == p1.y) break;
-
-                int e2 = 2 * err;
-
-                if (e2 >= dy)
-                {
-                    err += dy;
-                    x   += sx;
-                }
-
-                if (e2 <= dx)
-                {
-                    err += dx;
-                    y   += sy;
-                }
-            }
         }
 
         /// <summary>
@@ -434,10 +385,7 @@ namespace TileSystem
         /// </summary>
         private void Split()
         {
-            if (doneSplitting)
-            {
-                return;
-            }
+            if (doneSplitting) return;
             var islands = FindIslands();
             if (islands.Count <= 1) return;
 

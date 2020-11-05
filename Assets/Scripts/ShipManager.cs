@@ -13,7 +13,8 @@ public class ShipManager : MonoBehaviour
 {
     private Camera          cam;
     private MovementManager movementManager;
-    private TileManager     tileManager;
+    public  TileManager     TileManager { get; private set; }
+    public  Rigidbody2D     Rigidbody2D { get; private set; }
 
     /// <value>
     ///     Will enable or disable physics for this ship
@@ -23,19 +24,19 @@ public class ShipManager : MonoBehaviour
         set
         {
             if (!value) return;
-            tileManager.PhysicsEnabled = transform;
             UpdatePhysics();
         }
-        get => tileManager.PhysicsEnabled;
+        get => TileManager.PhysicsEnabled;
     }
 
 
     private void Awake()
     {
         cam             = Camera.main;
-        tileManager     = GetComponent<TileManager>();
+        TileManager     = GetComponent<TileManager>();
         movementManager = GetComponent<MovementManager>();
-        PhysicsEnabled  = tileManager.PhysicsEnabled;
+        Rigidbody2D     = GetComponent<Rigidbody2D>();
+        PhysicsEnabled  = TileManager.PhysicsEnabled;
     }
 
     private void Update()
@@ -46,22 +47,15 @@ public class ShipManager : MonoBehaviour
             {
                 Vector2Control mousePos = Mouse.current.position;
                 Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-                tileManager.SetTile(worldPos, tileManager.TileSet.VariantNameToID["Basic Armor"]);
+                TileManager.SetTile(worldPos, TileManager.TileSet.VariantNameToID["Basic Armor"]);
             }
             else if (Mouse.current.middleButton.isPressed)
             {
                 Vector2Control mousePos = Mouse.current.position;
                 Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-                tileManager.RemoveTile(worldPos);
+                TileManager.RemoveTile(worldPos);
             }
         }
-    }
-
-    public void ApplyDamage(Damage dmg)
-    {
-        if (!PhysicsEnabled) return;
-        if (!tileManager.ApplyDamage(dmg)) return;
-        UpdatePhysics();
     }
 
     public void SteerShip(InputAction.CallbackContext ctx)
@@ -70,8 +64,9 @@ public class ShipManager : MonoBehaviour
         movementManager.Steer(thrust);
     }
 
-    private void UpdatePhysics()
+    public void UpdatePhysics()
     {
+        TileManager.PhysicsEnabled = true;
         movementManager.UpdatePhysics();
     }
 
@@ -79,8 +74,7 @@ public class ShipManager : MonoBehaviour
     {
         if (!PhysicsEnabled)
         {
-            PhysicsEnabled             = true;
-            tileManager.PhysicsEnabled = true;
+            UpdatePhysics();
         }
     }
 }

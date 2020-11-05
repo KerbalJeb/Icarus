@@ -6,7 +6,7 @@ using TileSystem.TileVariants;
 using UnityEngine;
 
 /// <summary>
-/// Used to manage movement and calculate the flight model based on engine placement
+///     Used to manage movement and calculate the flight model based on engine placement
 /// </summary>
 [RequireComponent(typeof(TileManager))]
 public class MovementManager : MonoBehaviour
@@ -54,9 +54,12 @@ public class MovementManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Stabilizes the rotation of the ship using a PD controller
+    ///     Stabilizes the rotation of the ship using a PD controller
     /// </summary>
-    /// <param name="position">If true the controller will attempt to maintain the original rotation, otherwise it will only attempt to set the angular velocity to zero </param>
+    /// <param name="position">
+    ///     If true the controller will attempt to maintain the original rotation, otherwise it will only
+    ///     attempt to set the angular velocity to zero
+    /// </param>
     private void StabilizeRotation(bool position = false)
     {
         float   angularVelocityError = rb2D.angularVelocity;
@@ -75,7 +78,7 @@ public class MovementManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets the engine information from the TileManger and updates the flight model accordingly
+    ///     Gets the engine information from the TileManger and updates the flight model accordingly
     /// </summary>
     public void UpdatePhysics()
     {
@@ -86,8 +89,11 @@ public class MovementManager : MonoBehaviour
         engineVectors  = new List<ThrustVector>();
         thrustProfiles = new Dictionary<Directions, (Vector3 netThrust, Vector<float> values)>();
 
-
-        if (n < 1) return;
+        if (n < 1)
+        {
+            physics = false;
+            return;
+        }
 
         a            = new float[n * m]; // Column Major form
         engineInputs = Vector<float>.Build.Dense(n);
@@ -177,10 +183,11 @@ public class MovementManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Used to steer/move the ship in a given direction
+    ///     Used to steer/move the ship in a given direction
     /// </summary>
     /// <param name="thrust">
-    /// The x and y components correspond to the x-y movement and the z component is used to indicate turning/toque. All components of the vectors should be in the range [-1,1]
+    ///     The x and y components correspond to the x-y movement and the z component is used to indicate turning/toque. All
+    ///     components of the vectors should be in the range [-1,1]
     /// </param>
     public void Steer(Vector3 thrust)
     {
@@ -192,9 +199,12 @@ public class MovementManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Attempts to output the desired thrust vector with the constraints of engine placement.
+    ///     Attempts to output the desired thrust vector with the constraints of engine placement.
     /// </summary>
-    /// <param name="thrust">The x and y components correspond to the x-y movement and the z component is used to indicate turning/toque. All components of the vectors should be in the range [-1,1]</param>
+    /// <param name="thrust">
+    ///     The x and y components correspond to the x-y movement and the z component is used to indicate
+    ///     turning/toque. All components of the vectors should be in the range [-1,1]
+    /// </param>
     private void SetThrust(Vector3 thrust)
     {
         var direction = GetRotations(thrust);
@@ -210,7 +220,7 @@ public class MovementManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets all the directions a engine thrusts in
+    ///     Gets all the directions a engine thrusts in
     /// </summary>
     /// <param name="thrust">The engine thrust vector</param>
     /// <returns></returns>
@@ -230,7 +240,7 @@ public class MovementManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Creates a new thrust vector from the engine data
+    ///     Creates a new thrust vector from the engine data
     /// </summary>
     /// <param name="cords">The location of the engine</param>
     /// <param name="data">The instance data for the engine</param>
@@ -247,7 +257,7 @@ public class MovementManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Used to represent the thrust from an engine.
+    ///     Used to represent the thrust from an engine.
     /// </summary>
     private class ThrustVector
     {
