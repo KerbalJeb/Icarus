@@ -45,6 +45,7 @@ namespace TileSystem
 
         public  TileSet   TileSet { get; private set; }
         private BoundsInt Bounds  => tilemapLayers[0].cellBounds;
+        private bool      doneSplitting = false;
 
         public bool PhysicsEnabled
         {
@@ -433,6 +434,10 @@ namespace TileSystem
         /// </summary>
         private void Split()
         {
+            if (doneSplitting)
+            {
+                return;
+            }
             var islands = FindIslands();
             if (islands.Count <= 1) return;
 
@@ -472,11 +477,13 @@ namespace TileSystem
 
                 if (!PhysicsEnabled) continue;
 
-                newTileManager.PhysicsEnabled = true;
-                newRb2D.velocity              = rb2D.velocity;
-                newRb2D.angularVelocity       = rb2D.angularVelocity;
+                newTileManager.physics  = true;
+                newRb2D.isKinematic     = false;
+                newRb2D.velocity        = rb2D.velocity;
+                newRb2D.angularVelocity = rb2D.angularVelocity;
             }
 
+            doneSplitting = true;
             Destroy(gameObject);
         }
     }
