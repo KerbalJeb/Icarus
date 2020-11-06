@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MathNet.Numerics.LinearAlgebra;
 using TileSystem;
 using TileSystem.TileVariants;
 using UnityEngine;
@@ -13,20 +14,22 @@ public class MovementManager : MonoBehaviour
     private const int OutputStateDim = 3;
 
 
-    private float[]                                                           a;
-    private Vector2                                                           com;
-    private Vector3                                                           currentInput;
-    private float[]                                                    engineInputs;
-    private List<ThrustVector>                                                engineVectors;
-    private float                                                             goalRot = 0f;
-    private int                                                               n;
-    private Vector3                                                           netThrust;
-    private bool                                                              physics = false;
-    private Rigidbody2D                                                       rb2D;
-    private float[]                                                    thrustMatrix;
-    private Dictionary<Directions, (Vector3 netThrust, float[] values)> thrustProfiles;
-    private TileManager                                                       tileManager;
-    private int                                                               m => OutputStateDim;
+    private float[]            a;
+    private Vector2            com;
+    private Vector3            currentInput;
+    private Vector<float>      engineInputs;
+    private List<ThrustVector> engineVectors;
+    private float              goalRot = 0f;
+    private int                n;
+    private Vector3            netThrust;
+    private bool               physics = false;
+    private Rigidbody2D        rb2D;
+    private Matrix<float>      thrustMatrix;
+    private TileManager        tileManager;
+    private int                m => OutputStateDim;
+    
+    private Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
+
 
 
     private void Awake()
@@ -83,27 +86,27 @@ public class MovementManager : MonoBehaviour
         tileManager.GetTilesByVariant<EngineVariant>(out var engines);
         n              = engines.Count;
         engineVectors  = new List<ThrustVector>();
-        // thrustProfiles = new Dictionary<Directions, (Vector3 netThrust, Vector<float> values)>();
+        thrustProfiles = new Dictionary<Directions, (Vector3 netThrust, Vector<float> values)>();
 
 
         if (n < 1) return;
 
         a            = new float[n * m]; // Column Major form
-        // engineInputs = Vector<float>.Build.Dense(n);
+        engineInputs = Vector<float>.Build.Dense(n);
 
-        // thrustMatrix = Matrix<float>.Build.Dense(m, n, a);
+        thrustMatrix = Matrix<float>.Build.Dense(m, n, a);
 
         for (var i = 0; i < n; i++)
         {
             (Vector3Int cords, TileInstanceData data) = engines[i];
             ThrustVector thrustVector = GetThrustVector(cords, data);
             engineVectors.Add(thrustVector);
-            // thrustMatrix.SetColumn(i, thrustVector.Data);
+            thrustMatrix.SetColumn(i, thrustVector.Data);
         }
 
         foreach (Directions value in (Directions[]) Enum.GetValues(typeof(Directions)))
         {
-            // var         engineVector   = Vector<float>.Build.Dense(n, 0);
+            var         engineVector   = Vector<float>.Build.Dense(n, 0);
             const float threshold      = 0.25f;
             const float toqueThreshold = 1f;
             Vector3     dirNetThrust   = Vector3.zero;
@@ -119,7 +122,7 @@ public class MovementManager : MonoBehaviour
                         if (engine.ThrustY / engine.Magnitude > threshold)
                         {
                             dirNetThrust    += engine.NetThrust;
-                            // engineVector[i] =  1;
+                            engineVector[i] =  1;
                         }
 
                         break;
@@ -128,7 +131,7 @@ public class MovementManager : MonoBehaviour
                         if (engine.ThrustY / engine.Magnitude < threshold)
                         {
                             dirNetThrust    += engine.NetThrust;
-                            // engineVector[i] =  1;
+                            engineVector[i] =  1;
                         }
 
                         break;
@@ -137,7 +140,7 @@ public class MovementManager : MonoBehaviour
                         if (engine.ThrustX / engine.Magnitude > threshold)
                         {
                             dirNetThrust    += engine.NetThrust;
-                            // engineVector[i] =  1;
+                            engineVector[i] =  1;
                         }
 
                         break;
@@ -146,7 +149,7 @@ public class MovementManager : MonoBehaviour
                         if (engine.ThrustX / engine.Magnitude < threshold)
                         {
                             dirNetThrust    += engine.NetThrust;
-                            // engineVector[i] =  1;
+                            engineVector[i] =  1;
                         }
 
                         break;
@@ -154,7 +157,7 @@ public class MovementManager : MonoBehaviour
                         if (engine.Toque >= toqueThreshold)
                         {
                             dirNetThrust    += engine.NetThrust;
-                            // engineVector[i] =  1;
+                            engineVector[i] =  1;
                         }
 
                         break;
@@ -162,14 +165,14 @@ public class MovementManager : MonoBehaviour
                         if (engine.Toque <= toqueThreshold)
                         {
                             dirNetThrust    += engine.NetThrust;
-                            // engineVector[i] =  1;
+                            engineVector[i] =  1;
                         }
 
                         break;
                 }
             }
 
-            // thrustProfiles[value] = (dirNetThrust, engineVector);
+            thrustProfiles[value] = (dirNetThrust, engineVector);
         }
 
         physics = true;
@@ -197,15 +200,15 @@ public class MovementManager : MonoBehaviour
     private void SetThrust(Vector3 thrust)
     {
         var direction = GetRotations(thrust);
-        // engineInputs = Vector<float>.Build.Dense(n, 0);
+        engineInputs = Vector<float>.Build.Dense(n, 0);
         foreach ((Directions tileRotation, float mag) in direction)
         {
             var input                                   = thrustProfiles[tileRotation].values;
             for (var i = 0; i < n; i++) engineInputs[i] = Mathf.Clamp(input[i] * mag + engineInputs[i], 0, 1);
         }
 
-        // var netEffect = thrustMatrix * engineInputs;
-        // netThrust = new Vector3(netEffect[0], netEffect[1], netEffect[2]);
+        var netEffect = thrustMatrix * engineInputs;
+        netThrust = new Vector3(netEffect[0], netEffect[1], netEffect[2]);
     }
 
     /// <summary>
