@@ -1,7 +1,0 @@
-﻿{
-  "Name": "Blue Armor",
-  "TileType": "ArmorVariant",
-  "DamageResistance": 0.8,
-  "MaxHealth": 1000,
-  "TilePath": "Tiles\\ShipTiles\\ShipTiles_1"
-}

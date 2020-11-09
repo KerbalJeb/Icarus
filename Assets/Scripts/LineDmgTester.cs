@@ -34,22 +34,13 @@ public class LineDmgTester : MonoBehaviour
     }    
     public void StopDrawingLine(InputAction.CallbackContext context)
     {
+
         Vector2Control mousePos = Mouse.current.position;
         endPos  = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
         pressed = false;
-
-        Vector3 dir = endPos - startPos;
-
-        int numHits = Physics2D.RaycastNonAlloc(startPos, dir, hits);
-        var dmg     = new Damage(startPos, endPos, 1250f);
-
-        for (var i = 0; i < numHits; i++)
-        {
-            RaycastHit2D hit = hits[i];
-
-            var ship = hit.transform?.gameObject.GetComponentInParent<ShipManager>();
-            if (ship != null) ship.ApplyDamage(dmg);
-        }
+        var dmg = new Damage(startPos, endPos, 5000f);
+        dmg.ApplyDamage();
+        
     }
 
 }

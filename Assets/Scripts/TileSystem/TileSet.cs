@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using TileSystem.TileVariants;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 
 namespace TileSystem
@@ -15,22 +17,17 @@ namespace TileSystem
         public readonly HashSet<int> ActiveLayers = new HashSet<int>();
 
         /// <value>
-        ///     Maps the name of a TileBase object to the ID of the tile variant that uses it
-        /// </value>
-        public readonly ReadOnlyDictionary<string, ushort> TilemapNameToID;
-
-        /// <value>
         ///     A list of all the tile variants contained in this tile set, the variant's ID corresponds to its index in the list
         /// </value>
-        public readonly ReadOnlyCollection<BaseTileVariant> TileVariants;
-
-        private readonly ReadOnlyCollection<Type> tileVariantTypes =
-            new ReadOnlyCollection<Type>(GetAllDerived(typeof(BaseTileVariant)).ToList());
+        public readonly ReadOnlyCollection<BasePart> TileVariants;
+        
 
         /// <value>
         ///     Maps the name of a tile variant given in the JSON file to the variant's ID
         /// </value>
         public readonly ReadOnlyDictionary<string, ushort> VariantNameToID;
+        
+        public readonly ReadOnlyDictionary<ushort, string> VariantIDToName;
 
         /// <summary>
         ///     Creates a new TileSet for a given path
@@ -38,38 +35,27 @@ namespace TileSystem
         /// <param name="path">The path containing the JSON file</param>
         private TileSet(string path)
         {
-            BaseTileVariant.IdIDx = 0;
-            var jsonData = Resources.LoadAll<TextAsset>(path);
+            var variants = Resources.LoadAll<BasePart>("Tiles/Parts");
+            var allVariants = new List<BasePart>();
+            var variantNameDict = new Dictionary<string, ushort>();
+            var idsDict = new Dictionary<ushort, string>();
 
-            var tileVariants                = new List<BaseTileVariant>(jsonData.Length);
-            var tileVariantsTileNameDict    = new Dictionary<string, ushort>();
-            var tileVariantsVariantNameDict = new Dictionary<string, ushort>();
-
-            foreach (TextAsset file in jsonData)
+            foreach (BasePart variant in variants)
             {
-                var jsonTile     = JsonUtility.FromJson<JsonTile>(file.text);
-                var variantTypes = tileVariantTypes.Where(type => type.Name == jsonTile.TileType).ToArray();
-
-                if (variantTypes.Length != 1)
+                if (variantNameDict.ContainsKey(variant.partID))
                 {
-                    Debug.LogWarning("Found " + variantTypes.Length + " Matches for " + jsonTile.TileType);
+                    Debug.LogError("Found duplicate of " + variant.partID);
                     continue;
                 }
-
-                Type variantType = variantTypes[0];
-                var  variant     = Activator.CreateInstance(variantType, file.text) as BaseTileVariant;
-                if (variant == null) continue;
-
-                tileVariants.Add(variant);
-                ActiveLayers.Add(variant.Layer);
-                tileVariantsTileNameDict[variant.TileBase.name] = variant.ID;
-                tileVariantsVariantNameDict[variant.Name]       = variant.ID;
+                variant.id = (ushort)allVariants.Count;
+                allVariants.Add(variant);
+                ActiveLayers.Add(variant.layer);
+                variantNameDict[variant.partID] = variant.id;
+                idsDict[variant.id]             = variant.partID;
             }
-
-            TileSets[path]  = this;
-            TileVariants    = new ReadOnlyCollection<BaseTileVariant>(tileVariants);
-            TilemapNameToID = new ReadOnlyDictionary<string, ushort>(tileVariantsTileNameDict);
-            VariantNameToID = new ReadOnlyDictionary<string, ushort>(tileVariantsVariantNameDict);
+            TileVariants = new ReadOnlyCollection<BasePart>(allVariants);
+            VariantNameToID = new ReadOnlyDictionary<string, ushort>(variantNameDict);
+            VariantIDToName = new ReadOnlyDictionary<ushort, string>(idsDict);
         }
 
         /// <summary>
@@ -94,12 +80,6 @@ namespace TileSystem
         {
             return Assembly.GetAssembly(baseClass).GetTypes()
                            .Where(theType => theType.IsClass && !theType.IsAbstract && theType.IsSubclassOf(baseClass));
-        }
-
-        [Serializable]
-        private class JsonTile
-        {
-            public string TileType = null;
         }
     }
 }

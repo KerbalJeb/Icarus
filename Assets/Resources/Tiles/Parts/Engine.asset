@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c60682446644b409c113b2ab5c4c224, type: 3}
+  m_Name: Engine
+  m_EditorClassIdentifier: 
+  partName: Basic Engine
+  partID: default_eng
+  tile: {fileID: 11400000, guid: c7f09bae43fc9f440b060728e5dbe6d0, type: 2}
+  damageResistance: 0
+  maxHealth: 0
+  layer: 0
+  id: 0
+  thrust: 1.5

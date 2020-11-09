@@ -26,23 +26,17 @@ public class ShipManager : MonoBehaviour
         set
         {
             if (!value) return;
-            tileManager.PhysicsEnabled = transform;
             UpdatePhysics();
         }
         get => tileManager.PhysicsEnabled;
     }
-
 
     private void Awake()
     {
         cam             = Camera.main;
         tileManager     = GetComponent<TileManager>();
         movementManager = GetComponent<MovementManager>();
-    }
-
-    private void Start()
-    {
-        PhysicsEnabled = tileManager.PhysicsEnabled;
+        PhysicsEnabled  = tileManager.PhysicsEnabled;
     }
 
     private void OnEnable()
@@ -90,6 +84,11 @@ public class ShipManager : MonoBehaviour
         removingBlocks = false;
     }
 
+    private void Start()
+    {
+        tileManager.UpdatePhysics += UpdatePhysics;
+    }
+
     private void Update()
     {
         if (PhysicsEnabled) return;
@@ -107,20 +106,13 @@ public class ShipManager : MonoBehaviour
         }
     }
 
-    public void ApplyDamage(Damage dmg)
-    {
-        if (!PhysicsEnabled) return;
-        if (!tileManager.ApplyDamage(dmg)) return;
-        UpdatePhysics();
-    }
-
-    private void SteerShip(InputAction.CallbackContext ctx)
+    public void SteerShip(InputAction.CallbackContext ctx)
     {
         var thrust = ctx.ReadValue<Vector3>();
         movementManager.Steer(thrust);
     }
 
-    private void UpdatePhysics()
+    public void UpdatePhysics()
     {
         movementManager.UpdatePhysics();
     }
@@ -129,7 +121,7 @@ public class ShipManager : MonoBehaviour
     {
         if (!PhysicsEnabled)
         {
-            PhysicsEnabled             = true;
+            UpdatePhysics();
             tileManager.PhysicsEnabled = true;
         }
     }

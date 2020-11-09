@@ -11,4 +11,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShipBuildTesting.unity
     guid: 5074517c63f1ce94fbd2d6e54fd00d00
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: ffd006fe746affb4baa94578fba5c4b1, type: 2}

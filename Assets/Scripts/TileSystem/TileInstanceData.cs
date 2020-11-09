@@ -1,16 +1,18 @@
-﻿using TileSystem.TileVariants;
+﻿
+using System;
 
 namespace TileSystem
 {
     /// <summary>
     ///     This struct is used store data about 'instances' of tiles
     /// </summary>
+    [Serializable]
     public struct TileInstanceData
     {
-        public TileInstanceData(BaseTileVariant tileVariantType, Directions rotation = Directions.Up)
+        public TileInstanceData(BasePart partType, Directions rotation = Directions.Up)
         {
-            Health   = tileVariantType.MaxHealth;
-            ID       = tileVariantType.ID;
+            Health   = partType.maxHealth;
+            ID       = partType.id;
             Rotation = rotation;
         }
 
