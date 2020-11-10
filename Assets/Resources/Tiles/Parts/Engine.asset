@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: Basic Engine
   partID: default_eng
+  category: Movement
   tile: {fileID: 11400000, guid: c7f09bae43fc9f440b060728e5dbe6d0, type: 2}
   damageResistance: 0
   maxHealth: 0
   layer: 0
+  previewImg: {fileID: 2577598707902432233, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
   id: 0
   thrust: 1.5

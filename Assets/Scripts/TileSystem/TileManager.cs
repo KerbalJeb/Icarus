@@ -30,7 +30,6 @@ namespace TileSystem
              new Vector3Int(0,  -1, 0),
          });
 
-        [SerializeField] private string     tilePath = null;
         [SerializeField] private GameObject template = null;
 
 
@@ -73,7 +72,7 @@ namespace TileSystem
                 tilemapLayers[tilemapRenderer.sortingOrder] = map;
             var grid = GetComponent<Grid>();
             TileSize = grid.cellSize.x;
-            TileSet  = TileSet.GetTileSet(tilePath);
+            TileSet  = TileSet.Instance;
             Rigidbody2D     = GetComponent<Rigidbody2D>();
         }
 

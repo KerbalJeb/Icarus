@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partName: Basic Armor
   partID: default_hull
+  category: Hull
   tile: {fileID: 11400000, guid: fb175a856da45af4482e596806ec1780, type: 2}
   damageResistance: 0.8
   maxHealth: 1000
   layer: 0
+  previewImg: {fileID: 6903120917539983151, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
   id: 0

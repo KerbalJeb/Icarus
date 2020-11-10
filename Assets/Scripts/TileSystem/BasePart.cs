@@ -8,10 +8,12 @@ namespace TileSystem
     {
         public                   string   partName;
         public                   string   partID;
+        public                   string   category;
         public                   TileBase tile;
         public                   float    damageResistance;
         public                   ushort   maxHealth;
         public                   int      layer;
+        public                   Sprite   previewImg;
         [HideInInspector] public ushort   id;
     }
 }

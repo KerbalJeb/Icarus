@@ -12,7 +12,9 @@ namespace TileSystem
 {
     public class TileSet
     {
-        private static readonly Dictionary<string, TileSet> TileSets = new Dictionary<string, TileSet>();
+        private static  TileSet instance;
+
+        public static TileSet Instance => instance ?? (instance = new TileSet());
 
         public readonly HashSet<int> ActiveLayers = new HashSet<int>();
 
@@ -33,7 +35,7 @@ namespace TileSystem
         ///     Creates a new TileSet for a given path
         /// </summary>
         /// <param name="path">The path containing the JSON file</param>
-        private TileSet(string path)
+        private TileSet()
         {
             var variants = Resources.LoadAll<BasePart>("Tiles/Parts");
             var allVariants = new List<BasePart>();
@@ -56,19 +58,6 @@ namespace TileSystem
             TileVariants = new ReadOnlyCollection<BasePart>(allVariants);
             VariantNameToID = new ReadOnlyDictionary<string, ushort>(variantNameDict);
             VariantIDToName = new ReadOnlyDictionary<ushort, string>(idsDict);
-        }
-
-        /// <summary>
-        ///     Gets (or creates) based on all the json files present in the given path. A TileSet will only be created once per
-        ///     path, all subsequent calls will return a reference to the original instance
-        /// </summary>
-        /// <param name="path">A path containing json files</param>
-        /// <returns>A TileSet that contains all tile variants created from the json files in path</returns>
-        public static TileSet GetTileSet(string path)
-        {
-            if (!TileSets.ContainsKey(path)) TileSets[path] = new TileSet(path);
-
-            return TileSets[path];
         }
 
         /// <summary>
