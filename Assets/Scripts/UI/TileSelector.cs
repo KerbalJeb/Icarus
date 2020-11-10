@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TileSystem;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace UI
 {
+    /// <summary>
+    /// Manages the UI elements related to selecting the tile to draw with when designing a ship
+    /// </summary>
     public class TileSelector : MonoBehaviour
     {
-        private                  TileSet      tileSet;
-        [SerializeField] private TabGroup     tabGroup;
-        [SerializeField] private ShipDesigner shipDesigner;
-        [SerializeField] private Color        hoverColor    = Color.green;
-        [SerializeField] private Color        selectedColor = Color.white;
-        [SerializeField] private Color        defaultColor  = Color.gray;
-        
+        [SerializeField] private TabGroup         tabGroup;
+        [SerializeField] private ShipDesigner     shipDesigner;
+        [SerializeField] private Color            hoverColor    = Color.green;
+        [SerializeField] private Color            selectedColor = Color.white;
+        [SerializeField] private Color            defaultColor  = Color.gray;
+        private readonly         List<TileButton> buttons       = new List<TileButton>();
 
-        private TileButton       selected;
-        private List<TileButton> buttons = new List<TileButton>();
+
+        private TileButton selected;
+        private TileSet    tileSet;
 
         private void Awake()
         {
@@ -28,8 +29,8 @@ namespace UI
         {
             foreach (BasePart variant in tileSet.TileVariants)
             {
-                var tab = tabGroup.AddTab(variant.category);
-                var button = tab.AddTile(variant.previewImg, this);
+                TabButton  tab    = tabGroup.AddTab(variant.category);
+                TileButton button = tab.AddTile(variant.previewImg, this);
                 button.tileID = variant.partID;
                 buttons.Add(button);
 
@@ -39,6 +40,7 @@ namespace UI
                     selected.Image.color = selectedColor;
                     continue;
                 }
+
                 button.Image.color = defaultColor;
             }
         }
@@ -63,10 +65,7 @@ namespace UI
 
         private void ResetButtons()
         {
-            foreach (TileButton button in buttons)
-            {
-                button.Image.color = defaultColor;
-            }
+            foreach (TileButton button in buttons) button.Image.color = defaultColor;
         }
     }
 }

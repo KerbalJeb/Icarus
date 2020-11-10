@@ -24,11 +24,10 @@ public class MovementManager : MonoBehaviour
     private bool               physics = false;
     private Rigidbody2D        rb2D;
     private Matrix<float>      thrustMatrix;
-    private TileManager        tileManager;
-    private int                m => OutputStateDim;
-    
-    private Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
 
+    private Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
+    private TileManager                                                       tileManager;
+    private int                                                               m => OutputStateDim;
 
 
     private void Awake()

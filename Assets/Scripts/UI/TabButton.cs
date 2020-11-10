@@ -1,54 +1,63 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UI;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
+namespace UI
 {
-    public                    Image         Image;
-    [HideInInspector] public  TabGroup      tabGroup;
-    public                    GameObject    content              { get; private set; }
-    public                    RectTransform ContentRectTransform { get; private set; }
-    [HideInInspector] public  string        tabName;
-    [SerializeField]  private GameObject    tileButtonTemplate;
-    [HideInInspector] public  bool          selected = false;
-
-
-    private void Start()
+    /// <summary>
+    /// The button for a UI tab
+    /// </summary>
+    public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
     {
-        tabGroup.Subscribe(this);
-    }
+        public                    Image         Image;
+        [HideInInspector] public  TabGroup      tabGroup;
+        [HideInInspector] public  string        tabName;
+        [SerializeField]  private GameObject    tileButtonTemplate;
+        [HideInInspector] public  bool          selected = false;
+        public                    GameObject    content              { get; private set; }
+        public                    RectTransform ContentRectTransform { get; private set; }
 
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        tabGroup.OnTabEnter(this);
-    }
+        private void Start()
+        {
+            tabGroup.Subscribe(this);
+        }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        tabGroup.OnTabSelect(this);
-    }
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            tabGroup.OnTabSelect(this);
+        }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        tabGroup.OnTabExit(this);
-    }
 
-    public void SetContent(GameObject go)
-    {
-        content              = go;
-        ContentRectTransform = content.GetComponent<RectTransform>();
-    }
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            tabGroup.OnTabEnter(this);
+        }
 
-    public TileButton AddTile(Sprite sprite, TileSelector tileSelector)
-    {
-        var button     = Instantiate(tileButtonTemplate, content.transform);
-        var tileButton = button.GetComponent<TileButton>();
-        tileButton.SetSprite(sprite);
-        tileButton.tileSelector = tileSelector;
-        return tileButton;
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            tabGroup.OnTabExit(this);
+        }
+
+        public void SetContent(GameObject go)
+        {
+            content              = go;
+            ContentRectTransform = content.GetComponent<RectTransform>();
+        }
+
+        /// <summary>
+        /// Adds a new button the the content for this tab
+        /// </summary>
+        /// <param name="sprite">The sprite to use</param>
+        /// <param name="tileSelector">The main tile selector</param>
+        /// <returns></returns>
+        public TileButton AddTile(Sprite sprite, TileSelector tileSelector)
+        {
+            GameObject button     = Instantiate(tileButtonTemplate, content.transform);
+            var        tileButton = button.GetComponent<TileButton>();
+            tileButton.SetSprite(sprite);
+            tileButton.tileSelector = tileSelector;
+            return tileButton;
+        }
     }
 }

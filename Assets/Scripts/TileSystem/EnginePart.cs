@@ -1,10 +1,13 @@
-﻿using TileSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
-
-[CreateAssetMenu(fileName = "Engine", menuName = "TileParts/Engine", order = 1)]
-public class EnginePart : BasePart
+namespace TileSystem
 {
-    public float thrust;
+    /// <summary>
+    /// The engine tile variant type
+    /// </summary>
+    [CreateAssetMenu(fileName = "Engine", menuName = "TileParts/Engine", order = 1)]
+    public class EnginePart : BasePart
+    {
+        public float thrust;
+    }
 }
-

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace TileSystem
 {
@@ -9,6 +8,16 @@ namespace TileSystem
     [Serializable]
     public struct TileInstanceData
     {
+        /// <value>
+        ///     The health of the tile
+        /// </value>
+        public ushort Health;
+
+        /// <value>
+        ///     The Rotation of this tile
+        /// </value>
+        public Directions Rotation;
+
         public TileInstanceData(BasePart partType, Directions rotation = Directions.Up)
         {
             Health   = partType.maxHealth;
@@ -17,18 +26,8 @@ namespace TileSystem
         }
 
         /// <value>
-        ///     The health of the tile
-        /// </value>
-        public ushort Health;
-
-        /// <value>
         ///     The ID of the structural tile
         /// </value>
         public ushort ID { get; }
-
-        /// <value>
-        ///     The Rotation of this tile
-        /// </value>
-        public Directions Rotation;
     }
 }

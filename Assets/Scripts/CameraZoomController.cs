@@ -1,18 +1,22 @@
-﻿﻿using Cinemachine;
+﻿using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Basic camera zoom control using Cinemachine 
+/// </summary>
 public class CameraZoomController : MonoBehaviour
 {
-    private                  CinemachineVirtualCamera virtualCamera;
-    private                  float                    goalZoom;
-    public                   float                    MinFOV;
-    public                   float                    MaxFOV;
-    private                  float                    zoomLevel   = 0f;
-    private const            float                    ZoomInc     = -0.05f;
-    private const            float                    ZoomDamping = 0.1f;
-    private                  float                    zoomVel     = 0f;
+    private const float                    ZoomInc     = -0.05f;
+    private const float                    ZoomDamping = 0.1f;
+    public        float                    MinFOV;
+    public        float                    MaxFOV;
+    private       float                    goalZoom;
+    private       CinemachineVirtualCamera virtualCamera;
+    private       float                    zoomLevel = 0f;
+    private       float                    zoomVel   = 0f;
 
+    // Todo add panning (probably remove Cinemachine)
 
     private void Awake()
     {
@@ -35,12 +39,9 @@ public class CameraZoomController : MonoBehaviour
 
     private void Zoom(InputAction.CallbackContext ctx)
     {
-        if (InputManager.IsMouseOverClickableUI())
-        {
-            return;
-        }
+        if (InputManager.IsMouseOverClickableUI()) return;
         var deltaZoom = ctx.ReadValue<float>();
-        goalZoom += deltaZoom * ZoomInc*(goalZoom/MaxFOV);
+        goalZoom += deltaZoom * ZoomInc * (goalZoom / MaxFOV);
         goalZoom =  Mathf.Clamp(goalZoom, MinFOV, MaxFOV);
     }
 }

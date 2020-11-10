@@ -7,9 +7,8 @@ using UnityEngine.Tilemaps;
 
 namespace TileSystem
 {
-
     public delegate void Notify();
-    
+
     /// <summary>
     ///     Used to manage and update Unity tile maps and store tile data
     /// </summary>
@@ -45,14 +44,14 @@ namespace TileSystem
 
         public float TileSize { get; private set; }
 
-        public  TileSet     TileSet { get; private set; }
-        private BoundsInt   Bounds  => tilemapLayers[0].cellBounds;
-        public event Notify UpdatePhysics;
+        public  TileSet   TileSet { get; private set; }
+        private BoundsInt Bounds  => tilemapLayers[0].cellBounds;
+
         public bool PhysicsEnabled
         {
             set
             {
-                physics          = value;
+                physics                 = value;
                 Rigidbody2D.isKinematic = !value;
             }
             get => physics;
@@ -71,10 +70,15 @@ namespace TileSystem
             foreach ((Tilemap map, TilemapRenderer tilemapRenderer) in pairs)
                 tilemapLayers[tilemapRenderer.sortingOrder] = map;
             var grid = GetComponent<Grid>();
-            TileSize = grid.cellSize.x;
-            TileSet  = TileSet.Instance;
-            Rigidbody2D     = GetComponent<Rigidbody2D>();
+            TileSize    = grid.cellSize.x;
+            TileSet     = TileSet.Instance;
+            Rigidbody2D = GetComponent<Rigidbody2D>();
         }
+
+        /// <value>
+        /// Called everytime the physics model is updated (tile is destroyed)
+        /// </value>
+        public event Notify UpdatePhysics;
 
         /// <summary>
         ///     Converts a world position to coordinates in the tilemap
@@ -139,7 +143,7 @@ namespace TileSystem
         /// <param name="tileVariantID">The tile variant to use</param>
         public void SetTile(Vector3Int cords, ushort tileVariantID)
         {
-            var tileVariant = TileSet.TileVariants[tileVariantID];
+            BasePart tileVariant = TileSet.TileVariants[tileVariantID];
             tilemapLayers[tileVariant.layer].SetTile(cords, tileVariant.tile);
             cords.z         = tileVariant.layer;
             tileData[cords] = new TileInstanceData(tileVariant);
@@ -261,9 +265,9 @@ namespace TileSystem
                 return;
             }
 
-            TileInstanceData tile            = tileData[cords];
-            BasePart  partType = TileSet.TileVariants[tile.ID];
-            var              damage          = (ushort) (partType.damageResistance * baseDamage);
+            TileInstanceData tile     = tileData[cords];
+            BasePart         partType = TileSet.TileVariants[tile.ID];
+            var              damage   = (ushort) (partType.damageResistance * baseDamage);
             if (tile.Health <= damage)
             {
                 RemoveTile(cords);
@@ -406,33 +410,42 @@ namespace TileSystem
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// Splits the mesh if physics is enabled and invokes the UpdatePhysics event
+        /// </summary>
         public void RefreshPhysics()
         {
-            if(!physics){return;}
+            if (!physics) return;
             UpdatePhysics?.Invoke();
             Split();
         }
 
-        public string DesignToJson(string gridName)
+        /// <summary>
+        /// Will serialize the design data (only tile ID and rot, no HP)
+        /// </summary>
+        /// <returns>The JSON string</returns>
+        public string DesignToJson()
         {
             var data = tileData.Select(instanceData => new SerializableTileData
             {
-                pos = instanceData.Key, tileID = TileSet.VariantIDToName[instanceData.Value.ID],
+                pos = instanceData.Key, 
+                tileID = TileSet.VariantIDToName[instanceData.Value.ID],
+                dir = instanceData.Value.Rotation,
             }).ToList();
-            return JsonUtility.ToJson(new SerializableGridData{grid = data, name = gridName}, true);
+            return JsonUtility.ToJson(new SerializableGridData {grid = data}, true);
         }
-        
+
         [Serializable]
         private class SerializableTileData
         {
-            public Vector3Int pos;
             public string     tileID;
+            public Directions dir;
+            public Vector3Int pos;
         }
-        
+
         [Serializable]
         private class SerializableGridData
         {
-            public string                     name;
             public List<SerializableTileData> grid;
         }
     }

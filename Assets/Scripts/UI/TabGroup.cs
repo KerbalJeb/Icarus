@@ -1,31 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Used to manage a group of UI tabs, handles activating and deactivating content + hover/selected button coloring
+/// </summary>
 public class TabGroup : MonoBehaviour
 {
-    private                  List<TabButton> tabButtons    = new List<TabButton>();
-    [SerializeField] private Color           hoverColor    = Color.green;
-    [SerializeField] private Color           selectedColor = Color.white;
-    [SerializeField] private Color           defaultColor  = Color.gray;
-    [SerializeField] private ScrollRect      scrollRect;
-    [SerializeField] private GameObject      buttonTemplate;
-    [SerializeField] private GameObject      contentTemplate;
-    [SerializeField] private Transform       viewPort;
+    [SerializeField] private Color      hoverColor    = Color.green;
+    [SerializeField] private Color      selectedColor = Color.white;
+    [SerializeField] private Color      defaultColor  = Color.gray;
+    [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private GameObject buttonTemplate;
+    [SerializeField] private GameObject contentTemplate;
+    [SerializeField] private Transform  viewPort;
 
 
-    private                  TabButton                     selected =null;
-    private                  Dictionary<string, TabButton> tabs = new Dictionary<string, TabButton>();
-    
+    private          TabButton                     selected   = null;
+    private readonly List<TabButton>               tabButtons = new List<TabButton>();
+    private readonly Dictionary<string, TabButton> tabs       = new Dictionary<string, TabButton>();
+
 
     public void Subscribe(TabButton button)
     {
-        if (button.content is null)
-        {
-            Debug.LogWarning("Null Content for: " + button.gameObject.name);
-        }
+        if (button.content is null) Debug.LogWarning("Null Content for: " + button.gameObject.name);
         tabButtons.Add(button);
         if (selected is null)
         {
@@ -35,9 +34,9 @@ public class TabGroup : MonoBehaviour
             scrollRect.content = selected.ContentRectTransform;
             return;
         }
+
         button.Image.color = defaultColor;
         button.content.SetActive(false);
-
     }
 
     public void OnTabEnter(TabButton button)
@@ -55,7 +54,7 @@ public class TabGroup : MonoBehaviour
         ResetTabs();
         button.Image.color = selectedColor;
         selected?.content.SetActive(false);
-        selected           = button;
+        selected = button;
         selected.content.SetActive(true);
         scrollRect.content = selected.ContentRectTransform;
     }
@@ -63,12 +62,9 @@ public class TabGroup : MonoBehaviour
     public TabButton AddTab(string tabName)
     {
         GameObject content = Instantiate(contentTemplate, viewPort);
-        if (tabs.ContainsKey(tabName))
-        {
-            return tabs[tabName];
-        }
-        var button    = Instantiate(buttonTemplate, transform);
-        var tabButton = button.GetComponent<TabButton>();
+        if (tabs.ContainsKey(tabName)) return tabs[tabName];
+        GameObject button    = Instantiate(buttonTemplate, transform);
+        var        tabButton = button.GetComponent<TabButton>();
         tabButton.SetContent(content);
         tabButton.tabGroup = this;
         tabButton.tabName  = tabName;
@@ -78,11 +74,6 @@ public class TabGroup : MonoBehaviour
 
     public void ResetTabs()
     {
-        foreach (TabButton button in tabButtons)
-        {
-            button.Image.color = defaultColor;
-        }
+        foreach (TabButton button in tabButtons) button.Image.color = defaultColor;
     }
-
 }
-

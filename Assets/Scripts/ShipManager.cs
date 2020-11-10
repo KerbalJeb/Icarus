@@ -1,8 +1,6 @@
-﻿using System;
-using TileSystem;
+﻿using TileSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 /// <summary>
 ///     Used to connect all components needed for a ship
@@ -37,33 +35,45 @@ public class ShipManager : MonoBehaviour
         PhysicsEnabled  = tileManager.PhysicsEnabled;
     }
 
-    private void OnEnable()
-    {
-        InputManager.PlayerActions.Move.performed        += SteerShip;
-        InputManager.PlayerActions.UpdateMesh.performed  += Test;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.PlayerActions.Move.performed        -= SteerShip;
-        InputManager.PlayerActions.UpdateMesh.performed  -= Test;
-    }
     private void Start()
     {
         tileManager.UpdatePhysics += UpdatePhysics;
     }
 
+    private void OnEnable()
+    {
+        InputManager.PlayerActions.Move.performed       += SteerShip;
+        InputManager.PlayerActions.UpdateMesh.performed += Test;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.PlayerActions.Move.performed       -= SteerShip;
+        InputManager.PlayerActions.UpdateMesh.performed -= Test;
+    }
+
+    /// <summary>
+    ///     Callback function used by the input system to control the ship
+    /// </summary>
+    /// <param name="ctx">From input system</param>
     public void SteerShip(InputAction.CallbackContext ctx)
     {
         var thrust = ctx.ReadValue<Vector3>();
         movementManager.Steer(thrust);
     }
 
+    /// <summary>
+    ///     Will update the physics model for the ship, automatically called when a tile is destroyed
+    /// </summary>
     public void UpdatePhysics()
     {
         movementManager.UpdatePhysics();
     }
 
+    /// <summary>
+    ///     Enables physics
+    /// </summary>
+    /// <param name="ctx"></param>
     private void Test(InputAction.CallbackContext ctx)
     {
         if (!PhysicsEnabled)

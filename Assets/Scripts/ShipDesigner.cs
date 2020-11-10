@@ -1,34 +1,23 @@
-﻿using System;
-using TileSystem;
+﻿using TileSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-
+/// <summary>
+///     A class used to manage drawing tiles in ship design mode
+/// </summary>
 public class ShipDesigner : MonoBehaviour
 {
+    // todo Add preview of blocks to be placed
+    // todo Add saving method
+    // todo Add line and box drawing tools
+    // todo Change deleting blocks to hotkey instead of middle mouse
     [SerializeField] private TileManager tileManager;
     [SerializeField] private Camera      cam;
     private                  bool        placingBlocks;
     private                  bool        removingBlocks;
 
     public string CurrentTileID { get; set; } = "default_hull";
-
-    private void OnEnable()
-    {
-        InputManager.PlayerActions.PlaceBlock.performed  += StartPlacingBlocks;
-        InputManager.PlayerActions.DeleteBlock.performed += StartDeletingBlocks;        
-        InputManager.PlayerActions.PlaceBlock.canceled   += StopPlacingBlocks;
-        InputManager.PlayerActions.DeleteBlock.canceled  += StopDeletingBlocks;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.PlayerActions.PlaceBlock.performed  -= StartPlacingBlocks;
-        InputManager.PlayerActions.DeleteBlock.performed -= StartDeletingBlocks;        
-        InputManager.PlayerActions.PlaceBlock.canceled   -= StopPlacingBlocks;
-        InputManager.PlayerActions.DeleteBlock.canceled  -= StopDeletingBlocks;
-    }
 
     private void Update()
     {
@@ -45,30 +34,44 @@ public class ShipDesigner : MonoBehaviour
             tileManager.RemoveTile(worldPos);
         }
     }
-    
+
+    private void OnEnable()
+    {
+        InputManager.PlayerActions.PlaceBlock.performed  += StartPlacingBlocks;
+        InputManager.PlayerActions.DeleteBlock.performed += StartDeletingBlocks;
+        InputManager.PlayerActions.PlaceBlock.canceled   += StopPlacingBlocks;
+        InputManager.PlayerActions.DeleteBlock.canceled  += StopDeletingBlocks;
+    }
+
+    private void OnDisable()
+    {
+        InputManager.PlayerActions.PlaceBlock.performed  -= StartPlacingBlocks;
+        InputManager.PlayerActions.DeleteBlock.performed -= StartDeletingBlocks;
+        InputManager.PlayerActions.PlaceBlock.canceled   -= StopPlacingBlocks;
+        InputManager.PlayerActions.DeleteBlock.canceled  -= StopDeletingBlocks;
+    }
+
     private void StartPlacingBlocks(InputAction.CallbackContext context)
     {
-        if (InputManager.IsMouseOverClickableUI())
-        {
-            return;
-        }
+        // Stop 'click through' on UI
+        if (InputManager.IsMouseOverClickableUI()) return;
         placingBlocks = true;
     }
+
     private void StopPlacingBlocks(InputAction.CallbackContext context)
     {
         placingBlocks = false;
     }
+
     private void StartDeletingBlocks(InputAction.CallbackContext context)
     {
-        if (InputManager.IsMouseOverClickableUI())
-        {
-            return;
-        }
+        // Stop 'click through' on UI
+        if (InputManager.IsMouseOverClickableUI()) return;
         removingBlocks = true;
-    }    
+    }
+
     private void StopDeletingBlocks(InputAction.CallbackContext context)
     {
         removingBlocks = false;
     }
 }
-

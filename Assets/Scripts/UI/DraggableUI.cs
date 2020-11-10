@@ -1,31 +1,32 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableUI : MonoBehaviour, IDragHandler
+namespace UI
 {
-    private RectTransform rectTransform;
-    private Canvas        canvas;
-
-    private void Awake()
+    /// <summary>
+    /// Basic draggable UI element
+    /// </summary>
+    public class DraggableUI : MonoBehaviour, IDragHandler
     {
-        rectTransform   = GetComponent<RectTransform>();
-        var parentTransform = transform;
-        while (parentTransform != null)
+        // todo constrain to screen and update to not use evenData.delta
+        private Canvas        canvas;
+        private RectTransform rectTransform;
+
+        private void Awake()
         {
-            canvas = parentTransform.GetComponent<Canvas>();
-            if (canvas != null)
+            rectTransform = GetComponent<RectTransform>();
+            Transform parentTransform = transform;
+            while (parentTransform != null)
             {
-                break;
+                canvas = parentTransform.GetComponent<Canvas>();
+                if (canvas != null) break;
+                parentTransform = parentTransform.parent;
             }
-            parentTransform = parentTransform.parent;
         }
 
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        rectTransform.anchoredPosition += eventData.delta/canvas.scaleFactor;
+        public void OnDrag(PointerEventData eventData)
+        {
+            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+        }
     }
 }
-

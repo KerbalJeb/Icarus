@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///     A helper class for raster drawing utilities (ie. drawing lines or boxes)
+/// </summary>
 public static class RasterUtil
 {
     /// <summary>

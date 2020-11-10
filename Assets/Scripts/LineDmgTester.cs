@@ -1,8 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
+/// <summary>
+///     A class to test applying damage without having weapons
+/// </summary>
 public class LineDmgTester : MonoBehaviour
 {
     private readonly RaycastHit2D[] hits = new RaycastHit2D[20];
@@ -13,8 +15,8 @@ public class LineDmgTester : MonoBehaviour
 
     private void Start()
     {
-        cam                                          =  Camera.main;
-        InputManager.PlayerActions.DmgTest.started += StartDrawingLine;
+        cam                                         =  Camera.main;
+        InputManager.PlayerActions.DmgTest.started  += StartDrawingLine;
         InputManager.PlayerActions.DmgTest.canceled += StopDrawingLine;
     }
 
@@ -22,7 +24,6 @@ public class LineDmgTester : MonoBehaviour
     {
         InputManager.PlayerActions.DmgTest.started  -= StartDrawingLine;
         InputManager.PlayerActions.DmgTest.canceled -= StopDrawingLine;
-
     }
 
 
@@ -31,16 +32,14 @@ public class LineDmgTester : MonoBehaviour
         Vector2Control mousePos = Mouse.current.position;
         startPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
         pressed  = true;
-    }    
+    }
+
     public void StopDrawingLine(InputAction.CallbackContext context)
     {
-
         Vector2Control mousePos = Mouse.current.position;
         endPos  = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
         pressed = false;
         var dmg = new Damage(startPos, endPos, 5000f);
         dmg.ApplyDamage();
-        
     }
-
 }
