@@ -2,47 +2,40 @@
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
+/// <summary>
+///     A class to test applying damage without having weapons
+/// </summary>
 public class LineDmgTester : MonoBehaviour
 {
-    private readonly RaycastHit2D[] hits = new RaycastHit2D[20];
-    private          Camera         cam;
-    private          Vector3        endPos;
-    private          bool           pressed;
-    private          Vector3        startPos;
+    private Camera  cam;
+    private Vector3 endPos;
+    private Vector3 startPos;
 
     private void Start()
     {
-        cam = Camera.main;
+        cam                                         =  Camera.main;
+        InputManager.PlayerActions.DmgTest.started  += StartDrawingLine;
+        InputManager.PlayerActions.DmgTest.canceled += StopDrawingLine;
+    }
+
+    private void OnDestroy()
+    {
+        InputManager.PlayerActions.DmgTest.started  -= StartDrawingLine;
+        InputManager.PlayerActions.DmgTest.canceled -= StopDrawingLine;
     }
 
 
-    public void DrawLine(InputAction.CallbackContext ctx)
+    public void StartDrawingLine(InputAction.CallbackContext context)
     {
-        if (ctx.phase == InputActionPhase.Started && !pressed)
-        {
-            Vector2Control mousePos = Mouse.current.position;
-            startPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-            pressed  = true;
-        }
+        Vector2Control mousePos = Mouse.current.position;
+        startPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
+    }
 
-        if (ctx.phase == InputActionPhase.Canceled)
-        {
-            Vector2Control mousePos = Mouse.current.position;
-            endPos  = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-            pressed = false;
-
-            Vector3 dir = endPos - startPos;
-
-            int numHits = Physics2D.RaycastNonAlloc(startPos, dir, hits);
-            var dmg     = new Damage(startPos, endPos, 1250f);
-
-            for (var i = 0; i < numHits; i++)
-            {
-                RaycastHit2D hit = hits[i];
-
-                var ship = hit.transform?.gameObject.GetComponentInParent<ShipManager>();
-                if (ship != null) ship.ApplyDamage(dmg);
-            }
-        }
+    public void StopDrawingLine(InputAction.CallbackContext context)
+    {
+        Vector2Control mousePos = Mouse.current.position;
+        endPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
+        var dmg = new Damage(startPos, endPos, 5000f);
+        dmg.ApplyDamage();
     }
 }

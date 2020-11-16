@@ -7,8 +7,8 @@ namespace TileSystem
     public enum Directions : byte
     {
         Up,
-        Down,
         Left,
+        Down,
         Right,
         ZUp,
         ZDown,

@@ -1,7 +1,7 @@
-﻿using TileSystem;
+﻿using System;
+using TileSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 /// <summary>
 ///     Used to connect all components needed for a ship
@@ -11,9 +11,12 @@ using UnityEngine.InputSystem.Controls;
 [RequireComponent(typeof(TileManager))]
 public class ShipManager : MonoBehaviour
 {
-    private Camera          cam;
-    private MovementManager movementManager;
-    private TileManager     tileManager;
+    private                  MovementManager movementManager;
+    private readonly         Transform       target = null;
+    private                  TileManager     tileManager;
+    public                   WeaponsManager  WeaponsManager { get; private set; }
+    public                   bool            autoLoadFromShipData = false;
+    [SerializeField] private bool            startWithPhysics     = false;
 
     /// <value>
     ///     Will enable or disable physics for this ship
@@ -22,64 +25,86 @@ public class ShipManager : MonoBehaviour
     {
         set
         {
+            tileManager.PhysicsEnabled = value;
             if (!value) return;
-            tileManager.PhysicsEnabled = transform;
             UpdatePhysics();
         }
         get => tileManager.PhysicsEnabled;
     }
 
-
     private void Awake()
     {
-        cam             = Camera.main;
         tileManager     = GetComponent<TileManager>();
-        movementManager = GetComponent<MovementManager>();
-        PhysicsEnabled  = tileManager.PhysicsEnabled;
+        WeaponsManager  = new WeaponsManager(tileManager);
+        movementManager = new MovementManager(tileManager, transform);
+    }
+
+    private void Start()
+    {
+        if (autoLoadFromShipData)
+        {
+            tileManager.LoadFromJson(ShipData.ShipName);
+        }
+        PhysicsEnabled = startWithPhysics;
     }
 
     private void Update()
     {
-        if (!PhysicsEnabled)
+        if (!(target is null)) WeaponsManager.UpdateTransform(target);
+    }
+
+    private void FixedUpdate()
+    {
+        if (PhysicsEnabled)
         {
-            if (Mouse.current.leftButton.isPressed)
-            {
-                Vector2Control mousePos = Mouse.current.position;
-                Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-                tileManager.SetTile(worldPos, tileManager.TileSet.VariantNameToID["Basic Armor"]);
-            }
-            else if (Mouse.current.middleButton.isPressed)
-            {
-                Vector2Control mousePos = Mouse.current.position;
-                Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-                tileManager.RemoveTile(worldPos);
-            }
+            movementManager.ApplyThrust();
         }
     }
 
-    public void ApplyDamage(Damage dmg)
+    private void OnEnable()
     {
-        if (!PhysicsEnabled) return;
-        if (!tileManager.ApplyDamage(dmg)) return;
-        UpdatePhysics();
+        tileManager.UpdatePhysics                       += UpdatePhysics;
+        InputManager.PlayerActions.Move.performed       += SteerShip;
+        InputManager.PlayerActions.UpdateMesh.performed += Test;
     }
 
+    private void OnDisable()
+    {
+        tileManager.UpdatePhysics                       -= UpdatePhysics;
+        InputManager.PlayerActions.Move.performed       -= SteerShip;
+        InputManager.PlayerActions.UpdateMesh.performed -= Test;
+    }
+
+    /// <summary>
+    ///     Callback function used by the input system to control the ship
+    /// </summary>
+    /// <param name="ctx">From input system</param>
     public void SteerShip(InputAction.CallbackContext ctx)
     {
         var thrust = ctx.ReadValue<Vector3>();
         movementManager.Steer(thrust);
     }
 
-    private void UpdatePhysics()
+    /// <summary>
+    ///     Will update the physics model for the ship, automatically called when a tile is destroyed
+    /// </summary>
+    public void UpdatePhysics()
     {
-        movementManager.UpdatePhysics();
+        if (tileManager.PhysicsEnabled)
+        {
+            movementManager.UpdatePhysics();
+        }
     }
 
-    public void Test(InputAction.CallbackContext ctx)
+    /// <summary>
+    ///     Enables physics
+    /// </summary>
+    /// <param name="ctx"></param>
+    private void Test(InputAction.CallbackContext ctx)
     {
         if (!PhysicsEnabled)
         {
-            PhysicsEnabled             = true;
+            UpdatePhysics();
             tileManager.PhysicsEnabled = true;
         }
     }

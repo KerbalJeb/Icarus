@@ -66,6 +66,38 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""DeleteBlock"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7f6892b-cf82-4e4f-a02b-284aea966ded"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""2e88d0d7-4c89-4790-b4f3-e9ba51ac1109"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RotateTileLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""57873193-8b66-47a8-aa35-670c8d88fb75"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RotateTileRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""df8c0667-cd92-4169-b58f-5a3569281145"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -255,6 +287,50 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02d51384-0ee8-4e53-af92-d13256d8fb07"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DeleteBlock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""420f76e5-17fb-4a12-87fc-82ce0ecae166"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bad61cb8-ac4a-4f15-b62a-ce642bfb5dfe"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateTileLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b91d8276-da7d-4ff1-bfc0-d3963c666eba"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateTileRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -835,6 +911,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_PlaceBlock = m_Player.FindAction("PlaceBlock", throwIfNotFound: true);
         m_Player_UpdateMesh = m_Player.FindAction("UpdateMesh", throwIfNotFound: true);
         m_Player_DmgTest = m_Player.FindAction("DmgTest", throwIfNotFound: true);
+        m_Player_DeleteBlock = m_Player.FindAction("DeleteBlock", throwIfNotFound: true);
+        m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
+        m_Player_RotateTileLeft = m_Player.FindAction("RotateTileLeft", throwIfNotFound: true);
+        m_Player_RotateTileRight = m_Player.FindAction("RotateTileRight", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -911,6 +991,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_PlaceBlock;
     private readonly InputAction m_Player_UpdateMesh;
     private readonly InputAction m_Player_DmgTest;
+    private readonly InputAction m_Player_DeleteBlock;
+    private readonly InputAction m_Player_Zoom;
+    private readonly InputAction m_Player_RotateTileLeft;
+    private readonly InputAction m_Player_RotateTileRight;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -920,6 +1004,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @PlaceBlock => m_Wrapper.m_Player_PlaceBlock;
         public InputAction @UpdateMesh => m_Wrapper.m_Player_UpdateMesh;
         public InputAction @DmgTest => m_Wrapper.m_Player_DmgTest;
+        public InputAction @DeleteBlock => m_Wrapper.m_Player_DeleteBlock;
+        public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
+        public InputAction @RotateTileLeft => m_Wrapper.m_Player_RotateTileLeft;
+        public InputAction @RotateTileRight => m_Wrapper.m_Player_RotateTileRight;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -944,6 +1032,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @DmgTest.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDmgTest;
                 @DmgTest.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDmgTest;
                 @DmgTest.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDmgTest;
+                @DeleteBlock.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteBlock;
+                @DeleteBlock.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteBlock;
+                @DeleteBlock.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDeleteBlock;
+                @Zoom.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @Zoom.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @Zoom.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnZoom;
+                @RotateTileLeft.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTileLeft;
+                @RotateTileLeft.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTileLeft;
+                @RotateTileLeft.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTileLeft;
+                @RotateTileRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTileRight;
+                @RotateTileRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTileRight;
+                @RotateTileRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTileRight;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -963,6 +1063,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @DmgTest.started += instance.OnDmgTest;
                 @DmgTest.performed += instance.OnDmgTest;
                 @DmgTest.canceled += instance.OnDmgTest;
+                @DeleteBlock.started += instance.OnDeleteBlock;
+                @DeleteBlock.performed += instance.OnDeleteBlock;
+                @DeleteBlock.canceled += instance.OnDeleteBlock;
+                @Zoom.started += instance.OnZoom;
+                @Zoom.performed += instance.OnZoom;
+                @Zoom.canceled += instance.OnZoom;
+                @RotateTileLeft.started += instance.OnRotateTileLeft;
+                @RotateTileLeft.performed += instance.OnRotateTileLeft;
+                @RotateTileLeft.canceled += instance.OnRotateTileLeft;
+                @RotateTileRight.started += instance.OnRotateTileRight;
+                @RotateTileRight.performed += instance.OnRotateTileRight;
+                @RotateTileRight.canceled += instance.OnRotateTileRight;
             }
         }
     }
@@ -1124,6 +1236,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnPlaceBlock(InputAction.CallbackContext context);
         void OnUpdateMesh(InputAction.CallbackContext context);
         void OnDmgTest(InputAction.CallbackContext context);
+        void OnDeleteBlock(InputAction.CallbackContext context);
+        void OnZoom(InputAction.CallbackContext context);
+        void OnRotateTileLeft(InputAction.CallbackContext context);
+        void OnRotateTileRight(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
