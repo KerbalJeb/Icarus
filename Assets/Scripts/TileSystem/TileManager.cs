@@ -76,7 +76,7 @@ namespace TileSystem
         }
 
         /// <value>
-        /// Called everytime the physics model is updated (tile is destroyed)
+        ///     Called everytime the physics model is updated (tile is destroyed)
         /// </value>
         public event Notify UpdatePhysics;
 
@@ -130,13 +130,10 @@ namespace TileSystem
         /// <param name="cords">The coordinates of the tile to set</param>
         /// <param name="tileVariant">The tile variant to use</param>
         /// <param name="direction">The orientation of the tile</param>
-        public void SetTile(Vector3Int cords, BasePart tileVariant, Directions direction=Directions.Up)
+        public void SetTile(Vector3Int cords, BasePart tileVariant, Directions direction = Directions.Up)
         {
             cords.z = tileVariant.layer;
-            if (tileData.ContainsKey(cords) && tileData[cords].ID == tileVariant.id)
-            {
-                return;
-            }
+            if (tileData.ContainsKey(cords) && tileData[cords].ID == tileVariant.id) return;
             tileVariant.Instantiate(cords, tilemapLayers[tileVariant.layer], direction);
             tileData[cords] = new TileInstanceData(tileVariant);
         }
@@ -150,7 +147,7 @@ namespace TileSystem
         {
             if (cords.Length < 1) return;
             Debug.Assert(cords.All(i => i.z == cords[0].z));
-            
+
             int     layerID  = cords[0].z;
             var     newTiles = tiles.Select(tile => TileSet.TileVariants[tile.ID].tile).ToArray();
             Tilemap tilemap  = tilemapLayers[layerID];
@@ -188,10 +185,7 @@ namespace TileSystem
                 for (var i = 0; i < tilemapLayers.Length; i++)
                 {
                     cords.z = i;
-                    if (!tileData.ContainsKey(cords))
-                    {
-                        continue;
-                    }
+                    if (!tileData.ContainsKey(cords)) continue;
                     TileSet.TileVariants[tileData[cords].ID].Remove(cords, tilemapLayers[i]);
                     tileData.Remove(cords);
                 }
@@ -286,10 +280,7 @@ namespace TileSystem
             foreach (Tilemap tilemap in tilemapLayers)
             {
                 tilemap.ClearAllTiles();
-                foreach (Transform child in tilemap.transform)
-                {
-                    Destroy(child.gameObject);
-                }
+                foreach (Transform child in tilemap.transform) Destroy(child.gameObject);
             }
 
             tileData.Clear();
@@ -416,7 +407,7 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Splits the mesh if physics is enabled and invokes the UpdatePhysics event
+        ///     Splits the mesh if physics is enabled and invokes the UpdatePhysics event
         /// </summary>
         public void RefreshPhysics()
         {
@@ -426,28 +417,28 @@ namespace TileSystem
         }
 
         /// <summary>
-        /// Will serialize the design data (only tile ID and rot, no HP)
+        ///     Will serialize the design data (only tile ID and rot, no HP)
         /// </summary>
         /// <returns>The JSON string</returns>
         public string DesignToJson()
         {
             var data = tileData.Select(instanceData => new SerializableTileData
             {
-                pos = instanceData.Key, 
+                pos    = instanceData.Key,
                 tileID = TileSet.VariantIDToName[instanceData.Value.ID],
-                dir = instanceData.Value.Rotation,
+                dir    = instanceData.Value.Rotation,
             }).ToList();
             return JsonUtility.ToJson(new SerializableGridData {grid = data}, true);
         }
 
         public void LoadFromJson(string path)
         {
-            var jsonText = File.ReadAllText(path);
-            var grid     = JsonUtility.FromJson<SerializableGridData>(jsonText).grid;
+            string jsonText = File.ReadAllText(path);
+            var    grid     = JsonUtility.FromJson<SerializableGridData>(jsonText).grid;
             ResetTiles();
             foreach (SerializableTileData data in grid)
             {
-                var basePart = TileSet.Instance.VariantNameToID[data.tileID];
+                BasePart basePart = TileSet.Instance.VariantNameToID[data.tileID];
                 SetTile(data.pos, basePart, data.dir);
             }
         }

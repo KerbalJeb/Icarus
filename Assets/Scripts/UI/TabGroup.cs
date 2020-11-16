@@ -4,22 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Used to manage a group of UI tabs, handles activating and deactivating content + hover/selected button coloring
+///     Used to manage a group of UI tabs, handles activating and deactivating content + hover/selected button coloring
 /// </summary>
 public class TabGroup : MonoBehaviour
 {
-    [SerializeField] private Color      hoverColor      = Color.green;
-    [SerializeField] private Color      selectedColor   = Color.white;
-    [SerializeField] private Color      defaultColor    = Color.gray;
-    [SerializeField] private ScrollRect scrollRect      = null;
-    [SerializeField] private GameObject buttonTemplate  = null;
-    [SerializeField] private GameObject contentTemplate = null;
-    [SerializeField] private Transform  viewPort        = null;
+    [SerializeField] private Color                         hoverColor      = Color.green;
+    [SerializeField] private Color                         selectedColor   = Color.white;
+    [SerializeField] private Color                         defaultColor    = Color.gray;
+    [SerializeField] private ScrollRect                    scrollRect      = null;
+    [SerializeField] private GameObject                    buttonTemplate  = null;
+    [SerializeField] private GameObject                    contentTemplate = null;
+    [SerializeField] private Transform                     viewPort        = null;
+    private readonly         List<TabButton>               tabButtons      = new List<TabButton>();
+    private readonly         Dictionary<string, TabButton> tabs            = new Dictionary<string, TabButton>();
 
 
-    private          TabButton                     selected   = null;
-    private readonly List<TabButton>               tabButtons = new List<TabButton>();
-    private readonly Dictionary<string, TabButton> tabs       = new Dictionary<string, TabButton>();
+    private TabButton selected = null;
 
 
     public void Subscribe(TabButton button)

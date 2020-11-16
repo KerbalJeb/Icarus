@@ -7,9 +7,9 @@ using UnityEngine;
 /// </summary>
 public class Damage
 {
-    public           float          BaseDamage;
-    public           Vector2        Direction;
-    public           Vector2        EndPos;
+    public float   BaseDamage;
+    public Vector2 Direction;
+    public Vector2 EndPos;
 
     public Vector2 StartPos;
 
@@ -42,13 +42,13 @@ public class Damage
         var done = false;
         foreach (RaycastHit2D hit in hits)
         {
-            var          destroyedTile = false;
-            Vector2      lineStart     = hit.point - 0.5f * Direction;
-            Vector2      lineEnd       = EndPos;
-            var          tileManager   = hit.transform.GetComponent<TileManager>();
+            var     destroyedTile = false;
+            Vector2 lineStart     = hit.point - 0.5f * Direction;
+            Vector2 lineEnd       = EndPos;
+            var     tileManager   = hit.transform.GetComponent<TileManager>();
             if (tileManager is null) continue;
             var dmgToObject = 0f;
-            var line        = RasterUtil.Line(tileManager.PositionToCords(lineStart), tileManager.PositionToCords(lineEnd));
+            var line = RasterUtil.Line(tileManager.PositionToCords(lineStart), tileManager.PositionToCords(lineEnd));
 
             foreach (Vector3Int cord in line)
             {

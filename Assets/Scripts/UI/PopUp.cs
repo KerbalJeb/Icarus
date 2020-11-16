@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-
+﻿using UnityEngine;
 
 public class PopUp : MonoBehaviour
 {
@@ -19,4 +17,3 @@ public class PopUp : MonoBehaviour
         gameObject.SetActive(false);
     }
 }
-

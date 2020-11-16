@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Basic camera zoom control using Cinemachine 
+///     Basic camera zoom control using Cinemachine
 /// </summary>
 public class CameraZoomController : MonoBehaviour
 {

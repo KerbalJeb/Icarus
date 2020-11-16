@@ -5,17 +5,17 @@ using UnityEngine;
 namespace TileSystem
 {
     /// <summary>
-    /// A singleton that will load all tile variants present in Resources/Tiles/Parts
+    ///     A singleton that will load all tile variants present in Resources/Tiles/Parts
     /// </summary>
     public class TileSet
     {
         /// <value>
-        /// The singleton instace
+        ///     The singleton instace
         /// </value>
         private static TileSet instance;
 
         /// <summary>
-        /// All the layers used by the tile variants loaded
+        ///     All the layers used by the tile variants loaded
         /// </summary>
         public readonly HashSet<int> ActiveLayers = new HashSet<int>();
 
@@ -25,7 +25,7 @@ namespace TileSystem
         public readonly ReadOnlyCollection<BasePart> TileVariants;
 
         /// <value>
-        /// Maps the index of a part in the TileVariants list to it's partID string
+        ///     Maps the index of a part in the TileVariants list to it's partID string
         /// </value>
         public readonly ReadOnlyDictionary<ushort, string> VariantIDToName;
 

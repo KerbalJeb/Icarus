@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 namespace UI
 {
     /// <summary>
-    /// Basic draggable UI element
+    ///     Basic draggable UI element
     /// </summary>
     public class DraggableUI : MonoBehaviour, IDragHandler
     {

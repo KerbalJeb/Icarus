@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace UI
 {
     /// <summary>
-    /// A custom grid layout for UI elements, will give even spacing 
+    ///     A custom grid layout for UI elements, will give even spacing
     /// </summary>
     public class FixedGridLayout : LayoutGroup
     {
@@ -14,13 +14,15 @@ namespace UI
         }
 
         /// <value>
-        /// The size of each cell
+        ///     The size of each cell
         /// </value>
         public Vector2 cellSize = new Vector2(50, 50);
+
         /// <value>
-        /// The spacing between each cell, will be slightly adjusted to fit within the bounds of the rect transform
+        ///     The spacing between each cell, will be slightly adjusted to fit within the bounds of the rect transform
         /// </value>
         public Vector2 spacing;
+
         public Alignment alignment;
 
         public override void CalculateLayoutInputHorizontal()

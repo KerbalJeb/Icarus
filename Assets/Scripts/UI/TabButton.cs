@@ -5,15 +5,15 @@ using UnityEngine.UI;
 namespace UI
 {
     /// <summary>
-    /// The button for a UI tab
+    ///     The button for a UI tab
     /// </summary>
     public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
     {
-        public                    Image         Image=null;
-        [HideInInspector] public  TabGroup      tabGroup=null;
-        [HideInInspector] public  string        tabName=null;
-        [SerializeField]  private GameObject    tileButtonTemplate=null;
-        [HideInInspector] public  bool          selected = false;
+        public                    Image         Image              = null;
+        [HideInInspector] public  TabGroup      tabGroup           = null;
+        [HideInInspector] public  string        tabName            = null;
+        [SerializeField]  private GameObject    tileButtonTemplate = null;
+        [HideInInspector] public  bool          selected           = false;
         public                    GameObject    content              { get; private set; }
         public                    RectTransform ContentRectTransform { get; private set; }
 
@@ -46,7 +46,7 @@ namespace UI
         }
 
         /// <summary>
-        /// Adds a new button the the content for this tab
+        ///     Adds a new button the the content for this tab
         /// </summary>
         /// <param name="sprite">The sprite to use</param>
         /// <param name="tileSelector">The main tile selector</param>

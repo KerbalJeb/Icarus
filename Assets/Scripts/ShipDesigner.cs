@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using TileSystem;
 using TMPro;
 using UI;
@@ -12,21 +11,23 @@ using UnityEngine.InputSystem.Controls;
 /// </summary>
 public class ShipDesigner : MonoBehaviour
 {
+    private const string DefaultText = "Enter Ship Name..";
+
     // todo Add preview of blocks to be placed
     // todo Add saving method
     // todo Add line and box drawing tools
     // todo Change deleting blocks to hotkey instead of middle mouse
-    [SerializeField] private TileManager    tileManager =null;
-    [SerializeField] private Camera         cam         =null;
+    [SerializeField] private TileManager    tileManager = null;
+    [SerializeField] private Camera         cam         = null;
     [SerializeField] private PopUp          nameConflictPopUp;
     [SerializeField] private PopUp          savePopUp;
     [SerializeField] private TextList       shipSelector;
-    private                  bool           placingBlocks;
-    private                  bool           removingBlocks; private TileSet tileSet;
     [SerializeField] private TMP_InputField inputField;
-    private const            string         DefaultText = "Enter Ship Name..";
+    private                  bool           placingBlocks;
+    private                  bool           removingBlocks;
     private                  string         shipSavePath;
-    
+    private                  TileSet        tileSet;
+
 
     public string CurrentTileID { get; set; } = "default_hull";
 
@@ -99,18 +100,15 @@ public class ShipDesigner : MonoBehaviour
 
     public void TrySave(bool overwrite = false)
     {
-        var filePath = shipSavePath + "/" + inputField.text + ".json";
-        if (!Directory.Exists(shipSavePath))
-        {
-            Directory.CreateDirectory(shipSavePath);
-        }
+        string filePath = shipSavePath + "/" + inputField.text + ".json";
+        if (!Directory.Exists(shipSavePath)) Directory.CreateDirectory(shipSavePath);
         if (File.Exists(filePath) && !overwrite)
         {
             nameConflictPopUp.Open();
             return;
         }
 
-        var jsonData = tileManager.DesignToJson();
+        string jsonData = tileManager.DesignToJson();
         File.WriteAllText(filePath, jsonData);
         savePopUp.Close();
         nameConflictPopUp.Close();
@@ -122,14 +120,14 @@ public class ShipDesigner : MonoBehaviour
         shipSelector.Empty();
         foreach (string ship in ships)
         {
-            var shipName = Path.GetFileName(ship);
-            shipSelector.AddElement(shipName.Remove(shipName.Length-5), this);
+            string shipName = Path.GetFileName(ship);
+            shipSelector.AddElement(shipName.Remove(shipName.Length - 5), this);
         }
     }
 
     public void LoadDesign(string shipName)
     {
-        var filePath = shipSavePath + "/" + shipName + ".json";
+        string filePath = shipSavePath + "/" + shipName + ".json";
         tileManager.LoadFromJson(filePath);
     }
 }

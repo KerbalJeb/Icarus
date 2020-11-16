@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace UI
 {
     /// <summary>
-    /// A button used to select the tile to use for 'drawing' with the ship designer
+    ///     A button used to select the tile to use for 'drawing' with the ship designer
     /// </summary>
     public class TileButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
     {

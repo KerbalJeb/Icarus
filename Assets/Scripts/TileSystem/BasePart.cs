@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 namespace TileSystem
 {
     /// <summary>
-    /// The base tile variant, all other tile variant types should inherit from this
+    ///     The base tile variant, all other tile variant types should inherit from this
     /// </summary>
     [CreateAssetMenu(fileName = "BasePart", menuName = "TileParts/Hull", order = 0)]
     public class BasePart : ScriptableObject
@@ -29,6 +29,5 @@ namespace TileSystem
         {
             tilemap.SetTile(cords, null);
         }
-        
     }
 }
