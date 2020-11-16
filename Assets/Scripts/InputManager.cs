@@ -31,6 +31,11 @@ public class InputManager
         pointerEventData.position = Mouse.current.position.ReadValue();
 
         var raycastResults = new List<RaycastResult>();
+
+        if (EventSystem.current == null)
+        {
+            return false;
+        }
         EventSystem.current.RaycastAll(pointerEventData, raycastResults);
 
         return raycastResults.Any(raycastResult => !raycastResult.gameObject.CompareTag("Unclickable"));

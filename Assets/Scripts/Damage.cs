@@ -64,7 +64,7 @@ public class Damage
                 destroyedTile =  true;
             }
 
-            if (destroyedTile) tileManager.RefreshPhysics();
+            if (destroyedTile) tileManager.PhysicsModelChanged=true;
 
             tileManager.Rigidbody2D.AddForceAtPosition(Direction * dmgToObject * 1e-3f, lineStart);
 

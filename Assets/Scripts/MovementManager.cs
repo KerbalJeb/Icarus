@@ -8,7 +8,7 @@ using UnityEngine;
 ///     Used to manage movement and calculate the flight model based on engine placement
 /// </summary>
 [RequireComponent(typeof(TileManager))]
-public class MovementManager : MonoBehaviour
+public class MovementManager
 {
     private const int OutputStateDim = 3;
 
@@ -24,18 +24,20 @@ public class MovementManager : MonoBehaviour
     private bool               physics = false;
     private Rigidbody2D        rb2D;
     private Matrix<float>      thrustMatrix;
+    private Transform          transform;
 
     private Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
     private TileManager                                                       tileManager;
     private int                                                               m => OutputStateDim;
 
 
-    private void Awake()
+    public MovementManager(TileManager manager, Transform transform)
     {
-        tileManager = GetComponent<TileManager>();
+        tileManager    = manager;
+        this.transform = transform;
     }
 
-    private void FixedUpdate()
+    public void ApplyThrust()
     {
         if (physics)
         {
@@ -82,7 +84,10 @@ public class MovementManager : MonoBehaviour
     /// </summary>
     public void UpdatePhysics()
     {
-        rb2D = GetComponent<Rigidbody2D>();
+        if (rb2D == null)
+        {
+            rb2D = tileManager.Rigidbody2D;
+        }
         com  = rb2D.centerOfMass;
         tileManager.GetTilesByVariant<EnginePart>(out var engines);
         n              = engines.Count;
@@ -132,7 +137,7 @@ public class MovementManager : MonoBehaviour
                         break;
                     case Directions.Down:
                         if (engine.ThrustY >= 0) break;
-                        if (engine.ThrustY / engine.Magnitude < threshold)
+                        if (engine.ThrustY / engine.Magnitude < -threshold)
                         {
                             dirNetThrust    += engine.NetThrust;
                             engineVector[i] =  1;
@@ -150,7 +155,7 @@ public class MovementManager : MonoBehaviour
                         break;
                     case Directions.Right:
                         if (engine.ThrustX >= 0) break;
-                        if (engine.ThrustX / engine.Magnitude < threshold)
+                        if (engine.ThrustX / engine.Magnitude < -threshold)
                         {
                             dirNetThrust    += engine.NetThrust;
                             engineVector[i] =  1;
@@ -166,7 +171,7 @@ public class MovementManager : MonoBehaviour
 
                         break;
                     case Directions.ZDown:
-                        if (engine.Toque <= toqueThreshold)
+                        if (engine.Toque <= -toqueThreshold)
                         {
                             dirNetThrust    += engine.NetThrust;
                             engineVector[i] =  1;

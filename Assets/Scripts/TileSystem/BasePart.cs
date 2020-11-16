@@ -17,6 +17,7 @@ namespace TileSystem
         public                   ushort   maxHealth;
         public                   int      layer;
         public                   Sprite   previewImg;
+        public                   float    mass;
         [HideInInspector] public ushort   id;
 
         public virtual void Instantiate(Vector3Int cord, Tilemap tilemap, Directions direction)

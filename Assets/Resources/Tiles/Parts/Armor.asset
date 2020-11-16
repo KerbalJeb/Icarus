@@ -20,4 +20,5 @@ MonoBehaviour:
   maxHealth: 1000
   layer: 0
   previewImg: {fileID: 6903120917539983151, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
+  mass: 1
   id: 0

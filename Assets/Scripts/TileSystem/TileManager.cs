@@ -46,6 +46,7 @@ namespace TileSystem
 
         public  TileSet   TileSet { get; private set; }
         private BoundsInt Bounds  => tilemapLayers[0].cellBounds;
+        public  bool      PhysicsModelChanged;
 
         public bool PhysicsEnabled
         {
@@ -70,9 +71,18 @@ namespace TileSystem
             foreach ((Tilemap map, TilemapRenderer tilemapRenderer) in pairs)
                 tilemapLayers[tilemapRenderer.sortingOrder] = map;
             var grid = GetComponent<Grid>();
-            TileSize    = grid.cellSize.x;
-            TileSet     = TileSet.Instance;
-            Rigidbody2D = GetComponent<Rigidbody2D>();
+            TileSize                 = grid.cellSize.x;
+            TileSet                  = TileSet.Instance;
+            Rigidbody2D              = GetComponent<Rigidbody2D>();
+            Rigidbody2D.centerOfMass = Vector2.zero;
+            Rigidbody2D.mass         = 0;
+        }
+
+        private void FixedUpdate()
+        {
+            if (!PhysicsModelChanged) return;
+            RefreshPhysics();
+            PhysicsModelChanged = false;
         }
 
         /// <value>
@@ -132,10 +142,19 @@ namespace TileSystem
         /// <param name="direction">The orientation of the tile</param>
         public void SetTile(Vector3Int cords, BasePart tileVariant, Directions direction = Directions.Up)
         {
+            if (tileVariant is null)
+            {
+                RemoveTile(cords);
+                return;
+            }
             cords.z = tileVariant.layer;
             if (tileData.ContainsKey(cords) && tileData[cords].ID == tileVariant.id) return;
             tileVariant.Instantiate(cords, tilemapLayers[tileVariant.layer], direction);
-            tileData[cords] = new TileInstanceData(tileVariant);
+            tileData[cords] = new TileInstanceData(tileVariant, direction);
+            var localPos = CordsToPosition(cords);
+            Rigidbody2D.centerOfMass = (Rigidbody2D.mass * Rigidbody2D.centerOfMass + localPos * tileVariant.mass) /
+                                       (tileVariant.mass                            + Rigidbody2D.mass);
+            Rigidbody2D.mass += tileVariant.mass;
         }
 
         /// <summary>
@@ -180,19 +199,26 @@ namespace TileSystem
         /// <param name="allTiles">Deletes all tiles at xy cords if true (default)</param>
         public void RemoveTile(Vector3Int cords, bool allTiles = true)
         {
+            var localPos = CordsToPosition(cords);
             if (allTiles)
             {
                 for (var i = 0; i < tilemapLayers.Length; i++)
                 {
                     cords.z = i;
                     if (!tileData.ContainsKey(cords)) continue;
-                    TileSet.TileVariants[tileData[cords].ID].Remove(cords, tilemapLayers[i]);
+                    var variant = TileSet.TileVariants[tileData[cords].ID];
+                    Rigidbody2D.centerOfMass -= variant.mass * localPos / Rigidbody2D.mass;
+                    Rigidbody2D.mass         -= variant.mass;
+                    variant.Remove(cords, tilemapLayers[i]);
                     tileData.Remove(cords);
                 }
             }
             else
             {
-                TileSet.TileVariants[tileData[cords].ID].Remove(cords, tilemapLayers[cords.z]);
+                var variant = TileSet.TileVariants[tileData[cords].ID];
+                Rigidbody2D.centerOfMass -= variant.mass * localPos / Rigidbody2D.mass;
+                Rigidbody2D.mass         -= variant.mass;
+                variant.Remove(cords, tilemapLayers[cords.z]);
                 tileData.Remove(cords);
             }
         }
@@ -441,6 +467,8 @@ namespace TileSystem
                 BasePart basePart = TileSet.Instance.VariantNameToID[data.tileID];
                 SetTile(data.pos, basePart, data.dir);
             }
+
+            PhysicsModelChanged = true;
         }
 
         [Serializable]

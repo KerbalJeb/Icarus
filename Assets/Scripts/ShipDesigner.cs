@@ -5,6 +5,8 @@ using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
+using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 /// <summary>
 ///     A class used to manage drawing tiles in ship design mode
@@ -23,13 +25,29 @@ public class ShipDesigner : MonoBehaviour
     [SerializeField] private PopUp          savePopUp;
     [SerializeField] private TextList       shipSelector;
     [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private Tilemap        previewMap;
+    [SerializeField] private Color          addingColor;
+    [SerializeField] private Color          removingColor;
+    [SerializeField] private TileBase       blankTile;
+    private                  Vector3Int     lastPos;
     private                  bool           placingBlocks;
-    private                  bool           removingBlocks;
     private                  string         shipSavePath;
     private                  TileSet        tileSet;
+    private                  Directions     direction = Directions.Up;
 
 
-    public string CurrentTileID { get; set; } = "default_hull";
+    private string currentTileID = "default_hull";
+    private string activeTileID  = "default_hull";
+
+    public string CurrentTileID
+    {
+        get => currentTileID;
+        set
+        { 
+            ChangeMode(value != "null");
+            currentTileID = value;
+        }
+    }
 
     private void Awake()
     {
@@ -39,34 +57,64 @@ public class ShipDesigner : MonoBehaviour
 
     private void Update()
     {
+        Vector2Control mousePos = Mouse.current.position;
+        Vector3        worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
+        Vector3Int cords = previewMap.WorldToCell(worldPos);
+        
         if (placingBlocks)
         {
-            Vector2Control mousePos = Mouse.current.position;
-            Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-            tileManager.SetTile(worldPos, tileSet.VariantNameToID[CurrentTileID]);
+            tileManager.SetTile(cords, tileSet.VariantNameToID[CurrentTileID], direction);
         }
-        else if (removingBlocks)
+
+        if (!InputManager.IsMouseOverClickableUI())
         {
-            Vector2Control mousePos = Mouse.current.position;
-            Vector3 worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-            tileManager.RemoveTile(worldPos);
+            TileBase tile;
+            tile = tileSet.VariantNameToID[CurrentTileID] == null ? blankTile : tileSet.VariantNameToID[CurrentTileID].tile;
+            previewMap.SetTile(cords, tile);
+            previewMap.SetTransformMatrix(cords, TileInfo.TransformMatrix[direction]);
+            if (cords == lastPos) return;
+            previewMap.SetTile(lastPos, null);
+            lastPos = cords;
+        }
+        else
+        {
+            previewMap.SetTile(lastPos, null);
+        }
+
+
+        
+    }
+
+    private void ChangeMode(bool adding)
+    {
+        previewMap.color = adding ? addingColor : removingColor;
+        if (!adding)
+        {
+            activeTileID  = currentTileID;
+            currentTileID = "null";
+        }
+        else
+        {
+            currentTileID = activeTileID;
         }
     }
 
     private void OnEnable()
     {
-        InputManager.PlayerActions.PlaceBlock.performed  += StartPlacingBlocks;
-        InputManager.PlayerActions.DeleteBlock.performed += StartDeletingBlocks;
-        InputManager.PlayerActions.PlaceBlock.canceled   += StopPlacingBlocks;
-        InputManager.PlayerActions.DeleteBlock.canceled  += StopDeletingBlocks;
+        InputManager.PlayerActions.PlaceBlock.performed      += StartPlacingBlocks;
+        InputManager.PlayerActions.DeleteBlock.performed     += DeleteBlocks;
+        InputManager.PlayerActions.PlaceBlock.canceled       += StopPlacingBlocks;
+        InputManager.PlayerActions.RotateTileLeft.performed  += RotateLeft;
+        InputManager.PlayerActions.RotateTileRight.performed += RotateRight;
     }
 
     private void OnDisable()
     {
-        InputManager.PlayerActions.PlaceBlock.performed  -= StartPlacingBlocks;
-        InputManager.PlayerActions.DeleteBlock.performed -= StartDeletingBlocks;
-        InputManager.PlayerActions.PlaceBlock.canceled   -= StopPlacingBlocks;
-        InputManager.PlayerActions.DeleteBlock.canceled  -= StopDeletingBlocks;
+        InputManager.PlayerActions.PlaceBlock.performed      -= StartPlacingBlocks;
+        InputManager.PlayerActions.DeleteBlock.performed     -= DeleteBlocks;
+        InputManager.PlayerActions.PlaceBlock.canceled       -= StopPlacingBlocks;
+        InputManager.PlayerActions.RotateTileLeft.performed  -= RotateLeft;
+        InputManager.PlayerActions.RotateTileRight.performed -= RotateRight;
     }
 
     private void StartPlacingBlocks(InputAction.CallbackContext context)
@@ -81,18 +129,6 @@ public class ShipDesigner : MonoBehaviour
         placingBlocks = false;
     }
 
-    private void StartDeletingBlocks(InputAction.CallbackContext context)
-    {
-        // Stop 'click through' on UI
-        if (InputManager.IsMouseOverClickableUI()) return;
-        removingBlocks = true;
-    }
-
-    private void StopDeletingBlocks(InputAction.CallbackContext context)
-    {
-        removingBlocks = false;
-    }
-
     public void StartSave()
     {
         inputField.text = DefaultText;
@@ -100,7 +136,8 @@ public class ShipDesigner : MonoBehaviour
 
     public void TrySave(bool overwrite = false)
     {
-        string filePath = shipSavePath + "/" + inputField.text + ".json";
+        string designName = inputField.text;
+        string filePath   = shipSavePath + "/" + designName + ".json";
         if (!Directory.Exists(shipSavePath)) Directory.CreateDirectory(shipSavePath);
         if (File.Exists(filePath) && !overwrite)
         {
@@ -109,6 +146,7 @@ public class ShipDesigner : MonoBehaviour
         }
 
         string jsonData = tileManager.DesignToJson();
+        ShipData.ShipName = filePath;
         File.WriteAllText(filePath, jsonData);
         savePopUp.Close();
         nameConflictPopUp.Close();
@@ -129,5 +167,40 @@ public class ShipDesigner : MonoBehaviour
     {
         string filePath = shipSavePath + "/" + shipName + ".json";
         tileManager.LoadFromJson(filePath);
+    }
+
+    public void LoadShipTester()
+    {
+        TrySave(true);
+        SceneManager.LoadScene("Scenes/ShipTest");
+    }
+
+    private void RotateLeft(InputAction.CallbackContext context)
+    {
+        if (direction==Directions.Right)
+        {
+            direction = Directions.Up;
+        }
+        else
+        {
+            direction++;
+        }
+    }
+
+    private void RotateRight(InputAction.CallbackContext context)
+    {
+        if (direction==Directions.Up)
+        {
+            direction = Directions.Right;
+        }
+        else
+        {
+            direction--;
+        }
+    }
+
+    private void DeleteBlocks(InputAction.CallbackContext context)
+    {
+        ChangeMode(currentTileID=="null");
     }
 }

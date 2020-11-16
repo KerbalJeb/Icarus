@@ -20,6 +20,7 @@ MonoBehaviour:
   maxHealth: 0
   layer: 1
   previewImg: {fileID: 2734423211405241899, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
+  mass: 1
   id: 2
   turret: {fileID: 2734423211405241899, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
   turretTemplate: {fileID: 523066076592527933, guid: 17cf37523af8ea24086785f85489f4b5, type: 3}

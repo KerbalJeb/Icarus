@@ -1,4 +1,5 @@
-﻿using TileSystem;
+﻿using System;
+using TileSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,11 +11,12 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(TileManager))]
 public class ShipManager : MonoBehaviour
 {
-    private          Camera          cam;
-    private          MovementManager movementManager;
-    private readonly Transform       target = null;
-    private          TileManager     tileManager;
-    public           WeaponsManager  WeaponsManager { get; private set; }
+    private                  MovementManager movementManager;
+    private readonly         Transform       target = null;
+    private                  TileManager     tileManager;
+    public                   WeaponsManager  WeaponsManager { get; private set; }
+    public                   bool            autoLoadFromShipData = false;
+    [SerializeField] private bool            startWithPhysics     = false;
 
     /// <value>
     ///     Will enable or disable physics for this ship
@@ -23,6 +25,7 @@ public class ShipManager : MonoBehaviour
     {
         set
         {
+            tileManager.PhysicsEnabled = value;
             if (!value) return;
             UpdatePhysics();
         }
@@ -31,32 +34,43 @@ public class ShipManager : MonoBehaviour
 
     private void Awake()
     {
-        cam             = Camera.main;
         tileManager     = GetComponent<TileManager>();
-        movementManager = GetComponent<MovementManager>();
-        PhysicsEnabled  = tileManager.PhysicsEnabled;
         WeaponsManager  = new WeaponsManager(tileManager);
+        movementManager = new MovementManager(tileManager, transform);
     }
 
     private void Start()
     {
-        tileManager.UpdatePhysics += UpdatePhysics;
+        if (autoLoadFromShipData)
+        {
+            tileManager.LoadFromJson(ShipData.ShipName);
+        }
+        PhysicsEnabled = startWithPhysics;
     }
-
 
     private void Update()
     {
         if (!(target is null)) WeaponsManager.UpdateTransform(target);
     }
 
+    private void FixedUpdate()
+    {
+        if (PhysicsEnabled)
+        {
+            movementManager.ApplyThrust();
+        }
+    }
+
     private void OnEnable()
     {
+        tileManager.UpdatePhysics                       += UpdatePhysics;
         InputManager.PlayerActions.Move.performed       += SteerShip;
         InputManager.PlayerActions.UpdateMesh.performed += Test;
     }
 
     private void OnDisable()
     {
+        tileManager.UpdatePhysics                       -= UpdatePhysics;
         InputManager.PlayerActions.Move.performed       -= SteerShip;
         InputManager.PlayerActions.UpdateMesh.performed -= Test;
     }
@@ -76,7 +90,10 @@ public class ShipManager : MonoBehaviour
     /// </summary>
     public void UpdatePhysics()
     {
-        movementManager.UpdatePhysics();
+        if (tileManager.PhysicsEnabled)
+        {
+            movementManager.UpdatePhysics();
+        }
     }
 
     /// <summary>
