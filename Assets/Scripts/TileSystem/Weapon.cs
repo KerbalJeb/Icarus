@@ -18,7 +18,7 @@ namespace TileSystem
             GameObject gameObject = Instantiate(turretTemplate,
                                                 tilemap.CellToLocal(cord) +
                                                 new Vector3(0.5f * tilemap.cellSize.x, 0.5f * tilemap.cellSize.y),
-                                                Quaternion.identity,
+                                                TileInfo.TransformMatrix[direction].rotation,
                                                 tilemap.transform);
 
             var spriteRenderer = gameObject.GetComponent<SpriteRenderer>();

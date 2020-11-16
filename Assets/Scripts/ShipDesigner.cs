@@ -15,21 +15,19 @@ public class ShipDesigner : MonoBehaviour
 {
     private const string DefaultText = "Enter Ship Name..";
 
-    // todo Add preview of blocks to be placed
-    // todo Add saving method
     // todo Add line and box drawing tools
-    // todo Change deleting blocks to hotkey instead of middle mouse
     [SerializeField] private TileManager    tileManager = null;
     [SerializeField] private Camera         cam         = null;
     [SerializeField] private PopUp          nameConflictPopUp;
     [SerializeField] private PopUp          savePopUp;
     [SerializeField] private TextList       shipSelector;
     [SerializeField] private TMP_InputField inputField;
-    [SerializeField] private Tilemap        previewMap;
+    [SerializeField] private SpriteRenderer previewImg;
     [SerializeField] private Color          addingColor;
     [SerializeField] private Color          removingColor;
-    [SerializeField] private TileBase       blankTile;
+    [SerializeField] private Sprite         blankTile;
     private                  Vector3Int     lastPos;
+    private                  Transform      previewImgTransform;
     private                  bool           placingBlocks;
     private                  string         shipSavePath;
     private                  TileSet        tileSet;
@@ -51,15 +49,17 @@ public class ShipDesigner : MonoBehaviour
 
     private void Awake()
     {
-        tileSet      = TileSet.Instance;
-        shipSavePath = Application.persistentDataPath + "/ships";
+        tileSet             = TileSet.Instance;
+        shipSavePath        = Application.persistentDataPath + "/ships";
+        previewImgTransform = previewImg.transform;
+        previewImg.color    = addingColor;
     }
 
     private void Update()
     {
         Vector2Control mousePos = Mouse.current.position;
         Vector3        worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-        Vector3Int cords = previewMap.WorldToCell(worldPos);
+        Vector3Int cords = tileManager.PositionToCords(worldPos);
         
         if (placingBlocks)
         {
@@ -68,17 +68,16 @@ public class ShipDesigner : MonoBehaviour
 
         if (!InputManager.IsMouseOverClickableUI())
         {
-            TileBase tile;
-            tile = tileSet.VariantNameToID[CurrentTileID] == null ? blankTile : tileSet.VariantNameToID[CurrentTileID].tile;
-            previewMap.SetTile(cords, tile);
-            previewMap.SetTransformMatrix(cords, TileInfo.TransformMatrix[direction]);
-            if (cords == lastPos) return;
-            previewMap.SetTile(lastPos, null);
-            lastPos = cords;
+            Sprite tile = tileSet.VariantNameToID[CurrentTileID] == null ? blankTile : tileSet.VariantNameToID[CurrentTileID].previewImg;
+            Vector3 pos = tileManager.CordsToPosition(cords);
+            previewImg.sprite             = tile;
+            
+            previewImgTransform.position = pos;
+            previewImgTransform.rotation = TileInfo.TransformMatrix[direction].rotation;
         }
         else
         {
-            previewMap.SetTile(lastPos, null);
+            previewImg.sprite = null;
         }
 
 
@@ -87,7 +86,7 @@ public class ShipDesigner : MonoBehaviour
 
     private void ChangeMode(bool adding)
     {
-        previewMap.color = adding ? addingColor : removingColor;
+        previewImg.color = adding ? addingColor : removingColor;
         if (!adding)
         {
             activeTileID  = currentTileID;
