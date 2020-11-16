@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -30,7 +31,6 @@ namespace TileSystem
          });
 
         [SerializeField] private GameObject template = null;
-
 
         private readonly Dictionary<Vector3Int, TileInstanceData> tileData =
             new Dictionary<Vector3Int, TileInstanceData>();
@@ -125,27 +125,19 @@ namespace TileSystem
         }
 
         /// <summary>
-        ///     Trys to get the tile at a world position
-        /// </summary>
-        /// <param name="pos">The world position to check</param>
-        /// <param name="foundTile">True if there is a functional tile at cords, False otherwise</param>
-        /// <returns>Returns the value of the tile data (default if none)</returns>
-        public TileInstanceData GetTile(Vector3 pos, out bool foundTile)
-        {
-            Vector3Int cords = PositionToCords(pos);
-            return GetTile(cords, out foundTile);
-        }
-
-        /// <summary>
         ///     Set a tile at the given coordinates
         /// </summary>
         /// <param name="cords">The coordinates of the tile to set</param>
-        /// <param name="tileVariantID">The tile variant to use</param>
-        public void SetTile(Vector3Int cords, ushort tileVariantID)
+        /// <param name="tileVariant">The tile variant to use</param>
+        /// <param name="direction">The orientation of the tile</param>
+        public void SetTile(Vector3Int cords, BasePart tileVariant, Directions direction=Directions.Up)
         {
-            BasePart tileVariant = TileSet.TileVariants[tileVariantID];
-            tilemapLayers[tileVariant.layer].SetTile(cords, tileVariant.tile);
-            cords.z         = tileVariant.layer;
+            cords.z = tileVariant.layer;
+            if (tileData.ContainsKey(cords) && tileData[cords].ID == tileVariant.id)
+            {
+                return;
+            }
+            tileVariant.Instantiate(cords, tilemapLayers[tileVariant.layer], direction);
             tileData[cords] = new TileInstanceData(tileVariant);
         }
 
@@ -154,10 +146,11 @@ namespace TileSystem
         /// </summary>
         /// <param name="cords">The list of coordinates in the tilemap</param>
         /// <param name="tiles">The list of tile variants to be placed</param>
-        public void SetTiles(Vector3Int[] cords, TileInstanceData[] tiles)
+        private void CopyTileInstancesData(Vector3Int[] cords, TileInstanceData[] tiles)
         {
             if (cords.Length < 1) return;
             Debug.Assert(cords.All(i => i.z == cords[0].z));
+            
             int     layerID  = cords[0].z;
             var     newTiles = tiles.Select(tile => TileSet.TileVariants[tile.ID].tile).ToArray();
             Tilemap tilemap  = tilemapLayers[layerID];
@@ -177,10 +170,10 @@ namespace TileSystem
         ///     Sets a tile at the given position in world space
         /// </summary>
         /// <param name="pos">The position in world space</param>
-        /// <param name="tileVariantID">The tile variant to be placed</param>
-        public void SetTile(Vector3 pos, ushort tileVariantID)
+        /// <param name="tileVariant">The tile variant to be placed</param>
+        public void SetTile(Vector3 pos, BasePart tileVariant)
         {
-            SetTile(PositionToCords(pos), tileVariantID);
+            SetTile(PositionToCords(pos), tileVariant);
         }
 
         /// <summary>
@@ -195,14 +188,18 @@ namespace TileSystem
                 for (var i = 0; i < tilemapLayers.Length; i++)
                 {
                     cords.z = i;
-                    tilemapLayers[i].SetTile(cords, null);
+                    if (!tileData.ContainsKey(cords))
+                    {
+                        continue;
+                    }
+                    TileSet.TileVariants[tileData[cords].ID].Remove(cords, tilemapLayers[i]);
                     tileData.Remove(cords);
                 }
             }
             else
             {
+                TileSet.TileVariants[tileData[cords].ID].Remove(cords, tilemapLayers[cords.z]);
                 tileData.Remove(cords);
-                tilemapLayers[cords.z].SetTile(cords, null);
             }
         }
 
@@ -286,7 +283,15 @@ namespace TileSystem
         /// </summary>
         public void ResetTiles()
         {
-            foreach (Tilemap tilemap in tilemapLayers) tilemap.ClearAllTiles();
+            foreach (Tilemap tilemap in tilemapLayers)
+            {
+                tilemap.ClearAllTiles();
+                foreach (Transform child in tilemap.transform)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
+
             tileData.Clear();
         }
 
@@ -395,7 +400,7 @@ namespace TileSystem
                         cordsList.Add(c);
                     }
 
-                    newTileManager.SetTiles(cordsList.ToArray(), tiles.ToArray());
+                    newTileManager.CopyTileInstancesData(cordsList.ToArray(), tiles.ToArray());
                 }
 
                 if (!PhysicsEnabled) continue;
@@ -433,6 +438,18 @@ namespace TileSystem
                 dir = instanceData.Value.Rotation,
             }).ToList();
             return JsonUtility.ToJson(new SerializableGridData {grid = data}, true);
+        }
+
+        public void LoadFromJson(string path)
+        {
+            var jsonText = File.ReadAllText(path);
+            var grid     = JsonUtility.FromJson<SerializableGridData>(jsonText).grid;
+            ResetTiles();
+            foreach (SerializableTileData data in grid)
+            {
+                var basePart = TileSet.Instance.VariantNameToID[data.tileID];
+                SetTile(data.pos, basePart, data.dir);
+            }
         }
 
         [Serializable]

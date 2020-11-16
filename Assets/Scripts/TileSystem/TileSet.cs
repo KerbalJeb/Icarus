@@ -33,13 +33,13 @@ namespace TileSystem
         /// <value>
         ///     Maps the name partID string to the index of a part in the TileVariants List
         /// </value>
-        public readonly ReadOnlyDictionary<string, ushort> VariantNameToID;
+        public readonly ReadOnlyDictionary<string, BasePart> VariantNameToID;
 
         private TileSet()
         {
             var variants        = Resources.LoadAll<BasePart>("Tiles/Parts");
             var allVariants     = new List<BasePart>();
-            var variantNameDict = new Dictionary<string, ushort>();
+            var variantNameDict = new Dictionary<string, BasePart>();
             var idsDict         = new Dictionary<ushort, string>();
 
             foreach (BasePart variant in variants)
@@ -53,12 +53,12 @@ namespace TileSystem
                 variant.id = (ushort) allVariants.Count;
                 allVariants.Add(variant);
                 ActiveLayers.Add(variant.layer);
-                variantNameDict[variant.partID] = variant.id;
+                variantNameDict[variant.partID] = variant;
                 idsDict[variant.id]             = variant.partID;
             }
 
             TileVariants    = new ReadOnlyCollection<BasePart>(allVariants);
-            VariantNameToID = new ReadOnlyDictionary<string, ushort>(variantNameDict);
+            VariantNameToID = new ReadOnlyDictionary<string, BasePart>(variantNameDict);
             VariantIDToName = new ReadOnlyDictionary<ushort, string>(idsDict);
         }
 

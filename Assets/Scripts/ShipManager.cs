@@ -1,4 +1,5 @@
-﻿using TileSystem;
+﻿using System;
+using TileSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,8 @@ public class ShipManager : MonoBehaviour
     private Camera          cam;
     private MovementManager movementManager;
     private TileManager     tileManager;
+    private  Transform       target=null;
+    public  WeaponsManager  WeaponsManager { get; private set; }
 
     /// <value>
     ///     Will enable or disable physics for this ship
@@ -33,6 +36,7 @@ public class ShipManager : MonoBehaviour
         tileManager     = GetComponent<TileManager>();
         movementManager = GetComponent<MovementManager>();
         PhysicsEnabled  = tileManager.PhysicsEnabled;
+        WeaponsManager  = new WeaponsManager(tileManager);
     }
 
     private void Start()
@@ -50,6 +54,16 @@ public class ShipManager : MonoBehaviour
     {
         InputManager.PlayerActions.Move.performed       -= SteerShip;
         InputManager.PlayerActions.UpdateMesh.performed -= Test;
+    }
+
+
+    private void Update()
+    {
+        if (!(target is null))
+        {
+            WeaponsManager.UpdateTransform(target);
+
+        }
     }
 
     /// <summary>

@@ -18,5 +18,17 @@ namespace TileSystem
         public                   int      layer;
         public                   Sprite   previewImg;
         [HideInInspector] public ushort   id;
+
+        public virtual void Instantiate(Vector3Int cord, Tilemap tilemap, Directions direction)
+        {
+            tilemap.SetTile(cord, tile);
+            tilemap.SetTransformMatrix(cord, TileInfo.TransformMatrix[direction]);
+        }
+
+        public virtual void Remove(Vector3Int cords, Tilemap tilemap)
+        {
+            tilemap.SetTile(cords, null);
+        }
+        
     }
 }

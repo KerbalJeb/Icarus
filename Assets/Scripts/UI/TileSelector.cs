@@ -9,8 +9,8 @@ namespace UI
     /// </summary>
     public class TileSelector : MonoBehaviour
     {
-        [SerializeField] private TabGroup         tabGroup;
-        [SerializeField] private ShipDesigner     shipDesigner;
+        [SerializeField] private TabGroup         tabGroup=null;
+        [SerializeField] private ShipDesigner     shipDesigner=null;
         [SerializeField] private Color            hoverColor    = Color.green;
         [SerializeField] private Color            selectedColor = Color.white;
         [SerializeField] private Color            defaultColor  = Color.gray;

@@ -9,10 +9,10 @@ namespace UI
     /// </summary>
     public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
     {
-        public                    Image         Image;
-        [HideInInspector] public  TabGroup      tabGroup;
-        [HideInInspector] public  string        tabName;
-        [SerializeField]  private GameObject    tileButtonTemplate;
+        public                    Image         Image=null;
+        [HideInInspector] public  TabGroup      tabGroup=null;
+        [HideInInspector] public  string        tabName=null;
+        [SerializeField]  private GameObject    tileButtonTemplate=null;
         [HideInInspector] public  bool          selected = false;
         public                    GameObject    content              { get; private set; }
         public                    RectTransform ContentRectTransform { get; private set; }

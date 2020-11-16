@@ -8,13 +8,13 @@ using UnityEngine.UI;
 /// </summary>
 public class TabGroup : MonoBehaviour
 {
-    [SerializeField] private Color      hoverColor    = Color.green;
-    [SerializeField] private Color      selectedColor = Color.white;
-    [SerializeField] private Color      defaultColor  = Color.gray;
-    [SerializeField] private ScrollRect scrollRect;
-    [SerializeField] private GameObject buttonTemplate;
-    [SerializeField] private GameObject contentTemplate;
-    [SerializeField] private Transform  viewPort;
+    [SerializeField] private Color      hoverColor      = Color.green;
+    [SerializeField] private Color      selectedColor   = Color.white;
+    [SerializeField] private Color      defaultColor    = Color.gray;
+    [SerializeField] private ScrollRect scrollRect      = null;
+    [SerializeField] private GameObject buttonTemplate  = null;
+    [SerializeField] private GameObject contentTemplate = null;
+    [SerializeField] private Transform  viewPort        = null;
 
 
     private          TabButton                     selected   = null;
