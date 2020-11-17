@@ -5,6 +5,9 @@ using UnityEngine.Tilemaps;
 using UnityEngine.InputSystem;
 using UnityEditor;
 
+
+//coliders for edges of tiles
+
 public class TileAutomation : MonoBehaviour
 {
     [Range(0,100)] //percentage range
