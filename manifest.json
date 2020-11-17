@@ -5,11 +5,71 @@
   "files": [
     {
       "type": "ManagedReference",
+      "source_relative_path": "api/Global.AsteroidTester.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.AsteroidTester.html",
+          "hash": "u18MwBvi6PbcRRNS3KXF4Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.AsteroidsGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.AsteroidsGenerator.html",
+          "hash": "AY4vkrxYFC9LBd6gjTxbjQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.CameraZoomController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.CameraZoomController.html",
+          "hash": "tNPu5lCyvfI3l/yjw3SfVA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "api/Global.Damage.yml",
       "output": {
         ".html": {
           "relative_path": "api/Global.Damage.html",
-          "hash": "RHbXOZIJ09jNc5uikvZEJg=="
+          "hash": "Ip7ogJTZDAYym5rSLwAkgA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.FollowMouse.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.FollowMouse.html",
+          "hash": "MYHR2BaQn7CV5J3PAbci9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.InputManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.InputManager.html",
+          "hash": "dFoVKm0HSx6fLJD7Qw/mYA=="
         }
       },
       "is_incremental": false,
@@ -21,7 +81,31 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.LineDmgTester.html",
-          "hash": "lr42nOK5vVM4H3atAv2gow=="
+          "hash": "RnNU0Dd6703Mhf3jniVbUQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.MapGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.MapGenerator.html",
+          "hash": "Tw0pzl/hJYcQpN7WU/PRsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.MapTester.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.MapTester.html",
+          "hash": "gD1EcgJ2VKD94+Q4pZzDdg=="
         }
       },
       "is_incremental": false,
@@ -33,7 +117,19 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.MovementManager.html",
-          "hash": "rN+TqDV11SbAqEjFF5LbtA=="
+          "hash": "dMhSF6doAjN9+oIaXTGLEg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.ObjectPool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.ObjectPool.html",
+          "hash": "iF61UJQBtbxIz1Py/S7FKg=="
         }
       },
       "is_incremental": false,
@@ -45,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.IPlayerActions.html",
-          "hash": "FFpAAD0qPrsNyncsm0EBqQ=="
+          "hash": "tddfBIVz6eHY07NJC46+ZQ=="
         }
       },
       "is_incremental": false,
@@ -57,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.IUIActions.html",
-          "hash": "tr2YSv89YxMxVoBEV7o7IQ=="
+          "hash": "5TJZDGVkw0ARjvcNYAhmWg=="
         }
       },
       "is_incremental": false,
@@ -69,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.PlayerActions.html",
-          "hash": "JSYm5OcB5q7oAnhSjILYqg=="
+          "hash": "ku+r6THLWkRAS2sM1Z61Zg=="
         }
       },
       "is_incremental": false,
@@ -81,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.UIActions.html",
-          "hash": "AbBpGOC9oziBa4Cx45BOmA=="
+          "hash": "fNyvEcXcQ/KAPFyc9F9iLQ=="
         }
       },
       "is_incremental": false,
@@ -93,7 +189,43 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.PlayerInput.html",
-          "hash": "Yrlz3+BHsVxt6pLlqPK7YQ=="
+          "hash": "Z5ToRd5JLSkkGiPOfpMuQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.RasterUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.RasterUtil.html",
+          "hash": "xBlccH438cn57fhzjaCMbQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.ShipData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.ShipData.html",
+          "hash": "IvGD1wxriRKCr1i2nEyxGw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.ShipDesigner.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.ShipDesigner.html",
+          "hash": "1Tatceqz7UyXe+X0mnaaPQ=="
         }
       },
       "is_incremental": false,
@@ -105,7 +237,31 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.ShipManager.html",
-          "hash": "d6u7Asn17rS/5Ebeqtg5pQ=="
+          "hash": "7F/DeI0Liqa5uuHimUVwcQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.TabGroup.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.TabGroup.html",
+          "hash": "2BhVYad7qWgOCVq3LO+nFA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Global.WeaponsManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Global.WeaponsManager.html",
+          "hash": "IaszZJS8ITd4u+a/U2NaaQ=="
         }
       },
       "is_incremental": false,
@@ -117,7 +273,19 @@
       "output": {
         ".html": {
           "relative_path": "api/Global.html",
-          "hash": "1gh+aa/ro9Ty65vQHfuI5Q=="
+          "hash": "qcppySJx1XlzBVElG9U6Ig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.BasePart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.BasePart.html",
+          "hash": "eIMXLrmSzFWLKN9hu6nMaw=="
         }
       },
       "is_incremental": false,
@@ -129,7 +297,31 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.Directions.html",
-          "hash": "9Mnw/2GSJpOEjFKpSESf+A=="
+          "hash": "HvIPVdwz+OlpletKoANpZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.EnginePart.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.EnginePart.html",
+          "hash": "pjzOACB/9UmwDY7fGOcsYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/TileSystem.Notify.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/TileSystem.Notify.html",
+          "hash": "DMPMr6CbQtk+AofzYFHgAg=="
         }
       },
       "is_incremental": false,
@@ -141,7 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileInfo.html",
-          "hash": "5DB8FEyJHNgtxoEgidXXqg=="
+          "hash": "aiQaYDf489FBaZSgzQOZpw=="
         }
       },
       "is_incremental": false,
@@ -153,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileInstanceData.html",
-          "hash": "iJtQvZufHP1LvaAng4SCGw=="
+          "hash": "fFAFN0PEwRR3BrKWI+9zXw=="
         }
       },
       "is_incremental": false,
@@ -165,7 +357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileManager.html",
-          "hash": "sn6vbA6IqEZ+hJwgHYNTUQ=="
+          "hash": "/hDczYYDxFVHcJJ8N5fIwQ=="
         }
       },
       "is_incremental": false,
@@ -177,7 +369,7 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.TileSet.html",
-          "hash": "sYp8eOr2R0GQ5ma/RBQApw=="
+          "hash": "VVUotN7pKOAa5gR/cYZW1A=="
         }
       },
       "is_incremental": false,
@@ -185,59 +377,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/TileSystem.TileVariants.ArmorVariant.yml",
+      "source_relative_path": "api/TileSystem.Weapon.yml",
       "output": {
         ".html": {
-          "relative_path": "api/TileSystem.TileVariants.ArmorVariant.html",
-          "hash": "PuJgyHq1D/rk6d1+zykS4g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/TileSystem.TileVariants.BaseTileVariant.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/TileSystem.TileVariants.BaseTileVariant.html",
-          "hash": "qW2Yq4ZYABx/P7o4/b/7Xw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/TileSystem.TileVariants.EngineVariant.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/TileSystem.TileVariants.EngineVariant.html",
-          "hash": "ZpQZMqbj2n7YaJrzN0Op0w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/TileSystem.TileVariants.FunctionalTileVariant.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/TileSystem.TileVariants.FunctionalTileVariant.html",
-          "hash": "pQ7ogfuLtQoLzdTnrJdzaA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "api/TileSystem.TileVariants.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/TileSystem.TileVariants.html",
-          "hash": "bBE9BeuCnAo8GBPL5m++xQ=="
+          "relative_path": "api/TileSystem.Weapon.html",
+          "hash": "sPJOuHl0r21uVF0qstiTLw=="
         }
       },
       "is_incremental": false,
@@ -249,7 +393,127 @@
       "output": {
         ".html": {
           "relative_path": "api/TileSystem.html",
-          "hash": "In5UKtonwhzgBhu4R5/+HA=="
+          "hash": "4b/igi8ecIHSUlvL+ZfYFw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.DraggableUI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.DraggableUI.html",
+          "hash": "9KDiUxDV0MrvNcvuQETRbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.FixedGridLayout.Alignment.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.FixedGridLayout.Alignment.html",
+          "hash": "3Yk+RrkhjoTwZY0BQX8b8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.FixedGridLayout.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.FixedGridLayout.html",
+          "hash": "wMCQBaO8qKQZNkXOZ+nFXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.PopUp.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.PopUp.html",
+          "hash": "FUa+dAb0C3rsy8Ga6X2mHQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.SavedShip.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.SavedShip.html",
+          "hash": "tsn51rDDWZ5DMkteQaWv9Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.TabButton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.TabButton.html",
+          "hash": "0TSyPFCBnTB5iBy6rUq0YQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.TextList.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.TextList.html",
+          "hash": "jN4608dwv+Dqb1t4tktOfA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.TileButton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.TileButton.html",
+          "hash": "3SvMa0hjdAivMZYUzjosYA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.TileSelector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.TileSelector.html",
+          "hash": "QNApIRic7die5a5ZEPGNLQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/UI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/UI.html",
+          "hash": "eeueZKPj6fKSx1bInuVpAA=="
         }
       },
       "is_incremental": false,
@@ -261,7 +525,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "iw9FqU6aFFCYUO8bHu7qtg=="
+          "hash": "HSNTivugcpXpymMaYPqTZQ=="
         }
       },
       "is_incremental": false,
@@ -273,7 +537,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "ptOKAHEBSYeR+UlynSG3Sg=="
+          "hash": "SIlRvROoZmpBkZ+Y5h2mtQ=="
         }
       },
       "is_incremental": false,
@@ -291,23 +555,23 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "ConceptualDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 0,
+          "total_file_count": 2,
           "skipped_file_count": 0
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 21,
+          "total_file_count": 43,
           "skipped_file_count": 0
         },
-        "ConceptualDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
-          "total_file_count": 2,
+          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }

@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace TileSystem
+    <title>Class TabGroup
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace TileSystem
+    <meta name="title" content="Class TabGroup
    ">
     <meta name="generator" content="docfx 2.44.0.0">
     
@@ -143,16 +143,16 @@
                           <li class="">
                             <a href="Global.ShipManager.html" title="ShipManager" class="">ShipManager</a>
                           </li>
-                          <li class="">
-                            <a href="Global.TabGroup.html" title="TabGroup" class="">TabGroup</a>
+                          <li class="active">
+                            <a href="Global.TabGroup.html" title="TabGroup" class="active">TabGroup</a>
                           </li>
                           <li class="">
                             <a href="Global.WeaponsManager.html" title="WeaponsManager" class="">WeaponsManager</a>
                           </li>
                         </ul>  </li>
-                    <li class="active">
+                    <li class="">
                       <span class="expand-stub"></span>
-                      <a href="TileSystem.html" title="TileSystem" class="active">TileSystem</a>
+                      <a href="TileSystem.html" title="TileSystem" class="">TileSystem</a>
                         
                         <ul class="nav level2">
                           <li class="">
@@ -223,44 +223,187 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="TileSystem">
+            <article class="content wrap" id="_content" data-uid="Global.TabGroup">
   
-  <h1 id="TileSystem" data-uid="TileSystem" class="text-break">Namespace TileSystem
+  
+  <h1 id="Global_TabGroup" data-uid="Global.TabGroup" class="text-break">Class TabGroup
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Used to manage a group of UI tabs, handles activating and deactivating content + hover/selected button coloring</p>
+</div>
   <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-    <h3 id="classes">Classes
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">TabGroup</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Global.html">Global</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Global_TabGroup_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TabGroup : MonoBehaviour</code></pre>
+  </div>
+  <h3 id="methods">Methods
   </h3>
-      <h4><a class="xref" href="TileSystem.BasePart.html">BasePart</a></h4>
-      <section><p>The base tile variant, all other tile variant types should inherit from this</p>
-</section>
-      <h4><a class="xref" href="TileSystem.EnginePart.html">EnginePart</a></h4>
-      <section><p>The engine tile variant type</p>
-</section>
-      <h4><a class="xref" href="TileSystem.TileInfo.html">TileInfo</a></h4>
-      <section></section>
-      <h4><a class="xref" href="TileSystem.TileManager.html">TileManager</a></h4>
-      <section><p>Used to manage and update Unity tile maps and store tile data</p>
-</section>
-      <h4><a class="xref" href="TileSystem.TileSet.html">TileSet</a></h4>
-      <section><p>A singleton that will load all tile variants present in Resources/Tiles/Parts</p>
-</section>
-      <h4><a class="xref" href="TileSystem.Weapon.html">Weapon</a></h4>
-      <section></section>
-    <h3 id="structs">Structs
-  </h3>
-      <h4><a class="xref" href="TileSystem.TileInstanceData.html">TileInstanceData</a></h4>
-      <section><p>This struct is used store data about &apos;instances&apos; of tiles</p>
-</section>
-    <h3 id="enums">Enums
-  </h3>
-      <h4><a class="xref" href="TileSystem.Directions.html">Directions</a></h4>
-      <section></section>
-    <h3 id="delegates">Delegates
-  </h3>
-      <h4><a class="xref" href="TileSystem.Notify.html">Notify</a></h4>
-      <section></section>
+  
+  
+  <a id="Global_TabGroup_AddTab_" data-uid="Global.TabGroup.AddTab*"></a>
+  <h4 id="Global_TabGroup_AddTab_System_String_" data-uid="Global.TabGroup.AddTab(System.String)">AddTab(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TabButton AddTab(string tabName)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">tabName</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TabButton</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_TabGroup_OnTabEnter_" data-uid="Global.TabGroup.OnTabEnter*"></a>
+  <h4 id="Global_TabGroup_OnTabEnter_TabButton_" data-uid="Global.TabGroup.OnTabEnter(TabButton)">OnTabEnter(TabButton)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTabEnter(TabButton button)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TabButton</span></td>
+        <td><span class="parametername">button</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_TabGroup_OnTabExit_" data-uid="Global.TabGroup.OnTabExit*"></a>
+  <h4 id="Global_TabGroup_OnTabExit_TabButton_" data-uid="Global.TabGroup.OnTabExit(TabButton)">OnTabExit(TabButton)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTabExit(TabButton button)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TabButton</span></td>
+        <td><span class="parametername">button</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_TabGroup_OnTabSelect_" data-uid="Global.TabGroup.OnTabSelect*"></a>
+  <h4 id="Global_TabGroup_OnTabSelect_TabButton_" data-uid="Global.TabGroup.OnTabSelect(TabButton)">OnTabSelect(TabButton)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnTabSelect(TabButton button)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TabButton</span></td>
+        <td><span class="parametername">button</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_TabGroup_ResetTabs_" data-uid="Global.TabGroup.ResetTabs*"></a>
+  <h4 id="Global_TabGroup_ResetTabs" data-uid="Global.TabGroup.ResetTabs">ResetTabs()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ResetTabs()</code></pre>
+  </div>
+  
+  
+  <a id="Global_TabGroup_Subscribe_" data-uid="Global.TabGroup.Subscribe*"></a>
+  <h4 id="Global_TabGroup_Subscribe_TabButton_" data-uid="Global.TabGroup.Subscribe(TabButton)">Subscribe(TabButton)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Subscribe(TabButton button)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TabButton</span></td>
+        <td><span class="parametername">button</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           

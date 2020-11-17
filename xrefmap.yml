@@ -9,18 +9,101 @@ references:
   fullName.vb: ''
   nameWithType: Global
   nameWithType.vb: ''
+- uid: Global.AsteroidsGenerator
+  name: AsteroidsGenerator
+  href: api/Global.AsteroidsGenerator.html
+  commentId: T:Global.AsteroidsGenerator
+  fullName: AsteroidsGenerator
+  nameWithType: AsteroidsGenerator
+- uid: Global.AsteroidsGenerator.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)
+  name: AsteroidsGenerator(Int32, Int32, Int32, Int32)
+  href: api/Global.AsteroidsGenerator.html#Global_AsteroidsGenerator__ctor_System_Int32_System_Int32_System_Int32_System_Int32_
+  commentId: M:Global.AsteroidsGenerator.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)
+  fullName: AsteroidsGenerator.AsteroidsGenerator(System.Int32, System.Int32, System.Int32, System.Int32)
+  nameWithType: AsteroidsGenerator.AsteroidsGenerator(Int32, Int32, Int32, Int32)
+- uid: Global.AsteroidsGenerator.#ctor*
+  name: AsteroidsGenerator
+  href: api/Global.AsteroidsGenerator.html#Global_AsteroidsGenerator__ctor_
+  commentId: Overload:Global.AsteroidsGenerator.#ctor
+  isSpec: "True"
+  fullName: AsteroidsGenerator.AsteroidsGenerator
+  nameWithType: AsteroidsGenerator.AsteroidsGenerator
+- uid: Global.AsteroidsGenerator.SetTilemap(TileManager@,BasePart)
+  name: SetTilemap(ref TileManager, BasePart)
+  href: api/Global.AsteroidsGenerator.html#Global_AsteroidsGenerator_SetTilemap_TileManager__BasePart_
+  commentId: M:Global.AsteroidsGenerator.SetTilemap(TileManager@,BasePart)
+  name.vb: SetTilemap(ByRef TileManager, BasePart)
+  fullName: AsteroidsGenerator.SetTilemap(ref TileManager, BasePart)
+  fullName.vb: AsteroidsGenerator.SetTilemap(ByRef TileManager, BasePart)
+  nameWithType: AsteroidsGenerator.SetTilemap(ref TileManager, BasePart)
+  nameWithType.vb: AsteroidsGenerator.SetTilemap(ByRef TileManager, BasePart)
+- uid: Global.AsteroidsGenerator.SetTilemap*
+  name: SetTilemap
+  href: api/Global.AsteroidsGenerator.html#Global_AsteroidsGenerator_SetTilemap_
+  commentId: Overload:Global.AsteroidsGenerator.SetTilemap
+  isSpec: "True"
+  fullName: AsteroidsGenerator.SetTilemap
+  nameWithType: AsteroidsGenerator.SetTilemap
+- uid: Global.AsteroidTester
+  name: AsteroidTester
+  href: api/Global.AsteroidTester.html
+  commentId: T:Global.AsteroidTester
+  fullName: AsteroidTester
+  nameWithType: AsteroidTester
+- uid: Global.AsteroidTester.noiseScale
+  name: noiseScale
+  href: api/Global.AsteroidTester.html#Global_AsteroidTester_noiseScale
+  commentId: F:Global.AsteroidTester.noiseScale
+  fullName: AsteroidTester.noiseScale
+  nameWithType: AsteroidTester.noiseScale
+- uid: Global.AsteroidTester.seed
+  name: seed
+  href: api/Global.AsteroidTester.html#Global_AsteroidTester_seed
+  commentId: F:Global.AsteroidTester.seed
+  fullName: AsteroidTester.seed
+  nameWithType: AsteroidTester.seed
+- uid: Global.AsteroidTester.xMax
+  name: xMax
+  href: api/Global.AsteroidTester.html#Global_AsteroidTester_xMax
+  commentId: F:Global.AsteroidTester.xMax
+  fullName: AsteroidTester.xMax
+  nameWithType: AsteroidTester.xMax
+- uid: Global.AsteroidTester.yMax
+  name: yMax
+  href: api/Global.AsteroidTester.html#Global_AsteroidTester_yMax
+  commentId: F:Global.AsteroidTester.yMax
+  fullName: AsteroidTester.yMax
+  nameWithType: AsteroidTester.yMax
+- uid: Global.CameraZoomController
+  name: CameraZoomController
+  href: api/Global.CameraZoomController.html
+  commentId: T:Global.CameraZoomController
+  fullName: CameraZoomController
+  nameWithType: CameraZoomController
+- uid: Global.CameraZoomController.MaxFOV
+  name: MaxFOV
+  href: api/Global.CameraZoomController.html#Global_CameraZoomController_MaxFOV
+  commentId: F:Global.CameraZoomController.MaxFOV
+  fullName: CameraZoomController.MaxFOV
+  nameWithType: CameraZoomController.MaxFOV
+- uid: Global.CameraZoomController.MinFOV
+  name: MinFOV
+  href: api/Global.CameraZoomController.html#Global_CameraZoomController_MinFOV
+  commentId: F:Global.CameraZoomController.MinFOV
+  fullName: CameraZoomController.MinFOV
+  nameWithType: CameraZoomController.MinFOV
 - uid: Global.Damage
   name: Damage
   href: api/Global.Damage.html
   commentId: T:Global.Damage
   fullName: Damage
   nameWithType: Damage
-- uid: Global.Damage.#ctor(Vector3,Vector3,System.Single)
-  name: Damage(Vector3, Vector3, Single)
-  href: api/Global.Damage.html#Global_Damage__ctor_Vector3_Vector3_System_Single_
-  commentId: M:Global.Damage.#ctor(Vector3,Vector3,System.Single)
-  fullName: Damage.Damage(Vector3, Vector3, System.Single)
-  nameWithType: Damage.Damage(Vector3, Vector3, Single)
+- uid: Global.Damage.#ctor(Vector2,Vector2,System.Single)
+  name: Damage(Vector2, Vector2, Single)
+  href: api/Global.Damage.html#Global_Damage__ctor_Vector2_Vector2_System_Single_
+  commentId: M:Global.Damage.#ctor(Vector2,Vector2,System.Single)
+  fullName: Damage.Damage(Vector2, Vector2, System.Single)
+  nameWithType: Damage.Damage(Vector2, Vector2, Single)
 - uid: Global.Damage.#ctor*
   name: Damage
   href: api/Global.Damage.html#Global_Damage__ctor_
@@ -28,12 +111,34 @@ references:
   isSpec: "True"
   fullName: Damage.Damage
   nameWithType: Damage.Damage
+- uid: Global.Damage.ApplyDamage(TileManager[])
+  name: ApplyDamage(TileManager[])
+  href: api/Global.Damage.html#Global_Damage_ApplyDamage_TileManager___
+  commentId: M:Global.Damage.ApplyDamage(TileManager[])
+  name.vb: ApplyDamage(TileManager())
+  fullName: Damage.ApplyDamage(TileManager[])
+  fullName.vb: Damage.ApplyDamage(TileManager())
+  nameWithType: Damage.ApplyDamage(TileManager[])
+  nameWithType.vb: Damage.ApplyDamage(TileManager())
+- uid: Global.Damage.ApplyDamage*
+  name: ApplyDamage
+  href: api/Global.Damage.html#Global_Damage_ApplyDamage_
+  commentId: Overload:Global.Damage.ApplyDamage
+  isSpec: "True"
+  fullName: Damage.ApplyDamage
+  nameWithType: Damage.ApplyDamage
 - uid: Global.Damage.BaseDamage
   name: BaseDamage
   href: api/Global.Damage.html#Global_Damage_BaseDamage
   commentId: F:Global.Damage.BaseDamage
   fullName: Damage.BaseDamage
   nameWithType: Damage.BaseDamage
+- uid: Global.Damage.Direction
+  name: Direction
+  href: api/Global.Damage.html#Global_Damage_Direction
+  commentId: F:Global.Damage.Direction
+  fullName: Damage.Direction
+  nameWithType: Damage.Direction
 - uid: Global.Damage.EndPos
   name: EndPos
   href: api/Global.Damage.html#Global_Damage_EndPos
@@ -46,31 +151,175 @@ references:
   commentId: F:Global.Damage.StartPos
   fullName: Damage.StartPos
   nameWithType: Damage.StartPos
+- uid: Global.FollowMouse
+  name: FollowMouse
+  href: api/Global.FollowMouse.html
+  commentId: T:Global.FollowMouse
+  fullName: FollowMouse
+  nameWithType: FollowMouse
+- uid: Global.InputManager
+  name: InputManager
+  href: api/Global.InputManager.html
+  commentId: T:Global.InputManager
+  fullName: InputManager
+  nameWithType: InputManager
+- uid: Global.InputManager.Instance
+  name: Instance
+  href: api/Global.InputManager.html#Global_InputManager_Instance
+  commentId: P:Global.InputManager.Instance
+  fullName: InputManager.Instance
+  nameWithType: InputManager.Instance
+- uid: Global.InputManager.Instance*
+  name: Instance
+  href: api/Global.InputManager.html#Global_InputManager_Instance_
+  commentId: Overload:Global.InputManager.Instance
+  isSpec: "True"
+  fullName: InputManager.Instance
+  nameWithType: InputManager.Instance
+- uid: Global.InputManager.IsMouseOverClickableUI
+  name: IsMouseOverClickableUI()
+  href: api/Global.InputManager.html#Global_InputManager_IsMouseOverClickableUI
+  commentId: M:Global.InputManager.IsMouseOverClickableUI
+  fullName: InputManager.IsMouseOverClickableUI()
+  nameWithType: InputManager.IsMouseOverClickableUI()
+- uid: Global.InputManager.IsMouseOverClickableUI*
+  name: IsMouseOverClickableUI
+  href: api/Global.InputManager.html#Global_InputManager_IsMouseOverClickableUI_
+  commentId: Overload:Global.InputManager.IsMouseOverClickableUI
+  isSpec: "True"
+  fullName: InputManager.IsMouseOverClickableUI
+  nameWithType: InputManager.IsMouseOverClickableUI
+- uid: Global.InputManager.PlayerActions
+  name: PlayerActions
+  href: api/Global.InputManager.html#Global_InputManager_PlayerActions
+  commentId: P:Global.InputManager.PlayerActions
+  fullName: InputManager.PlayerActions
+  nameWithType: InputManager.PlayerActions
+- uid: Global.InputManager.PlayerActions*
+  name: PlayerActions
+  href: api/Global.InputManager.html#Global_InputManager_PlayerActions_
+  commentId: Overload:Global.InputManager.PlayerActions
+  isSpec: "True"
+  fullName: InputManager.PlayerActions
+  nameWithType: InputManager.PlayerActions
+- uid: Global.InputManager.PlayerInput
+  name: PlayerInput
+  href: api/Global.InputManager.html#Global_InputManager_PlayerInput
+  commentId: P:Global.InputManager.PlayerInput
+  fullName: InputManager.PlayerInput
+  nameWithType: InputManager.PlayerInput
+- uid: Global.InputManager.PlayerInput*
+  name: PlayerInput
+  href: api/Global.InputManager.html#Global_InputManager_PlayerInput_
+  commentId: Overload:Global.InputManager.PlayerInput
+  isSpec: "True"
+  fullName: InputManager.PlayerInput
+  nameWithType: InputManager.PlayerInput
 - uid: Global.LineDmgTester
   name: LineDmgTester
   href: api/Global.LineDmgTester.html
   commentId: T:Global.LineDmgTester
   fullName: LineDmgTester
   nameWithType: LineDmgTester
-- uid: Global.LineDmgTester.DrawLine(InputAction.CallbackContext)
-  name: DrawLine(InputAction.CallbackContext)
-  href: api/Global.LineDmgTester.html#Global_LineDmgTester_DrawLine_InputAction_CallbackContext_
-  commentId: M:Global.LineDmgTester.DrawLine(InputAction.CallbackContext)
-  fullName: LineDmgTester.DrawLine(InputAction.CallbackContext)
-  nameWithType: LineDmgTester.DrawLine(InputAction.CallbackContext)
-- uid: Global.LineDmgTester.DrawLine*
-  name: DrawLine
-  href: api/Global.LineDmgTester.html#Global_LineDmgTester_DrawLine_
-  commentId: Overload:Global.LineDmgTester.DrawLine
+- uid: Global.LineDmgTester.StartDrawingLine(InputAction.CallbackContext)
+  name: StartDrawingLine(InputAction.CallbackContext)
+  href: api/Global.LineDmgTester.html#Global_LineDmgTester_StartDrawingLine_InputAction_CallbackContext_
+  commentId: M:Global.LineDmgTester.StartDrawingLine(InputAction.CallbackContext)
+  fullName: LineDmgTester.StartDrawingLine(InputAction.CallbackContext)
+  nameWithType: LineDmgTester.StartDrawingLine(InputAction.CallbackContext)
+- uid: Global.LineDmgTester.StartDrawingLine*
+  name: StartDrawingLine
+  href: api/Global.LineDmgTester.html#Global_LineDmgTester_StartDrawingLine_
+  commentId: Overload:Global.LineDmgTester.StartDrawingLine
   isSpec: "True"
-  fullName: LineDmgTester.DrawLine
-  nameWithType: LineDmgTester.DrawLine
+  fullName: LineDmgTester.StartDrawingLine
+  nameWithType: LineDmgTester.StartDrawingLine
+- uid: Global.LineDmgTester.StopDrawingLine(InputAction.CallbackContext)
+  name: StopDrawingLine(InputAction.CallbackContext)
+  href: api/Global.LineDmgTester.html#Global_LineDmgTester_StopDrawingLine_InputAction_CallbackContext_
+  commentId: M:Global.LineDmgTester.StopDrawingLine(InputAction.CallbackContext)
+  fullName: LineDmgTester.StopDrawingLine(InputAction.CallbackContext)
+  nameWithType: LineDmgTester.StopDrawingLine(InputAction.CallbackContext)
+- uid: Global.LineDmgTester.StopDrawingLine*
+  name: StopDrawingLine
+  href: api/Global.LineDmgTester.html#Global_LineDmgTester_StopDrawingLine_
+  commentId: Overload:Global.LineDmgTester.StopDrawingLine
+  isSpec: "True"
+  fullName: LineDmgTester.StopDrawingLine
+  nameWithType: LineDmgTester.StopDrawingLine
+- uid: Global.MapGenerator
+  name: MapGenerator
+  href: api/Global.MapGenerator.html
+  commentId: T:Global.MapGenerator
+  fullName: MapGenerator
+  nameWithType: MapGenerator
+- uid: Global.MapGenerator.#ctor(System.Int32,BasePart)
+  name: MapGenerator(Int32, BasePart)
+  href: api/Global.MapGenerator.html#Global_MapGenerator__ctor_System_Int32_BasePart_
+  commentId: M:Global.MapGenerator.#ctor(System.Int32,BasePart)
+  fullName: MapGenerator.MapGenerator(System.Int32, BasePart)
+  nameWithType: MapGenerator.MapGenerator(Int32, BasePart)
+- uid: Global.MapGenerator.#ctor*
+  name: MapGenerator
+  href: api/Global.MapGenerator.html#Global_MapGenerator__ctor_
+  commentId: Overload:Global.MapGenerator.#ctor
+  isSpec: "True"
+  fullName: MapGenerator.MapGenerator
+  nameWithType: MapGenerator.MapGenerator
+- uid: Global.MapGenerator.Generate(System.Collections.Generic.IEnumerable{Vector2Int},GameObject,Transform,ObjectPool)
+  name: Generate(IEnumerable<Vector2Int>, GameObject, Transform, ObjectPool)
+  href: api/Global.MapGenerator.html#Global_MapGenerator_Generate_System_Collections_Generic_IEnumerable_Vector2Int__GameObject_Transform_ObjectPool_
+  commentId: M:Global.MapGenerator.Generate(System.Collections.Generic.IEnumerable{Vector2Int},GameObject,Transform,ObjectPool)
+  name.vb: Generate(IEnumerable(Of Vector2Int), GameObject, Transform, ObjectPool)
+  fullName: MapGenerator.Generate(System.Collections.Generic.IEnumerable<Vector2Int>, GameObject, Transform, ObjectPool)
+  fullName.vb: MapGenerator.Generate(System.Collections.Generic.IEnumerable(Of Vector2Int), GameObject, Transform, ObjectPool)
+  nameWithType: MapGenerator.Generate(IEnumerable<Vector2Int>, GameObject, Transform, ObjectPool)
+  nameWithType.vb: MapGenerator.Generate(IEnumerable(Of Vector2Int), GameObject, Transform, ObjectPool)
+- uid: Global.MapGenerator.Generate*
+  name: Generate
+  href: api/Global.MapGenerator.html#Global_MapGenerator_Generate_
+  commentId: Overload:Global.MapGenerator.Generate
+  isSpec: "True"
+  fullName: MapGenerator.Generate
+  nameWithType: MapGenerator.Generate
+- uid: Global.MapTester
+  name: MapTester
+  href: api/Global.MapTester.html
+  commentId: T:Global.MapTester
+  fullName: MapTester
+  nameWithType: MapTester
 - uid: Global.MovementManager
   name: MovementManager
   href: api/Global.MovementManager.html
   commentId: T:Global.MovementManager
   fullName: MovementManager
   nameWithType: MovementManager
+- uid: Global.MovementManager.#ctor(TileManager,Transform)
+  name: MovementManager(TileManager, Transform)
+  href: api/Global.MovementManager.html#Global_MovementManager__ctor_TileManager_Transform_
+  commentId: M:Global.MovementManager.#ctor(TileManager,Transform)
+  fullName: MovementManager.MovementManager(TileManager, Transform)
+  nameWithType: MovementManager.MovementManager(TileManager, Transform)
+- uid: Global.MovementManager.#ctor*
+  name: MovementManager
+  href: api/Global.MovementManager.html#Global_MovementManager__ctor_
+  commentId: Overload:Global.MovementManager.#ctor
+  isSpec: "True"
+  fullName: MovementManager.MovementManager
+  nameWithType: MovementManager.MovementManager
+- uid: Global.MovementManager.ApplyThrust
+  name: ApplyThrust()
+  href: api/Global.MovementManager.html#Global_MovementManager_ApplyThrust
+  commentId: M:Global.MovementManager.ApplyThrust
+  fullName: MovementManager.ApplyThrust()
+  nameWithType: MovementManager.ApplyThrust()
+- uid: Global.MovementManager.ApplyThrust*
+  name: ApplyThrust
+  href: api/Global.MovementManager.html#Global_MovementManager_ApplyThrust_
+  commentId: Overload:Global.MovementManager.ApplyThrust
+  isSpec: "True"
+  fullName: MovementManager.ApplyThrust
+  nameWithType: MovementManager.ApplyThrust
 - uid: Global.MovementManager.Steer(Vector3)
   name: Steer(Vector3)
   href: api/Global.MovementManager.html#Global_MovementManager_Steer_Vector3_
@@ -97,6 +346,25 @@ references:
   isSpec: "True"
   fullName: MovementManager.UpdatePhysics
   nameWithType: MovementManager.UpdatePhysics
+- uid: Global.ObjectPool
+  name: ObjectPool
+  href: api/Global.ObjectPool.html
+  commentId: T:Global.ObjectPool
+  fullName: ObjectPool
+  nameWithType: ObjectPool
+- uid: Global.ObjectPool.GetObject
+  name: GetObject()
+  href: api/Global.ObjectPool.html#Global_ObjectPool_GetObject
+  commentId: M:Global.ObjectPool.GetObject
+  fullName: ObjectPool.GetObject()
+  nameWithType: ObjectPool.GetObject()
+- uid: Global.ObjectPool.GetObject*
+  name: GetObject
+  href: api/Global.ObjectPool.html#Global_ObjectPool_GetObject_
+  commentId: Overload:Global.ObjectPool.GetObject
+  isSpec: "True"
+  fullName: ObjectPool.GetObject
+  nameWithType: ObjectPool.GetObject
 - uid: Global.PlayerInput
   name: PlayerInput
   href: api/Global.PlayerInput.html
@@ -294,6 +562,19 @@ references:
   commentId: T:Global.PlayerInput.IPlayerActions
   fullName: PlayerInput.IPlayerActions
   nameWithType: PlayerInput.IPlayerActions
+- uid: Global.PlayerInput.IPlayerActions.OnDeleteBlock(InputAction.CallbackContext)
+  name: OnDeleteBlock(InputAction.CallbackContext)
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnDeleteBlock_InputAction_CallbackContext_
+  commentId: M:Global.PlayerInput.IPlayerActions.OnDeleteBlock(InputAction.CallbackContext)
+  fullName: PlayerInput.IPlayerActions.OnDeleteBlock(InputAction.CallbackContext)
+  nameWithType: PlayerInput.IPlayerActions.OnDeleteBlock(InputAction.CallbackContext)
+- uid: Global.PlayerInput.IPlayerActions.OnDeleteBlock*
+  name: OnDeleteBlock
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnDeleteBlock_
+  commentId: Overload:Global.PlayerInput.IPlayerActions.OnDeleteBlock
+  isSpec: "True"
+  fullName: PlayerInput.IPlayerActions.OnDeleteBlock
+  nameWithType: PlayerInput.IPlayerActions.OnDeleteBlock
 - uid: Global.PlayerInput.IPlayerActions.OnDmgTest(InputAction.CallbackContext)
   name: OnDmgTest(InputAction.CallbackContext)
   href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnDmgTest_InputAction_CallbackContext_
@@ -307,6 +588,19 @@ references:
   isSpec: "True"
   fullName: PlayerInput.IPlayerActions.OnDmgTest
   nameWithType: PlayerInput.IPlayerActions.OnDmgTest
+- uid: Global.PlayerInput.IPlayerActions.OnFire(InputAction.CallbackContext)
+  name: OnFire(InputAction.CallbackContext)
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnFire_InputAction_CallbackContext_
+  commentId: M:Global.PlayerInput.IPlayerActions.OnFire(InputAction.CallbackContext)
+  fullName: PlayerInput.IPlayerActions.OnFire(InputAction.CallbackContext)
+  nameWithType: PlayerInput.IPlayerActions.OnFire(InputAction.CallbackContext)
+- uid: Global.PlayerInput.IPlayerActions.OnFire*
+  name: OnFire
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnFire_
+  commentId: Overload:Global.PlayerInput.IPlayerActions.OnFire
+  isSpec: "True"
+  fullName: PlayerInput.IPlayerActions.OnFire
+  nameWithType: PlayerInput.IPlayerActions.OnFire
 - uid: Global.PlayerInput.IPlayerActions.OnLook(InputAction.CallbackContext)
   name: OnLook(InputAction.CallbackContext)
   href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnLook_InputAction_CallbackContext_
@@ -346,6 +640,32 @@ references:
   isSpec: "True"
   fullName: PlayerInput.IPlayerActions.OnPlaceBlock
   nameWithType: PlayerInput.IPlayerActions.OnPlaceBlock
+- uid: Global.PlayerInput.IPlayerActions.OnRotateTileLeft(InputAction.CallbackContext)
+  name: OnRotateTileLeft(InputAction.CallbackContext)
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnRotateTileLeft_InputAction_CallbackContext_
+  commentId: M:Global.PlayerInput.IPlayerActions.OnRotateTileLeft(InputAction.CallbackContext)
+  fullName: PlayerInput.IPlayerActions.OnRotateTileLeft(InputAction.CallbackContext)
+  nameWithType: PlayerInput.IPlayerActions.OnRotateTileLeft(InputAction.CallbackContext)
+- uid: Global.PlayerInput.IPlayerActions.OnRotateTileLeft*
+  name: OnRotateTileLeft
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnRotateTileLeft_
+  commentId: Overload:Global.PlayerInput.IPlayerActions.OnRotateTileLeft
+  isSpec: "True"
+  fullName: PlayerInput.IPlayerActions.OnRotateTileLeft
+  nameWithType: PlayerInput.IPlayerActions.OnRotateTileLeft
+- uid: Global.PlayerInput.IPlayerActions.OnRotateTileRight(InputAction.CallbackContext)
+  name: OnRotateTileRight(InputAction.CallbackContext)
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnRotateTileRight_InputAction_CallbackContext_
+  commentId: M:Global.PlayerInput.IPlayerActions.OnRotateTileRight(InputAction.CallbackContext)
+  fullName: PlayerInput.IPlayerActions.OnRotateTileRight(InputAction.CallbackContext)
+  nameWithType: PlayerInput.IPlayerActions.OnRotateTileRight(InputAction.CallbackContext)
+- uid: Global.PlayerInput.IPlayerActions.OnRotateTileRight*
+  name: OnRotateTileRight
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnRotateTileRight_
+  commentId: Overload:Global.PlayerInput.IPlayerActions.OnRotateTileRight
+  isSpec: "True"
+  fullName: PlayerInput.IPlayerActions.OnRotateTileRight
+  nameWithType: PlayerInput.IPlayerActions.OnRotateTileRight
 - uid: Global.PlayerInput.IPlayerActions.OnUpdateMesh(InputAction.CallbackContext)
   name: OnUpdateMesh(InputAction.CallbackContext)
   href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnUpdateMesh_InputAction_CallbackContext_
@@ -359,6 +679,19 @@ references:
   isSpec: "True"
   fullName: PlayerInput.IPlayerActions.OnUpdateMesh
   nameWithType: PlayerInput.IPlayerActions.OnUpdateMesh
+- uid: Global.PlayerInput.IPlayerActions.OnZoom(InputAction.CallbackContext)
+  name: OnZoom(InputAction.CallbackContext)
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnZoom_InputAction_CallbackContext_
+  commentId: M:Global.PlayerInput.IPlayerActions.OnZoom(InputAction.CallbackContext)
+  fullName: PlayerInput.IPlayerActions.OnZoom(InputAction.CallbackContext)
+  nameWithType: PlayerInput.IPlayerActions.OnZoom(InputAction.CallbackContext)
+- uid: Global.PlayerInput.IPlayerActions.OnZoom*
+  name: OnZoom
+  href: api/Global.PlayerInput.IPlayerActions.html#Global_PlayerInput_IPlayerActions_OnZoom_
+  commentId: Overload:Global.PlayerInput.IPlayerActions.OnZoom
+  isSpec: "True"
+  fullName: PlayerInput.IPlayerActions.OnZoom
+  nameWithType: PlayerInput.IPlayerActions.OnZoom
 - uid: Global.PlayerInput.IUIActions
   name: PlayerInput.IUIActions
   href: api/Global.PlayerInput.IUIActions.html
@@ -553,6 +886,19 @@ references:
   isSpec: "True"
   fullName: PlayerInput.PlayerActions.PlayerActions
   nameWithType: PlayerInput.PlayerActions.PlayerActions
+- uid: Global.PlayerInput.PlayerActions.DeleteBlock
+  name: DeleteBlock
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_DeleteBlock
+  commentId: P:Global.PlayerInput.PlayerActions.DeleteBlock
+  fullName: PlayerInput.PlayerActions.DeleteBlock
+  nameWithType: PlayerInput.PlayerActions.DeleteBlock
+- uid: Global.PlayerInput.PlayerActions.DeleteBlock*
+  name: DeleteBlock
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_DeleteBlock_
+  commentId: Overload:Global.PlayerInput.PlayerActions.DeleteBlock
+  isSpec: "True"
+  fullName: PlayerInput.PlayerActions.DeleteBlock
+  nameWithType: PlayerInput.PlayerActions.DeleteBlock
 - uid: Global.PlayerInput.PlayerActions.Disable
   name: Disable()
   href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_Disable
@@ -605,6 +951,19 @@ references:
   isSpec: "True"
   fullName: PlayerInput.PlayerActions.enabled
   nameWithType: PlayerInput.PlayerActions.enabled
+- uid: Global.PlayerInput.PlayerActions.Fire
+  name: Fire
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_Fire
+  commentId: P:Global.PlayerInput.PlayerActions.Fire
+  fullName: PlayerInput.PlayerActions.Fire
+  nameWithType: PlayerInput.PlayerActions.Fire
+- uid: Global.PlayerInput.PlayerActions.Fire*
+  name: Fire
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_Fire_
+  commentId: Overload:Global.PlayerInput.PlayerActions.Fire
+  isSpec: "True"
+  fullName: PlayerInput.PlayerActions.Fire
+  nameWithType: PlayerInput.PlayerActions.Fire
 - uid: Global.PlayerInput.PlayerActions.Get
   name: Get()
   href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_Get
@@ -676,6 +1035,32 @@ references:
   isSpec: "True"
   fullName: PlayerInput.PlayerActions.PlaceBlock
   nameWithType: PlayerInput.PlayerActions.PlaceBlock
+- uid: Global.PlayerInput.PlayerActions.RotateTileLeft
+  name: RotateTileLeft
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_RotateTileLeft
+  commentId: P:Global.PlayerInput.PlayerActions.RotateTileLeft
+  fullName: PlayerInput.PlayerActions.RotateTileLeft
+  nameWithType: PlayerInput.PlayerActions.RotateTileLeft
+- uid: Global.PlayerInput.PlayerActions.RotateTileLeft*
+  name: RotateTileLeft
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_RotateTileLeft_
+  commentId: Overload:Global.PlayerInput.PlayerActions.RotateTileLeft
+  isSpec: "True"
+  fullName: PlayerInput.PlayerActions.RotateTileLeft
+  nameWithType: PlayerInput.PlayerActions.RotateTileLeft
+- uid: Global.PlayerInput.PlayerActions.RotateTileRight
+  name: RotateTileRight
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_RotateTileRight
+  commentId: P:Global.PlayerInput.PlayerActions.RotateTileRight
+  fullName: PlayerInput.PlayerActions.RotateTileRight
+  nameWithType: PlayerInput.PlayerActions.RotateTileRight
+- uid: Global.PlayerInput.PlayerActions.RotateTileRight*
+  name: RotateTileRight
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_RotateTileRight_
+  commentId: Overload:Global.PlayerInput.PlayerActions.RotateTileRight
+  isSpec: "True"
+  fullName: PlayerInput.PlayerActions.RotateTileRight
+  nameWithType: PlayerInput.PlayerActions.RotateTileRight
 - uid: Global.PlayerInput.PlayerActions.SetCallbacks(PlayerInput.IPlayerActions)
   name: SetCallbacks(PlayerInput.IPlayerActions)
   href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_SetCallbacks_PlayerInput_IPlayerActions_
@@ -702,6 +1087,19 @@ references:
   isSpec: "True"
   fullName: PlayerInput.PlayerActions.UpdateMesh
   nameWithType: PlayerInput.PlayerActions.UpdateMesh
+- uid: Global.PlayerInput.PlayerActions.Zoom
+  name: Zoom
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_Zoom
+  commentId: P:Global.PlayerInput.PlayerActions.Zoom
+  fullName: PlayerInput.PlayerActions.Zoom
+  nameWithType: PlayerInput.PlayerActions.Zoom
+- uid: Global.PlayerInput.PlayerActions.Zoom*
+  name: Zoom
+  href: api/Global.PlayerInput.PlayerActions.html#Global_PlayerInput_PlayerActions_Zoom_
+  commentId: Overload:Global.PlayerInput.PlayerActions.Zoom
+  isSpec: "True"
+  fullName: PlayerInput.PlayerActions.Zoom
+  nameWithType: PlayerInput.PlayerActions.Zoom
 - uid: Global.PlayerInput.TouchScheme
   name: TouchScheme
   href: api/Global.PlayerInput.html#Global_PlayerInput_TouchScheme
@@ -974,25 +1372,133 @@ references:
   isSpec: "True"
   fullName: PlayerInput.XRScheme
   nameWithType: PlayerInput.XRScheme
+- uid: Global.RasterUtil
+  name: RasterUtil
+  href: api/Global.RasterUtil.html
+  commentId: T:Global.RasterUtil
+  fullName: RasterUtil
+  nameWithType: RasterUtil
+- uid: Global.RasterUtil.Line(Vector3Int,Vector3Int)
+  name: Line(Vector3Int, Vector3Int)
+  href: api/Global.RasterUtil.html#Global_RasterUtil_Line_Vector3Int_Vector3Int_
+  commentId: M:Global.RasterUtil.Line(Vector3Int,Vector3Int)
+  fullName: RasterUtil.Line(Vector3Int, Vector3Int)
+  nameWithType: RasterUtil.Line(Vector3Int, Vector3Int)
+- uid: Global.RasterUtil.Line*
+  name: Line
+  href: api/Global.RasterUtil.html#Global_RasterUtil_Line_
+  commentId: Overload:Global.RasterUtil.Line
+  isSpec: "True"
+  fullName: RasterUtil.Line
+  nameWithType: RasterUtil.Line
+- uid: Global.ShipData
+  name: ShipData
+  href: api/Global.ShipData.html
+  commentId: T:Global.ShipData
+  fullName: ShipData
+  nameWithType: ShipData
+- uid: Global.ShipData.ShipPath
+  name: ShipPath
+  href: api/Global.ShipData.html#Global_ShipData_ShipPath
+  commentId: F:Global.ShipData.ShipPath
+  fullName: ShipData.ShipPath
+  nameWithType: ShipData.ShipPath
+- uid: Global.ShipDesigner
+  name: ShipDesigner
+  href: api/Global.ShipDesigner.html
+  commentId: T:Global.ShipDesigner
+  fullName: ShipDesigner
+  nameWithType: ShipDesigner
+- uid: Global.ShipDesigner.CurrentTileID
+  name: CurrentTileID
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_CurrentTileID
+  commentId: P:Global.ShipDesigner.CurrentTileID
+  fullName: ShipDesigner.CurrentTileID
+  nameWithType: ShipDesigner.CurrentTileID
+- uid: Global.ShipDesigner.CurrentTileID*
+  name: CurrentTileID
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_CurrentTileID_
+  commentId: Overload:Global.ShipDesigner.CurrentTileID
+  isSpec: "True"
+  fullName: ShipDesigner.CurrentTileID
+  nameWithType: ShipDesigner.CurrentTileID
+- uid: Global.ShipDesigner.LoadDesign(System.String)
+  name: LoadDesign(String)
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_LoadDesign_System_String_
+  commentId: M:Global.ShipDesigner.LoadDesign(System.String)
+  fullName: ShipDesigner.LoadDesign(System.String)
+  nameWithType: ShipDesigner.LoadDesign(String)
+- uid: Global.ShipDesigner.LoadDesign*
+  name: LoadDesign
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_LoadDesign_
+  commentId: Overload:Global.ShipDesigner.LoadDesign
+  isSpec: "True"
+  fullName: ShipDesigner.LoadDesign
+  nameWithType: ShipDesigner.LoadDesign
+- uid: Global.ShipDesigner.LoadShipTester
+  name: LoadShipTester()
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_LoadShipTester
+  commentId: M:Global.ShipDesigner.LoadShipTester
+  fullName: ShipDesigner.LoadShipTester()
+  nameWithType: ShipDesigner.LoadShipTester()
+- uid: Global.ShipDesigner.LoadShipTester*
+  name: LoadShipTester
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_LoadShipTester_
+  commentId: Overload:Global.ShipDesigner.LoadShipTester
+  isSpec: "True"
+  fullName: ShipDesigner.LoadShipTester
+  nameWithType: ShipDesigner.LoadShipTester
+- uid: Global.ShipDesigner.ShowSavedShips
+  name: ShowSavedShips()
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_ShowSavedShips
+  commentId: M:Global.ShipDesigner.ShowSavedShips
+  fullName: ShipDesigner.ShowSavedShips()
+  nameWithType: ShipDesigner.ShowSavedShips()
+- uid: Global.ShipDesigner.ShowSavedShips*
+  name: ShowSavedShips
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_ShowSavedShips_
+  commentId: Overload:Global.ShipDesigner.ShowSavedShips
+  isSpec: "True"
+  fullName: ShipDesigner.ShowSavedShips
+  nameWithType: ShipDesigner.ShowSavedShips
+- uid: Global.ShipDesigner.StartSave
+  name: StartSave()
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_StartSave
+  commentId: M:Global.ShipDesigner.StartSave
+  fullName: ShipDesigner.StartSave()
+  nameWithType: ShipDesigner.StartSave()
+- uid: Global.ShipDesigner.StartSave*
+  name: StartSave
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_StartSave_
+  commentId: Overload:Global.ShipDesigner.StartSave
+  isSpec: "True"
+  fullName: ShipDesigner.StartSave
+  nameWithType: ShipDesigner.StartSave
+- uid: Global.ShipDesigner.TrySave(System.Boolean)
+  name: TrySave(Boolean)
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_TrySave_System_Boolean_
+  commentId: M:Global.ShipDesigner.TrySave(System.Boolean)
+  fullName: ShipDesigner.TrySave(System.Boolean)
+  nameWithType: ShipDesigner.TrySave(Boolean)
+- uid: Global.ShipDesigner.TrySave*
+  name: TrySave
+  href: api/Global.ShipDesigner.html#Global_ShipDesigner_TrySave_
+  commentId: Overload:Global.ShipDesigner.TrySave
+  isSpec: "True"
+  fullName: ShipDesigner.TrySave
+  nameWithType: ShipDesigner.TrySave
 - uid: Global.ShipManager
   name: ShipManager
   href: api/Global.ShipManager.html
   commentId: T:Global.ShipManager
   fullName: ShipManager
   nameWithType: ShipManager
-- uid: Global.ShipManager.ApplyDamage(Damage)
-  name: ApplyDamage(Damage)
-  href: api/Global.ShipManager.html#Global_ShipManager_ApplyDamage_Damage_
-  commentId: M:Global.ShipManager.ApplyDamage(Damage)
-  fullName: ShipManager.ApplyDamage(Damage)
-  nameWithType: ShipManager.ApplyDamage(Damage)
-- uid: Global.ShipManager.ApplyDamage*
-  name: ApplyDamage
-  href: api/Global.ShipManager.html#Global_ShipManager_ApplyDamage_
-  commentId: Overload:Global.ShipManager.ApplyDamage
-  isSpec: "True"
-  fullName: ShipManager.ApplyDamage
-  nameWithType: ShipManager.ApplyDamage
+- uid: Global.ShipManager.autoLoadFromShipData
+  name: autoLoadFromShipData
+  href: api/Global.ShipManager.html#Global_ShipManager_autoLoadFromShipData
+  commentId: F:Global.ShipManager.autoLoadFromShipData
+  fullName: ShipManager.autoLoadFromShipData
+  nameWithType: ShipManager.autoLoadFromShipData
 - uid: Global.ShipManager.PhysicsEnabled
   name: PhysicsEnabled
   href: api/Global.ShipManager.html#Global_ShipManager_PhysicsEnabled
@@ -1006,38 +1512,278 @@ references:
   isSpec: "True"
   fullName: ShipManager.PhysicsEnabled
   nameWithType: ShipManager.PhysicsEnabled
-- uid: Global.ShipManager.SteerShip(InputAction.CallbackContext)
-  name: SteerShip(InputAction.CallbackContext)
-  href: api/Global.ShipManager.html#Global_ShipManager_SteerShip_InputAction_CallbackContext_
-  commentId: M:Global.ShipManager.SteerShip(InputAction.CallbackContext)
-  fullName: ShipManager.SteerShip(InputAction.CallbackContext)
-  nameWithType: ShipManager.SteerShip(InputAction.CallbackContext)
-- uid: Global.ShipManager.SteerShip*
-  name: SteerShip
-  href: api/Global.ShipManager.html#Global_ShipManager_SteerShip_
-  commentId: Overload:Global.ShipManager.SteerShip
+- uid: Global.ShipManager.target
+  name: target
+  href: api/Global.ShipManager.html#Global_ShipManager_target
+  commentId: F:Global.ShipManager.target
+  fullName: ShipManager.target
+  nameWithType: ShipManager.target
+- uid: Global.ShipManager.WeaponsManager
+  name: WeaponsManager
+  href: api/Global.ShipManager.html#Global_ShipManager_WeaponsManager
+  commentId: P:Global.ShipManager.WeaponsManager
+  fullName: ShipManager.WeaponsManager
+  nameWithType: ShipManager.WeaponsManager
+- uid: Global.ShipManager.WeaponsManager*
+  name: WeaponsManager
+  href: api/Global.ShipManager.html#Global_ShipManager_WeaponsManager_
+  commentId: Overload:Global.ShipManager.WeaponsManager
   isSpec: "True"
-  fullName: ShipManager.SteerShip
-  nameWithType: ShipManager.SteerShip
-- uid: Global.ShipManager.Test(InputAction.CallbackContext)
-  name: Test(InputAction.CallbackContext)
-  href: api/Global.ShipManager.html#Global_ShipManager_Test_InputAction_CallbackContext_
-  commentId: M:Global.ShipManager.Test(InputAction.CallbackContext)
-  fullName: ShipManager.Test(InputAction.CallbackContext)
-  nameWithType: ShipManager.Test(InputAction.CallbackContext)
-- uid: Global.ShipManager.Test*
-  name: Test
-  href: api/Global.ShipManager.html#Global_ShipManager_Test_
-  commentId: Overload:Global.ShipManager.Test
+  fullName: ShipManager.WeaponsManager
+  nameWithType: ShipManager.WeaponsManager
+- uid: Global.TabGroup
+  name: TabGroup
+  href: api/Global.TabGroup.html
+  commentId: T:Global.TabGroup
+  fullName: TabGroup
+  nameWithType: TabGroup
+- uid: Global.TabGroup.AddTab(System.String)
+  name: AddTab(String)
+  href: api/Global.TabGroup.html#Global_TabGroup_AddTab_System_String_
+  commentId: M:Global.TabGroup.AddTab(System.String)
+  fullName: TabGroup.AddTab(System.String)
+  nameWithType: TabGroup.AddTab(String)
+- uid: Global.TabGroup.AddTab*
+  name: AddTab
+  href: api/Global.TabGroup.html#Global_TabGroup_AddTab_
+  commentId: Overload:Global.TabGroup.AddTab
   isSpec: "True"
-  fullName: ShipManager.Test
-  nameWithType: ShipManager.Test
+  fullName: TabGroup.AddTab
+  nameWithType: TabGroup.AddTab
+- uid: Global.TabGroup.OnTabEnter(TabButton)
+  name: OnTabEnter(TabButton)
+  href: api/Global.TabGroup.html#Global_TabGroup_OnTabEnter_TabButton_
+  commentId: M:Global.TabGroup.OnTabEnter(TabButton)
+  fullName: TabGroup.OnTabEnter(TabButton)
+  nameWithType: TabGroup.OnTabEnter(TabButton)
+- uid: Global.TabGroup.OnTabEnter*
+  name: OnTabEnter
+  href: api/Global.TabGroup.html#Global_TabGroup_OnTabEnter_
+  commentId: Overload:Global.TabGroup.OnTabEnter
+  isSpec: "True"
+  fullName: TabGroup.OnTabEnter
+  nameWithType: TabGroup.OnTabEnter
+- uid: Global.TabGroup.OnTabExit(TabButton)
+  name: OnTabExit(TabButton)
+  href: api/Global.TabGroup.html#Global_TabGroup_OnTabExit_TabButton_
+  commentId: M:Global.TabGroup.OnTabExit(TabButton)
+  fullName: TabGroup.OnTabExit(TabButton)
+  nameWithType: TabGroup.OnTabExit(TabButton)
+- uid: Global.TabGroup.OnTabExit*
+  name: OnTabExit
+  href: api/Global.TabGroup.html#Global_TabGroup_OnTabExit_
+  commentId: Overload:Global.TabGroup.OnTabExit
+  isSpec: "True"
+  fullName: TabGroup.OnTabExit
+  nameWithType: TabGroup.OnTabExit
+- uid: Global.TabGroup.OnTabSelect(TabButton)
+  name: OnTabSelect(TabButton)
+  href: api/Global.TabGroup.html#Global_TabGroup_OnTabSelect_TabButton_
+  commentId: M:Global.TabGroup.OnTabSelect(TabButton)
+  fullName: TabGroup.OnTabSelect(TabButton)
+  nameWithType: TabGroup.OnTabSelect(TabButton)
+- uid: Global.TabGroup.OnTabSelect*
+  name: OnTabSelect
+  href: api/Global.TabGroup.html#Global_TabGroup_OnTabSelect_
+  commentId: Overload:Global.TabGroup.OnTabSelect
+  isSpec: "True"
+  fullName: TabGroup.OnTabSelect
+  nameWithType: TabGroup.OnTabSelect
+- uid: Global.TabGroup.ResetTabs
+  name: ResetTabs()
+  href: api/Global.TabGroup.html#Global_TabGroup_ResetTabs
+  commentId: M:Global.TabGroup.ResetTabs
+  fullName: TabGroup.ResetTabs()
+  nameWithType: TabGroup.ResetTabs()
+- uid: Global.TabGroup.ResetTabs*
+  name: ResetTabs
+  href: api/Global.TabGroup.html#Global_TabGroup_ResetTabs_
+  commentId: Overload:Global.TabGroup.ResetTabs
+  isSpec: "True"
+  fullName: TabGroup.ResetTabs
+  nameWithType: TabGroup.ResetTabs
+- uid: Global.TabGroup.Subscribe(TabButton)
+  name: Subscribe(TabButton)
+  href: api/Global.TabGroup.html#Global_TabGroup_Subscribe_TabButton_
+  commentId: M:Global.TabGroup.Subscribe(TabButton)
+  fullName: TabGroup.Subscribe(TabButton)
+  nameWithType: TabGroup.Subscribe(TabButton)
+- uid: Global.TabGroup.Subscribe*
+  name: Subscribe
+  href: api/Global.TabGroup.html#Global_TabGroup_Subscribe_
+  commentId: Overload:Global.TabGroup.Subscribe
+  isSpec: "True"
+  fullName: TabGroup.Subscribe
+  nameWithType: TabGroup.Subscribe
+- uid: Global.WeaponsManager
+  name: WeaponsManager
+  href: api/Global.WeaponsManager.html
+  commentId: T:Global.WeaponsManager
+  fullName: WeaponsManager
+  nameWithType: WeaponsManager
+- uid: Global.WeaponsManager.#ctor(TileManager)
+  name: WeaponsManager(TileManager)
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager__ctor_TileManager_
+  commentId: M:Global.WeaponsManager.#ctor(TileManager)
+  fullName: WeaponsManager.WeaponsManager(TileManager)
+  nameWithType: WeaponsManager.WeaponsManager(TileManager)
+- uid: Global.WeaponsManager.#ctor*
+  name: WeaponsManager
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager__ctor_
+  commentId: Overload:Global.WeaponsManager.#ctor
+  isSpec: "True"
+  fullName: WeaponsManager.WeaponsManager
+  nameWithType: WeaponsManager.WeaponsManager
+- uid: Global.WeaponsManager.AddWeapon(Vector3Int,Weapon,GameObject)
+  name: AddWeapon(Vector3Int, Weapon, GameObject)
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_AddWeapon_Vector3Int_Weapon_GameObject_
+  commentId: M:Global.WeaponsManager.AddWeapon(Vector3Int,Weapon,GameObject)
+  fullName: WeaponsManager.AddWeapon(Vector3Int, Weapon, GameObject)
+  nameWithType: WeaponsManager.AddWeapon(Vector3Int, Weapon, GameObject)
+- uid: Global.WeaponsManager.AddWeapon*
+  name: AddWeapon
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_AddWeapon_
+  commentId: Overload:Global.WeaponsManager.AddWeapon
+  isSpec: "True"
+  fullName: WeaponsManager.AddWeapon
+  nameWithType: WeaponsManager.AddWeapon
+- uid: Global.WeaponsManager.Fire
+  name: Fire()
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_Fire
+  commentId: M:Global.WeaponsManager.Fire
+  fullName: WeaponsManager.Fire()
+  nameWithType: WeaponsManager.Fire()
+- uid: Global.WeaponsManager.Fire*
+  name: Fire
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_Fire_
+  commentId: Overload:Global.WeaponsManager.Fire
+  isSpec: "True"
+  fullName: WeaponsManager.Fire
+  nameWithType: WeaponsManager.Fire
+- uid: Global.WeaponsManager.RemoveWeapon(Vector3Int)
+  name: RemoveWeapon(Vector3Int)
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_RemoveWeapon_Vector3Int_
+  commentId: M:Global.WeaponsManager.RemoveWeapon(Vector3Int)
+  fullName: WeaponsManager.RemoveWeapon(Vector3Int)
+  nameWithType: WeaponsManager.RemoveWeapon(Vector3Int)
+- uid: Global.WeaponsManager.RemoveWeapon*
+  name: RemoveWeapon
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_RemoveWeapon_
+  commentId: Overload:Global.WeaponsManager.RemoveWeapon
+  isSpec: "True"
+  fullName: WeaponsManager.RemoveWeapon
+  nameWithType: WeaponsManager.RemoveWeapon
+- uid: Global.WeaponsManager.UpdateTransform(Transform)
+  name: UpdateTransform(Transform)
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_UpdateTransform_Transform_
+  commentId: M:Global.WeaponsManager.UpdateTransform(Transform)
+  fullName: WeaponsManager.UpdateTransform(Transform)
+  nameWithType: WeaponsManager.UpdateTransform(Transform)
+- uid: Global.WeaponsManager.UpdateTransform*
+  name: UpdateTransform
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_UpdateTransform_
+  commentId: Overload:Global.WeaponsManager.UpdateTransform
+  isSpec: "True"
+  fullName: WeaponsManager.UpdateTransform
+  nameWithType: WeaponsManager.UpdateTransform
 - uid: TileSystem
   name: TileSystem
   href: api/TileSystem.html
   commentId: N:TileSystem
   fullName: TileSystem
   nameWithType: TileSystem
+- uid: TileSystem.BasePart
+  name: BasePart
+  href: api/TileSystem.BasePart.html
+  commentId: T:TileSystem.BasePart
+  fullName: TileSystem.BasePart
+  nameWithType: BasePart
+- uid: TileSystem.BasePart.category
+  name: category
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_category
+  commentId: F:TileSystem.BasePart.category
+  fullName: TileSystem.BasePart.category
+  nameWithType: BasePart.category
+- uid: TileSystem.BasePart.damageResistance
+  name: damageResistance
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_damageResistance
+  commentId: F:TileSystem.BasePart.damageResistance
+  fullName: TileSystem.BasePart.damageResistance
+  nameWithType: BasePart.damageResistance
+- uid: TileSystem.BasePart.id
+  name: id
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_id
+  commentId: F:TileSystem.BasePart.id
+  fullName: TileSystem.BasePart.id
+  nameWithType: BasePart.id
+- uid: TileSystem.BasePart.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
+  name: Instantiate(Vector3Int, Tilemap, Directions)
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_Instantiate_Vector3Int_Tilemap_TileSystem_Directions_
+  commentId: M:TileSystem.BasePart.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
+  fullName: TileSystem.BasePart.Instantiate(Vector3Int, Tilemap, TileSystem.Directions)
+  nameWithType: BasePart.Instantiate(Vector3Int, Tilemap, Directions)
+- uid: TileSystem.BasePart.Instantiate*
+  name: Instantiate
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_Instantiate_
+  commentId: Overload:TileSystem.BasePart.Instantiate
+  isSpec: "True"
+  fullName: TileSystem.BasePart.Instantiate
+  nameWithType: BasePart.Instantiate
+- uid: TileSystem.BasePart.layer
+  name: layer
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_layer
+  commentId: F:TileSystem.BasePart.layer
+  fullName: TileSystem.BasePart.layer
+  nameWithType: BasePart.layer
+- uid: TileSystem.BasePart.mass
+  name: mass
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_mass
+  commentId: F:TileSystem.BasePart.mass
+  fullName: TileSystem.BasePart.mass
+  nameWithType: BasePart.mass
+- uid: TileSystem.BasePart.maxHealth
+  name: maxHealth
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_maxHealth
+  commentId: F:TileSystem.BasePart.maxHealth
+  fullName: TileSystem.BasePart.maxHealth
+  nameWithType: BasePart.maxHealth
+- uid: TileSystem.BasePart.partID
+  name: partID
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_partID
+  commentId: F:TileSystem.BasePart.partID
+  fullName: TileSystem.BasePart.partID
+  nameWithType: BasePart.partID
+- uid: TileSystem.BasePart.partName
+  name: partName
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_partName
+  commentId: F:TileSystem.BasePart.partName
+  fullName: TileSystem.BasePart.partName
+  nameWithType: BasePart.partName
+- uid: TileSystem.BasePart.previewImg
+  name: previewImg
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_previewImg
+  commentId: F:TileSystem.BasePart.previewImg
+  fullName: TileSystem.BasePart.previewImg
+  nameWithType: BasePart.previewImg
+- uid: TileSystem.BasePart.Remove(Vector3Int,Tilemap)
+  name: Remove(Vector3Int, Tilemap)
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_Remove_Vector3Int_Tilemap_
+  commentId: M:TileSystem.BasePart.Remove(Vector3Int,Tilemap)
+  fullName: TileSystem.BasePart.Remove(Vector3Int, Tilemap)
+  nameWithType: BasePart.Remove(Vector3Int, Tilemap)
+- uid: TileSystem.BasePart.Remove*
+  name: Remove
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_Remove_
+  commentId: Overload:TileSystem.BasePart.Remove
+  isSpec: "True"
+  fullName: TileSystem.BasePart.Remove
+  nameWithType: BasePart.Remove
+- uid: TileSystem.BasePart.tile
+  name: tile
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_tile
+  commentId: F:TileSystem.BasePart.tile
+  fullName: TileSystem.BasePart.tile
+  nameWithType: BasePart.tile
 - uid: TileSystem.Directions
   name: Directions
   href: api/TileSystem.Directions.html
@@ -1086,6 +1832,24 @@ references:
   commentId: F:TileSystem.Directions.ZUp
   fullName: TileSystem.Directions.ZUp
   nameWithType: Directions.ZUp
+- uid: TileSystem.EnginePart
+  name: EnginePart
+  href: api/TileSystem.EnginePart.html
+  commentId: T:TileSystem.EnginePart
+  fullName: TileSystem.EnginePart
+  nameWithType: EnginePart
+- uid: TileSystem.EnginePart.thrust
+  name: thrust
+  href: api/TileSystem.EnginePart.html#TileSystem_EnginePart_thrust
+  commentId: F:TileSystem.EnginePart.thrust
+  fullName: TileSystem.EnginePart.thrust
+  nameWithType: EnginePart.thrust
+- uid: TileSystem.Notify
+  name: Notify
+  href: api/TileSystem.Notify.html
+  commentId: T:TileSystem.Notify
+  fullName: TileSystem.Notify
+  nameWithType: Notify
 - uid: TileSystem.TileInfo
   name: TileInfo
   href: api/TileSystem.TileInfo.html
@@ -1110,12 +1874,12 @@ references:
   commentId: T:TileSystem.TileInstanceData
   fullName: TileSystem.TileInstanceData
   nameWithType: TileInstanceData
-- uid: TileSystem.TileInstanceData.#ctor(BaseTileVariant,TileSystem.Directions)
-  name: TileInstanceData(BaseTileVariant, Directions)
-  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData__ctor_BaseTileVariant_TileSystem_Directions_
-  commentId: M:TileSystem.TileInstanceData.#ctor(BaseTileVariant,TileSystem.Directions)
-  fullName: TileSystem.TileInstanceData.TileInstanceData(BaseTileVariant, TileSystem.Directions)
-  nameWithType: TileInstanceData.TileInstanceData(BaseTileVariant, Directions)
+- uid: TileSystem.TileInstanceData.#ctor(TileSystem.BasePart,TileSystem.Directions)
+  name: TileInstanceData(BasePart, Directions)
+  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData__ctor_TileSystem_BasePart_TileSystem_Directions_
+  commentId: M:TileSystem.TileInstanceData.#ctor(TileSystem.BasePart,TileSystem.Directions)
+  fullName: TileSystem.TileInstanceData.TileInstanceData(TileSystem.BasePart, TileSystem.Directions)
+  nameWithType: TileInstanceData.TileInstanceData(BasePart, Directions)
 - uid: TileSystem.TileInstanceData.#ctor*
   name: TileInstanceData
   href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData__ctor_
@@ -1154,19 +1918,6 @@ references:
   commentId: T:TileSystem.TileManager
   fullName: TileSystem.TileManager
   nameWithType: TileManager
-- uid: TileSystem.TileManager.ApplyDamage(Damage)
-  name: ApplyDamage(Damage)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_ApplyDamage_Damage_
-  commentId: M:TileSystem.TileManager.ApplyDamage(Damage)
-  fullName: TileSystem.TileManager.ApplyDamage(Damage)
-  nameWithType: TileManager.ApplyDamage(Damage)
-- uid: TileSystem.TileManager.ApplyDamage*
-  name: ApplyDamage
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_ApplyDamage_
-  commentId: Overload:TileSystem.TileManager.ApplyDamage
-  isSpec: "True"
-  fullName: TileSystem.TileManager.ApplyDamage
-  nameWithType: TileManager.ApplyDamage
 - uid: TileSystem.TileManager.Awake
   name: Awake()
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_Awake
@@ -1193,6 +1944,35 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.CordsToPosition
   nameWithType: TileManager.CordsToPosition
+- uid: TileSystem.TileManager.DamageTile(Vector3Int,System.Single,System.Single@)
+  name: DamageTile(Vector3Int, Single, out Single)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_DamageTile_Vector3Int_System_Single_System_Single__
+  commentId: M:TileSystem.TileManager.DamageTile(Vector3Int,System.Single,System.Single@)
+  name.vb: DamageTile(Vector3Int, Single, ByRef Single)
+  fullName: TileSystem.TileManager.DamageTile(Vector3Int, System.Single, out System.Single)
+  fullName.vb: TileSystem.TileManager.DamageTile(Vector3Int, System.Single, ByRef System.Single)
+  nameWithType: TileManager.DamageTile(Vector3Int, Single, out Single)
+  nameWithType.vb: TileManager.DamageTile(Vector3Int, Single, ByRef Single)
+- uid: TileSystem.TileManager.DamageTile*
+  name: DamageTile
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_DamageTile_
+  commentId: Overload:TileSystem.TileManager.DamageTile
+  isSpec: "True"
+  fullName: TileSystem.TileManager.DamageTile
+  nameWithType: TileManager.DamageTile
+- uid: TileSystem.TileManager.DesignToJson
+  name: DesignToJson()
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_DesignToJson
+  commentId: M:TileSystem.TileManager.DesignToJson
+  fullName: TileSystem.TileManager.DesignToJson()
+  nameWithType: TileManager.DesignToJson()
+- uid: TileSystem.TileManager.DesignToJson*
+  name: DesignToJson
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_DesignToJson_
+  commentId: Overload:TileSystem.TileManager.DesignToJson
+  isSpec: "True"
+  fullName: TileSystem.TileManager.DesignToJson
+  nameWithType: TileManager.DesignToJson
 - uid: TileSystem.TileManager.FindIslands(System.Int32)
   name: FindIslands(Int32)
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_FindIslands_System_Int32_
@@ -1206,15 +1986,6 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.FindIslands
   nameWithType: TileManager.FindIslands
-- uid: TileSystem.TileManager.GetTile(Vector3,System.Boolean@)
-  name: GetTile(Vector3, out Boolean)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_Vector3_System_Boolean__
-  commentId: M:TileSystem.TileManager.GetTile(Vector3,System.Boolean@)
-  name.vb: GetTile(Vector3, ByRef Boolean)
-  fullName: TileSystem.TileManager.GetTile(Vector3, out System.Boolean)
-  fullName.vb: TileSystem.TileManager.GetTile(Vector3, ByRef System.Boolean)
-  nameWithType: TileManager.GetTile(Vector3, out Boolean)
-  nameWithType.vb: TileManager.GetTile(Vector3, ByRef Boolean)
 - uid: TileSystem.TileManager.GetTile(Vector3Int,System.Boolean@)
   name: GetTile(Vector3Int, out Boolean)
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_GetTile_Vector3Int_System_Boolean__
@@ -1275,6 +2046,38 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.HasTile
   nameWithType: TileManager.HasTile
+- uid: TileSystem.TileManager.LoadFromJson(System.String)
+  name: LoadFromJson(String)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_LoadFromJson_System_String_
+  commentId: M:TileSystem.TileManager.LoadFromJson(System.String)
+  fullName: TileSystem.TileManager.LoadFromJson(System.String)
+  nameWithType: TileManager.LoadFromJson(String)
+- uid: TileSystem.TileManager.LoadFromJson*
+  name: LoadFromJson
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_LoadFromJson_
+  commentId: Overload:TileSystem.TileManager.LoadFromJson
+  isSpec: "True"
+  fullName: TileSystem.TileManager.LoadFromJson
+  nameWithType: TileManager.LoadFromJson
+- uid: TileSystem.TileManager.OnEnable
+  name: OnEnable()
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_OnEnable
+  commentId: M:TileSystem.TileManager.OnEnable
+  fullName: TileSystem.TileManager.OnEnable()
+  nameWithType: TileManager.OnEnable()
+- uid: TileSystem.TileManager.OnEnable*
+  name: OnEnable
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_OnEnable_
+  commentId: Overload:TileSystem.TileManager.OnEnable
+  isSpec: "True"
+  fullName: TileSystem.TileManager.OnEnable
+  nameWithType: TileManager.OnEnable
+- uid: TileSystem.TileManager.onTileMap
+  name: onTileMap
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_onTileMap
+  commentId: F:TileSystem.TileManager.onTileMap
+  fullName: TileSystem.TileManager.onTileMap
+  nameWithType: TileManager.onTileMap
 - uid: TileSystem.TileManager.PhysicsEnabled
   name: PhysicsEnabled
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_PhysicsEnabled
@@ -1288,6 +2091,25 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.PhysicsEnabled
   nameWithType: TileManager.PhysicsEnabled
+- uid: TileSystem.TileManager.PhysicsModelChanged
+  name: PhysicsModelChanged
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_PhysicsModelChanged
+  commentId: P:TileSystem.TileManager.PhysicsModelChanged
+  fullName: TileSystem.TileManager.PhysicsModelChanged
+  nameWithType: TileManager.PhysicsModelChanged
+- uid: TileSystem.TileManager.PhysicsModelChanged*
+  name: PhysicsModelChanged
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_PhysicsModelChanged_
+  commentId: Overload:TileSystem.TileManager.PhysicsModelChanged
+  isSpec: "True"
+  fullName: TileSystem.TileManager.PhysicsModelChanged
+  nameWithType: TileManager.PhysicsModelChanged
+- uid: TileSystem.TileManager.pool
+  name: pool
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_pool
+  commentId: F:TileSystem.TileManager.pool
+  fullName: TileSystem.TileManager.pool
+  nameWithType: TileManager.pool
 - uid: TileSystem.TileManager.PositionToCords(Vector3)
   name: PositionToCords(Vector3)
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_PositionToCords_Vector3_
@@ -1301,6 +2123,19 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.PositionToCords
   nameWithType: TileManager.PositionToCords
+- uid: TileSystem.TileManager.RefreshPhysics
+  name: RefreshPhysics()
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_RefreshPhysics
+  commentId: M:TileSystem.TileManager.RefreshPhysics
+  fullName: TileSystem.TileManager.RefreshPhysics()
+  nameWithType: TileManager.RefreshPhysics()
+- uid: TileSystem.TileManager.RefreshPhysics*
+  name: RefreshPhysics
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_RefreshPhysics_
+  commentId: Overload:TileSystem.TileManager.RefreshPhysics
+  isSpec: "True"
+  fullName: TileSystem.TileManager.RefreshPhysics
+  nameWithType: TileManager.RefreshPhysics
 - uid: TileSystem.TileManager.RemoveTile(Vector3)
   name: RemoveTile(Vector3)
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_RemoveTile_Vector3_
@@ -1333,18 +2168,31 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.ResetTiles
   nameWithType: TileManager.ResetTiles
-- uid: TileSystem.TileManager.SetTile(Vector3,System.UInt16)
-  name: SetTile(Vector3, UInt16)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTile_Vector3_System_UInt16_
-  commentId: M:TileSystem.TileManager.SetTile(Vector3,System.UInt16)
-  fullName: TileSystem.TileManager.SetTile(Vector3, System.UInt16)
-  nameWithType: TileManager.SetTile(Vector3, UInt16)
-- uid: TileSystem.TileManager.SetTile(Vector3Int,System.UInt16)
-  name: SetTile(Vector3Int, UInt16)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTile_Vector3Int_System_UInt16_
-  commentId: M:TileSystem.TileManager.SetTile(Vector3Int,System.UInt16)
-  fullName: TileSystem.TileManager.SetTile(Vector3Int, System.UInt16)
-  nameWithType: TileManager.SetTile(Vector3Int, UInt16)
+- uid: TileSystem.TileManager.Rigidbody2D
+  name: Rigidbody2D
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_Rigidbody2D
+  commentId: P:TileSystem.TileManager.Rigidbody2D
+  fullName: TileSystem.TileManager.Rigidbody2D
+  nameWithType: TileManager.Rigidbody2D
+- uid: TileSystem.TileManager.Rigidbody2D*
+  name: Rigidbody2D
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_Rigidbody2D_
+  commentId: Overload:TileSystem.TileManager.Rigidbody2D
+  isSpec: "True"
+  fullName: TileSystem.TileManager.Rigidbody2D
+  nameWithType: TileManager.Rigidbody2D
+- uid: TileSystem.TileManager.SetTile(Vector3,TileSystem.BasePart)
+  name: SetTile(Vector3, BasePart)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTile_Vector3_TileSystem_BasePart_
+  commentId: M:TileSystem.TileManager.SetTile(Vector3,TileSystem.BasePart)
+  fullName: TileSystem.TileManager.SetTile(Vector3, TileSystem.BasePart)
+  nameWithType: TileManager.SetTile(Vector3, BasePart)
+- uid: TileSystem.TileManager.SetTile(Vector3Int,TileSystem.BasePart,TileSystem.Directions)
+  name: SetTile(Vector3Int, BasePart, Directions)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTile_Vector3Int_TileSystem_BasePart_TileSystem_Directions_
+  commentId: M:TileSystem.TileManager.SetTile(Vector3Int,TileSystem.BasePart,TileSystem.Directions)
+  fullName: TileSystem.TileManager.SetTile(Vector3Int, TileSystem.BasePart, TileSystem.Directions)
+  nameWithType: TileManager.SetTile(Vector3Int, BasePart, Directions)
 - uid: TileSystem.TileManager.SetTile*
   name: SetTile
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTile_
@@ -1352,35 +2200,6 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.SetTile
   nameWithType: TileManager.SetTile
-- uid: TileSystem.TileManager.SetTiles(Vector3Int[],TileSystem.TileInstanceData[])
-  name: SetTiles(Vector3Int[], TileInstanceData[])
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTiles_Vector3Int___TileSystem_TileInstanceData___
-  commentId: M:TileSystem.TileManager.SetTiles(Vector3Int[],TileSystem.TileInstanceData[])
-  name.vb: SetTiles(Vector3Int(), TileInstanceData())
-  fullName: TileSystem.TileManager.SetTiles(Vector3Int[], TileSystem.TileInstanceData[])
-  fullName.vb: TileSystem.TileManager.SetTiles(Vector3Int(), TileSystem.TileInstanceData())
-  nameWithType: TileManager.SetTiles(Vector3Int[], TileInstanceData[])
-  nameWithType.vb: TileManager.SetTiles(Vector3Int(), TileInstanceData())
-- uid: TileSystem.TileManager.SetTiles*
-  name: SetTiles
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTiles_
-  commentId: Overload:TileSystem.TileManager.SetTiles
-  isSpec: "True"
-  fullName: TileSystem.TileManager.SetTiles
-  nameWithType: TileManager.SetTiles
-- uid: TileSystem.TileManager.Start
-  name: Start()
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_Start
-  commentId: M:TileSystem.TileManager.Start
-  fullName: TileSystem.TileManager.Start()
-  nameWithType: TileManager.Start()
-- uid: TileSystem.TileManager.Start*
-  name: Start
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_Start_
-  commentId: Overload:TileSystem.TileManager.Start
-  isSpec: "True"
-  fullName: TileSystem.TileManager.Start
-  nameWithType: TileManager.Start
 - uid: TileSystem.TileManager.TileSet
   name: TileSet
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_TileSet
@@ -1407,6 +2226,12 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.TileSize
   nameWithType: TileManager.TileSize
+- uid: TileSystem.TileManager.UpdatePhysics
+  name: UpdatePhysics
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_UpdatePhysics
+  commentId: E:TileSystem.TileManager.UpdatePhysics
+  fullName: TileSystem.TileManager.UpdatePhysics
+  nameWithType: TileManager.UpdatePhysics
 - uid: TileSystem.TileSet
   name: TileSet
   href: api/TileSystem.TileSet.html
@@ -1419,177 +2244,541 @@ references:
   commentId: F:TileSystem.TileSet.ActiveLayers
   fullName: TileSystem.TileSet.ActiveLayers
   nameWithType: TileSet.ActiveLayers
-- uid: TileSystem.TileSet.GetTileSet(System.String)
-  name: GetTileSet(String)
-  href: api/TileSystem.TileSet.html#TileSystem_TileSet_GetTileSet_System_String_
-  commentId: M:TileSystem.TileSet.GetTileSet(System.String)
-  fullName: TileSystem.TileSet.GetTileSet(System.String)
-  nameWithType: TileSet.GetTileSet(String)
-- uid: TileSystem.TileSet.GetTileSet*
-  name: GetTileSet
-  href: api/TileSystem.TileSet.html#TileSystem_TileSet_GetTileSet_
-  commentId: Overload:TileSystem.TileSet.GetTileSet
+- uid: TileSystem.TileSet.Instance
+  name: Instance
+  href: api/TileSystem.TileSet.html#TileSystem_TileSet_Instance
+  commentId: P:TileSystem.TileSet.Instance
+  fullName: TileSystem.TileSet.Instance
+  nameWithType: TileSet.Instance
+- uid: TileSystem.TileSet.Instance*
+  name: Instance
+  href: api/TileSystem.TileSet.html#TileSystem_TileSet_Instance_
+  commentId: Overload:TileSystem.TileSet.Instance
   isSpec: "True"
-  fullName: TileSystem.TileSet.GetTileSet
-  nameWithType: TileSet.GetTileSet
-- uid: TileSystem.TileSet.TilemapNameToID
-  name: TilemapNameToID
-  href: api/TileSystem.TileSet.html#TileSystem_TileSet_TilemapNameToID
-  commentId: F:TileSystem.TileSet.TilemapNameToID
-  fullName: TileSystem.TileSet.TilemapNameToID
-  nameWithType: TileSet.TilemapNameToID
+  fullName: TileSystem.TileSet.Instance
+  nameWithType: TileSet.Instance
 - uid: TileSystem.TileSet.TileVariants
   name: TileVariants
   href: api/TileSystem.TileSet.html#TileSystem_TileSet_TileVariants
   commentId: F:TileSystem.TileSet.TileVariants
   fullName: TileSystem.TileSet.TileVariants
   nameWithType: TileSet.TileVariants
+- uid: TileSystem.TileSet.VariantIDToName
+  name: VariantIDToName
+  href: api/TileSystem.TileSet.html#TileSystem_TileSet_VariantIDToName
+  commentId: F:TileSystem.TileSet.VariantIDToName
+  fullName: TileSystem.TileSet.VariantIDToName
+  nameWithType: TileSet.VariantIDToName
 - uid: TileSystem.TileSet.VariantNameToID
   name: VariantNameToID
   href: api/TileSystem.TileSet.html#TileSystem_TileSet_VariantNameToID
   commentId: F:TileSystem.TileSet.VariantNameToID
   fullName: TileSystem.TileSet.VariantNameToID
   nameWithType: TileSet.VariantNameToID
-- uid: TileSystem.TileVariants
-  name: TileSystem.TileVariants
-  href: api/TileSystem.TileVariants.html
-  commentId: N:TileSystem.TileVariants
-  fullName: TileSystem.TileVariants
-  nameWithType: TileSystem.TileVariants
-- uid: TileSystem.TileVariants.ArmorVariant
-  name: ArmorVariant
-  href: api/TileSystem.TileVariants.ArmorVariant.html
-  commentId: T:TileSystem.TileVariants.ArmorVariant
-  fullName: TileSystem.TileVariants.ArmorVariant
-  nameWithType: ArmorVariant
-- uid: TileSystem.TileVariants.ArmorVariant.#ctor(System.String)
-  name: ArmorVariant(String)
-  href: api/TileSystem.TileVariants.ArmorVariant.html#TileSystem_TileVariants_ArmorVariant__ctor_System_String_
-  commentId: M:TileSystem.TileVariants.ArmorVariant.#ctor(System.String)
-  fullName: TileSystem.TileVariants.ArmorVariant.ArmorVariant(System.String)
-  nameWithType: ArmorVariant.ArmorVariant(String)
-- uid: TileSystem.TileVariants.ArmorVariant.#ctor*
-  name: ArmorVariant
-  href: api/TileSystem.TileVariants.ArmorVariant.html#TileSystem_TileVariants_ArmorVariant__ctor_
-  commentId: Overload:TileSystem.TileVariants.ArmorVariant.#ctor
+- uid: TileSystem.Weapon
+  name: Weapon
+  href: api/TileSystem.Weapon.html
+  commentId: T:TileSystem.Weapon
+  fullName: TileSystem.Weapon
+  nameWithType: Weapon
+- uid: TileSystem.Weapon.baseDamage
+  name: baseDamage
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_baseDamage
+  commentId: F:TileSystem.Weapon.baseDamage
+  fullName: TileSystem.Weapon.baseDamage
+  nameWithType: Weapon.baseDamage
+- uid: TileSystem.Weapon.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
+  name: Instantiate(Vector3Int, Tilemap, Directions)
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_Instantiate_Vector3Int_Tilemap_TileSystem_Directions_
+  commentId: M:TileSystem.Weapon.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
+  fullName: TileSystem.Weapon.Instantiate(Vector3Int, Tilemap, TileSystem.Directions)
+  nameWithType: Weapon.Instantiate(Vector3Int, Tilemap, Directions)
+- uid: TileSystem.Weapon.Instantiate*
+  name: Instantiate
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_Instantiate_
+  commentId: Overload:TileSystem.Weapon.Instantiate
   isSpec: "True"
-  fullName: TileSystem.TileVariants.ArmorVariant.ArmorVariant
-  nameWithType: ArmorVariant.ArmorVariant
-- uid: TileSystem.TileVariants.BaseTileVariant
-  name: BaseTileVariant
-  href: api/TileSystem.TileVariants.BaseTileVariant.html
-  commentId: T:TileSystem.TileVariants.BaseTileVariant
-  fullName: TileSystem.TileVariants.BaseTileVariant
-  nameWithType: BaseTileVariant
-- uid: TileSystem.TileVariants.BaseTileVariant.#ctor(System.String)
-  name: BaseTileVariant(String)
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant__ctor_System_String_
-  commentId: M:TileSystem.TileVariants.BaseTileVariant.#ctor(System.String)
-  fullName: TileSystem.TileVariants.BaseTileVariant.BaseTileVariant(System.String)
-  nameWithType: BaseTileVariant.BaseTileVariant(String)
-- uid: TileSystem.TileVariants.BaseTileVariant.#ctor*
-  name: BaseTileVariant
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant__ctor_
-  commentId: Overload:TileSystem.TileVariants.BaseTileVariant.#ctor
+  fullName: TileSystem.Weapon.Instantiate
+  nameWithType: Weapon.Instantiate
+- uid: TileSystem.Weapon.range
+  name: range
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_range
+  commentId: F:TileSystem.Weapon.range
+  fullName: TileSystem.Weapon.range
+  nameWithType: Weapon.range
+- uid: TileSystem.Weapon.Remove(Vector3Int,Tilemap)
+  name: Remove(Vector3Int, Tilemap)
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_Remove_Vector3Int_Tilemap_
+  commentId: M:TileSystem.Weapon.Remove(Vector3Int,Tilemap)
+  fullName: TileSystem.Weapon.Remove(Vector3Int, Tilemap)
+  nameWithType: Weapon.Remove(Vector3Int, Tilemap)
+- uid: TileSystem.Weapon.Remove*
+  name: Remove
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_Remove_
+  commentId: Overload:TileSystem.Weapon.Remove
   isSpec: "True"
-  fullName: TileSystem.TileVariants.BaseTileVariant.BaseTileVariant
-  nameWithType: BaseTileVariant.BaseTileVariant
-- uid: TileSystem.TileVariants.BaseTileVariant.DamageResistance
-  name: DamageResistance
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_DamageResistance
-  commentId: F:TileSystem.TileVariants.BaseTileVariant.DamageResistance
-  fullName: TileSystem.TileVariants.BaseTileVariant.DamageResistance
-  nameWithType: BaseTileVariant.DamageResistance
-- uid: TileSystem.TileVariants.BaseTileVariant.ID
-  name: ID
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_ID
-  commentId: F:TileSystem.TileVariants.BaseTileVariant.ID
-  fullName: TileSystem.TileVariants.BaseTileVariant.ID
-  nameWithType: BaseTileVariant.ID
-- uid: TileSystem.TileVariants.BaseTileVariant.IdIDx
-  name: IdIDx
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_IdIDx
-  commentId: P:TileSystem.TileVariants.BaseTileVariant.IdIDx
-  fullName: TileSystem.TileVariants.BaseTileVariant.IdIDx
-  nameWithType: BaseTileVariant.IdIDx
-- uid: TileSystem.TileVariants.BaseTileVariant.IdIDx*
-  name: IdIDx
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_IdIDx_
-  commentId: Overload:TileSystem.TileVariants.BaseTileVariant.IdIDx
+  fullName: TileSystem.Weapon.Remove
+  nameWithType: Weapon.Remove
+- uid: TileSystem.Weapon.turret
+  name: turret
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_turret
+  commentId: F:TileSystem.Weapon.turret
+  fullName: TileSystem.Weapon.turret
+  nameWithType: Weapon.turret
+- uid: TileSystem.Weapon.turretTemplate
+  name: turretTemplate
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_turretTemplate
+  commentId: F:TileSystem.Weapon.turretTemplate
+  fullName: TileSystem.Weapon.turretTemplate
+  nameWithType: Weapon.turretTemplate
+- uid: UI
+  name: UI
+  href: api/UI.html
+  commentId: N:UI
+  fullName: UI
+  nameWithType: UI
+- uid: UI.DraggableUI
+  name: DraggableUI
+  href: api/UI.DraggableUI.html
+  commentId: T:UI.DraggableUI
+  fullName: UI.DraggableUI
+  nameWithType: DraggableUI
+- uid: UI.DraggableUI.OnDrag(PointerEventData)
+  name: OnDrag(PointerEventData)
+  href: api/UI.DraggableUI.html#UI_DraggableUI_OnDrag_PointerEventData_
+  commentId: M:UI.DraggableUI.OnDrag(PointerEventData)
+  fullName: UI.DraggableUI.OnDrag(PointerEventData)
+  nameWithType: DraggableUI.OnDrag(PointerEventData)
+- uid: UI.DraggableUI.OnDrag*
+  name: OnDrag
+  href: api/UI.DraggableUI.html#UI_DraggableUI_OnDrag_
+  commentId: Overload:UI.DraggableUI.OnDrag
   isSpec: "True"
-  fullName: TileSystem.TileVariants.BaseTileVariant.IdIDx
-  nameWithType: BaseTileVariant.IdIDx
-- uid: TileSystem.TileVariants.BaseTileVariant.Layer
-  name: Layer
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_Layer
-  commentId: F:TileSystem.TileVariants.BaseTileVariant.Layer
-  fullName: TileSystem.TileVariants.BaseTileVariant.Layer
-  nameWithType: BaseTileVariant.Layer
-- uid: TileSystem.TileVariants.BaseTileVariant.MaxHealth
-  name: MaxHealth
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_MaxHealth
-  commentId: F:TileSystem.TileVariants.BaseTileVariant.MaxHealth
-  fullName: TileSystem.TileVariants.BaseTileVariant.MaxHealth
-  nameWithType: BaseTileVariant.MaxHealth
-- uid: TileSystem.TileVariants.BaseTileVariant.Name
-  name: Name
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_Name
-  commentId: F:TileSystem.TileVariants.BaseTileVariant.Name
-  fullName: TileSystem.TileVariants.BaseTileVariant.Name
-  nameWithType: BaseTileVariant.Name
-- uid: TileSystem.TileVariants.BaseTileVariant.TileBase
-  name: TileBase
-  href: api/TileSystem.TileVariants.BaseTileVariant.html#TileSystem_TileVariants_BaseTileVariant_TileBase
-  commentId: F:TileSystem.TileVariants.BaseTileVariant.TileBase
-  fullName: TileSystem.TileVariants.BaseTileVariant.TileBase
-  nameWithType: BaseTileVariant.TileBase
-- uid: TileSystem.TileVariants.EngineVariant
-  name: EngineVariant
-  href: api/TileSystem.TileVariants.EngineVariant.html
-  commentId: T:TileSystem.TileVariants.EngineVariant
-  fullName: TileSystem.TileVariants.EngineVariant
-  nameWithType: EngineVariant
-- uid: TileSystem.TileVariants.EngineVariant.#ctor(System.String)
-  name: EngineVariant(String)
-  href: api/TileSystem.TileVariants.EngineVariant.html#TileSystem_TileVariants_EngineVariant__ctor_System_String_
-  commentId: M:TileSystem.TileVariants.EngineVariant.#ctor(System.String)
-  fullName: TileSystem.TileVariants.EngineVariant.EngineVariant(System.String)
-  nameWithType: EngineVariant.EngineVariant(String)
-- uid: TileSystem.TileVariants.EngineVariant.#ctor*
-  name: EngineVariant
-  href: api/TileSystem.TileVariants.EngineVariant.html#TileSystem_TileVariants_EngineVariant__ctor_
-  commentId: Overload:TileSystem.TileVariants.EngineVariant.#ctor
+  fullName: UI.DraggableUI.OnDrag
+  nameWithType: DraggableUI.OnDrag
+- uid: UI.FixedGridLayout
+  name: FixedGridLayout
+  href: api/UI.FixedGridLayout.html
+  commentId: T:UI.FixedGridLayout
+  fullName: UI.FixedGridLayout
+  nameWithType: FixedGridLayout
+- uid: UI.FixedGridLayout.alignment
+  name: alignment
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_alignment
+  commentId: F:UI.FixedGridLayout.alignment
+  fullName: UI.FixedGridLayout.alignment
+  nameWithType: FixedGridLayout.alignment
+- uid: UI.FixedGridLayout.Alignment
+  name: FixedGridLayout.Alignment
+  href: api/UI.FixedGridLayout.Alignment.html
+  commentId: T:UI.FixedGridLayout.Alignment
+  fullName: UI.FixedGridLayout.Alignment
+  nameWithType: FixedGridLayout.Alignment
+- uid: UI.FixedGridLayout.Alignment.Center
+  name: Center
+  href: api/UI.FixedGridLayout.Alignment.html#UI_FixedGridLayout_Alignment_Center
+  commentId: F:UI.FixedGridLayout.Alignment.Center
+  fullName: UI.FixedGridLayout.Alignment.Center
+  nameWithType: FixedGridLayout.Alignment.Center
+- uid: UI.FixedGridLayout.CalculateLayoutInputHorizontal
+  name: CalculateLayoutInputHorizontal()
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_CalculateLayoutInputHorizontal
+  commentId: M:UI.FixedGridLayout.CalculateLayoutInputHorizontal
+  fullName: UI.FixedGridLayout.CalculateLayoutInputHorizontal()
+  nameWithType: FixedGridLayout.CalculateLayoutInputHorizontal()
+- uid: UI.FixedGridLayout.CalculateLayoutInputHorizontal*
+  name: CalculateLayoutInputHorizontal
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_CalculateLayoutInputHorizontal_
+  commentId: Overload:UI.FixedGridLayout.CalculateLayoutInputHorizontal
   isSpec: "True"
-  fullName: TileSystem.TileVariants.EngineVariant.EngineVariant
-  nameWithType: EngineVariant.EngineVariant
-- uid: TileSystem.TileVariants.EngineVariant.Thrust
-  name: Thrust
-  href: api/TileSystem.TileVariants.EngineVariant.html#TileSystem_TileVariants_EngineVariant_Thrust
-  commentId: F:TileSystem.TileVariants.EngineVariant.Thrust
-  fullName: TileSystem.TileVariants.EngineVariant.Thrust
-  nameWithType: EngineVariant.Thrust
-- uid: TileSystem.TileVariants.FunctionalTileVariant
-  name: FunctionalTileVariant
-  href: api/TileSystem.TileVariants.FunctionalTileVariant.html
-  commentId: T:TileSystem.TileVariants.FunctionalTileVariant
-  fullName: TileSystem.TileVariants.FunctionalTileVariant
-  nameWithType: FunctionalTileVariant
-- uid: TileSystem.TileVariants.FunctionalTileVariant.#ctor(System.String)
-  name: FunctionalTileVariant(String)
-  href: api/TileSystem.TileVariants.FunctionalTileVariant.html#TileSystem_TileVariants_FunctionalTileVariant__ctor_System_String_
-  commentId: M:TileSystem.TileVariants.FunctionalTileVariant.#ctor(System.String)
-  fullName: TileSystem.TileVariants.FunctionalTileVariant.FunctionalTileVariant(System.String)
-  nameWithType: FunctionalTileVariant.FunctionalTileVariant(String)
-- uid: TileSystem.TileVariants.FunctionalTileVariant.#ctor*
-  name: FunctionalTileVariant
-  href: api/TileSystem.TileVariants.FunctionalTileVariant.html#TileSystem_TileVariants_FunctionalTileVariant__ctor_
-  commentId: Overload:TileSystem.TileVariants.FunctionalTileVariant.#ctor
+  fullName: UI.FixedGridLayout.CalculateLayoutInputHorizontal
+  nameWithType: FixedGridLayout.CalculateLayoutInputHorizontal
+- uid: UI.FixedGridLayout.CalculateLayoutInputVertical
+  name: CalculateLayoutInputVertical()
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_CalculateLayoutInputVertical
+  commentId: M:UI.FixedGridLayout.CalculateLayoutInputVertical
+  fullName: UI.FixedGridLayout.CalculateLayoutInputVertical()
+  nameWithType: FixedGridLayout.CalculateLayoutInputVertical()
+- uid: UI.FixedGridLayout.CalculateLayoutInputVertical*
+  name: CalculateLayoutInputVertical
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_CalculateLayoutInputVertical_
+  commentId: Overload:UI.FixedGridLayout.CalculateLayoutInputVertical
   isSpec: "True"
-  fullName: TileSystem.TileVariants.FunctionalTileVariant.FunctionalTileVariant
-  nameWithType: FunctionalTileVariant.FunctionalTileVariant
-- uid: TileSystem.TileVariants.FunctionalTileVariant.PowerGeneration
-  name: PowerGeneration
-  href: api/TileSystem.TileVariants.FunctionalTileVariant.html#TileSystem_TileVariants_FunctionalTileVariant_PowerGeneration
-  commentId: F:TileSystem.TileVariants.FunctionalTileVariant.PowerGeneration
-  fullName: TileSystem.TileVariants.FunctionalTileVariant.PowerGeneration
-  nameWithType: FunctionalTileVariant.PowerGeneration
+  fullName: UI.FixedGridLayout.CalculateLayoutInputVertical
+  nameWithType: FixedGridLayout.CalculateLayoutInputVertical
+- uid: UI.FixedGridLayout.cellSize
+  name: cellSize
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_cellSize
+  commentId: F:UI.FixedGridLayout.cellSize
+  fullName: UI.FixedGridLayout.cellSize
+  nameWithType: FixedGridLayout.cellSize
+- uid: UI.FixedGridLayout.SetLayoutHorizontal
+  name: SetLayoutHorizontal()
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_SetLayoutHorizontal
+  commentId: M:UI.FixedGridLayout.SetLayoutHorizontal
+  fullName: UI.FixedGridLayout.SetLayoutHorizontal()
+  nameWithType: FixedGridLayout.SetLayoutHorizontal()
+- uid: UI.FixedGridLayout.SetLayoutHorizontal*
+  name: SetLayoutHorizontal
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_SetLayoutHorizontal_
+  commentId: Overload:UI.FixedGridLayout.SetLayoutHorizontal
+  isSpec: "True"
+  fullName: UI.FixedGridLayout.SetLayoutHorizontal
+  nameWithType: FixedGridLayout.SetLayoutHorizontal
+- uid: UI.FixedGridLayout.SetLayoutVertical
+  name: SetLayoutVertical()
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_SetLayoutVertical
+  commentId: M:UI.FixedGridLayout.SetLayoutVertical
+  fullName: UI.FixedGridLayout.SetLayoutVertical()
+  nameWithType: FixedGridLayout.SetLayoutVertical()
+- uid: UI.FixedGridLayout.SetLayoutVertical*
+  name: SetLayoutVertical
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_SetLayoutVertical_
+  commentId: Overload:UI.FixedGridLayout.SetLayoutVertical
+  isSpec: "True"
+  fullName: UI.FixedGridLayout.SetLayoutVertical
+  nameWithType: FixedGridLayout.SetLayoutVertical
+- uid: UI.FixedGridLayout.spacing
+  name: spacing
+  href: api/UI.FixedGridLayout.html#UI_FixedGridLayout_spacing
+  commentId: F:UI.FixedGridLayout.spacing
+  fullName: UI.FixedGridLayout.spacing
+  nameWithType: FixedGridLayout.spacing
+- uid: UI.PopUp
+  name: PopUp
+  href: api/UI.PopUp.html
+  commentId: T:UI.PopUp
+  fullName: UI.PopUp
+  nameWithType: PopUp
+- uid: UI.PopUp.Close
+  name: Close()
+  href: api/UI.PopUp.html#UI_PopUp_Close
+  commentId: M:UI.PopUp.Close
+  fullName: UI.PopUp.Close()
+  nameWithType: PopUp.Close()
+- uid: UI.PopUp.Close*
+  name: Close
+  href: api/UI.PopUp.html#UI_PopUp_Close_
+  commentId: Overload:UI.PopUp.Close
+  isSpec: "True"
+  fullName: UI.PopUp.Close
+  nameWithType: PopUp.Close
+- uid: UI.PopUp.Open
+  name: Open()
+  href: api/UI.PopUp.html#UI_PopUp_Open
+  commentId: M:UI.PopUp.Open
+  fullName: UI.PopUp.Open()
+  nameWithType: PopUp.Open()
+- uid: UI.PopUp.Open*
+  name: Open
+  href: api/UI.PopUp.html#UI_PopUp_Open_
+  commentId: Overload:UI.PopUp.Open
+  isSpec: "True"
+  fullName: UI.PopUp.Open
+  nameWithType: PopUp.Open
+- uid: UI.SavedShip
+  name: SavedShip
+  href: api/UI.SavedShip.html
+  commentId: T:UI.SavedShip
+  fullName: UI.SavedShip
+  nameWithType: SavedShip
+- uid: UI.SavedShip.OnPointerClick(PointerEventData)
+  name: OnPointerClick(PointerEventData)
+  href: api/UI.SavedShip.html#UI_SavedShip_OnPointerClick_PointerEventData_
+  commentId: M:UI.SavedShip.OnPointerClick(PointerEventData)
+  fullName: UI.SavedShip.OnPointerClick(PointerEventData)
+  nameWithType: SavedShip.OnPointerClick(PointerEventData)
+- uid: UI.SavedShip.OnPointerClick*
+  name: OnPointerClick
+  href: api/UI.SavedShip.html#UI_SavedShip_OnPointerClick_
+  commentId: Overload:UI.SavedShip.OnPointerClick
+  isSpec: "True"
+  fullName: UI.SavedShip.OnPointerClick
+  nameWithType: SavedShip.OnPointerClick
+- uid: UI.SavedShip.ShipDesigner
+  name: ShipDesigner
+  href: api/UI.SavedShip.html#UI_SavedShip_ShipDesigner
+  commentId: P:UI.SavedShip.ShipDesigner
+  fullName: UI.SavedShip.ShipDesigner
+  nameWithType: SavedShip.ShipDesigner
+- uid: UI.SavedShip.ShipDesigner*
+  name: ShipDesigner
+  href: api/UI.SavedShip.html#UI_SavedShip_ShipDesigner_
+  commentId: Overload:UI.SavedShip.ShipDesigner
+  isSpec: "True"
+  fullName: UI.SavedShip.ShipDesigner
+  nameWithType: SavedShip.ShipDesigner
+- uid: UI.TabButton
+  name: TabButton
+  href: api/UI.TabButton.html
+  commentId: T:UI.TabButton
+  fullName: UI.TabButton
+  nameWithType: TabButton
+- uid: UI.TabButton.AddTile(Sprite,UI.TileSelector)
+  name: AddTile(Sprite, TileSelector)
+  href: api/UI.TabButton.html#UI_TabButton_AddTile_Sprite_UI_TileSelector_
+  commentId: M:UI.TabButton.AddTile(Sprite,UI.TileSelector)
+  fullName: UI.TabButton.AddTile(Sprite, UI.TileSelector)
+  nameWithType: TabButton.AddTile(Sprite, TileSelector)
+- uid: UI.TabButton.AddTile*
+  name: AddTile
+  href: api/UI.TabButton.html#UI_TabButton_AddTile_
+  commentId: Overload:UI.TabButton.AddTile
+  isSpec: "True"
+  fullName: UI.TabButton.AddTile
+  nameWithType: TabButton.AddTile
+- uid: UI.TabButton.content
+  name: content
+  href: api/UI.TabButton.html#UI_TabButton_content
+  commentId: P:UI.TabButton.content
+  fullName: UI.TabButton.content
+  nameWithType: TabButton.content
+- uid: UI.TabButton.content*
+  name: content
+  href: api/UI.TabButton.html#UI_TabButton_content_
+  commentId: Overload:UI.TabButton.content
+  isSpec: "True"
+  fullName: UI.TabButton.content
+  nameWithType: TabButton.content
+- uid: UI.TabButton.ContentRectTransform
+  name: ContentRectTransform
+  href: api/UI.TabButton.html#UI_TabButton_ContentRectTransform
+  commentId: P:UI.TabButton.ContentRectTransform
+  fullName: UI.TabButton.ContentRectTransform
+  nameWithType: TabButton.ContentRectTransform
+- uid: UI.TabButton.ContentRectTransform*
+  name: ContentRectTransform
+  href: api/UI.TabButton.html#UI_TabButton_ContentRectTransform_
+  commentId: Overload:UI.TabButton.ContentRectTransform
+  isSpec: "True"
+  fullName: UI.TabButton.ContentRectTransform
+  nameWithType: TabButton.ContentRectTransform
+- uid: UI.TabButton.Image
+  name: Image
+  href: api/UI.TabButton.html#UI_TabButton_Image
+  commentId: F:UI.TabButton.Image
+  fullName: UI.TabButton.Image
+  nameWithType: TabButton.Image
+- uid: UI.TabButton.OnPointerClick(PointerEventData)
+  name: OnPointerClick(PointerEventData)
+  href: api/UI.TabButton.html#UI_TabButton_OnPointerClick_PointerEventData_
+  commentId: M:UI.TabButton.OnPointerClick(PointerEventData)
+  fullName: UI.TabButton.OnPointerClick(PointerEventData)
+  nameWithType: TabButton.OnPointerClick(PointerEventData)
+- uid: UI.TabButton.OnPointerClick*
+  name: OnPointerClick
+  href: api/UI.TabButton.html#UI_TabButton_OnPointerClick_
+  commentId: Overload:UI.TabButton.OnPointerClick
+  isSpec: "True"
+  fullName: UI.TabButton.OnPointerClick
+  nameWithType: TabButton.OnPointerClick
+- uid: UI.TabButton.OnPointerEnter(PointerEventData)
+  name: OnPointerEnter(PointerEventData)
+  href: api/UI.TabButton.html#UI_TabButton_OnPointerEnter_PointerEventData_
+  commentId: M:UI.TabButton.OnPointerEnter(PointerEventData)
+  fullName: UI.TabButton.OnPointerEnter(PointerEventData)
+  nameWithType: TabButton.OnPointerEnter(PointerEventData)
+- uid: UI.TabButton.OnPointerEnter*
+  name: OnPointerEnter
+  href: api/UI.TabButton.html#UI_TabButton_OnPointerEnter_
+  commentId: Overload:UI.TabButton.OnPointerEnter
+  isSpec: "True"
+  fullName: UI.TabButton.OnPointerEnter
+  nameWithType: TabButton.OnPointerEnter
+- uid: UI.TabButton.OnPointerExit(PointerEventData)
+  name: OnPointerExit(PointerEventData)
+  href: api/UI.TabButton.html#UI_TabButton_OnPointerExit_PointerEventData_
+  commentId: M:UI.TabButton.OnPointerExit(PointerEventData)
+  fullName: UI.TabButton.OnPointerExit(PointerEventData)
+  nameWithType: TabButton.OnPointerExit(PointerEventData)
+- uid: UI.TabButton.OnPointerExit*
+  name: OnPointerExit
+  href: api/UI.TabButton.html#UI_TabButton_OnPointerExit_
+  commentId: Overload:UI.TabButton.OnPointerExit
+  isSpec: "True"
+  fullName: UI.TabButton.OnPointerExit
+  nameWithType: TabButton.OnPointerExit
+- uid: UI.TabButton.selected
+  name: selected
+  href: api/UI.TabButton.html#UI_TabButton_selected
+  commentId: F:UI.TabButton.selected
+  fullName: UI.TabButton.selected
+  nameWithType: TabButton.selected
+- uid: UI.TabButton.SetContent(GameObject)
+  name: SetContent(GameObject)
+  href: api/UI.TabButton.html#UI_TabButton_SetContent_GameObject_
+  commentId: M:UI.TabButton.SetContent(GameObject)
+  fullName: UI.TabButton.SetContent(GameObject)
+  nameWithType: TabButton.SetContent(GameObject)
+- uid: UI.TabButton.SetContent*
+  name: SetContent
+  href: api/UI.TabButton.html#UI_TabButton_SetContent_
+  commentId: Overload:UI.TabButton.SetContent
+  isSpec: "True"
+  fullName: UI.TabButton.SetContent
+  nameWithType: TabButton.SetContent
+- uid: UI.TabButton.tabGroup
+  name: tabGroup
+  href: api/UI.TabButton.html#UI_TabButton_tabGroup
+  commentId: F:UI.TabButton.tabGroup
+  fullName: UI.TabButton.tabGroup
+  nameWithType: TabButton.tabGroup
+- uid: UI.TabButton.tabName
+  name: tabName
+  href: api/UI.TabButton.html#UI_TabButton_tabName
+  commentId: F:UI.TabButton.tabName
+  fullName: UI.TabButton.tabName
+  nameWithType: TabButton.tabName
+- uid: UI.TextList
+  name: TextList
+  href: api/UI.TextList.html
+  commentId: T:UI.TextList
+  fullName: UI.TextList
+  nameWithType: TextList
+- uid: UI.TextList.AddElement(System.String,ShipDesigner)
+  name: AddElement(String, ShipDesigner)
+  href: api/UI.TextList.html#UI_TextList_AddElement_System_String_ShipDesigner_
+  commentId: M:UI.TextList.AddElement(System.String,ShipDesigner)
+  fullName: UI.TextList.AddElement(System.String, ShipDesigner)
+  nameWithType: TextList.AddElement(String, ShipDesigner)
+- uid: UI.TextList.AddElement*
+  name: AddElement
+  href: api/UI.TextList.html#UI_TextList_AddElement_
+  commentId: Overload:UI.TextList.AddElement
+  isSpec: "True"
+  fullName: UI.TextList.AddElement
+  nameWithType: TextList.AddElement
+- uid: UI.TextList.Empty
+  name: Empty()
+  href: api/UI.TextList.html#UI_TextList_Empty
+  commentId: M:UI.TextList.Empty
+  fullName: UI.TextList.Empty()
+  nameWithType: TextList.Empty()
+- uid: UI.TextList.Empty*
+  name: Empty
+  href: api/UI.TextList.html#UI_TextList_Empty_
+  commentId: Overload:UI.TextList.Empty
+  isSpec: "True"
+  fullName: UI.TextList.Empty
+  nameWithType: TextList.Empty
+- uid: UI.TileButton
+  name: TileButton
+  href: api/UI.TileButton.html
+  commentId: T:UI.TileButton
+  fullName: UI.TileButton
+  nameWithType: TileButton
+- uid: UI.TileButton.Image
+  name: Image
+  href: api/UI.TileButton.html#UI_TileButton_Image
+  commentId: F:UI.TileButton.Image
+  fullName: UI.TileButton.Image
+  nameWithType: TileButton.Image
+- uid: UI.TileButton.OnPointerClick(PointerEventData)
+  name: OnPointerClick(PointerEventData)
+  href: api/UI.TileButton.html#UI_TileButton_OnPointerClick_PointerEventData_
+  commentId: M:UI.TileButton.OnPointerClick(PointerEventData)
+  fullName: UI.TileButton.OnPointerClick(PointerEventData)
+  nameWithType: TileButton.OnPointerClick(PointerEventData)
+- uid: UI.TileButton.OnPointerClick*
+  name: OnPointerClick
+  href: api/UI.TileButton.html#UI_TileButton_OnPointerClick_
+  commentId: Overload:UI.TileButton.OnPointerClick
+  isSpec: "True"
+  fullName: UI.TileButton.OnPointerClick
+  nameWithType: TileButton.OnPointerClick
+- uid: UI.TileButton.OnPointerEnter(PointerEventData)
+  name: OnPointerEnter(PointerEventData)
+  href: api/UI.TileButton.html#UI_TileButton_OnPointerEnter_PointerEventData_
+  commentId: M:UI.TileButton.OnPointerEnter(PointerEventData)
+  fullName: UI.TileButton.OnPointerEnter(PointerEventData)
+  nameWithType: TileButton.OnPointerEnter(PointerEventData)
+- uid: UI.TileButton.OnPointerEnter*
+  name: OnPointerEnter
+  href: api/UI.TileButton.html#UI_TileButton_OnPointerEnter_
+  commentId: Overload:UI.TileButton.OnPointerEnter
+  isSpec: "True"
+  fullName: UI.TileButton.OnPointerEnter
+  nameWithType: TileButton.OnPointerEnter
+- uid: UI.TileButton.OnPointerExit(PointerEventData)
+  name: OnPointerExit(PointerEventData)
+  href: api/UI.TileButton.html#UI_TileButton_OnPointerExit_PointerEventData_
+  commentId: M:UI.TileButton.OnPointerExit(PointerEventData)
+  fullName: UI.TileButton.OnPointerExit(PointerEventData)
+  nameWithType: TileButton.OnPointerExit(PointerEventData)
+- uid: UI.TileButton.OnPointerExit*
+  name: OnPointerExit
+  href: api/UI.TileButton.html#UI_TileButton_OnPointerExit_
+  commentId: Overload:UI.TileButton.OnPointerExit
+  isSpec: "True"
+  fullName: UI.TileButton.OnPointerExit
+  nameWithType: TileButton.OnPointerExit
+- uid: UI.TileButton.SetSprite(Sprite)
+  name: SetSprite(Sprite)
+  href: api/UI.TileButton.html#UI_TileButton_SetSprite_Sprite_
+  commentId: M:UI.TileButton.SetSprite(Sprite)
+  fullName: UI.TileButton.SetSprite(Sprite)
+  nameWithType: TileButton.SetSprite(Sprite)
+- uid: UI.TileButton.SetSprite*
+  name: SetSprite
+  href: api/UI.TileButton.html#UI_TileButton_SetSprite_
+  commentId: Overload:UI.TileButton.SetSprite
+  isSpec: "True"
+  fullName: UI.TileButton.SetSprite
+  nameWithType: TileButton.SetSprite
+- uid: UI.TileButton.tileID
+  name: tileID
+  href: api/UI.TileButton.html#UI_TileButton_tileID
+  commentId: F:UI.TileButton.tileID
+  fullName: UI.TileButton.tileID
+  nameWithType: TileButton.tileID
+- uid: UI.TileButton.tileSelector
+  name: tileSelector
+  href: api/UI.TileButton.html#UI_TileButton_tileSelector
+  commentId: F:UI.TileButton.tileSelector
+  fullName: UI.TileButton.tileSelector
+  nameWithType: TileButton.tileSelector
+- uid: UI.TileSelector
+  name: TileSelector
+  href: api/UI.TileSelector.html
+  commentId: T:UI.TileSelector
+  fullName: UI.TileSelector
+  nameWithType: TileSelector
+- uid: UI.TileSelector.OnButtonEnter(UI.TileButton)
+  name: OnButtonEnter(TileButton)
+  href: api/UI.TileSelector.html#UI_TileSelector_OnButtonEnter_UI_TileButton_
+  commentId: M:UI.TileSelector.OnButtonEnter(UI.TileButton)
+  fullName: UI.TileSelector.OnButtonEnter(UI.TileButton)
+  nameWithType: TileSelector.OnButtonEnter(TileButton)
+- uid: UI.TileSelector.OnButtonEnter*
+  name: OnButtonEnter
+  href: api/UI.TileSelector.html#UI_TileSelector_OnButtonEnter_
+  commentId: Overload:UI.TileSelector.OnButtonEnter
+  isSpec: "True"
+  fullName: UI.TileSelector.OnButtonEnter
+  nameWithType: TileSelector.OnButtonEnter
+- uid: UI.TileSelector.OnButtonExit(UI.TileButton)
+  name: OnButtonExit(TileButton)
+  href: api/UI.TileSelector.html#UI_TileSelector_OnButtonExit_UI_TileButton_
+  commentId: M:UI.TileSelector.OnButtonExit(UI.TileButton)
+  fullName: UI.TileSelector.OnButtonExit(UI.TileButton)
+  nameWithType: TileSelector.OnButtonExit(TileButton)
+- uid: UI.TileSelector.OnButtonExit*
+  name: OnButtonExit
+  href: api/UI.TileSelector.html#UI_TileSelector_OnButtonExit_
+  commentId: Overload:UI.TileSelector.OnButtonExit
+  isSpec: "True"
+  fullName: UI.TileSelector.OnButtonExit
+  nameWithType: TileSelector.OnButtonExit
+- uid: UI.TileSelector.OnButtonPress(UI.TileButton)
+  name: OnButtonPress(TileButton)
+  href: api/UI.TileSelector.html#UI_TileSelector_OnButtonPress_UI_TileButton_
+  commentId: M:UI.TileSelector.OnButtonPress(UI.TileButton)
+  fullName: UI.TileSelector.OnButtonPress(UI.TileButton)
+  nameWithType: TileSelector.OnButtonPress(TileButton)
+- uid: UI.TileSelector.OnButtonPress*
+  name: OnButtonPress
+  href: api/UI.TileSelector.html#UI_TileSelector_OnButtonPress_
+  commentId: Overload:UI.TileSelector.OnButtonPress
+  isSpec: "True"
+  fullName: UI.TileSelector.OnButtonPress
+  nameWithType: TileSelector.OnButtonPress

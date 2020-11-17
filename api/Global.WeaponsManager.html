@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Namespace TileSystem
+    <title>Class WeaponsManager
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Namespace TileSystem
+    <meta name="title" content="Class WeaponsManager
    ">
     <meta name="generator" content="docfx 2.44.0.0">
     
@@ -146,13 +146,13 @@
                           <li class="">
                             <a href="Global.TabGroup.html" title="TabGroup" class="">TabGroup</a>
                           </li>
-                          <li class="">
-                            <a href="Global.WeaponsManager.html" title="WeaponsManager" class="">WeaponsManager</a>
+                          <li class="active">
+                            <a href="Global.WeaponsManager.html" title="WeaponsManager" class="active">WeaponsManager</a>
                           </li>
                         </ul>  </li>
-                    <li class="active">
+                    <li class="">
                       <span class="expand-stub"></span>
-                      <a href="TileSystem.html" title="TileSystem" class="active">TileSystem</a>
+                      <a href="TileSystem.html" title="TileSystem" class="">TileSystem</a>
                         
                         <ul class="nav level2">
                           <li class="">
@@ -223,44 +223,168 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="TileSystem">
+            <article class="content wrap" id="_content" data-uid="Global.WeaponsManager">
   
-  <h1 id="TileSystem" data-uid="TileSystem" class="text-break">Namespace TileSystem
+  
+  <h1 id="Global_WeaponsManager" data-uid="Global.WeaponsManager" class="text-break">Class WeaponsManager
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>Used to manage weapons on a ship</p>
+</div>
   <div class="markdown level0 conceptual"></div>
-  <div class="markdown level0 remarks"></div>
-    <h3 id="classes">Classes
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">WeaponsManager</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Global.html">Global</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Global_WeaponsManager_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class WeaponsManager</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
   </h3>
-      <h4><a class="xref" href="TileSystem.BasePart.html">BasePart</a></h4>
-      <section><p>The base tile variant, all other tile variant types should inherit from this</p>
-</section>
-      <h4><a class="xref" href="TileSystem.EnginePart.html">EnginePart</a></h4>
-      <section><p>The engine tile variant type</p>
-</section>
-      <h4><a class="xref" href="TileSystem.TileInfo.html">TileInfo</a></h4>
-      <section></section>
-      <h4><a class="xref" href="TileSystem.TileManager.html">TileManager</a></h4>
-      <section><p>Used to manage and update Unity tile maps and store tile data</p>
-</section>
-      <h4><a class="xref" href="TileSystem.TileSet.html">TileSet</a></h4>
-      <section><p>A singleton that will load all tile variants present in Resources/Tiles/Parts</p>
-</section>
-      <h4><a class="xref" href="TileSystem.Weapon.html">Weapon</a></h4>
-      <section></section>
-    <h3 id="structs">Structs
+  
+  
+  <a id="Global_WeaponsManager__ctor_" data-uid="Global.WeaponsManager.#ctor*"></a>
+  <h4 id="Global_WeaponsManager__ctor_TileManager_" data-uid="Global.WeaponsManager.#ctor(TileManager)">WeaponsManager(TileManager)</h4>
+  <div class="markdown level1 summary"><p>The constructor for the weapons manager</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public WeaponsManager(TileManager manager)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">TileManager</span></td>
+        <td><span class="parametername">manager</span></td>
+        <td><p>The tile manager it is attached to</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
   </h3>
-      <h4><a class="xref" href="TileSystem.TileInstanceData.html">TileInstanceData</a></h4>
-      <section><p>This struct is used store data about &apos;instances&apos; of tiles</p>
-</section>
-    <h3 id="enums">Enums
-  </h3>
-      <h4><a class="xref" href="TileSystem.Directions.html">Directions</a></h4>
-      <section></section>
-    <h3 id="delegates">Delegates
-  </h3>
-      <h4><a class="xref" href="TileSystem.Notify.html">Notify</a></h4>
-      <section></section>
+  
+  
+  <a id="Global_WeaponsManager_AddWeapon_" data-uid="Global.WeaponsManager.AddWeapon*"></a>
+  <h4 id="Global_WeaponsManager_AddWeapon_Vector3Int_Weapon_GameObject_" data-uid="Global.WeaponsManager.AddWeapon(Vector3Int,Weapon,GameObject)">AddWeapon(Vector3Int, Weapon, GameObject)</h4>
+  <div class="markdown level1 summary"><p>Registers a new weapon wi</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddWeapon(Vector3Int cords, Weapon weapon, GameObject turret)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3Int</span></td>
+        <td><span class="parametername">cords</span></td>
+        <td><p>The coordinates of the weapon in the tile map</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Weapon</span></td>
+        <td><span class="parametername">weapon</span></td>
+        <td><p>The weapon variant</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">GameObject</span></td>
+        <td><span class="parametername">turret</span></td>
+        <td><p>The turret GameObject</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_WeaponsManager_Fire_" data-uid="Global.WeaponsManager.Fire*"></a>
+  <h4 id="Global_WeaponsManager_Fire" data-uid="Global.WeaponsManager.Fire">Fire()</h4>
+  <div class="markdown level1 summary"><p>Fires all weapons in the direction it is currently facing</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Fire()</code></pre>
+  </div>
+  
+  
+  <a id="Global_WeaponsManager_RemoveWeapon_" data-uid="Global.WeaponsManager.RemoveWeapon*"></a>
+  <h4 id="Global_WeaponsManager_RemoveWeapon_Vector3Int_" data-uid="Global.WeaponsManager.RemoveWeapon(Vector3Int)">RemoveWeapon(Vector3Int)</h4>
+  <div class="markdown level1 summary"><p>De-Registers a weapon</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveWeapon(Vector3Int cords)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3Int</span></td>
+        <td><span class="parametername">cords</span></td>
+        <td><p>The coordinates of the weapon in the tile map</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <a id="Global_WeaponsManager_UpdateTransform_" data-uid="Global.WeaponsManager.UpdateTransform*"></a>
+  <h4 id="Global_WeaponsManager_UpdateTransform_Transform_" data-uid="Global.WeaponsManager.UpdateTransform(Transform)">UpdateTransform(Transform)</h4>
+  <div class="markdown level1 summary"><p>Updates the rotations of the weapons turrets</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateTransform(Transform target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Transform</span></td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The target to aim towards</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           
