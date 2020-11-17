@@ -403,6 +403,10 @@ namespace TileSystem
         /// </summary>
         private void Split()
         {
+            if (doneSplitting)
+            {
+                return;
+            }
             var islands = FindIslands();
             if (islands.Count <= 1) return;
             int biggest     = islands.Max(i => i.Count);
