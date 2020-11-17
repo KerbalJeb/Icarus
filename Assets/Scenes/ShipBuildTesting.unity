@@ -1180,8 +1180,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 996504176}
   m_HandleRect: {fileID: 996504175}
   m_Direction: 2
-  m_Value: 1.0000006
-  m_Size: 0.7100828
+  m_Value: 1.0000002
+  m_Size: 0.7100829
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3443,6 +3443,7 @@ GameObject:
   - component: {fileID: 1183928012}
   - component: {fileID: 1183928011}
   - component: {fileID: 1183928010}
+  - component: {fileID: 1183928013}
   m_Layer: 0
   m_Name: GameMan
   m_TagString: Untagged
@@ -3498,6 +3499,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1183928013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183928009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0718bab315c69147bc6d87f0fd7958c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObject: {fileID: 8273386219752798284, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
+  numObjects: 0
+  parentTransform: {fileID: 2095474266}
 --- !u!1 &1312446878
 GameObject:
   m_ObjectHideFlags: 0
@@ -4781,40 +4797,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703931029}
   m_CullTransparentMesh: 0
---- !u!1 &1770404228 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8273386219752798284, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
-  m_PrefabInstance: {fileID: 8273386219592957905}
-  m_PrefabAsset: {fileID: 0}
---- !u!66 &1770404229
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1770404228}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1791574729}
-    m_ColliderPaths: []
-  m_CompositePaths:
-    m_Paths: []
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
---- !u!19719996 &1791574729 stripped
-TilemapCollider2D:
-  m_CorrespondingSourceObject: {fileID: 8273386219703939178, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
-  m_PrefabInstance: {fileID: 8273386219592957905}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1854956347
 GameObject:
   m_ObjectHideFlags: 0
@@ -5403,7 +5385,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8273386219752798322, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
   m_PrefabInstance: {fileID: 8273386219592957905}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1770404228}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ede24535e8a65f4d9507ebec87f0410, type: 3}
@@ -13047,7 +13029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8273386219703939178, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
       propertyPath: m_UsedByComposite
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8273386219752798284, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
       propertyPath: m_Name
@@ -13060,7 +13042,7 @@ PrefabInstance:
     - target: {fileID: 8273386219752798287, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 1360129732}
+      objectReference: {fileID: 2095474266}
     - target: {fileID: 8273386219752798320, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
       propertyPath: m_GravityScale
       value: 0
@@ -13117,6 +13099,10 @@ PrefabInstance:
       propertyPath: template
       value: 
       objectReference: {fileID: 8273386219752798284, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
+    - target: {fileID: 8273386219752798322, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
+      propertyPath: pool
+      value: 
+      objectReference: {fileID: 1183928013}
     - target: {fileID: 8273386220409410904, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
       propertyPath: m_Tiles.Array.size
       value: 0

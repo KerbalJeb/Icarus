@@ -48,9 +48,9 @@ public class WeaponsManager
             (Weapon w, GameObject o) = valueTuple.Value;
             Quaternion dir      = o.transform.rotation;
             Vector3    startPos = o.transform.position;
-            Vector3    endPos   = dir * Vector3.forward * w.range;
+            Vector3    endPos   = startPos + dir * Vector3.up * w.range;
             var        dmg      = new Damage(startPos, endPos, w.baseDamage);
-            dmg.ApplyDamage();
+            dmg.ApplyDamage(new []{tileManager});
         }
     }
 }

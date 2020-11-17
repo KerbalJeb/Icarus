@@ -74,7 +74,7 @@ public class MovementManager
         }
         // Velocity controller
         else
-            thrust.z = 0.5f * angularVelocityError;
+            thrust.z = 0.05f * angularVelocityError;
 
         SetThrust(thrust);
     }

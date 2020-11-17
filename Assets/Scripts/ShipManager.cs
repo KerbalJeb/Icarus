@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 public class ShipManager : MonoBehaviour
 {
     private                  MovementManager movementManager;
-    private readonly         Transform       target = null;
+    public                   Transform       target = null;
     private                  TileManager     tileManager;
     public                   WeaponsManager  WeaponsManager { get; private set; }
     public                   bool            autoLoadFromShipData = false;
@@ -50,7 +50,7 @@ public class ShipManager : MonoBehaviour
 
     private void Update()
     {
-        if (!(target is null)) WeaponsManager.UpdateTransform(target);
+        if (!(target is null) && PhysicsEnabled) WeaponsManager.UpdateTransform(target);
     }
 
     private void FixedUpdate()
@@ -63,16 +63,16 @@ public class ShipManager : MonoBehaviour
 
     private void OnEnable()
     {
-        tileManager.UpdatePhysics                       += UpdatePhysics;
-        InputManager.PlayerActions.Move.performed       += SteerShip;
-        InputManager.PlayerActions.UpdateMesh.performed += Test;
+        tileManager.UpdatePhysics                 += UpdatePhysics;
+        InputManager.PlayerActions.Fire.performed += Fire;
+        InputManager.PlayerActions.Move.performed += SteerShip;
     }
 
     private void OnDisable()
     {
-        tileManager.UpdatePhysics                       -= UpdatePhysics;
-        InputManager.PlayerActions.Move.performed       -= SteerShip;
-        InputManager.PlayerActions.UpdateMesh.performed -= Test;
+        tileManager.UpdatePhysics                 -= UpdatePhysics;
+        InputManager.PlayerActions.Fire.performed -= Fire;
+        InputManager.PlayerActions.Move.performed -= SteerShip;
     }
 
     /// <summary>
@@ -96,16 +96,12 @@ public class ShipManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    ///     Enables physics
-    /// </summary>
-    /// <param name="ctx"></param>
-    private void Test(InputAction.CallbackContext ctx)
+    public void Fire(InputAction.CallbackContext context)
     {
         if (!PhysicsEnabled)
         {
-            UpdatePhysics();
-            tileManager.PhysicsEnabled = true;
+            return;
         }
+        WeaponsManager.Fire();
     }
 }

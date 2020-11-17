@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TileSystem;
 using UnityEngine;
 
@@ -24,7 +25,7 @@ public class Damage
     public Damage(Vector2 startPos, Vector2 endPos, float baseDamage)
     {
         StartPos   = startPos;
-        Direction  = endPos - startPos;
+        Direction  = (endPos - startPos).normalized;
         EndPos     = endPos;
         BaseDamage = baseDamage;
     }
@@ -33,23 +34,29 @@ public class Damage
     /// <summary>
     ///     Apply the damage to all tilemaps in range. Will penetrate multiple tiles if damage is high enough
     /// </summary>
-    public void ApplyDamage()
+    public void ApplyDamage(TileManager[] exclude)
     {
-        var hits = Physics2D.RaycastAll(StartPos, Direction);
+        var hits = Physics2D.LinecastAll(StartPos, EndPos);
         Array.Sort(hits, (h1, h2) => h1.distance.CompareTo(h2.distance));
-        Debug.Log(hits);
-        Debug.DrawLine(StartPos, EndPos, Color.red, 5f);
+        Debug.DrawLine(StartPos, EndPos, Color.green, 5f);
         var done = false;
         foreach (RaycastHit2D hit in hits)
         {
+
+
+            var     tileManager   = hit.transform.GetComponent<TileManager>();
+            if (tileManager is null) continue;
+            if (exclude.Contains(tileManager))
+            {
+                continue;
+            }
             var     destroyedTile = false;
             Vector2 lineStart     = hit.point - 0.5f * Direction;
             Vector2 lineEnd       = EndPos;
-            var     tileManager   = hit.transform.GetComponent<TileManager>();
-            if (tileManager is null) continue;
+            Debug.DrawLine(lineStart, lineEnd, Color.red, 5f);
             var dmgToObject = 0f;
             var line = RasterUtil.Line(tileManager.PositionToCords(lineStart), tileManager.PositionToCords(lineEnd));
-
+            Debug.Log("Hit");
             foreach (Vector3Int cord in line)
             {
                 tileManager.DamageTile(cord, BaseDamage, out float damageUsed);

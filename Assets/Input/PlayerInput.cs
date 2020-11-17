@@ -98,6 +98,14 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ae2fc53-79a3-4649-a1a7-a937192b2d46"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -329,6 +337,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""RotateTileRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7cb68422-50aa-4cfe-a4e6-4e7a52549bba"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -915,6 +934,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Zoom = m_Player.FindAction("Zoom", throwIfNotFound: true);
         m_Player_RotateTileLeft = m_Player.FindAction("RotateTileLeft", throwIfNotFound: true);
         m_Player_RotateTileRight = m_Player.FindAction("RotateTileRight", throwIfNotFound: true);
+        m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -995,6 +1015,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Zoom;
     private readonly InputAction m_Player_RotateTileLeft;
     private readonly InputAction m_Player_RotateTileRight;
+    private readonly InputAction m_Player_Fire;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -1008,6 +1029,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Zoom => m_Wrapper.m_Player_Zoom;
         public InputAction @RotateTileLeft => m_Wrapper.m_Player_RotateTileLeft;
         public InputAction @RotateTileRight => m_Wrapper.m_Player_RotateTileRight;
+        public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1044,6 +1066,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @RotateTileRight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTileRight;
                 @RotateTileRight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTileRight;
                 @RotateTileRight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRotateTileRight;
+                @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1075,6 +1100,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @RotateTileRight.started += instance.OnRotateTileRight;
                 @RotateTileRight.performed += instance.OnRotateTileRight;
                 @RotateTileRight.canceled += instance.OnRotateTileRight;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -1240,6 +1268,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnZoom(InputAction.CallbackContext context);
         void OnRotateTileLeft(InputAction.CallbackContext context);
         void OnRotateTileRight(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

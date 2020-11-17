@@ -1,6 +1,7 @@
 ﻿﻿
 using System;
 using System.Collections.Generic;
+using TileSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
@@ -53,14 +54,14 @@ public class AsteroidsGenerator
         }
     }
 
-    public void SetTilemap(ref Tilemap tilemap, TileBase tileBase)
+    public void SetTilemap(ref TileManager tilemap,  BasePart tileBase)
     {
-        var tiles = new TileBase[points.Length];
+        var tiles = new BasePart[points.Length];
         for (int i = 0; i < tiles.Length; i++)
         {
             tiles[i] = tileBase;
+            tilemap.SetTile(points[i], tileBase);
         }
-        tilemap.SetTiles(points, tiles);
     }
 }
 

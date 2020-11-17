@@ -21,5 +21,5 @@ MonoBehaviour:
   layer: 0
   previewImg: {fileID: 2577598707902432233, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
   mass: 1
-  id: 1
-  thrust: 5
+  id: 2
+  thrust: 100
