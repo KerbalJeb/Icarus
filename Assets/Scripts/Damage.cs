@@ -51,7 +51,6 @@ public class Damage
             Debug.DrawLine(lineStart, lineEnd, Color.red, 5f);
             var dmgToObject = 0f;
             var line = RasterUtil.Line(tileManager.PositionToCords(lineStart), tileManager.PositionToCords(lineEnd));
-            Debug.Log("Hit");
             foreach (Vector3Int cord in line)
             {
                 tileManager.DamageTile(cord, BaseDamage, out float damageUsed);

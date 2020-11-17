@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Analytics;
 using UnityEngine.Tilemaps;
 
 namespace TileSystem
@@ -25,6 +26,36 @@ namespace TileSystem
         {
             tilemap.SetTile(cord, tile);
             tilemap.SetTransformMatrix(cord, TileInfo.TransformMatrix[direction]);
+        }
+
+        public virtual void SetTiles(Vector3Int[] cords, Tilemap tilemap, Directions[] directions)
+        {
+            var tiles = new TileBase[cords.Length];
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                tiles[i] = tile;
+            }
+            tilemap.SetTiles(cords, tiles);
+            
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                var dir = directions[i];
+                if (dir == Directions.Up)
+                {
+                    continue;
+                }
+                tilemap.SetTransformMatrix(cords[i], TileInfo.TransformMatrix[dir]);
+            }
+        }
+
+        public virtual void RemoveTiles(Vector3Int[] cords, Tilemap tilemap)
+        {
+            var tiles = new TileBase[cords.Length];
+            for (int i = 0; i < tiles.Length; i++)
+            {
+                tiles[i] = null;
+            }
+            tilemap.SetTiles(cords, tiles);
         }
 
         public virtual void Remove(Vector3Int cords, Tilemap tilemap)

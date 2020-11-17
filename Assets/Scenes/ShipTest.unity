@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0718bab315c69147bc6d87f0fd7958c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 2540413421306311634, guid: 2efa00ba12971f849a1949be4baaea0d, type: 3}
+  templateGameObject: {fileID: 2540413421306311634, guid: 2efa00ba12971f849a1949be4baaea0d, type: 3}
   numObjects: 20
 --- !u!4 &968543463
 Transform:
@@ -720,7 +720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0718bab315c69147bc6d87f0fd7958c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject: {fileID: 8273386219752798284, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
+  templateGameObject: {fileID: 8273386219752798284, guid: fadfb403ace383d428fa71a5dda5e8d1, type: 3}
   numObjects: 5
 --- !u!4 &1573513992
 Transform:

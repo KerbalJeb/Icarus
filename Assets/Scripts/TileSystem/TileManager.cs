@@ -47,7 +47,10 @@ namespace TileSystem
 
         public  TileSet   TileSet             { get; private set; }
         private BoundsInt Bounds              => tilemapLayers[0].cellBounds;
-        public  bool      PhysicsModelChanged { get; set; }
+        public  bool      PhysicsModelChanged { get; set; } = false;
+        private float     mass;
+        private Vector2   com;
+        private bool      com_updated;
 
         public bool PhysicsEnabled
         {
@@ -69,9 +72,19 @@ namespace TileSystem
 
         private void FixedUpdate()
         {
-            if (!PhysicsModelChanged) return;
-            RefreshPhysics();
-            PhysicsModelChanged = false;
+            if (PhysicsModelChanged)
+            {
+                RefreshPhysics();
+                PhysicsModelChanged = false;
+            }
+
+            if (com_updated)
+            {
+                Rigidbody2D.mass         = mass;
+                Rigidbody2D.centerOfMass = com;
+                com_updated              = false;
+            }
+
         }
 
         public void OnEnable()
@@ -173,34 +186,7 @@ namespace TileSystem
             tileVariant.Instantiate(cords, tilemapLayers[tileVariant.layer], direction);
             tileData[cords] = new TileInstanceData(tileVariant, direction);
             Vector2 localPos = CordsToPosition(cords);
-            Rigidbody2D.centerOfMass = (Rigidbody2D.mass * Rigidbody2D.centerOfMass + localPos * tileVariant.mass) /
-                                       (tileVariant.mass                            + Rigidbody2D.mass);
-            Rigidbody2D.mass += tileVariant.mass;
-        }
-
-        /// <summary>
-        ///     Set an array of tiles at the given coordinates
-        /// </summary>
-        /// <param name="cords">The list of coordinates in the tilemap</param>
-        /// <param name="tiles">The list of tile variants to be placed</param>
-        private void CopyTileInstancesData(Vector3Int[] cords, TileInstanceData[] tiles)
-        {
-            if (cords.Length < 1) return;
-            Debug.Assert(cords.All(i => i.z == cords[0].z));
-
-            int     layerID  = cords[0].z;
-            var     newTiles = tiles.Select(tile => TileSet.TileVariants[tile.ID].tile).ToArray();
-            Tilemap tilemap  = tilemapLayers[layerID];
-            tilemap.SetTiles(cords, newTiles);
-
-            for (var i = 0; i < cords.Length; i++)
-            {
-                Vector3Int       cord = cords[i];
-                TileInstanceData data = tiles[i];
-                tileData[cord] = data;
-                if (data.Rotation != Directions.Up)
-                    tilemap.SetTransformMatrix(cord, TileInfo.TransformMatrix[data.Rotation]);
-            }
+            UpdateCom(localPos, tileVariant.mass, true);
         }
 
         /// <summary>
@@ -228,8 +214,7 @@ namespace TileSystem
                     cords.z = i;
                     if (!tileData.ContainsKey(cords)) continue;
                     BasePart variant = TileSet.TileVariants[tileData[cords].ID];
-                    Rigidbody2D.centerOfMass -= variant.mass * localPos / Rigidbody2D.mass;
-                    Rigidbody2D.mass         -= variant.mass;
+                    UpdateCom(localPos, variant.mass, false);
                     variant.Remove(cords, tilemapLayers[i]);
                     tileData.Remove(cords);
                 }
@@ -237,8 +222,7 @@ namespace TileSystem
             else
             {
                 BasePart variant = TileSet.TileVariants[tileData[cords].ID];
-                Rigidbody2D.centerOfMass -= variant.mass * localPos / Rigidbody2D.mass;
-                Rigidbody2D.mass         -= variant.mass;
+                UpdateCom(localPos, variant.mass, false);
                 variant.Remove(cords, tilemapLayers[cords.z]);
                 tileData.Remove(cords);
             }
@@ -331,8 +315,9 @@ namespace TileSystem
             }
 
             tileData.Clear();
-            Rigidbody2D.mass         = 0;
-            Rigidbody2D.centerOfMass = Vector2.zero;
+            mass        = 0;
+            com         = Vector2.zero;
+            com_updated = true;
         }
 
         /// <summary>
@@ -341,16 +326,22 @@ namespace TileSystem
         /// <returns>A list of the islands, each containing a list of the coordinate positions that make up the island</returns>
         public List<List<Vector3Int>> FindIslands(int layer = 0)
         {
-            var count  = 0;
-            int width  = Bounds.xMax - Bounds.xMin + 2;
-            int height = Bounds.yMax - Bounds.yMin + 2;
+            var cachedBounds = Bounds;
+            
+            int xMax = cachedBounds.xMax +1;
+            int yMax = cachedBounds.yMax +1;
+            int xMin = cachedBounds.xMin -1;
+            int yMin = cachedBounds.yMin - 1;
+            
+            int width        = xMax - xMin;
+            int height       = yMax - yMin;
 
             var checkedCells = new bool[width * height];
 
             var islands = new List<List<Vector3Int>>();
 
-            for (int x = Bounds.xMin - 1; x <= Bounds.xMax; x++)
-            for (int y = Bounds.yMin - 1; y <= Bounds.yMax; y++)
+            for (int x = xMin; x < xMax; x++)
+            for (int y = yMin; y < yMax; y++)
             {
                 var cords = new Vector3Int(x, y, layer);
                 if (!CheckTile(cords)) continue;
@@ -377,18 +368,21 @@ namespace TileSystem
                 }
             }
 
-            Debug.Log(count);
             return islands;
 
             bool CheckTile(Vector3Int cords)
             {
-                count++;
-                int xIdx = cords.x - Bounds.xMin + 1;
-                int yIdx = cords.y - Bounds.yMin + 1;
+                int x    = cords.x;
+                int y    = cords.y;
+                int xIdx = x - xMin;
+                int yIdx = y - yMin;
 
-                if (checkedCells[xIdx + yIdx * width] || !Bounds.Contains(cords)) return false;
+                var idx = xIdx + yIdx * width;
 
-                checkedCells[xIdx + yIdx * width] = true;
+
+                if (checkedCells[idx] || x > xMax || x < xMin || y > yMax || y < yMin) return false;
+
+                checkedCells[idx] = true;
                 return HasTile(cords);
             }
         }
@@ -413,6 +407,7 @@ namespace TileSystem
             if (islands.Count <= 1) return;
             int biggest     = islands.Max(i => i.Count);
             var updatedThis = false;
+            tilemapLayers[0].color = Color.white;
             foreach (var island in islands)
             {
                 if (island.Count == biggest && !updatedThis)
@@ -437,6 +432,13 @@ namespace TileSystem
 
                     var instanceData = new TileInstanceData();
                     obj.SetActive(true);
+                    
+                    var tileGroups = new List<(List<Vector3Int> cords, List<Directions> dirs, List<TileInstanceData> data)>();
+                    
+                    for (int i = 0; i < TileSet.TileVariants.Count; i++)
+                    {
+                        tileGroups.Add((new List<Vector3Int>(), new List<Directions>(), new List<TileInstanceData>()));
+                    }
 
                     foreach (Vector3Int cords in island)
                     {
@@ -445,17 +447,33 @@ namespace TileSystem
                             Vector3Int c = cords;
                             c.z = i;
                             if (!GetTile(c, ref instanceData)) continue;
-                            RemoveTile(cords);
-                            BasePart variant = TileSet.TileVariants[instanceData.ID];
-                            newTileManager.SetTile(c, variant, instanceData.Rotation);
-                            newTileManager.tileData[c] = instanceData;
+                            tileGroups[instanceData.ID].cords.Add(c);
+                            tileGroups[instanceData.ID].dirs.Add(instanceData.Rotation);
+                            tileGroups[instanceData.ID].data.Add(instanceData);
                         }
                     }
+
+                    for (int i = 1; i <  TileSet.TileVariants.Count; i++)
+                    {
+                        var variant = TileSet.TileVariants[i];
+                        if (tileGroups[i].cords.Count <= 0)
+                        {
+                            continue;
+                        }
+                        variant.SetTiles(tileGroups[i].cords.ToArray(), newTileManager.tilemapLayers[variant.layer],
+                                         tileGroups[i].dirs.ToArray());
+                        variant.RemoveTiles(tileGroups[i].cords.ToArray(), tilemapLayers[variant.layer]);
+                        for (int j = 0; j < tileGroups[i].cords.Count; j++)
+                        {
+                            newTileManager.tileData[tileGroups[i].cords[j]] = tileGroups[i].data[j];
+                        }
+                    }
+                    newTileManager.RecalculateCom();
+                    newTileManager.tilemapLayers[0].color = Color.red;
 
                     if (!PhysicsEnabled) continue;
 
                     newTileManager.physics = true;
-                    foreach (Tilemap tilemapLayer in newTileManager.tilemapLayers) tilemapLayer.ResizeBounds();
                     newRb2D.isKinematic     = false;
                     newRb2D.angularVelocity = Rigidbody2D.angularVelocity;
                 }
@@ -465,12 +483,47 @@ namespace TileSystem
         /// <summary>
         ///     Splits the mesh if physics is enabled and invokes the UpdatePhysics event
         /// </summary>
-        public void RefreshPhysics()
+        private void RefreshPhysics()
         {
             if (!physics) return;
             UpdatePhysics?.Invoke();
             Split();
         }
+
+        private void UpdateCom(Vector2 localPos, float tileMass, bool adding)
+        {
+            if (adding)
+            {
+                com         =  (mass * com + localPos * tileMass) / (tileMass + mass);
+                mass        += tileMass;
+            }
+            else
+            {
+                if (mass<Mathf.Epsilon)
+                {
+                    return;
+                }
+                com  -= tileMass * localPos / mass;
+                mass -= tileMass;
+            }
+            com_updated = true;
+        }
+
+        private void RecalculateCom()
+        {
+            mass = 0;
+            com = Vector2.zero;
+            foreach (var data in tileData)
+            {
+                var pos  = CordsToPosition(data.Key);
+                var tileMass = TileSet.TileVariants[data.Value.ID].mass;
+                com  =  (mass * com + tileMass * pos) / (mass + tileMass);
+                mass += tileMass;
+            }
+
+            com_updated=true;
+        }
+        
 
         /// <summary>
         ///     Will serialize the design data (only tile ID and rot, no HP)
