@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using TileSystem.TileVariants;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 namespace TileSystem
 {
+    public delegate void Notify();
+
     /// <summary>
     ///     Used to manage and update Unity tile maps and store tile data
     /// </summary>
@@ -16,7 +18,6 @@ namespace TileSystem
     ///     tile renders must be sequential (ie. 1,2,3 is ok but 1,3,4 is not). Tiles are accessed using a Vector3Int, the X
     ///     and Y cords correspond to the X and Y position of the tile and Z is used for the layer.
     /// </remarks>
-    [RequireComponent(typeof(Grid))]
     public class TileManager : MonoBehaviour
     {
         private static readonly ReadOnlyCollection<Vector3Int> ConnectionRules = new ReadOnlyCollection<Vector3Int>(
@@ -28,58 +29,89 @@ namespace TileSystem
              new Vector3Int(0,  -1, 0),
          });
 
-        [SerializeField] private string     tilePath = null;
-        [SerializeField] private GameObject template = null;
-
+        public ObjectPool pool;
 
         private readonly Dictionary<Vector3Int, TileInstanceData> tileData =
             new Dictionary<Vector3Int, TileInstanceData>();
 
-        private bool physics = false;
+        private bool doneSplitting = false;
 
-        private Rigidbody2D rb2D;
+        [SerializeField] private bool physics = false;
+        private Grid grid;
 
-        private Tilemap[] tilemapLayers;
+        private Tilemap[]   tilemapLayers;
+        public  Rigidbody2D Rigidbody2D { get; private set; }
 
-        public float TileSize { get; private set; }
+        public float TileSize => grid.cellSize.x;
 
-        public  TileSet   TileSet { get; private set; }
-        private BoundsInt Bounds  => tilemapLayers[0].cellBounds;
+        public  TileSet   TileSet             { get; private set; }
+        private BoundsInt Bounds              => tilemapLayers[0].cellBounds;
+        public  bool      PhysicsModelChanged { get; set; }
+        public  bool      onTileMap;
 
         public bool PhysicsEnabled
         {
             set
             {
-                physics          = value;
-                rb2D.isKinematic = !value;
-                if (!value) return;
-                Split();
+                physics                 = value;
+                Rigidbody2D.isKinematic = !value;
             }
             get => physics;
         }
 
         public void Awake()
         {
-            var tilemaps       = GetComponentsInChildren<Tilemap>();
-            var tilemapRenders = GetComponentsInChildren<TilemapRenderer>();
-            var pairs = (from map in tilemaps
-                         from tilemapRenderer in tilemapRenders
-                         where map.gameObject == tilemapRenderer.gameObject
-                         select (map, tilemapRenderer)).ToList();
-
-            tilemapLayers = new Tilemap[pairs.Count];
-            foreach ((Tilemap map, TilemapRenderer tilemapRenderer) in pairs)
-                tilemapLayers[tilemapRenderer.sortingOrder] = map;
-            var grid = GetComponent<Grid>();
-            TileSize = grid.cellSize.x;
-            TileSet  = TileSet.GetTileSet(tilePath);
-            rb2D     = GetComponent<Rigidbody2D>();
+            TileSet                  = TileSet.Instance;
+            Rigidbody2D              = GetComponent<Rigidbody2D>();
+            Rigidbody2D.centerOfMass = Vector2.zero;
+            Rigidbody2D.mass         = 0;
         }
 
-        public void Start()
+        public void OnEnable()
         {
-            SyncFromTilemap();
+            if (onTileMap)
+            {
+                var tileMap = GetComponent<Tilemap>();
+                tilemapLayers = new[] {tileMap};
+            }
+            else
+            {
+                var tilemaps       = GetComponentsInChildren<Tilemap>();
+                var tilemapRenders = GetComponentsInChildren<TilemapRenderer>();
+                var pairs = (from map in tilemaps
+                             from tilemapRenderer in tilemapRenders
+                             where map.gameObject == tilemapRenderer.gameObject
+                             select (map, tilemapRenderer)).ToList();
+
+                if (pairs.Count <= 0)
+                {
+                    gameObject.SetActive(false);
+                    return;
+                }
+
+                tilemapLayers = new Tilemap[pairs.Count];
+                foreach ((Tilemap map, TilemapRenderer tilemapRenderer) in pairs)
+                    tilemapLayers[tilemapRenderer.sortingOrder] = map;
+            }
+
+            grid     = tilemapLayers[0].layoutGrid;
+            if (grid == null)
+            {
+                gameObject.SetActive(false);
+            }
         }
+
+        private void FixedUpdate()
+        {
+            if (!PhysicsModelChanged) return;
+            RefreshPhysics();
+            PhysicsModelChanged = false;
+        }
+
+        /// <value>
+        ///     Called everytime the physics model is updated (tile is destroyed)
+        /// </value>
+        public event Notify UpdatePhysics;
 
         /// <summary>
         ///     Converts a world position to coordinates in the tilemap
@@ -126,28 +158,26 @@ namespace TileSystem
         }
 
         /// <summary>
-        ///     Trys to get the tile at a world position
-        /// </summary>
-        /// <param name="pos">The world position to check</param>
-        /// <param name="foundTile">True if there is a functional tile at cords, False otherwise</param>
-        /// <returns>Returns the value of the tile data (default if none)</returns>
-        public TileInstanceData GetTile(Vector3 pos, out bool foundTile)
-        {
-            Vector3Int cords = PositionToCords(pos);
-            return GetTile(cords, out foundTile);
-        }
-
-        /// <summary>
         ///     Set a tile at the given coordinates
         /// </summary>
         /// <param name="cords">The coordinates of the tile to set</param>
-        /// <param name="tileVariantID">The tile variant to use</param>
-        public void SetTile(Vector3Int cords, ushort tileVariantID)
+        /// <param name="tileVariant">The tile variant to use</param>
+        /// <param name="direction">The orientation of the tile</param>
+        public void SetTile(Vector3Int cords, BasePart tileVariant, Directions direction = Directions.Up)
         {
-            BaseTileVariant tileVariant = TileSet.TileVariants[tileVariantID];
-            tilemapLayers[tileVariant.Layer].SetTile(cords, tileVariant.TileBase);
-            cords.z         = tileVariant.Layer;
-            tileData[cords] = new TileInstanceData(tileVariant);
+            if (tileVariant is null)
+            {
+                RemoveTile(cords);
+                return;
+            }
+            cords.z = tileVariant.layer;
+            if (tileData.ContainsKey(cords) && tileData[cords].ID == tileVariant.id) return;
+            tileVariant.Instantiate(cords, tilemapLayers[tileVariant.layer], direction);
+            tileData[cords] = new TileInstanceData(tileVariant, direction);
+            var localPos = CordsToPosition(cords);
+            Rigidbody2D.centerOfMass = (Rigidbody2D.mass * Rigidbody2D.centerOfMass + localPos * tileVariant.mass) /
+                                       (tileVariant.mass                            + Rigidbody2D.mass);
+            Rigidbody2D.mass += tileVariant.mass;
         }
 
         /// <summary>
@@ -155,12 +185,13 @@ namespace TileSystem
         /// </summary>
         /// <param name="cords">The list of coordinates in the tilemap</param>
         /// <param name="tiles">The list of tile variants to be placed</param>
-        public void SetTiles(Vector3Int[] cords, TileInstanceData[] tiles)
+        private void CopyTileInstancesData(Vector3Int[] cords, TileInstanceData[] tiles)
         {
             if (cords.Length < 1) return;
             Debug.Assert(cords.All(i => i.z == cords[0].z));
+
             int     layerID  = cords[0].z;
-            var     newTiles = tiles.Select(tile => TileSet.TileVariants[tile.ID].TileBase).ToArray();
+            var     newTiles = tiles.Select(tile => TileSet.TileVariants[tile.ID].tile).ToArray();
             Tilemap tilemap  = tilemapLayers[layerID];
             tilemap.SetTiles(cords, newTiles);
 
@@ -178,10 +209,10 @@ namespace TileSystem
         ///     Sets a tile at the given position in world space
         /// </summary>
         /// <param name="pos">The position in world space</param>
-        /// <param name="tileVariantID">The tile variant to be placed</param>
-        public void SetTile(Vector3 pos, ushort tileVariantID)
+        /// <param name="tileVariant">The tile variant to be placed</param>
+        public void SetTile(Vector3 pos, BasePart tileVariant)
         {
-            SetTile(PositionToCords(pos), tileVariantID);
+            SetTile(PositionToCords(pos), tileVariant);
         }
 
         /// <summary>
@@ -191,18 +222,28 @@ namespace TileSystem
         /// <param name="allTiles">Deletes all tiles at xy cords if true (default)</param>
         public void RemoveTile(Vector3Int cords, bool allTiles = true)
         {
+            var localPos = CordsToPosition(cords);
             if (allTiles)
             {
                 for (var i = 0; i < tilemapLayers.Length; i++)
                 {
                     cords.z = i;
-                    tilemapLayers[i].SetTile(cords, null);
+                    if (!tileData.ContainsKey(cords)) continue;
+                    var variant = TileSet.TileVariants[tileData[cords].ID];
+                    Rigidbody2D.centerOfMass -= variant.mass * localPos / Rigidbody2D.mass;
+                    Rigidbody2D.mass         -= variant.mass;
+                    variant.Remove(cords, tilemapLayers[i]);
                     tileData.Remove(cords);
                 }
             }
-
-            tileData.Remove(cords);
-            tilemapLayers[cords.z].SetTile(cords, null);
+            else
+            {
+                var variant = TileSet.TileVariants[tileData[cords].ID];
+                Rigidbody2D.centerOfMass -= variant.mass * localPos / Rigidbody2D.mass;
+                Rigidbody2D.mass         -= variant.mass;
+                variant.Remove(cords, tilemapLayers[cords.z]);
+                tileData.Remove(cords);
+            }
         }
 
         /// <summary>
@@ -229,31 +270,6 @@ namespace TileSystem
         public bool HasTile(Vector3 pos) => HasTile(PositionToCords(pos));
 
         /// <summary>
-        ///     Updates the internal tile data to match the tiles in Unity's tilemaps
-        /// </summary>
-        private void SyncFromTilemap()
-        {
-            for (var i = 0; i < tilemapLayers.Length; i++)
-            {
-                Tilemap tilemapLayer = tilemapLayers[i];
-                foreach (Vector3Int cords in tilemapLayer.cellBounds.allPositionsWithin)
-                {
-                    if (!tilemapLayer.HasTile(cords)) continue;
-
-                    Vector3Int c2 = cords;
-                    c2.z = i;
-                    TileBase   tile = tilemapLayer.GetTile(cords);
-                    Directions rot  = GetTileRotation(tilemapLayer, cords);
-
-                    tilemapLayer.SetTile(c2, tile);
-                    ushort id = TileSet.TilemapNameToID[tile.name];
-                    tileData[c2] = new TileInstanceData(TileSet.TileVariants[id], rot);
-                    if (rot != Directions.Up) tilemapLayer.SetTransformMatrix(c2, TileInfo.TransformMatrix[rot]);
-                }
-            }
-        }
-
-        /// <summary>
         ///     Get the rotation of a tile at the given cords
         /// </summary>
         /// <param name="tilemap">The tilemap to use</param>
@@ -276,43 +292,33 @@ namespace TileSystem
         }
 
         /// <summary>
-        ///     Applies damage to the tilemap
-        /// </summary>
-        /// <param name="dmg">A description of the damage to apply</param>
-        public bool ApplyDamage(Damage dmg)
-        {
-            Vector3Int start         = PositionToCords(dmg.StartPos);
-            Vector3Int end           = PositionToCords(dmg.EndPos);
-            var        destroyedTile = false;
-
-            ApplyInLine(start, end, cords => DamageTile(cords, dmg.BaseDamage, ref destroyedTile));
-            if (destroyedTile) Split();
-            return destroyedTile;
-        }
-
-        /// <summary>
         ///     Damages a tile at the given coordinates
         /// </summary>
         /// <param name="cords">The coordinates to damage the tile at</param>
         /// <param name="baseDamage">The base damage to use</param>
-        /// <param name="destroyed">Will be set to true if a tile is destroyed (unchanged otherwise)</param>
-        private void DamageTile(Vector3Int cords, float baseDamage, ref bool destroyed)
+        /// <param name="damageUsed">How much of the base damage was used to destroy the tile</param>
+        public void DamageTile(Vector3Int cords, float baseDamage, out float damageUsed)
         {
-            if (!HasTile(cords)) return;
+            if (!HasTile(cords))
+            {
+                damageUsed = 0;
+                return;
+            }
 
-            TileInstanceData tile            = tileData[cords];
-            BaseTileVariant  tileVariantType = TileSet.TileVariants[tile.ID];
-            var              damage          = (ushort) (tileVariantType.DamageResistance * baseDamage);
+            TileInstanceData tile     = tileData[cords];
+            BasePart         partType = TileSet.TileVariants[tile.ID];
+            var              damage   = (ushort) (partType.damageResistance * baseDamage);
             if (tile.Health <= damage)
             {
                 RemoveTile(cords);
-                if (tileData.Count == 0) Destroy(transform.gameObject);
-                destroyed = true;
+                if (tileData.Count == 0) transform.gameObject.SetActive(false);
+                damageUsed = tile.Health / partType.damageResistance;
                 return;
             }
 
             tile.Health     -= damage;
             tileData[cords] =  tile;
+            damageUsed      =  baseDamage;
         }
 
         /// <summary>
@@ -320,47 +326,15 @@ namespace TileSystem
         /// </summary>
         public void ResetTiles()
         {
-            foreach (Tilemap tilemap in tilemapLayers) tilemap.ClearAllTiles();
-            tileData.Clear();
-        }
-
-        /// <summary>
-        ///     Used to apply an action to every tile in a line between two points
-        /// </summary>
-        /// <param name="p0">The starting point</param>
-        /// <param name="p1">The end point</param>
-        /// <param name="callback">A delegate action that takes a Vector3Int that will be calle for every point on the line</param>
-        private static void ApplyInLine(Vector3Int p0, Vector3Int p1, Action<Vector3Int> callback)
-        {
-            // Bresenham's line algorithm (https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm#All_cases)
-            int dx  = Math.Abs(p1.x - p0.x);
-            int sx  = p0.x < p1.x ? 1 : -1;
-            int dy  = -Math.Abs(p1.y - p0.y);
-            int sy  = p0.y < p1.y ? 1 : -1;
-            int err = dx + dy;
-
-            int x = p0.x;
-            int y = p0.y;
-
-            while (true)
+            foreach (Tilemap tilemap in tilemapLayers)
             {
-                callback(new Vector3Int(x, y, 0));
-                if (x == p1.x && y == p1.y) break;
-
-                int e2 = 2 * err;
-
-                if (e2 >= dy)
-                {
-                    err += dy;
-                    x   += sx;
-                }
-
-                if (e2 <= dx)
-                {
-                    err += dx;
-                    y   += sy;
-                }
+                tilemap.ClearAllTiles();
+                foreach (Transform child in tilemap.transform) Destroy(child.gameObject);
             }
+
+            tileData.Clear();
+            Rigidbody2D.mass = 0;
+            Rigidbody2D.centerOfMass = Vector2.zero;
         }
 
         /// <summary>
@@ -369,15 +343,16 @@ namespace TileSystem
         /// <returns>A list of the islands, each containing a list of the coordinate positions that make up the island</returns>
         public List<List<Vector3Int>> FindIslands(int layer = 0)
         {
-            int width  = Bounds.xMax - Bounds.xMin;
-            int height = Bounds.yMax - Bounds.yMin;
+            int count  = 0;
+            int width  = Bounds.xMax - Bounds.xMin+2;
+            int height = Bounds.yMax - Bounds.yMin+2;
 
-            var checkedCells = new bool[width, height];
+            var checkedCells = new bool[width*height];
 
             var islands = new List<List<Vector3Int>>();
 
-            for (int x = Bounds.xMin; x < Bounds.xMax; x++)
-            for (int y = Bounds.yMin; y < Bounds.yMax; y++)
+            for (int x = Bounds.xMin-1; x <= Bounds.xMax; x++)
+            for (int y = Bounds.yMin-1; y <= Bounds.yMax; y++)
             {
                 var cords = new Vector3Int(x, y, layer);
                 if (!CheckTile(cords)) continue;
@@ -403,16 +378,18 @@ namespace TileSystem
                     }
                 }
             }
-
+            Debug.Log(count);
             return islands;
 
             bool CheckTile(Vector3Int cords)
             {
-                int xIdx = cords.x - Bounds.xMin;
-                int yIdx = cords.y - Bounds.yMin;
-                if (!Bounds.Contains(cords) || checkedCells[xIdx, yIdx]) return false;
+                count++;
+                int xIdx = cords.x - Bounds.xMin + 1;
+                int yIdx = cords.y - Bounds.yMin + 1;
 
-                checkedCells[xIdx, yIdx] = true;
+                if (checkedCells[xIdx +yIdx *width] || !Bounds.Contains(cords)) return false;
+
+                checkedCells[xIdx +yIdx *width] = true;
                 return HasTile(cords);
             }
         }
@@ -424,7 +401,7 @@ namespace TileSystem
         /// <typeparam name="T">The variant type (Must inherit from BaseTileVariant or will throw null reference)</typeparam>
         public void GetTilesByVariant<T>(out List<(Vector3Int cords, TileInstanceData data)> tiles)
         {
-            var ids = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BaseTileVariant).ID));
+            var ids = new HashSet<ushort>(TileSet.TileVariants.OfType<T>().Select(x => (x as BasePart).id));
             tiles = tileData.Where(x => ids.Contains(x.Value.ID)).Select(x => (x.Key, x.Value)).ToList();
         }
 
@@ -435,49 +412,113 @@ namespace TileSystem
         {
             var islands = FindIslands();
             if (islands.Count <= 1) return;
-
+            int  biggest     = islands.Max(i => i.Count);
+            bool updatedThis = false;
             foreach (var island in islands)
             {
-                GameObject obj            = Instantiate(template);
-                var        newTileManager = obj.GetComponent<TileManager>();
-                var        newRb2D        = obj.GetComponent<Rigidbody2D>();
-
-                newTileManager.ResetTiles();
-
-                Transform thisTransform = transform;
-                Transform tileTransform = newTileManager.transform;
-
-                tileTransform.position = thisTransform.position;
-                tileTransform.rotation = thisTransform.rotation;
-
-                var tiles        = new List<TileInstanceData>();
-                var cordsList    = new List<Vector3Int>();
-                var instanceData = new TileInstanceData();
-
-                foreach (int i in TileSet.ActiveLayers)
+                if (island.Count == biggest && !updatedThis)
                 {
-                    tiles.Clear();
-                    cordsList.Clear();
+                    updatedThis = true;
+                }
+                else
+                {
+                    Transform  gridTransform = grid.transform;
+                    GameObject obj           = pool.GetObject();
+                    obj.transform.parent = gridTransform;
+                
+                    var newTileManager = obj.GetComponent<TileManager>();
+                    var newRb2D        = newTileManager.Rigidbody2D;
+                    newTileManager.ResetTiles();
+                    newTileManager.pool = pool;
+                    newTileManager.grid = grid;
+
+                    Transform thisTransform = transform;
+                    Transform tileTransform = newTileManager.transform;
+
+                    tileTransform.position = thisTransform.position;
+                    tileTransform.rotation = thisTransform.rotation;
+
+                    var instanceData = new TileInstanceData();
+                    obj.SetActive(true);
+
                     foreach (Vector3Int cords in island)
                     {
-                        Vector3Int c = cords;
-                        c.z = i;
-                        if (!GetTile(c, ref instanceData)) continue;
-                        tiles.Add(instanceData);
-                        cordsList.Add(c);
+                        foreach (int i in TileSet.ActiveLayers)
+                        {
+                            Vector3Int c = cords;
+                            c.z = i;
+                            if (!GetTile(c, ref instanceData)) continue;
+                            RemoveTile(cords);
+                            var variant = TileSet.TileVariants[instanceData.ID];
+                            newTileManager.SetTile(c, variant, instanceData.Rotation);
+                            newTileManager.tileData[c] = instanceData;
+                        }
                     }
 
-                    newTileManager.SetTiles(cordsList.ToArray(), tiles.ToArray());
+                    if (!PhysicsEnabled) continue;
+
+                    newTileManager.physics  = true;
+                    foreach (Tilemap tilemapLayer in newTileManager.tilemapLayers)
+                    {
+                        tilemapLayer.ResizeBounds();
+                    }
+                    newRb2D.isKinematic     = false;
+                    newRb2D.angularVelocity = Rigidbody2D.angularVelocity;
                 }
+            }
+        }
 
-                if (!PhysicsEnabled) continue;
+        /// <summary>
+        ///     Splits the mesh if physics is enabled and invokes the UpdatePhysics event
+        /// </summary>
+        public void RefreshPhysics()
+        {
+            if (!physics) return;
+            UpdatePhysics?.Invoke();
+            Split();
+        }
 
-                newTileManager.PhysicsEnabled = true;
-                newRb2D.velocity              = rb2D.velocity;
-                newRb2D.angularVelocity       = rb2D.angularVelocity;
+        /// <summary>
+        ///     Will serialize the design data (only tile ID and rot, no HP)
+        /// </summary>
+        /// <returns>The JSON string</returns>
+        public string DesignToJson()
+        {
+            var data = tileData.Select(instanceData => new SerializableTileData
+            {
+                pos    = instanceData.Key,
+                tileID = TileSet.VariantIDToName[instanceData.Value.ID],
+                dir    = instanceData.Value.Rotation,
+            }).ToList();
+            return JsonUtility.ToJson(new SerializableGridData {grid = data}, true);
+        }
+
+        public void LoadFromJson(string path)
+        {
+            string jsonText = File.ReadAllText(path);
+            var    grid     = JsonUtility.FromJson<SerializableGridData>(jsonText).grid;
+            ResetTiles();
+            foreach (SerializableTileData data in grid)
+            {
+                BasePart basePart = TileSet.Instance.VariantNameToID[data.tileID];
+                SetTile(data.pos, basePart, data.dir);
             }
 
-            Destroy(gameObject);
+            PhysicsModelChanged = true;
+        }
+
+        [Serializable]
+        private class SerializableTileData
+        {
+            public string     tileID;
+            public Directions dir;
+            public Vector3Int pos;
+        }
+
+        [Serializable]
+        private class SerializableGridData
+        {
+            public List<SerializableTileData> grid;
         }
     }
 }

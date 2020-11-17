@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2573c506ace14b6db63386923536592f, type: 3}
+  m_Name: Rock
+  m_EditorClassIdentifier: 
+  partName: Basic Armor
+  partID: rock1
+  category: Hull
+  tile: {fileID: 11400000, guid: fb175a856da45af4482e596806ec1780, type: 2}
+  damageResistance: 1
+  maxHealth: 25
+  layer: 0
+  previewImg: {fileID: 6903120917539983151, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
+  mass: 1
+  id: 0
