@@ -3,7 +3,9 @@ using TileSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-
+/// <summary>
+/// A basic class to generate asteroids
+/// </summary>
 [RequireComponent(typeof(Tilemap))]
 public class AsteroidTester : MonoBehaviour
 {

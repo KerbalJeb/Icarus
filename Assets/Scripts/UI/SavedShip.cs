@@ -4,6 +4,9 @@ using UnityEngine.EventSystems;
 
 namespace UI
 {
+    /// <summary>
+    /// Used to load saved ships from UI
+    /// </summary>
     public class SavedShip : MonoBehaviour, IPointerClickHandler
     {
         private string       text;

@@ -6,11 +6,22 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;
 
+/// <summary>
+/// A class to generate procedural asteroids from a seed
+/// </summary>
 public class AsteroidsGenerator
 {
     private Vector3Int[] points;
     private float        LargeScaleNoise = 0.1f;
     private float        SmallScaleNoise = 0.2f;
+    
+    /// <summary>
+    /// Constructor for the asteroid generator
+    /// </summary>
+    /// <param name="xMax">x 'radius' of the asteroid ellipse (semi-minor or semi-major axis, depending on if xMax or yMax is greater)</param>
+    /// <param name="yMax">y 'radius' of the asteroid ellipse (semi-minor or semi-major axis, depending on if xMax or yMax is greater)</param>
+    /// <param name="noiseOffsetScale">The scale of the noise offet, larger numbers will make rougher asteroids</param>
+    /// <param name="seed"></param>
     public AsteroidsGenerator(int xMax, int yMax, int noiseOffsetScale, int seed=0)
     {
         Random.InitState(seed);
@@ -54,6 +65,11 @@ public class AsteroidsGenerator
         }
     }
 
+    /// <summary>
+    /// Set a tilemanager with the data for the asteroid
+    /// </summary>
+    /// <param name="tilemap">The tilemanager to set</param>
+    /// <param name="tileBase">The part variant to use for the asteroid material</param>
     public void SetTilemap(ref TileManager tilemap,  BasePart tileBase)
     {
         var tiles = new BasePart[points.Length];

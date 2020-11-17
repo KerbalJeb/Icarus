@@ -7,30 +7,36 @@ using UnityEngine;
 /// <summary>
 ///     Used to manage movement and calculate the flight model based on engine placement
 /// </summary>
-[RequireComponent(typeof(TileManager))]
 public class MovementManager
 {
     private const int OutputStateDim = 3;
 
 
-    private float[]            a;
-    private Vector2            com;
-    private Vector3            currentInput;
-    private Vector<float>      engineInputs;
-    private List<ThrustVector> engineVectors;
-    private float              goalRot = 0f;
-    private int                n;
-    private Vector3            netThrust;
-    private bool               physics = false;
-    private Rigidbody2D        rb2D;
-    private Matrix<float>      thrustMatrix;
-    private Transform          transform;
+    private          float[]            a;
+    private          Vector2            com;
+    private          Vector3            currentInput;
+    private          Vector<float>      engineInputs;
+    private          List<ThrustVector> engineVectors;
+    private          float              goalRot = 0f;
+    private          int                n;
+    private          Vector3            netThrust;
+    private          bool               physics = false;
+    private          Rigidbody2D        rb2D;
+    private          Matrix<float>      thrustMatrix;
+    private readonly Transform          transform;
+    private readonly TileManager        tileManager;
+    private          int                m => OutputStateDim;
 
     private Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
-    private TileManager                                                       tileManager;
-    private int                                                               m => OutputStateDim;
+    
 
 
+
+    /// <summary>
+    /// MovementManager Constructor
+    /// </summary>
+    /// <param name="manager">The tile manager it is attached to</param>
+    /// <param name="transform">The transform of the ship</param>
     public MovementManager(TileManager manager, Transform transform)
     {
         tileManager    = manager;

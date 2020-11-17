@@ -4,6 +4,9 @@ using UI;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+/// <summary>
+/// Used to generate a map from a seed
+/// </summary>
 public class MapGenerator
 {
     private float    scale      =100f;
@@ -14,7 +17,11 @@ public class MapGenerator
     private int      yOffset;
     private BasePart tileBase;
 
-    
+    /// <summary>
+    /// Map gen constructor
+    /// </summary>
+    /// <param name="seed">The seed to use for generation</param>
+    /// <param name="tileBase">The part type to use for the asteroid material</param>
     public MapGenerator(int seed, BasePart tileBase)
     {
         Random.InitState(seed);
@@ -23,6 +30,13 @@ public class MapGenerator
         this.tileBase = tileBase;
     }
 
+    /// <summary>
+    /// Generates a map
+    /// </summary>
+    /// <param name="pos">The portion of the map to generate as the coordinates of 100x100 squares centred on the origin</param>
+    /// <param name="tilemap">The tilemap template to use for the asteroids</param>
+    /// <param name="grid">The grid objects to attach the tilemaps to</param>
+    /// <param name="pool">The object pool to use</param>
     public void Generate(IEnumerable<Vector2Int> pos, GameObject tilemap, Transform grid, ObjectPool pool)
     {
         foreach (Vector2Int vector2Int in pos)

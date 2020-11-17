@@ -1,19 +1,25 @@
 ﻿using UnityEngine;
 
-public class PopUp : MonoBehaviour
+namespace UI
 {
-    private void Awake()
+    /// <summary>
+    /// Used to create 'pop up' windows that are closed by default
+    /// </summary>
+    public class PopUp : MonoBehaviour
     {
-        gameObject.SetActive(false);
-    }
+        private void Awake()
+        {
+            gameObject.SetActive(false);
+        }
 
-    public void Open()
-    {
-        gameObject.SetActive(true);
-    }
+        public void Open()
+        {
+            gameObject.SetActive(true);
+        }
 
-    public void Close()
-    {
-        gameObject.SetActive(false);
+        public void Close()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

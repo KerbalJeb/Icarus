@@ -145,7 +145,7 @@ public class ShipDesigner : MonoBehaviour
         }
 
         string jsonData = tileManager.DesignToJson();
-        ShipData.ShipName = filePath;
+        ShipData.ShipPath = filePath;
         File.WriteAllText(filePath, jsonData);
         savePopUp.Close();
         nameConflictPopUp.Close();

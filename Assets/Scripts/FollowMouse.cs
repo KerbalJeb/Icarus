@@ -3,7 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-
+/// <summary>
+/// Basic class to make object track mouse in world space
+/// </summary>
 public class FollowMouse : MonoBehaviour
 {
     private Camera cam;
