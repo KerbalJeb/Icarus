@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50611ad090a94feea7f70fb46ab2d5ac, type: 3}
+  m_Name: Weapon
+  m_EditorClassIdentifier: 
+  partName: Rail Gun
+  partID: rail_gn
+  category: Weapons
+  tile: {fileID: 11400000, guid: 49c0a134854d0664391e8c61cb12c45b, type: 2}
+  damageResistance: 0
+  maxHealth: 0
+  layer: 1
+  previewImg: {fileID: 2734423211405241899, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
+  mass: 1
+  id: 4
+  turret: {fileID: 2734423211405241899, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
+  turretTemplate: {fileID: 523066076592527933, guid: 17cf37523af8ea24086785f85489f4b5, type: 3}
+  baseDamage: 500
+  range: 100
