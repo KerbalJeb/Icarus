@@ -9,31 +9,28 @@ using UnityEngine;
 /// </summary>
 public class MovementManager
 {
-    private const int OutputStateDim = 3;
+    private const    int         OutputStateDim = 3;
+    private readonly TileManager tileManager;
+    private readonly Transform   transform;
 
 
-    private          float[]            a;
-    private          Vector2            com;
-    private          Vector3            currentInput;
-    private          Vector<float>      engineInputs;
-    private          List<ThrustVector> engineVectors;
-    private          float              goalRot = 0f;
-    private          int                n;
-    private          Vector3            netThrust;
-    private          bool               physics = false;
-    private          Rigidbody2D        rb2D;
-    private          Matrix<float>      thrustMatrix;
-    private readonly Transform          transform;
-    private readonly TileManager        tileManager;
-    private          int                m => OutputStateDim;
+    private float[]            a;
+    private Vector2            com;
+    private Vector3            currentInput;
+    private Vector<float>      engineInputs;
+    private List<ThrustVector> engineVectors;
+    private float              goalRot = 0f;
+    private int                n;
+    private Vector3            netThrust;
+    private bool               physics = false;
+    private Rigidbody2D        rb2D;
+    private Matrix<float>      thrustMatrix;
 
     private Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
-    
-
 
 
     /// <summary>
-    /// MovementManager Constructor
+    ///     MovementManager Constructor
     /// </summary>
     /// <param name="manager">The tile manager it is attached to</param>
     /// <param name="transform">The transform of the ship</param>
@@ -42,6 +39,8 @@ public class MovementManager
         tileManager    = manager;
         this.transform = transform;
     }
+
+    private int m => OutputStateDim;
 
     public void ApplyThrust()
     {
@@ -90,11 +89,8 @@ public class MovementManager
     /// </summary>
     public void UpdatePhysics()
     {
-        if (rb2D == null)
-        {
-            rb2D = tileManager.Rigidbody2D;
-        }
-        com  = rb2D.centerOfMass;
+        if (rb2D == null) rb2D = tileManager.Rigidbody2D;
+        com = rb2D.centerOfMass;
         tileManager.GetTilesByVariant<EnginePart>(out var engines);
         n              = engines.Count;
         engineVectors  = new List<ThrustVector>();

@@ -1,5 +1,4 @@
-﻿using System;
-using TileSystem;
+﻿using TileSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,21 +11,23 @@ using UnityEngine.InputSystem;
 public class ShipManager : MonoBehaviour
 {
     /// <value>
-    /// The target to aim the weapons at
+    ///     The target to aim the weapons at
     /// </value>
-    public Transform      target = null;
-    public WeaponsManager WeaponsManager { get; private set; }
+    public Transform target = null;
+
     /// <value>
-    /// If true will load a ship from the path given in ShipData.Path
+    ///     If true will load a ship from the path given in ShipData.Path
     /// </value>
-    public                   bool            autoLoadFromShipData = false;
+    public bool autoLoadFromShipData = false;
+
     /// <value>
-    /// If physics should be enabled when the object if first created
+    ///     If physics should be enabled when the object if first created
     /// </value>
-    [SerializeField] private bool            startWithPhysics     = false;
-    
+    [SerializeField] private bool startWithPhysics = false;
+
     private MovementManager movementManager;
     private TileManager     tileManager;
+    public  WeaponsManager  WeaponsManager { get; private set; }
 
     /// <value>
     ///     Will enable or disable physics for this ship
@@ -51,10 +52,7 @@ public class ShipManager : MonoBehaviour
 
     private void Start()
     {
-        if (autoLoadFromShipData)
-        {
-            tileManager.LoadFromJson(ShipData.ShipPath);
-        }
+        if (autoLoadFromShipData) tileManager.LoadFromJson(ShipData.ShipPath);
         PhysicsEnabled = startWithPhysics;
     }
 
@@ -65,10 +63,7 @@ public class ShipManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PhysicsEnabled)
-        {
-            movementManager.ApplyThrust();
-        }
+        if (PhysicsEnabled) movementManager.ApplyThrust();
     }
 
     private void OnEnable()
@@ -100,22 +95,16 @@ public class ShipManager : MonoBehaviour
     /// </summary>
     private void UpdatePhysics()
     {
-        if (tileManager.PhysicsEnabled)
-        {
-            movementManager.UpdatePhysics();
-        }
+        if (tileManager.PhysicsEnabled) movementManager.UpdatePhysics();
     }
 
     /// <summary>
-    /// Fires all the weapons attached to the ship
+    ///     Fires all the weapons attached to the ship
     /// </summary>
     /// <param name="context">Needed for input system to work, but not used in function</param>
     private void Fire(InputAction.CallbackContext context)
     {
-        if (!PhysicsEnabled)
-        {
-            return;
-        }
+        if (!PhysicsEnabled) return;
         WeaponsManager.Fire();
     }
 }

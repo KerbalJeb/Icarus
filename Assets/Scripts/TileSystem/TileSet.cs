@@ -41,7 +41,7 @@ namespace TileSystem
             var allVariants     = new List<BasePart>();
             var variantNameDict = new Dictionary<string, BasePart>();
             var idsDict         = new Dictionary<ushort, string>();
-            
+
             allVariants.Add(null);
             idsDict[0]              = "null";
             variantNameDict["null"] = null;

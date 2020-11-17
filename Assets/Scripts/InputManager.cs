@@ -32,10 +32,7 @@ public class InputManager
 
         var raycastResults = new List<RaycastResult>();
 
-        if (EventSystem.current == null)
-        {
-            return false;
-        }
+        if (EventSystem.current == null) return false;
         EventSystem.current.RaycastAll(pointerEventData, raycastResults);
 
         return raycastResults.Any(raycastResult => !raycastResult.gameObject.CompareTag("Unclickable"));

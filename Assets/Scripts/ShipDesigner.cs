@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
-using UnityEngine.Tilemaps;
 
 /// <summary>
 ///     A class used to manage drawing tiles in ship design mode
@@ -26,22 +25,22 @@ public class ShipDesigner : MonoBehaviour
     [SerializeField] private Color          addingColor;
     [SerializeField] private Color          removingColor;
     [SerializeField] private Sprite         blankTile;
-    private                  Vector3Int     lastPos;
-    private                  Transform      previewImgTransform;
-    private                  bool           placingBlocks;
-    private                  string         shipSavePath;
-    private                  TileSet        tileSet;
-    private                  Directions     direction = Directions.Up;
+    private                  string         activeTileID = "default_hull";
 
 
-    private string currentTileID = "default_hull";
-    private string activeTileID  = "default_hull";
+    private string     currentTileID = "default_hull";
+    private Directions direction     = Directions.Up;
+    private Vector3Int lastPos;
+    private bool       placingBlocks;
+    private Transform  previewImgTransform;
+    private string     shipSavePath;
+    private TileSet    tileSet;
 
     public string CurrentTileID
     {
         get => currentTileID;
         set
-        { 
+        {
             ChangeMode(value != "null");
             currentTileID = value;
         }
@@ -59,43 +58,23 @@ public class ShipDesigner : MonoBehaviour
     {
         Vector2Control mousePos = Mouse.current.position;
         Vector3        worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
-        Vector3Int cords = tileManager.PositionToCords(worldPos);
-        
-        if (placingBlocks)
-        {
-            tileManager.SetTile(cords, tileSet.VariantNameToID[CurrentTileID], direction);
-        }
+        Vector3Int     cords    = tileManager.PositionToCords(worldPos);
+
+        if (placingBlocks) tileManager.SetTile(cords, tileSet.VariantNameToID[CurrentTileID], direction);
 
         if (!InputManager.IsMouseOverClickableUI())
         {
-            Sprite tile = tileSet.VariantNameToID[CurrentTileID] == null ? blankTile : tileSet.VariantNameToID[CurrentTileID].previewImg;
+            Sprite tile = tileSet.VariantNameToID[CurrentTileID] == null
+                ? blankTile
+                : tileSet.VariantNameToID[CurrentTileID].previewImg;
             Vector3 pos = tileManager.CordsToPosition(cords);
-            previewImg.sprite             = tile;
-            
+            previewImg.sprite = tile;
+
             previewImgTransform.position = pos;
             previewImgTransform.rotation = TileInfo.TransformMatrix[direction].rotation;
         }
         else
-        {
             previewImg.sprite = null;
-        }
-
-
-        
-    }
-
-    private void ChangeMode(bool adding)
-    {
-        previewImg.color = adding ? addingColor : removingColor;
-        if (!adding)
-        {
-            activeTileID  = currentTileID;
-            currentTileID = "null";
-        }
-        else
-        {
-            currentTileID = activeTileID;
-        }
     }
 
     private void OnEnable()
@@ -114,6 +93,18 @@ public class ShipDesigner : MonoBehaviour
         InputManager.PlayerActions.PlaceBlock.canceled       -= StopPlacingBlocks;
         InputManager.PlayerActions.RotateTileLeft.performed  -= RotateLeft;
         InputManager.PlayerActions.RotateTileRight.performed -= RotateRight;
+    }
+
+    private void ChangeMode(bool adding)
+    {
+        previewImg.color = adding ? addingColor : removingColor;
+        if (!adding)
+        {
+            activeTileID  = currentTileID;
+            currentTileID = "null";
+        }
+        else
+            currentTileID = activeTileID;
     }
 
     private void StartPlacingBlocks(InputAction.CallbackContext context)
@@ -176,30 +167,22 @@ public class ShipDesigner : MonoBehaviour
 
     private void RotateLeft(InputAction.CallbackContext context)
     {
-        if (direction==Directions.Right)
-        {
+        if (direction == Directions.Right)
             direction = Directions.Up;
-        }
         else
-        {
             direction++;
-        }
     }
 
     private void RotateRight(InputAction.CallbackContext context)
     {
-        if (direction==Directions.Up)
-        {
+        if (direction == Directions.Up)
             direction = Directions.Right;
-        }
         else
-        {
             direction--;
-        }
     }
 
     private void DeleteBlocks(InputAction.CallbackContext context)
     {
-        ChangeMode(currentTileID=="null");
+        ChangeMode(currentTileID == "null");
     }
 }

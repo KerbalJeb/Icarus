@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "src": "../Assets",
+          "src": "../Assets/Scripts",
           "files": [
             "**.cs"
           ]

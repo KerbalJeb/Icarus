@@ -1,21 +1,21 @@
-﻿using System;
-using TileSystem;
+﻿using TileSystem;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 /// <summary>
-/// A basic class to generate asteroids
+///     A basic class to generate asteroids
 /// </summary>
 [RequireComponent(typeof(Tilemap))]
 public class AsteroidTester : MonoBehaviour
 {
-    private                  TileManager tilemap;
     [SerializeField] private BasePart    tileBase;
     public                   int         seed;
+    public                   int         xMax       = 30;
+    public                   int         yMax       = 30;
+    public                   int         noiseScale = 15;
     private                  int         lastSeed;
-    public                   int         xMax       =30;
-    public                   int         yMax       =30;
-    public                   int         noiseScale =15;
+    private                  TileManager tilemap;
+
     private void Awake()
     {
         tilemap = GetComponent<TileManager>();
@@ -36,4 +36,3 @@ public class AsteroidTester : MonoBehaviour
         lastSeed = seed;
     }
 }
-

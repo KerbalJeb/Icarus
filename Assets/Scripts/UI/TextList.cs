@@ -5,7 +5,7 @@ using UnityEngine;
 namespace UI
 {
     /// <summary>
-    /// A list of UI text elements (used for selecting save)
+    ///     A list of UI text elements (used for selecting save)
     /// </summary>
     public class TextList : MonoBehaviour
     {

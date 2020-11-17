@@ -3,7 +3,7 @@
 namespace UI
 {
     /// <summary>
-    /// Used to create 'pop up' windows that are closed by default
+    ///     Used to create 'pop up' windows that are closed by default
     /// </summary>
     public class PopUp : MonoBehaviour
     {

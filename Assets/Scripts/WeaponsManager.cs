@@ -8,7 +8,7 @@ using UnityEngine;
 // TODO add fire groups
 
 /// <summary>
-/// Used to manage weapons on a ship
+///     Used to manage weapons on a ship
 /// </summary>
 public class WeaponsManager
 {
@@ -18,7 +18,7 @@ public class WeaponsManager
         new Dictionary<Vector3Int, (Weapon, GameObject)>();
 
     /// <summary>
-    /// The constructor for the weapons manager
+    ///     The constructor for the weapons manager
     /// </summary>
     /// <param name="manager">The tile manager it is attached to</param>
     public WeaponsManager(TileManager manager)
@@ -27,7 +27,7 @@ public class WeaponsManager
     }
 
     /// <summary>
-    /// Updates the rotations of the weapons turrets
+    ///     Updates the rotations of the weapons turrets
     /// </summary>
     /// <param name="target">The target to aim towards</param>
     public void UpdateTransform(Transform target)
@@ -42,7 +42,7 @@ public class WeaponsManager
     }
 
     /// <summary>
-    /// Registers a new weapon wi
+    ///     Registers a new weapon wi
     /// </summary>
     /// <param name="cords">The coordinates of the weapon in the tile map</param>
     /// <param name="weapon">The weapon variant</param>
@@ -53,7 +53,7 @@ public class WeaponsManager
     }
 
     /// <summary>
-    /// De-Registers a weapon
+    ///     De-Registers a weapon
     /// </summary>
     /// <param name="cords">The coordinates of the weapon in the tile map</param>
     public void RemoveWeapon(Vector3Int cords)
@@ -67,7 +67,7 @@ public class WeaponsManager
     }
 
     /// <summary>
-    /// Fires all weapons in the direction it is currently facing
+    ///     Fires all weapons in the direction it is currently facing
     /// </summary>
     public void Fire()
     {
@@ -78,7 +78,7 @@ public class WeaponsManager
             Vector3    startPos = o.transform.position;
             Vector3    endPos   = startPos + dir * Vector3.up * w.range;
             var        dmg      = new Damage(startPos, endPos, w.baseDamage);
-            dmg.ApplyDamage(new []{tileManager});
+            dmg.ApplyDamage(new[] {tileManager});
         }
     }
 }

@@ -42,17 +42,12 @@ public class Damage
         var done = false;
         foreach (RaycastHit2D hit in hits)
         {
-
-
-            var     tileManager   = hit.transform.GetComponent<TileManager>();
+            var tileManager = hit.transform.GetComponent<TileManager>();
             if (tileManager is null) continue;
-            if (exclude.Contains(tileManager))
-            {
-                continue;
-            }
-            var     destroyedTile = false;
-            Vector2 lineStart     = hit.point - 0.5f * Direction;
-            Vector2 lineEnd       = EndPos;
+            if (exclude.Contains(tileManager)) continue;
+            var destroyedTile = false;
+            Vector2 lineStart = hit.point - 0.5f * Direction;
+            Vector2 lineEnd = EndPos;
             Debug.DrawLine(lineStart, lineEnd, Color.red, 5f);
             var dmgToObject = 0f;
             var line = RasterUtil.Line(tileManager.PositionToCords(lineStart), tileManager.PositionToCords(lineEnd));
@@ -71,7 +66,7 @@ public class Damage
                 destroyedTile =  true;
             }
 
-            if (destroyedTile) tileManager.PhysicsModelChanged=true;
+            if (destroyedTile) tileManager.PhysicsModelChanged = true;
 
             tileManager.Rigidbody2D.AddForceAtPosition(Direction * dmgToObject * 1e-3f, lineStart);
 

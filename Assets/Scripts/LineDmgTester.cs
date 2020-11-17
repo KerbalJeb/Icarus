@@ -37,6 +37,6 @@ public class LineDmgTester : MonoBehaviour
         Vector2Control mousePos = Mouse.current.position;
         endPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
         var dmg = new Damage(startPos, endPos, 5000f);
-        dmg.ApplyDamage(new TileManager[]{});
+        dmg.ApplyDamage(new TileManager[] { });
     }
 }

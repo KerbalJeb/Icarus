@@ -29,10 +29,7 @@ namespace UI
         {
             foreach (BasePart variant in tileSet.TileVariants)
             {
-                if (variant == null)
-                {
-                    continue;
-                }
+                if (variant == null) continue;
                 TabButton  tab    = tabGroup.AddTab(variant.category);
                 TileButton button = tab.AddTile(variant.previewImg, this);
                 button.tileID = variant.partID;
