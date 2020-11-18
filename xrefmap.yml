@@ -771,6 +771,38 @@ references:
   isSpec: "True"
   fullName: TileSystem.BasePart.Remove
   nameWithType: BasePart.Remove
+- uid: TileSystem.BasePart.RemoveTiles(Vector3Int[],Tilemap)
+  name: RemoveTiles(Vector3Int[], Tilemap)
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_RemoveTiles_Vector3Int___Tilemap_
+  commentId: M:TileSystem.BasePart.RemoveTiles(Vector3Int[],Tilemap)
+  name.vb: RemoveTiles(Vector3Int(), Tilemap)
+  fullName: TileSystem.BasePart.RemoveTiles(Vector3Int[], Tilemap)
+  fullName.vb: TileSystem.BasePart.RemoveTiles(Vector3Int(), Tilemap)
+  nameWithType: BasePart.RemoveTiles(Vector3Int[], Tilemap)
+  nameWithType.vb: BasePart.RemoveTiles(Vector3Int(), Tilemap)
+- uid: TileSystem.BasePart.RemoveTiles*
+  name: RemoveTiles
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_RemoveTiles_
+  commentId: Overload:TileSystem.BasePart.RemoveTiles
+  isSpec: "True"
+  fullName: TileSystem.BasePart.RemoveTiles
+  nameWithType: BasePart.RemoveTiles
+- uid: TileSystem.BasePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
+  name: SetTiles(Vector3Int[], Tilemap, Directions[])
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_SetTiles_Vector3Int___Tilemap_TileSystem_Directions___
+  commentId: M:TileSystem.BasePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
+  name.vb: SetTiles(Vector3Int(), Tilemap, Directions())
+  fullName: TileSystem.BasePart.SetTiles(Vector3Int[], Tilemap, TileSystem.Directions[])
+  fullName.vb: TileSystem.BasePart.SetTiles(Vector3Int(), Tilemap, TileSystem.Directions())
+  nameWithType: BasePart.SetTiles(Vector3Int[], Tilemap, Directions[])
+  nameWithType.vb: BasePart.SetTiles(Vector3Int(), Tilemap, Directions())
+- uid: TileSystem.BasePart.SetTiles*
+  name: SetTiles
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_SetTiles_
+  commentId: Overload:TileSystem.BasePart.SetTiles
+  isSpec: "True"
+  fullName: TileSystem.BasePart.SetTiles
+  nameWithType: BasePart.SetTiles
 - uid: TileSystem.BasePart.tile
   name: tile
   href: api/TileSystem.BasePart.html#TileSystem_BasePart_tile
@@ -1116,19 +1148,6 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.PositionToCords
   nameWithType: TileManager.PositionToCords
-- uid: TileSystem.TileManager.RefreshPhysics
-  name: RefreshPhysics()
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_RefreshPhysics
-  commentId: M:TileSystem.TileManager.RefreshPhysics
-  fullName: TileSystem.TileManager.RefreshPhysics()
-  nameWithType: TileManager.RefreshPhysics()
-- uid: TileSystem.TileManager.RefreshPhysics*
-  name: RefreshPhysics
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_RefreshPhysics_
-  commentId: Overload:TileSystem.TileManager.RefreshPhysics
-  isSpec: "True"
-  fullName: TileSystem.TileManager.RefreshPhysics
-  nameWithType: TileManager.RefreshPhysics
 - uid: TileSystem.TileManager.RemoveTile(Vector3)
   name: RemoveTile(Vector3)
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_RemoveTile_Vector3_
@@ -1312,6 +1331,38 @@ references:
   isSpec: "True"
   fullName: TileSystem.Weapon.Remove
   nameWithType: Weapon.Remove
+- uid: TileSystem.Weapon.RemoveTiles(Vector3Int[],Tilemap)
+  name: RemoveTiles(Vector3Int[], Tilemap)
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_RemoveTiles_Vector3Int___Tilemap_
+  commentId: M:TileSystem.Weapon.RemoveTiles(Vector3Int[],Tilemap)
+  name.vb: RemoveTiles(Vector3Int(), Tilemap)
+  fullName: TileSystem.Weapon.RemoveTiles(Vector3Int[], Tilemap)
+  fullName.vb: TileSystem.Weapon.RemoveTiles(Vector3Int(), Tilemap)
+  nameWithType: Weapon.RemoveTiles(Vector3Int[], Tilemap)
+  nameWithType.vb: Weapon.RemoveTiles(Vector3Int(), Tilemap)
+- uid: TileSystem.Weapon.RemoveTiles*
+  name: RemoveTiles
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_RemoveTiles_
+  commentId: Overload:TileSystem.Weapon.RemoveTiles
+  isSpec: "True"
+  fullName: TileSystem.Weapon.RemoveTiles
+  nameWithType: Weapon.RemoveTiles
+- uid: TileSystem.Weapon.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
+  name: SetTiles(Vector3Int[], Tilemap, Directions[])
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_SetTiles_Vector3Int___Tilemap_TileSystem_Directions___
+  commentId: M:TileSystem.Weapon.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
+  name.vb: SetTiles(Vector3Int(), Tilemap, Directions())
+  fullName: TileSystem.Weapon.SetTiles(Vector3Int[], Tilemap, TileSystem.Directions[])
+  fullName.vb: TileSystem.Weapon.SetTiles(Vector3Int(), Tilemap, TileSystem.Directions())
+  nameWithType: Weapon.SetTiles(Vector3Int[], Tilemap, Directions[])
+  nameWithType.vb: Weapon.SetTiles(Vector3Int(), Tilemap, Directions())
+- uid: TileSystem.Weapon.SetTiles*
+  name: SetTiles
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_SetTiles_
+  commentId: Overload:TileSystem.Weapon.SetTiles
+  isSpec: "True"
+  fullName: TileSystem.Weapon.SetTiles
+  nameWithType: Weapon.SetTiles
 - uid: TileSystem.Weapon.turret
   name: turret
   href: api/TileSystem.Weapon.html#TileSystem_Weapon_turret
