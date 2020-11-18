@@ -20,6 +20,8 @@ namespace TileSystem
     /// </remarks>
     public class TileManager : MonoBehaviour
     {
+        private const int minIslandSize = 3;
+
         private static readonly ReadOnlyCollection<Vector3Int> ConnectionRules = new ReadOnlyCollection<Vector3Int>(
          new List<Vector3Int>
          {
@@ -37,8 +39,11 @@ namespace TileSystem
         private readonly Dictionary<Vector3Int, TileInstanceData> tileData =
             new Dictionary<Vector3Int, TileInstanceData>();
 
-        private bool doneSplitting = false;
-        private Grid grid;
+        private Vector2 com;
+        private bool    com_updated;
+
+        private Grid  grid;
+        private float mass;
 
         private Tilemap[]   tilemapLayers;
         public  Rigidbody2D Rigidbody2D { get; private set; }
@@ -48,9 +53,6 @@ namespace TileSystem
         public  TileSet   TileSet             { get; private set; }
         private BoundsInt Bounds              => tilemapLayers[0].cellBounds;
         public  bool      PhysicsModelChanged { get; set; } = false;
-        private float     mass;
-        private Vector2   com;
-        private bool      com_updated;
 
         public bool PhysicsEnabled
         {
@@ -84,7 +86,6 @@ namespace TileSystem
                 Rigidbody2D.centerOfMass = com;
                 com_updated              = false;
             }
-
         }
 
         public void OnEnable()
@@ -294,7 +295,8 @@ namespace TileSystem
             {
                 RemoveTile(cords);
                 if (tileData.Count == 0) transform.gameObject.SetActive(false);
-                damageUsed = tile.Health / partType.damageResistance;
+                damageUsed          = tile.Health / partType.damageResistance;
+                PhysicsModelChanged = true;
                 return;
             }
 
@@ -326,15 +328,15 @@ namespace TileSystem
         /// <returns>A list of the islands, each containing a list of the coordinate positions that make up the island</returns>
         public List<List<Vector3Int>> FindIslands(int layer = 0)
         {
-            var cachedBounds = Bounds;
-            
-            int xMax = cachedBounds.xMax +1;
-            int yMax = cachedBounds.yMax +1;
-            int xMin = cachedBounds.xMin -1;
+            BoundsInt cachedBounds = Bounds;
+
+            int xMax = cachedBounds.xMax + 1;
+            int yMax = cachedBounds.yMax + 1;
+            int xMin = cachedBounds.xMin - 1;
             int yMin = cachedBounds.yMin - 1;
-            
-            int width        = xMax - xMin;
-            int height       = yMax - yMin;
+
+            int width  = xMax - xMin;
+            int height = yMax - yMin;
 
             var checkedCells = new bool[width * height];
 
@@ -377,7 +379,7 @@ namespace TileSystem
                 int xIdx = x - xMin;
                 int yIdx = y - yMin;
 
-                var idx = xIdx + yIdx * width;
+                int idx = xIdx + yIdx * width;
 
 
                 if (checkedCells[idx] || x > xMax || x < xMin || y > yMax || y < yMin) return false;
@@ -403,30 +405,33 @@ namespace TileSystem
         /// </summary>
         private void Split()
         {
-            if (doneSplitting)
-            {
-                return;
-            }
             var islands = FindIslands();
             if (islands.Count <= 1) return;
+
             int biggest     = islands.Max(i => i.Count);
             var updatedThis = false;
             tilemapLayers[0].color = Color.white;
+
             foreach (var island in islands)
             {
                 if (island.Count == biggest && !updatedThis)
                     updatedThis = true;
                 else
                 {
+                    if (island.Count <= minIslandSize)
+                    {
+                        foreach (Vector3Int cord in island) RemoveTile(cord);
+                    }
+
                     Transform  gridTransform = grid.transform;
                     GameObject obj           = pool.GetObject();
                     obj.transform.parent = gridTransform;
 
                     var         newTileManager = obj.GetComponent<TileManager>();
                     Rigidbody2D newRb2D        = newTileManager.Rigidbody2D;
-                    newTileManager.ResetTiles();
                     newTileManager.pool = pool;
                     newTileManager.grid = grid;
+                    newTileManager.ResetTiles();
 
                     Transform thisTransform = transform;
                     Transform tileTransform = newTileManager.transform;
@@ -436,13 +441,12 @@ namespace TileSystem
 
                     var instanceData = new TileInstanceData();
                     obj.SetActive(true);
-                    
-                    var tileGroups = new List<(List<Vector3Int> cords, List<Directions> dirs, List<TileInstanceData> data)>();
-                    
-                    for (int i = 0; i < TileSet.TileVariants.Count; i++)
-                    {
+
+                    var tileGroups =
+                        new List<(List<Vector3Int> cords, List<Directions> dirs, List<TileInstanceData> data)>();
+
+                    for (var i = 0; i < TileSet.TileVariants.Count; i++)
                         tileGroups.Add((new List<Vector3Int>(), new List<Directions>(), new List<TileInstanceData>()));
-                    }
 
                     foreach (Vector3Int cords in island)
                     {
@@ -457,31 +461,32 @@ namespace TileSystem
                         }
                     }
 
-                    for (int i = 1; i <  TileSet.TileVariants.Count; i++)
+                    for (var i = 1; i < TileSet.TileVariants.Count; i++)
                     {
-                        var variant = TileSet.TileVariants[i];
-                        if (tileGroups[i].cords.Count <= 0)
-                        {
-                            continue;
-                        }
+                        BasePart variant = TileSet.TileVariants[i];
+                        if (tileGroups[i].cords.Count <= 0) continue;
                         variant.SetTiles(tileGroups[i].cords.ToArray(), newTileManager.tilemapLayers[variant.layer],
                                          tileGroups[i].dirs.ToArray());
                         variant.RemoveTiles(tileGroups[i].cords.ToArray(), tilemapLayers[variant.layer]);
-                        for (int j = 0; j < tileGroups[i].cords.Count; j++)
+
+                        for (var j = 0; j < tileGroups[i].cords.Count; j++)
                         {
-                            newTileManager.tileData[tileGroups[i].cords[j]] = tileGroups[i].data[j];
+                            Vector3Int cord = tileGroups[i].cords[j];
+                            newTileManager.tileData[cord] = tileGroups[i].data[j];
+                            tileData.Remove(cord);
                         }
                     }
+
                     newTileManager.RecalculateCom();
-                    newTileManager.tilemapLayers[0].color = Color.red;
 
                     if (!PhysicsEnabled) continue;
-
-                    newTileManager.physics = true;
+                    newTileManager.physics  = true;
                     newRb2D.isKinematic     = false;
                     newRb2D.angularVelocity = Rigidbody2D.angularVelocity;
                 }
             }
+
+            RecalculateCom();
         }
 
         /// <summary>
@@ -498,36 +503,34 @@ namespace TileSystem
         {
             if (adding)
             {
-                com         =  (mass * com + localPos * tileMass) / (tileMass + mass);
-                mass        += tileMass;
+                com  =  (mass * com + localPos * tileMass) / (tileMass + mass);
+                mass += tileMass;
             }
             else
             {
-                if (mass<Mathf.Epsilon)
-                {
-                    return;
-                }
+                if (mass < Mathf.Epsilon) return;
                 com  -= tileMass * localPos / mass;
                 mass -= tileMass;
             }
+
             com_updated = true;
         }
 
         private void RecalculateCom()
         {
             mass = 0;
-            com = Vector2.zero;
+            com  = Vector2.zero;
             foreach (var data in tileData)
             {
-                var pos  = CordsToPosition(data.Key);
-                var tileMass = TileSet.TileVariants[data.Value.ID].mass;
+                Vector2 pos      = CordsToPosition(data.Key);
+                float   tileMass = TileSet.TileVariants[data.Value.ID].mass;
                 com  =  (mass * com + tileMass * pos) / (mass + tileMass);
                 mass += tileMass;
             }
 
-            com_updated=true;
+            com_updated = true;
         }
-        
+
 
         /// <summary>
         ///     Will serialize the design data (only tile ID and rot, no HP)

@@ -45,7 +45,6 @@ public class Damage
             var tileManager = hit.transform.GetComponent<TileManager>();
             if (tileManager is null) continue;
             if (exclude.Contains(tileManager)) continue;
-            var destroyedTile = false;
             Vector2 lineStart = hit.point - 0.5f * Direction;
             Vector2 lineEnd = EndPos;
             Debug.DrawLine(lineStart, lineEnd, Color.red, 5f);
@@ -60,12 +59,9 @@ public class Damage
                     break;
                 }
 
-                BaseDamage    -= damageUsed;
-                dmgToObject   += damageUsed;
-                destroyedTile =  true;
+                BaseDamage  -= damageUsed;
+                dmgToObject += damageUsed;
             }
-
-            if (destroyedTile) tileManager.PhysicsModelChanged = true;
 
             tileManager.Rigidbody2D.AddForceAtPosition(Direction * dmgToObject * 1e-3f, lineStart);
 
