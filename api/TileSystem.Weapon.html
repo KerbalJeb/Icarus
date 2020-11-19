@@ -99,6 +99,9 @@
                             <a href="Global.FollowMouse.html" title="FollowMouse" class="">FollowMouse</a>
                           </li>
                           <li class="">
+                            <a href="Global.GameManager.html" title="GameManager" class="">GameManager</a>
+                          </li>
+                          <li class="">
                             <a href="Global.InputManager.html" title="InputManager" class="">InputManager</a>
                           </li>
                           <li class="">
@@ -118,9 +121,6 @@
                           </li>
                           <li class="">
                             <a href="Global.RasterUtil.html" title="RasterUtil" class="">RasterUtil</a>
-                          </li>
-                          <li class="">
-                            <a href="Global.SceneLoader.html" title="SceneLoader" class="">SceneLoader</a>
                           </li>
                           <li class="">
                             <a href="Global.ShipData.html" title="ShipData" class="">ShipData</a>
@@ -150,7 +150,7 @@
                             <a href="TileSystem.BasePart.html" title="BasePart" class="">BasePart</a>
                           </li>
                           <li class="">
-                            <a href="TileSystem.Directions.html" title="Directions" class="">Directions</a>
+                            <a href="TileSystem.Direction.html" title="Direction" class="">Direction</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.EnginePart.html" title="EnginePart" class="">EnginePart</a>
@@ -271,7 +271,8 @@
   
   
   <h4 id="TileSystem_Weapon_baseDamage" data-uid="TileSystem.Weapon.baseDamage">baseDamage</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>How much damage this weapon does</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -294,8 +295,34 @@
   </table>
   
   
+  <h4 id="TileSystem_Weapon_firePeriod" data-uid="TileSystem.Weapon.firePeriod">firePeriod</h4>
+  <div class="markdown level1 summary"><p>The delay between shots from this weapons (in seconds)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float firePeriod</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <h4 id="TileSystem_Weapon_range" data-uid="TileSystem.Weapon.range">range</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The range of the weapon</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -319,7 +346,8 @@
   
   
   <h4 id="TileSystem_Weapon_turret" data-uid="TileSystem.Weapon.turret">turret</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The image to use for the turret part of this weapon that will track the target</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -343,7 +371,8 @@
   
   
   <h4 id="TileSystem_Weapon_turretTemplate" data-uid="TileSystem.Weapon.turretTemplate">turretTemplate</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The gameobject to use as a template for the turret, must have a WeaponFX and SpriteRenderer</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -369,12 +398,13 @@
   
   
   <a id="TileSystem_Weapon_Instantiate_" data-uid="TileSystem.Weapon.Instantiate*"></a>
-  <h4 id="TileSystem_Weapon_Instantiate_Vector3Int_Tilemap_TileSystem_Directions_" data-uid="TileSystem.Weapon.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)">Instantiate(Vector3Int, Tilemap, Directions)</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="TileSystem_Weapon_Instantiate_Vector3Int_Tilemap_TileSystem_Direction_" data-uid="TileSystem.Weapon.Instantiate(Vector3Int,Tilemap,TileSystem.Direction)">Instantiate(Vector3Int, Tilemap, Direction)</h4>
+  <div class="markdown level1 summary"><p>Creates a tile at the given coordinates</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void Instantiate(Vector3Int cord, Tilemap tilemap, Directions direction)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void Instantiate(Vector3Int cord, Tilemap tilemap, Direction direction)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -389,27 +419,31 @@
       <tr>
         <td><span class="xref">Vector3Int</span></td>
         <td><span class="parametername">cord</span></td>
-        <td></td>
+        <td><p>The position of the engine</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Tilemap</span></td>
         <td><span class="parametername">tilemap</span></td>
-        <td></td>
+        <td><p>The tilemap to use</p>
+</td>
       </tr>
       <tr>
-        <td><a class="xref" href="TileSystem.Directions.html">Directions</a></td>
+        <td><a class="xref" href="TileSystem.Direction.html">Direction</a></td>
         <td><span class="parametername">direction</span></td>
-        <td></td>
+        <td><p>The direction it is facing</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="TileSystem.BasePart.html#TileSystem_BasePart_Instantiate_Vector3Int_Tilemap_TileSystem_Directions_">BasePart.Instantiate(Vector3Int, Tilemap, Directions)</a></div>
+  <div><a class="xref" href="TileSystem.BasePart.html#TileSystem_BasePart_Instantiate_Vector3Int_Tilemap_TileSystem_Direction_">BasePart.Instantiate(Vector3Int, Tilemap, Direction)</a></div>
   
   
   <a id="TileSystem_Weapon_Remove_" data-uid="TileSystem.Weapon.Remove*"></a>
   <h4 id="TileSystem_Weapon_Remove_Vector3Int_Tilemap_" data-uid="TileSystem.Weapon.Remove(Vector3Int,Tilemap)">Remove(Vector3Int, Tilemap)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes a tile at the given coordinates</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -428,12 +462,14 @@
       <tr>
         <td><span class="xref">Vector3Int</span></td>
         <td><span class="parametername">cords</span></td>
-        <td></td>
+        <td><p>The coordinate to remove tiles from</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Tilemap</span></td>
         <td><span class="parametername">tilemap</span></td>
-        <td></td>
+        <td><p>The tilemap to use</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -443,7 +479,8 @@
   
   <a id="TileSystem_Weapon_RemoveTiles_" data-uid="TileSystem.Weapon.RemoveTiles*"></a>
   <h4 id="TileSystem_Weapon_RemoveTiles_Vector3Int___Tilemap_" data-uid="TileSystem.Weapon.RemoveTiles(Vector3Int[],Tilemap)">RemoveTiles(Vector3Int[], Tilemap)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Removes tiles at the given coordinates</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -462,12 +499,14 @@
       <tr>
         <td><span class="xref">Vector3Int</span>[]</td>
         <td><span class="parametername">cords</span></td>
-        <td></td>
+        <td><p>The coordinates to remove tiles from</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Tilemap</span></td>
         <td><span class="parametername">tilemap</span></td>
-        <td></td>
+        <td><p>The tilemap to use</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -476,12 +515,13 @@
   
   
   <a id="TileSystem_Weapon_SetTiles_" data-uid="TileSystem.Weapon.SetTiles*"></a>
-  <h4 id="TileSystem_Weapon_SetTiles_Vector3Int___Tilemap_TileSystem_Directions___" data-uid="TileSystem.Weapon.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])">SetTiles(Vector3Int[], Tilemap, Directions[])</h4>
-  <div class="markdown level1 summary"></div>
+  <h4 id="TileSystem_Weapon_SetTiles_Vector3Int___Tilemap_TileSystem_Direction___" data-uid="TileSystem.Weapon.SetTiles(Vector3Int[],Tilemap,TileSystem.Direction[])">SetTiles(Vector3Int[], Tilemap, Direction[])</h4>
+  <div class="markdown level1 summary"><p>Sets multiple tiles</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void SetTiles(Vector3Int[] cords, Tilemap tilemap, Directions[] directions)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void SetTiles(Vector3Int[] cords, Tilemap tilemap, Direction[] directions)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -496,22 +536,25 @@
       <tr>
         <td><span class="xref">Vector3Int</span>[]</td>
         <td><span class="parametername">cords</span></td>
-        <td></td>
+        <td><p>The positions of the tile</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">Tilemap</span></td>
         <td><span class="parametername">tilemap</span></td>
-        <td></td>
+        <td><p>The tilemap to use</p>
+</td>
       </tr>
       <tr>
-        <td><a class="xref" href="TileSystem.Directions.html">Directions</a>[]</td>
+        <td><a class="xref" href="TileSystem.Direction.html">Direction</a>[]</td>
         <td><span class="parametername">directions</span></td>
-        <td></td>
+        <td><p>The directions it is facing</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="TileSystem.BasePart.html#TileSystem_BasePart_SetTiles_Vector3Int___Tilemap_TileSystem_Directions___">BasePart.SetTiles(Vector3Int[], Tilemap, Directions[])</a></div>
+  <div><a class="xref" href="TileSystem.BasePart.html#TileSystem_BasePart_SetTiles_Vector3Int___Tilemap_TileSystem_Direction___">BasePart.SetTiles(Vector3Int[], Tilemap, Direction[])</a></div>
 </article>
           </div>
           

@@ -99,6 +99,9 @@
                             <a href="Global.FollowMouse.html" title="FollowMouse" class="">FollowMouse</a>
                           </li>
                           <li class="">
+                            <a href="Global.GameManager.html" title="GameManager" class="">GameManager</a>
+                          </li>
+                          <li class="">
                             <a href="Global.InputManager.html" title="InputManager" class="">InputManager</a>
                           </li>
                           <li class="">
@@ -118,9 +121,6 @@
                           </li>
                           <li class="">
                             <a href="Global.RasterUtil.html" title="RasterUtil" class="">RasterUtil</a>
-                          </li>
-                          <li class="">
-                            <a href="Global.SceneLoader.html" title="SceneLoader" class="">SceneLoader</a>
                           </li>
                           <li class="">
                             <a href="Global.ShipData.html" title="ShipData" class="">ShipData</a>
@@ -150,7 +150,7 @@
                             <a href="TileSystem.BasePart.html" title="BasePart" class="">BasePart</a>
                           </li>
                           <li class="">
-                            <a href="TileSystem.Directions.html" title="Directions" class="">Directions</a>
+                            <a href="TileSystem.Direction.html" title="Direction" class="">Direction</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.EnginePart.html" title="EnginePart" class="">EnginePart</a>
@@ -1006,13 +1006,13 @@ and Y cords correspond to the X and Y position of the tile and Z is used for the
   
   
   <a id="TileSystem_TileManager_SetTile_" data-uid="TileSystem.TileManager.SetTile*"></a>
-  <h4 id="TileSystem_TileManager_SetTile_Vector3Int_TileSystem_BasePart_TileSystem_Directions_" data-uid="TileSystem.TileManager.SetTile(Vector3Int,TileSystem.BasePart,TileSystem.Directions)">SetTile(Vector3Int, BasePart, Directions)</h4>
+  <h4 id="TileSystem_TileManager_SetTile_Vector3Int_TileSystem_BasePart_TileSystem_Direction_" data-uid="TileSystem.TileManager.SetTile(Vector3Int,TileSystem.BasePart,TileSystem.Direction)">SetTile(Vector3Int, BasePart, Direction)</h4>
   <div class="markdown level1 summary"><p>Set a tile at the given coordinates</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SetTile(Vector3Int cords, BasePart tileVariant, Directions direction = Directions.Up)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SetTile(Vector3Int cords, BasePart tileVariant, Direction direction = Direction.Up)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1037,7 +1037,7 @@ and Y cords correspond to the X and Y position of the tile and Z is used for the
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="TileSystem.Directions.html">Directions</a></td>
+        <td><a class="xref" href="TileSystem.Direction.html">Direction</a></td>
         <td><span class="parametername">direction</span></td>
         <td><p>The orientation of the tile</p>
 </td>

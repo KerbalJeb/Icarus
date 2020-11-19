@@ -157,25 +157,63 @@ references:
   commentId: T:Global.FollowMouse
   fullName: FollowMouse
   nameWithType: FollowMouse
+- uid: Global.GameManager
+  name: GameManager
+  href: api/Global.GameManager.html
+  commentId: T:Global.GameManager
+  fullName: GameManager
+  nameWithType: GameManager
+- uid: Global.GameManager.closePopUp
+  name: closePopUp
+  href: api/Global.GameManager.html#Global_GameManager_closePopUp
+  commentId: F:Global.GameManager.closePopUp
+  fullName: GameManager.closePopUp
+  nameWithType: GameManager.closePopUp
+- uid: Global.GameManager.ExitGameNow
+  name: ExitGameNow()
+  href: api/Global.GameManager.html#Global_GameManager_ExitGameNow
+  commentId: M:Global.GameManager.ExitGameNow
+  fullName: GameManager.ExitGameNow()
+  nameWithType: GameManager.ExitGameNow()
+- uid: Global.GameManager.ExitGameNow*
+  name: ExitGameNow
+  href: api/Global.GameManager.html#Global_GameManager_ExitGameNow_
+  commentId: Overload:Global.GameManager.ExitGameNow
+  isSpec: "True"
+  fullName: GameManager.ExitGameNow
+  nameWithType: GameManager.ExitGameNow
+- uid: Global.GameManager.LoadDesigner
+  name: LoadDesigner()
+  href: api/Global.GameManager.html#Global_GameManager_LoadDesigner
+  commentId: M:Global.GameManager.LoadDesigner
+  fullName: GameManager.LoadDesigner()
+  nameWithType: GameManager.LoadDesigner()
+- uid: Global.GameManager.LoadDesigner*
+  name: LoadDesigner
+  href: api/Global.GameManager.html#Global_GameManager_LoadDesigner_
+  commentId: Overload:Global.GameManager.LoadDesigner
+  isSpec: "True"
+  fullName: GameManager.LoadDesigner
+  nameWithType: GameManager.LoadDesigner
+- uid: Global.GameManager.Quit
+  name: Quit()
+  href: api/Global.GameManager.html#Global_GameManager_Quit
+  commentId: M:Global.GameManager.Quit
+  fullName: GameManager.Quit()
+  nameWithType: GameManager.Quit()
+- uid: Global.GameManager.Quit*
+  name: Quit
+  href: api/Global.GameManager.html#Global_GameManager_Quit_
+  commentId: Overload:Global.GameManager.Quit
+  isSpec: "True"
+  fullName: GameManager.Quit
+  nameWithType: GameManager.Quit
 - uid: Global.InputManager
   name: InputManager
   href: api/Global.InputManager.html
   commentId: T:Global.InputManager
   fullName: InputManager
   nameWithType: InputManager
-- uid: Global.InputManager.Instance
-  name: Instance
-  href: api/Global.InputManager.html#Global_InputManager_Instance
-  commentId: P:Global.InputManager.Instance
-  fullName: InputManager.Instance
-  nameWithType: InputManager.Instance
-- uid: Global.InputManager.Instance*
-  name: Instance
-  href: api/Global.InputManager.html#Global_InputManager_Instance_
-  commentId: Overload:Global.InputManager.Instance
-  isSpec: "True"
-  fullName: InputManager.Instance
-  nameWithType: InputManager.Instance
 - uid: Global.InputManager.IsMouseOverClickableUI
   name: IsMouseOverClickableUI()
   href: api/Global.InputManager.html#Global_InputManager_IsMouseOverClickableUI
@@ -202,19 +240,6 @@ references:
   isSpec: "True"
   fullName: InputManager.PlayerActions
   nameWithType: InputManager.PlayerActions
-- uid: Global.InputManager.PlayerInput
-  name: PlayerInput
-  href: api/Global.InputManager.html#Global_InputManager_PlayerInput
-  commentId: P:Global.InputManager.PlayerInput
-  fullName: InputManager.PlayerInput
-  nameWithType: InputManager.PlayerInput
-- uid: Global.InputManager.PlayerInput*
-  name: PlayerInput
-  href: api/Global.InputManager.html#Global_InputManager_PlayerInput_
-  commentId: Overload:Global.InputManager.PlayerInput
-  isSpec: "True"
-  fullName: InputManager.PlayerInput
-  nameWithType: InputManager.PlayerInput
 - uid: Global.LineDmgTester
   name: LineDmgTester
   href: api/Global.LineDmgTester.html
@@ -307,12 +332,12 @@ references:
   isSpec: "True"
   fullName: MovementManager.MovementManager
   nameWithType: MovementManager.MovementManager
-- uid: Global.MovementManager.AddEngine(Vector3Int,TileSystem.EnginePart,GameObject,TileSystem.Directions)
-  name: AddEngine(Vector3Int, EnginePart, GameObject, Directions)
-  href: api/Global.MovementManager.html#Global_MovementManager_AddEngine_Vector3Int_TileSystem_EnginePart_GameObject_TileSystem_Directions_
-  commentId: M:Global.MovementManager.AddEngine(Vector3Int,TileSystem.EnginePart,GameObject,TileSystem.Directions)
-  fullName: MovementManager.AddEngine(Vector3Int, TileSystem.EnginePart, GameObject, TileSystem.Directions)
-  nameWithType: MovementManager.AddEngine(Vector3Int, EnginePart, GameObject, Directions)
+- uid: Global.MovementManager.AddEngine(Vector3Int,TileSystem.EnginePart,GameObject,TileSystem.Direction)
+  name: AddEngine(Vector3Int, EnginePart, GameObject, Direction)
+  href: api/Global.MovementManager.html#Global_MovementManager_AddEngine_Vector3Int_TileSystem_EnginePart_GameObject_TileSystem_Direction_
+  commentId: M:Global.MovementManager.AddEngine(Vector3Int,TileSystem.EnginePart,GameObject,TileSystem.Direction)
+  fullName: MovementManager.AddEngine(Vector3Int, TileSystem.EnginePart, GameObject, TileSystem.Direction)
+  nameWithType: MovementManager.AddEngine(Vector3Int, EnginePart, GameObject, Direction)
 - uid: Global.MovementManager.AddEngine*
   name: AddEngine
   href: api/Global.MovementManager.html#Global_MovementManager_AddEngine_
@@ -384,6 +409,19 @@ references:
   commentId: T:Global.RasterUtil
   fullName: RasterUtil
   nameWithType: RasterUtil
+- uid: Global.RasterUtil.FindNearestPointOnLine(Vector2,Vector2,Vector2)
+  name: FindNearestPointOnLine(Vector2, Vector2, Vector2)
+  href: api/Global.RasterUtil.html#Global_RasterUtil_FindNearestPointOnLine_Vector2_Vector2_Vector2_
+  commentId: M:Global.RasterUtil.FindNearestPointOnLine(Vector2,Vector2,Vector2)
+  fullName: RasterUtil.FindNearestPointOnLine(Vector2, Vector2, Vector2)
+  nameWithType: RasterUtil.FindNearestPointOnLine(Vector2, Vector2, Vector2)
+- uid: Global.RasterUtil.FindNearestPointOnLine*
+  name: FindNearestPointOnLine
+  href: api/Global.RasterUtil.html#Global_RasterUtil_FindNearestPointOnLine_
+  commentId: Overload:Global.RasterUtil.FindNearestPointOnLine
+  isSpec: "True"
+  fullName: RasterUtil.FindNearestPointOnLine
+  nameWithType: RasterUtil.FindNearestPointOnLine
 - uid: Global.RasterUtil.Line(Vector3Int,Vector3Int)
   name: Line(Vector3Int, Vector3Int)
   href: api/Global.RasterUtil.html#Global_RasterUtil_Line_Vector3Int_Vector3Int_
@@ -397,25 +435,6 @@ references:
   isSpec: "True"
   fullName: RasterUtil.Line
   nameWithType: RasterUtil.Line
-- uid: Global.SceneLoader
-  name: SceneLoader
-  href: api/Global.SceneLoader.html
-  commentId: T:Global.SceneLoader
-  fullName: SceneLoader
-  nameWithType: SceneLoader
-- uid: Global.SceneLoader.LoadDesigner
-  name: LoadDesigner()
-  href: api/Global.SceneLoader.html#Global_SceneLoader_LoadDesigner
-  commentId: M:Global.SceneLoader.LoadDesigner
-  fullName: SceneLoader.LoadDesigner()
-  nameWithType: SceneLoader.LoadDesigner()
-- uid: Global.SceneLoader.LoadDesigner*
-  name: LoadDesigner
-  href: api/Global.SceneLoader.html#Global_SceneLoader_LoadDesigner_
-  commentId: Overload:Global.SceneLoader.LoadDesigner
-  isSpec: "True"
-  fullName: SceneLoader.LoadDesigner
-  nameWithType: SceneLoader.LoadDesigner
 - uid: Global.ShipData
   name: ShipData
   href: api/Global.ShipData.html
@@ -729,19 +748,25 @@ references:
   isSpec: "True"
   fullName: WeaponsManager.AddWeapon
   nameWithType: WeaponsManager.AddWeapon
-- uid: Global.WeaponsManager.Fire
-  name: Fire()
-  href: api/Global.WeaponsManager.html#Global_WeaponsManager_Fire
-  commentId: M:Global.WeaponsManager.Fire
-  fullName: WeaponsManager.Fire()
-  nameWithType: WeaponsManager.Fire()
-- uid: Global.WeaponsManager.Fire*
-  name: Fire
-  href: api/Global.WeaponsManager.html#Global_WeaponsManager_Fire_
-  commentId: Overload:Global.WeaponsManager.Fire
+- uid: Global.WeaponsManager.FireRoutine(Vector3Int)
+  name: FireRoutine(Vector3Int)
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_FireRoutine_Vector3Int_
+  commentId: M:Global.WeaponsManager.FireRoutine(Vector3Int)
+  fullName: WeaponsManager.FireRoutine(Vector3Int)
+  nameWithType: WeaponsManager.FireRoutine(Vector3Int)
+- uid: Global.WeaponsManager.FireRoutine*
+  name: FireRoutine
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_FireRoutine_
+  commentId: Overload:Global.WeaponsManager.FireRoutine
   isSpec: "True"
-  fullName: WeaponsManager.Fire
-  nameWithType: WeaponsManager.Fire
+  fullName: WeaponsManager.FireRoutine
+  nameWithType: WeaponsManager.FireRoutine
+- uid: Global.WeaponsManager.Firing
+  name: Firing
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_Firing
+  commentId: F:Global.WeaponsManager.Firing
+  fullName: WeaponsManager.Firing
+  nameWithType: WeaponsManager.Firing
 - uid: Global.WeaponsManager.RemoveWeapon(Vector3Int)
   name: RemoveWeapon(Vector3Int)
   href: api/Global.WeaponsManager.html#Global_WeaponsManager_RemoveWeapon_Vector3Int_
@@ -768,6 +793,19 @@ references:
   isSpec: "True"
   fullName: WeaponsManager.UpdateTransform
   nameWithType: WeaponsManager.UpdateTransform
+- uid: Global.WeaponsManager.WeaponPos
+  name: WeaponPos
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_WeaponPos
+  commentId: P:Global.WeaponsManager.WeaponPos
+  fullName: WeaponsManager.WeaponPos
+  nameWithType: WeaponsManager.WeaponPos
+- uid: Global.WeaponsManager.WeaponPos*
+  name: WeaponPos
+  href: api/Global.WeaponsManager.html#Global_WeaponsManager_WeaponPos_
+  commentId: Overload:Global.WeaponsManager.WeaponPos
+  isSpec: "True"
+  fullName: WeaponsManager.WeaponPos
+  nameWithType: WeaponsManager.WeaponPos
 - uid: TileSystem
   name: TileSystem
   href: api/TileSystem.html
@@ -798,12 +836,12 @@ references:
   commentId: F:TileSystem.BasePart.id
   fullName: TileSystem.BasePart.id
   nameWithType: BasePart.id
-- uid: TileSystem.BasePart.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
-  name: Instantiate(Vector3Int, Tilemap, Directions)
-  href: api/TileSystem.BasePart.html#TileSystem_BasePart_Instantiate_Vector3Int_Tilemap_TileSystem_Directions_
-  commentId: M:TileSystem.BasePart.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
-  fullName: TileSystem.BasePart.Instantiate(Vector3Int, Tilemap, TileSystem.Directions)
-  nameWithType: BasePart.Instantiate(Vector3Int, Tilemap, Directions)
+- uid: TileSystem.BasePart.Instantiate(Vector3Int,Tilemap,TileSystem.Direction)
+  name: Instantiate(Vector3Int, Tilemap, Direction)
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_Instantiate_Vector3Int_Tilemap_TileSystem_Direction_
+  commentId: M:TileSystem.BasePart.Instantiate(Vector3Int,Tilemap,TileSystem.Direction)
+  fullName: TileSystem.BasePart.Instantiate(Vector3Int, Tilemap, TileSystem.Direction)
+  nameWithType: BasePart.Instantiate(Vector3Int, Tilemap, Direction)
 - uid: TileSystem.BasePart.Instantiate*
   name: Instantiate
   href: api/TileSystem.BasePart.html#TileSystem_BasePart_Instantiate_
@@ -876,15 +914,15 @@ references:
   isSpec: "True"
   fullName: TileSystem.BasePart.RemoveTiles
   nameWithType: BasePart.RemoveTiles
-- uid: TileSystem.BasePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
-  name: SetTiles(Vector3Int[], Tilemap, Directions[])
-  href: api/TileSystem.BasePart.html#TileSystem_BasePart_SetTiles_Vector3Int___Tilemap_TileSystem_Directions___
-  commentId: M:TileSystem.BasePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
-  name.vb: SetTiles(Vector3Int(), Tilemap, Directions())
-  fullName: TileSystem.BasePart.SetTiles(Vector3Int[], Tilemap, TileSystem.Directions[])
-  fullName.vb: TileSystem.BasePart.SetTiles(Vector3Int(), Tilemap, TileSystem.Directions())
-  nameWithType: BasePart.SetTiles(Vector3Int[], Tilemap, Directions[])
-  nameWithType.vb: BasePart.SetTiles(Vector3Int(), Tilemap, Directions())
+- uid: TileSystem.BasePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Direction[])
+  name: SetTiles(Vector3Int[], Tilemap, Direction[])
+  href: api/TileSystem.BasePart.html#TileSystem_BasePart_SetTiles_Vector3Int___Tilemap_TileSystem_Direction___
+  commentId: M:TileSystem.BasePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Direction[])
+  name.vb: SetTiles(Vector3Int(), Tilemap, Direction())
+  fullName: TileSystem.BasePart.SetTiles(Vector3Int[], Tilemap, TileSystem.Direction[])
+  fullName.vb: TileSystem.BasePart.SetTiles(Vector3Int(), Tilemap, TileSystem.Direction())
+  nameWithType: BasePart.SetTiles(Vector3Int[], Tilemap, Direction[])
+  nameWithType.vb: BasePart.SetTiles(Vector3Int(), Tilemap, Direction())
 - uid: TileSystem.BasePart.SetTiles*
   name: SetTiles
   href: api/TileSystem.BasePart.html#TileSystem_BasePart_SetTiles_
@@ -904,54 +942,54 @@ references:
   commentId: F:TileSystem.BasePart.tile
   fullName: TileSystem.BasePart.tile
   nameWithType: BasePart.tile
-- uid: TileSystem.Directions
-  name: Directions
-  href: api/TileSystem.Directions.html
-  commentId: T:TileSystem.Directions
-  fullName: TileSystem.Directions
-  nameWithType: Directions
-- uid: TileSystem.Directions.Down
+- uid: TileSystem.Direction
+  name: Direction
+  href: api/TileSystem.Direction.html
+  commentId: T:TileSystem.Direction
+  fullName: TileSystem.Direction
+  nameWithType: Direction
+- uid: TileSystem.Direction.Down
   name: Down
-  href: api/TileSystem.Directions.html#TileSystem_Directions_Down
-  commentId: F:TileSystem.Directions.Down
-  fullName: TileSystem.Directions.Down
-  nameWithType: Directions.Down
-- uid: TileSystem.Directions.Left
+  href: api/TileSystem.Direction.html#TileSystem_Direction_Down
+  commentId: F:TileSystem.Direction.Down
+  fullName: TileSystem.Direction.Down
+  nameWithType: Direction.Down
+- uid: TileSystem.Direction.Left
   name: Left
-  href: api/TileSystem.Directions.html#TileSystem_Directions_Left
-  commentId: F:TileSystem.Directions.Left
-  fullName: TileSystem.Directions.Left
-  nameWithType: Directions.Left
-- uid: TileSystem.Directions.None
+  href: api/TileSystem.Direction.html#TileSystem_Direction_Left
+  commentId: F:TileSystem.Direction.Left
+  fullName: TileSystem.Direction.Left
+  nameWithType: Direction.Left
+- uid: TileSystem.Direction.None
   name: None
-  href: api/TileSystem.Directions.html#TileSystem_Directions_None
-  commentId: F:TileSystem.Directions.None
-  fullName: TileSystem.Directions.None
-  nameWithType: Directions.None
-- uid: TileSystem.Directions.Right
+  href: api/TileSystem.Direction.html#TileSystem_Direction_None
+  commentId: F:TileSystem.Direction.None
+  fullName: TileSystem.Direction.None
+  nameWithType: Direction.None
+- uid: TileSystem.Direction.Right
   name: Right
-  href: api/TileSystem.Directions.html#TileSystem_Directions_Right
-  commentId: F:TileSystem.Directions.Right
-  fullName: TileSystem.Directions.Right
-  nameWithType: Directions.Right
-- uid: TileSystem.Directions.Up
+  href: api/TileSystem.Direction.html#TileSystem_Direction_Right
+  commentId: F:TileSystem.Direction.Right
+  fullName: TileSystem.Direction.Right
+  nameWithType: Direction.Right
+- uid: TileSystem.Direction.Up
   name: Up
-  href: api/TileSystem.Directions.html#TileSystem_Directions_Up
-  commentId: F:TileSystem.Directions.Up
-  fullName: TileSystem.Directions.Up
-  nameWithType: Directions.Up
-- uid: TileSystem.Directions.ZDown
+  href: api/TileSystem.Direction.html#TileSystem_Direction_Up
+  commentId: F:TileSystem.Direction.Up
+  fullName: TileSystem.Direction.Up
+  nameWithType: Direction.Up
+- uid: TileSystem.Direction.ZDown
   name: ZDown
-  href: api/TileSystem.Directions.html#TileSystem_Directions_ZDown
-  commentId: F:TileSystem.Directions.ZDown
-  fullName: TileSystem.Directions.ZDown
-  nameWithType: Directions.ZDown
-- uid: TileSystem.Directions.ZUp
+  href: api/TileSystem.Direction.html#TileSystem_Direction_ZDown
+  commentId: F:TileSystem.Direction.ZDown
+  fullName: TileSystem.Direction.ZDown
+  nameWithType: Direction.ZDown
+- uid: TileSystem.Direction.ZUp
   name: ZUp
-  href: api/TileSystem.Directions.html#TileSystem_Directions_ZUp
-  commentId: F:TileSystem.Directions.ZUp
-  fullName: TileSystem.Directions.ZUp
-  nameWithType: Directions.ZUp
+  href: api/TileSystem.Direction.html#TileSystem_Direction_ZUp
+  commentId: F:TileSystem.Direction.ZUp
+  fullName: TileSystem.Direction.ZUp
+  nameWithType: Direction.ZUp
 - uid: TileSystem.EnginePart
   name: EnginePart
   href: api/TileSystem.EnginePart.html
@@ -970,12 +1008,12 @@ references:
   commentId: F:TileSystem.EnginePart.exhaustPos
   fullName: TileSystem.EnginePart.exhaustPos
   nameWithType: EnginePart.exhaustPos
-- uid: TileSystem.EnginePart.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
-  name: Instantiate(Vector3Int, Tilemap, Directions)
-  href: api/TileSystem.EnginePart.html#TileSystem_EnginePart_Instantiate_Vector3Int_Tilemap_TileSystem_Directions_
-  commentId: M:TileSystem.EnginePart.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
-  fullName: TileSystem.EnginePart.Instantiate(Vector3Int, Tilemap, TileSystem.Directions)
-  nameWithType: EnginePart.Instantiate(Vector3Int, Tilemap, Directions)
+- uid: TileSystem.EnginePart.Instantiate(Vector3Int,Tilemap,TileSystem.Direction)
+  name: Instantiate(Vector3Int, Tilemap, Direction)
+  href: api/TileSystem.EnginePart.html#TileSystem_EnginePart_Instantiate_Vector3Int_Tilemap_TileSystem_Direction_
+  commentId: M:TileSystem.EnginePart.Instantiate(Vector3Int,Tilemap,TileSystem.Direction)
+  fullName: TileSystem.EnginePart.Instantiate(Vector3Int, Tilemap, TileSystem.Direction)
+  nameWithType: EnginePart.Instantiate(Vector3Int, Tilemap, Direction)
 - uid: TileSystem.EnginePart.Instantiate*
   name: Instantiate
   href: api/TileSystem.EnginePart.html#TileSystem_EnginePart_Instantiate_
@@ -1012,15 +1050,15 @@ references:
   isSpec: "True"
   fullName: TileSystem.EnginePart.RemoveTiles
   nameWithType: EnginePart.RemoveTiles
-- uid: TileSystem.EnginePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
-  name: SetTiles(Vector3Int[], Tilemap, Directions[])
-  href: api/TileSystem.EnginePart.html#TileSystem_EnginePart_SetTiles_Vector3Int___Tilemap_TileSystem_Directions___
-  commentId: M:TileSystem.EnginePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
-  name.vb: SetTiles(Vector3Int(), Tilemap, Directions())
-  fullName: TileSystem.EnginePart.SetTiles(Vector3Int[], Tilemap, TileSystem.Directions[])
-  fullName.vb: TileSystem.EnginePart.SetTiles(Vector3Int(), Tilemap, TileSystem.Directions())
-  nameWithType: EnginePart.SetTiles(Vector3Int[], Tilemap, Directions[])
-  nameWithType.vb: EnginePart.SetTiles(Vector3Int(), Tilemap, Directions())
+- uid: TileSystem.EnginePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Direction[])
+  name: SetTiles(Vector3Int[], Tilemap, Direction[])
+  href: api/TileSystem.EnginePart.html#TileSystem_EnginePart_SetTiles_Vector3Int___Tilemap_TileSystem_Direction___
+  commentId: M:TileSystem.EnginePart.SetTiles(Vector3Int[],Tilemap,TileSystem.Direction[])
+  name.vb: SetTiles(Vector3Int(), Tilemap, Direction())
+  fullName: TileSystem.EnginePart.SetTiles(Vector3Int[], Tilemap, TileSystem.Direction[])
+  fullName.vb: TileSystem.EnginePart.SetTiles(Vector3Int(), Tilemap, TileSystem.Direction())
+  nameWithType: EnginePart.SetTiles(Vector3Int[], Tilemap, Direction[])
+  nameWithType.vb: EnginePart.SetTiles(Vector3Int(), Tilemap, Direction())
 - uid: TileSystem.EnginePart.SetTiles*
   name: SetTiles
   href: api/TileSystem.EnginePart.html#TileSystem_EnginePart_SetTiles_
@@ -1058,12 +1096,12 @@ references:
   commentId: T:TileSystem.TileInstanceData
   fullName: TileSystem.TileInstanceData
   nameWithType: TileInstanceData
-- uid: TileSystem.TileInstanceData.#ctor(TileSystem.BasePart,TileSystem.Directions)
-  name: TileInstanceData(BasePart, Directions)
-  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData__ctor_TileSystem_BasePart_TileSystem_Directions_
-  commentId: M:TileSystem.TileInstanceData.#ctor(TileSystem.BasePart,TileSystem.Directions)
-  fullName: TileSystem.TileInstanceData.TileInstanceData(TileSystem.BasePart, TileSystem.Directions)
-  nameWithType: TileInstanceData.TileInstanceData(BasePart, Directions)
+- uid: TileSystem.TileInstanceData.#ctor(TileSystem.BasePart,TileSystem.Direction)
+  name: TileInstanceData(BasePart, Direction)
+  href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData__ctor_TileSystem_BasePart_TileSystem_Direction_
+  commentId: M:TileSystem.TileInstanceData.#ctor(TileSystem.BasePart,TileSystem.Direction)
+  fullName: TileSystem.TileInstanceData.TileInstanceData(TileSystem.BasePart, TileSystem.Direction)
+  nameWithType: TileInstanceData.TileInstanceData(BasePart, Direction)
 - uid: TileSystem.TileInstanceData.#ctor*
   name: TileInstanceData
   href: api/TileSystem.TileInstanceData.html#TileSystem_TileInstanceData__ctor_
@@ -1358,12 +1396,12 @@ references:
   commentId: M:TileSystem.TileManager.SetTile(Vector3,TileSystem.BasePart)
   fullName: TileSystem.TileManager.SetTile(Vector3, TileSystem.BasePart)
   nameWithType: TileManager.SetTile(Vector3, BasePart)
-- uid: TileSystem.TileManager.SetTile(Vector3Int,TileSystem.BasePart,TileSystem.Directions)
-  name: SetTile(Vector3Int, BasePart, Directions)
-  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTile_Vector3Int_TileSystem_BasePart_TileSystem_Directions_
-  commentId: M:TileSystem.TileManager.SetTile(Vector3Int,TileSystem.BasePart,TileSystem.Directions)
-  fullName: TileSystem.TileManager.SetTile(Vector3Int, TileSystem.BasePart, TileSystem.Directions)
-  nameWithType: TileManager.SetTile(Vector3Int, BasePart, Directions)
+- uid: TileSystem.TileManager.SetTile(Vector3Int,TileSystem.BasePart,TileSystem.Direction)
+  name: SetTile(Vector3Int, BasePart, Direction)
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTile_Vector3Int_TileSystem_BasePart_TileSystem_Direction_
+  commentId: M:TileSystem.TileManager.SetTile(Vector3Int,TileSystem.BasePart,TileSystem.Direction)
+  fullName: TileSystem.TileManager.SetTile(Vector3Int, TileSystem.BasePart, TileSystem.Direction)
+  nameWithType: TileManager.SetTile(Vector3Int, BasePart, Direction)
 - uid: TileSystem.TileManager.SetTile*
   name: SetTile
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_SetTile_
@@ -1458,12 +1496,18 @@ references:
   commentId: F:TileSystem.Weapon.baseDamage
   fullName: TileSystem.Weapon.baseDamage
   nameWithType: Weapon.baseDamage
-- uid: TileSystem.Weapon.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
-  name: Instantiate(Vector3Int, Tilemap, Directions)
-  href: api/TileSystem.Weapon.html#TileSystem_Weapon_Instantiate_Vector3Int_Tilemap_TileSystem_Directions_
-  commentId: M:TileSystem.Weapon.Instantiate(Vector3Int,Tilemap,TileSystem.Directions)
-  fullName: TileSystem.Weapon.Instantiate(Vector3Int, Tilemap, TileSystem.Directions)
-  nameWithType: Weapon.Instantiate(Vector3Int, Tilemap, Directions)
+- uid: TileSystem.Weapon.firePeriod
+  name: firePeriod
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_firePeriod
+  commentId: F:TileSystem.Weapon.firePeriod
+  fullName: TileSystem.Weapon.firePeriod
+  nameWithType: Weapon.firePeriod
+- uid: TileSystem.Weapon.Instantiate(Vector3Int,Tilemap,TileSystem.Direction)
+  name: Instantiate(Vector3Int, Tilemap, Direction)
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_Instantiate_Vector3Int_Tilemap_TileSystem_Direction_
+  commentId: M:TileSystem.Weapon.Instantiate(Vector3Int,Tilemap,TileSystem.Direction)
+  fullName: TileSystem.Weapon.Instantiate(Vector3Int, Tilemap, TileSystem.Direction)
+  nameWithType: Weapon.Instantiate(Vector3Int, Tilemap, Direction)
 - uid: TileSystem.Weapon.Instantiate*
   name: Instantiate
   href: api/TileSystem.Weapon.html#TileSystem_Weapon_Instantiate_
@@ -1506,15 +1550,15 @@ references:
   isSpec: "True"
   fullName: TileSystem.Weapon.RemoveTiles
   nameWithType: Weapon.RemoveTiles
-- uid: TileSystem.Weapon.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
-  name: SetTiles(Vector3Int[], Tilemap, Directions[])
-  href: api/TileSystem.Weapon.html#TileSystem_Weapon_SetTiles_Vector3Int___Tilemap_TileSystem_Directions___
-  commentId: M:TileSystem.Weapon.SetTiles(Vector3Int[],Tilemap,TileSystem.Directions[])
-  name.vb: SetTiles(Vector3Int(), Tilemap, Directions())
-  fullName: TileSystem.Weapon.SetTiles(Vector3Int[], Tilemap, TileSystem.Directions[])
-  fullName.vb: TileSystem.Weapon.SetTiles(Vector3Int(), Tilemap, TileSystem.Directions())
-  nameWithType: Weapon.SetTiles(Vector3Int[], Tilemap, Directions[])
-  nameWithType.vb: Weapon.SetTiles(Vector3Int(), Tilemap, Directions())
+- uid: TileSystem.Weapon.SetTiles(Vector3Int[],Tilemap,TileSystem.Direction[])
+  name: SetTiles(Vector3Int[], Tilemap, Direction[])
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_SetTiles_Vector3Int___Tilemap_TileSystem_Direction___
+  commentId: M:TileSystem.Weapon.SetTiles(Vector3Int[],Tilemap,TileSystem.Direction[])
+  name.vb: SetTiles(Vector3Int(), Tilemap, Direction())
+  fullName: TileSystem.Weapon.SetTiles(Vector3Int[], Tilemap, TileSystem.Direction[])
+  fullName.vb: TileSystem.Weapon.SetTiles(Vector3Int(), Tilemap, TileSystem.Direction())
+  nameWithType: Weapon.SetTiles(Vector3Int[], Tilemap, Direction[])
+  nameWithType.vb: Weapon.SetTiles(Vector3Int(), Tilemap, Direction())
 - uid: TileSystem.Weapon.SetTiles*
   name: SetTiles
   href: api/TileSystem.Weapon.html#TileSystem_Weapon_SetTiles_
