@@ -25,18 +25,21 @@ public class ShipDesigner : MonoBehaviour
     [SerializeField] private Sprite         blankTile;
     [SerializeField] private TileSelector   tileSelector;
 
-    private string     activeTileID  = "default_hull";
-    private string     currentTileID = "default_hull";
-    private string     designName    = "Unnamed Ship";
-    private Directions direction     = Directions.Up;
-    private bool       placingBlocks;
-    private Transform  previewImgTransform;
-    private string     shipSavePath;
-    private TileSet    tileSet;
+    private string    activeTileID  = "default_hull";
+    private string    currentTileID = "default_hull";
+    private string    designName    = "Unnamed Ship";
+    private Direction direction     = Direction.Up;
+    private bool      placingBlocks;
+    private Transform previewImgTransform;
+    private string    shipSavePath;
+    private TileSet   tileSet;
 
-    public bool ActivelyPlacingBlocks { get; private set; }
+    private bool ActivelyPlacingBlocks { get; set; }
 
 
+    /// <value>
+    ///     The string id of the tile currently being placed
+    /// </value>
     public string CurrentTileID
     {
         get => currentTileID;
@@ -139,16 +142,27 @@ public class ShipDesigner : MonoBehaviour
         placingBlocks = false;
     }
 
+    /// <summary>
+    ///     Updates the save popup with the correct name
+    /// </summary>
     public void StartSave()
     {
         inputField.text = designName;
     }
 
+    /// <summary>
+    ///     Updates the name of the current ship
+    /// </summary>
+    /// <param name="newName">The new name of the ship</param>
     public void UpdateName(string newName)
     {
         designName = newName;
     }
 
+    /// <summary>
+    ///     Saves the ship design and warns about overwriting name conflicts
+    /// </summary>
+    /// <param name="overwrite">will overwrite without prompt if true</param>
     public void TrySave(bool overwrite = false)
     {
         string filePath = shipSavePath + "/" + designName + ".json";
@@ -165,6 +179,9 @@ public class ShipDesigner : MonoBehaviour
         nameConflictPopUp.Close();
     }
 
+    /// <summary>
+    ///     Displays the pop up that shows saved shps
+    /// </summary>
     public void ShowSavedShips()
     {
         var ships = Directory.GetFiles(shipSavePath, "*.json");
@@ -176,6 +193,10 @@ public class ShipDesigner : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///     Loads a ship design by name
+    /// </summary>
+    /// <param name="shipName">The name of the ship to loasd</param>
     public void LoadDesign(string shipName)
     {
         if (shipName == null) return;
@@ -186,6 +207,9 @@ public class ShipDesigner : MonoBehaviour
         tileManager.LoadFromJson(filePath);
     }
 
+    /// <summary>
+    ///     Enter the flight test mode
+    /// </summary>
     public void LoadShipTester()
     {
         if (ShipData.ShipPath is null) return;
@@ -195,16 +219,16 @@ public class ShipDesigner : MonoBehaviour
 
     private void RotateLeft(InputAction.CallbackContext context)
     {
-        if (direction == Directions.Right)
-            direction = Directions.Up;
+        if (direction == Direction.Right)
+            direction = Direction.Up;
         else
             direction++;
     }
 
     private void RotateRight(InputAction.CallbackContext context)
     {
-        if (direction == Directions.Up)
-            direction = Directions.Right;
+        if (direction == Direction.Up)
+            direction = Direction.Right;
         else
             direction--;
     }

@@ -2,9 +2,19 @@
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+///     A class to display particle effects
+/// </summary>
 public class WeaponFx : MonoBehaviour
 {
+    /// <value>
+    ///     A gameobject with the particle effect for the weapon until it hits an object
+    /// </value>
     public GameObject trace;
+
+    /// <value>
+    ///     A gameobject with the particle effect for the weapon after it hits an object
+    /// </value>
     public GameObject hit;
 
     private readonly List<ParticleSystem> hitParticleSystems   = new List<ParticleSystem>();
@@ -19,13 +29,26 @@ public class WeaponFx : MonoBehaviour
             Destroy(system.gameObject);
     }
 
+    /// <summary>
+    ///     Displays the weapon effects
+    /// </summary>
+    /// <param name="startPos">The origin of the effect</param>
+    /// <param name="endPos">The end position of the effect</param>
+    /// <param name="hitPos">Where the weapon hit its target</param>
     public void ApplyFX(Vector3 startPos, Vector3 endPos, Vector3 hitPos)
     {
         ParticleLine(startPos, hitPos, traceParticleSystems, trace);
         if (hitPos != endPos) ParticleLine(hitPos, endPos, hitParticleSystems, hit);
     }
 
-    private void ParticleLine(Vector3 start, Vector3 end, List<ParticleSystem> systems, GameObject template)
+    /// <summary>
+    ///     Scales a gameobject with a line particle effect to reach between two points. Will get or create a new gameobject
+    /// </summary>
+    /// <param name="start">The start position of the line</param>
+    /// <param name="end">The end position of the line</param>
+    /// <param name="systems">The particle systems available to use</param>
+    /// <param name="template">The template to use if a new gameobject is needed</param>
+    private void ParticleLine(Vector3 start, Vector3 end, ICollection<ParticleSystem> systems, GameObject template)
     {
         ParticleSystem particle = systems.FirstOrDefault(system => !system.IsAlive());
 

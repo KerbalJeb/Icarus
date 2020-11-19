@@ -27,8 +27,15 @@ public class ShipManager : MonoBehaviour
 
     private TileManager tileManager;
 
+    /// <value>
+    ///     The MovementManager for this ship
+    /// </value>
     public MovementManager MovementManager { get; private set; }
-    public WeaponsManager  WeaponsManager  { get; private set; }
+
+    /// <value>
+    ///     The WeaponsManager for this ship
+    /// </value>
+    public WeaponsManager WeaponsManager { get; private set; }
 
     /// <value>
     ///     Will enable or disable physics for this ship
@@ -111,6 +118,10 @@ public class ShipManager : MonoBehaviour
         foreach (Vector3Int pos in WeaponsManager.WeaponPos) StartCoroutine(WeaponsManager.FireRoutine(pos));
     }
 
+    /// <summary>
+    ///     Stops weapons from firing
+    /// </summary>
+    /// <param name="context">Needed for input system to work, but not used in function</param>
     private void StopFiring(InputAction.CallbackContext context)
     {
         WeaponsManager.Firing = false;

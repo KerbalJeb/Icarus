@@ -5,6 +5,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+///     A game manager that helps with scene loading/exiting
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     public  PopUp                               closePopUp;

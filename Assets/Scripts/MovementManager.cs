@@ -17,8 +17,8 @@ public class MovementManager
     private readonly List<GameObject>            exhaustObjects         = new List<GameObject>();
     private readonly List<ParticleSystem>        exhaustParticleSystems = new List<ParticleSystem>();
 
-    private readonly Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles =
-        new Dictionary<Directions, (Vector3 netThrust, Vector<float> values)>();
+    private readonly Dictionary<Direction, (Vector3 netThrust, Vector<float> values)> thrustProfiles =
+        new Dictionary<Direction, (Vector3 netThrust, Vector<float> values)>();
 
     private readonly TileManager tileManager;
     private readonly Transform   transform;
@@ -100,7 +100,14 @@ public class MovementManager
     }
 
 
-    public void AddEngine(Vector3Int cord, EnginePart enginePart, GameObject exhaust, Directions rot)
+    /// <summary>
+    ///     Adds an engine to the flight model
+    /// </summary>
+    /// <param name="cord">The location of the engine</param>
+    /// <param name="enginePart">The engine variant</param>
+    /// <param name="exhaust">The exhaust effect object</param>
+    /// <param name="rot">The rotation of the engine</param>
+    public void AddEngine(Vector3Int cord, EnginePart enginePart, GameObject exhaust, Direction rot)
     {
         if (rb2D == null) rb2D = tileManager.Rigidbody2D;
         com = rb2D.centerOfMass;
@@ -133,7 +140,7 @@ public class MovementManager
 
         for (var i = 0; i < n; i++) thrustMatrix.SetColumn(i, engineVectors[i].Data);
 
-        foreach (Directions value in (Directions[]) Enum.GetValues(typeof(Directions)))
+        foreach (Direction value in (Direction[]) Enum.GetValues(typeof(Direction)))
         {
             var         engineVector   = Vector<float>.Build.Dense(n, 0);
             const float threshold      = 0.25f;
@@ -145,7 +152,7 @@ public class MovementManager
                 ThrustVector engine = engineVectors[i];
                 switch (value)
                 {
-                    case Directions.Up:
+                    case Direction.Up:
                         if (engine.ThrustY <= 0) break;
 
                         if (engine.ThrustY / engine.Magnitude > threshold)
@@ -155,7 +162,7 @@ public class MovementManager
                         }
 
                         break;
-                    case Directions.Down:
+                    case Direction.Down:
                         if (engine.ThrustY >= 0) break;
                         if (engine.ThrustY / engine.Magnitude < -threshold)
                         {
@@ -164,7 +171,7 @@ public class MovementManager
                         }
 
                         break;
-                    case Directions.Left:
+                    case Direction.Left:
                         if (engine.ThrustX <= 0) break;
                         if (engine.ThrustX / engine.Magnitude > threshold)
                         {
@@ -173,7 +180,7 @@ public class MovementManager
                         }
 
                         break;
-                    case Directions.Right:
+                    case Direction.Right:
                         if (engine.ThrustX >= 0) break;
                         if (engine.ThrustX / engine.Magnitude < -threshold)
                         {
@@ -182,7 +189,7 @@ public class MovementManager
                         }
 
                         break;
-                    case Directions.ZUp:
+                    case Direction.ZUp:
                         if (engine.Toque >= toqueThreshold)
                         {
                             dirNetThrust    += engine.NetThrust;
@@ -190,7 +197,7 @@ public class MovementManager
                         }
 
                         break;
-                    case Directions.ZDown:
+                    case Direction.ZDown:
                         if (engine.Toque <= -toqueThreshold)
                         {
                             dirNetThrust    += engine.NetThrust;
@@ -205,6 +212,10 @@ public class MovementManager
         }
     }
 
+    /// <summary>
+    ///     Removes an engine
+    /// </summary>
+    /// <param name="cord">The coordinates of the engine</param>
     public void RemoveEngine(Vector3Int cord)
     {
         if (!engineIDs.ContainsKey(cord)) return;
@@ -244,7 +255,7 @@ public class MovementManager
     {
         var direction = GetRotations(thrust);
         engineInputs = Vector<float>.Build.Dense(n, 0);
-        foreach ((Directions tileRotation, float mag) in direction)
+        foreach ((Direction tileRotation, float mag) in direction)
         {
             var input                                   = thrustProfiles[tileRotation].values;
             for (var i = 0; i < n; i++) engineInputs[i] = Mathf.Clamp(input[i] * mag + engineInputs[i], 0, 1);
@@ -259,17 +270,17 @@ public class MovementManager
     /// </summary>
     /// <param name="thrust">The engine thrust vector</param>
     /// <returns></returns>
-    private static IEnumerable<(Directions, float)> GetRotations(Vector3 thrust)
+    private static IEnumerable<(Direction, float)> GetRotations(Vector3 thrust)
     {
-        var         tileRot   = new List<(Directions, float)>();
+        var         tileRot   = new List<(Direction, float)>();
         const float threshold = 0.1f;
 
-        if (thrust.x > threshold) tileRot.Add((Directions.Left, Mathf.Abs(thrust.x)));
-        if (thrust.x < -threshold) tileRot.Add((Directions.Right, Mathf.Abs(thrust.x)));
-        if (thrust.y > threshold) tileRot.Add((Directions.Up, Mathf.Abs(thrust.y)));
-        if (thrust.y < -threshold) tileRot.Add((Directions.Down, Mathf.Abs(thrust.y)));
-        if (thrust.z > threshold) tileRot.Add((Directions.ZDown, Mathf.Abs(thrust.z)));
-        if (thrust.z < -threshold) tileRot.Add((Directions.ZUp, Mathf.Abs(thrust.z)));
+        if (thrust.x > threshold) tileRot.Add((Direction.Left, Mathf.Abs(thrust.x)));
+        if (thrust.x < -threshold) tileRot.Add((Direction.Right, Mathf.Abs(thrust.x)));
+        if (thrust.y > threshold) tileRot.Add((Direction.Up, Mathf.Abs(thrust.y)));
+        if (thrust.y < -threshold) tileRot.Add((Direction.Down, Mathf.Abs(thrust.y)));
+        if (thrust.z > threshold) tileRot.Add((Direction.ZDown, Mathf.Abs(thrust.z)));
+        if (thrust.z < -threshold) tileRot.Add((Direction.ZUp, Mathf.Abs(thrust.z)));
 
         return tileRot;
     }
@@ -281,7 +292,7 @@ public class MovementManager
     /// <param name="thrustMag"></param>
     /// <param name="rot"></param>
     /// <returns></returns>
-    private ThrustVector GetThrustVector(Vector3Int cords, float thrustMag, Directions rot)
+    private ThrustVector GetThrustVector(Vector3Int cords, float thrustMag, Direction rot)
     {
         Vector2 dir      = TileInfo.Directions[rot];
         Vector2 thrust   = dir * thrustMag;

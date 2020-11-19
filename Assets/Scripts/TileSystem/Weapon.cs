@@ -6,13 +6,38 @@ namespace TileSystem
     [CreateAssetMenu(fileName = "Weapon", menuName = "TileParts/Weapon", order = 0)]
     public class Weapon : BasePart
     {
-        public Sprite     turret;
-        public GameObject turretTemplate;
-        public float      baseDamage = 500f;
-        public float      range      = 50f;
-        public float      firePeriod = 1f;
+        /// <summary>
+        ///     The image to use for the turret part of this weapon that will track the target
+        /// </summary>
+        public Sprite turret;
 
-        public override void Instantiate(Vector3Int cord, Tilemap tilemap, Directions direction)
+        /// <summary>
+        ///     The gameobject to use as a template for the turret, must have a WeaponFX and SpriteRenderer
+        /// </summary>
+        public GameObject turretTemplate;
+
+        /// <summary>
+        ///     How much damage this weapon does
+        /// </summary>
+        public float baseDamage = 500f;
+
+        /// <summary>
+        ///     The range of the weapon
+        /// </summary>
+        public float range = 50f;
+
+        /// <summary>
+        ///     The delay between shots from this weapons (in seconds)
+        /// </summary>
+        public float firePeriod = 1f;
+
+        /// <summary>
+        ///     Creates a tile at the given coordinates
+        /// </summary>
+        /// <param name="cord">The position of the engine</param>
+        /// <param name="tilemap">The tilemap to use</param>
+        /// <param name="direction">The direction it is facing</param>
+        public override void Instantiate(Vector3Int cord, Tilemap tilemap, Direction direction)
         {
             base.Instantiate(cord, tilemap, direction);
             GameObject gameObject = Instantiate(turretTemplate,
@@ -27,16 +52,32 @@ namespace TileSystem
             tilemap.transform.parent.GetComponent<ShipManager>().WeaponsManager.AddWeapon(cord, this, gameObject);
         }
 
-        public override void SetTiles(Vector3Int[] cords, Tilemap tilemap, Directions[] directions)
+        /// <summary>
+        ///     Sets multiple tiles
+        /// </summary>
+        /// <param name="cords">The positions of the tile</param>
+        /// <param name="tilemap">The tilemap to use</param>
+        /// <param name="directions">The directions it is facing</param>
+        public override void SetTiles(Vector3Int[] cords, Tilemap tilemap, Direction[] directions)
         {
             for (var i = 0; i < cords.Length; i++) Instantiate(cords[i], tilemap, directions[i]);
         }
 
+        /// <summary>
+        ///     Removes tiles at the given coordinates
+        /// </summary>
+        /// <param name="cords">The coordinates to remove tiles from</param>
+        /// <param name="tilemap">The tilemap to use</param>
         public override void RemoveTiles(Vector3Int[] cords, Tilemap tilemap)
         {
             foreach (Vector3Int cord in cords) Remove(cord, tilemap);
         }
 
+        /// <summary>
+        ///     Removes a tile at the given coordinates
+        /// </summary>
+        /// <param name="cords">The coordinate to remove tiles from</param>
+        /// <param name="tilemap">The tilemap to use</param>
         public override void Remove(Vector3Int cords, Tilemap tilemap)
         {
             base.Remove(cords, tilemap);

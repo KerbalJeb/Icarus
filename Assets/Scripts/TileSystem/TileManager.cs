@@ -171,7 +171,7 @@ namespace TileSystem
         /// <param name="cords">The coordinates of the tile to set</param>
         /// <param name="tileVariant">The tile variant to use</param>
         /// <param name="direction">The orientation of the tile</param>
-        public void SetTile(Vector3Int cords, BasePart tileVariant, Directions direction = Directions.Up)
+        public void SetTile(Vector3Int cords, BasePart tileVariant, Direction direction = Direction.Up)
         {
             if (tileVariant is null)
             {
@@ -255,19 +255,19 @@ namespace TileSystem
         /// <param name="tilemap">The tilemap to use</param>
         /// <param name="cords">The XYZ Coordinates of the tile</param>
         /// <returns>The direction the tile is facing</returns>
-        private static Directions GetTileRotation(Tilemap tilemap, Vector3Int cords)
+        private static Direction GetTileRotation(Tilemap tilemap, Vector3Int cords)
         {
             float rot = tilemap.GetTransformMatrix(cords).rotation.eulerAngles.z;
             switch (rot)
             {
                 case 90f:
-                    return Directions.Left;
+                    return Direction.Left;
                 case 180f:
-                    return Directions.Down;
+                    return Direction.Down;
                 case 270f:
-                    return Directions.Right;
+                    return Direction.Right;
                 default:
-                    return Directions.Up;
+                    return Direction.Up;
             }
         }
 
@@ -441,10 +441,10 @@ namespace TileSystem
                     obj.SetActive(true);
 
                     var tileGroups =
-                        new List<(List<Vector3Int> cords, List<Directions> dirs, List<TileInstanceData> data)>();
+                        new List<(List<Vector3Int> cords, List<Direction> dirs, List<TileInstanceData> data)>();
 
                     for (var i = 0; i < TileSet.TileVariants.Count; i++)
-                        tileGroups.Add((new List<Vector3Int>(), new List<Directions>(), new List<TileInstanceData>()));
+                        tileGroups.Add((new List<Vector3Int>(), new List<Direction>(), new List<TileInstanceData>()));
 
                     foreach (Vector3Int cords in island)
                     {
@@ -565,7 +565,7 @@ namespace TileSystem
         private class SerializableTileData
         {
             public string     tileID;
-            public Directions dir;
+            public Direction  dir;
             public Vector3Int pos;
         }
 

@@ -17,9 +17,9 @@ public class InputManager
         playerInput.Enable();
     }
 
-    public static InputManager              Instance      => instance ?? (instance = new InputManager());
-    public static PlayerInput               PlayerInput   => Instance.playerInput;
-    public static PlayerInput.PlayerActions PlayerActions => PlayerInput.Player;
+    private static InputManager              Instance      => instance ?? (instance = new InputManager());
+    private static PlayerInput               PlayerInput   => Instance.playerInput;
+    public static  PlayerInput.PlayerActions PlayerActions => PlayerInput.Player;
 
     /// <summary>
     ///     Checks if the mouse is over a UI element (excluding ones with the tag "Unclickable")

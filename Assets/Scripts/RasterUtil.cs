@@ -45,6 +45,13 @@ public static class RasterUtil
         }
     }
 
+    /// <summary>
+    ///     Finds the point on a line nearest the reference point
+    /// </summary>
+    /// <param name="origin">The starting point of the line</param>
+    /// <param name="direction">The direction of the line</param>
+    /// <param name="point">The reference point</param>
+    /// <returns></returns>
     public static Vector2 FindNearestPointOnLine(Vector2 origin, Vector2 direction, Vector2 point)
     {
         direction.Normalize();

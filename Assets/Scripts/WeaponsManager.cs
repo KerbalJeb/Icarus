@@ -21,6 +21,9 @@ public class WeaponsManager
     private readonly Dictionary<Vector3Int, (Weapon weapon, GameObject gameObject, WeaponFx fx)> weapons =
         new Dictionary<Vector3Int, (Weapon weapon, GameObject gameObject, WeaponFx fx)>();
 
+    /// <value>
+    ///     If the weapons are currently firing, if set all active weapon coroutines will fire their weapons
+    /// </value>
     public bool Firing = false;
 
 
@@ -79,6 +82,11 @@ public class WeaponsManager
         }
     }
 
+    /// <summary>
+    ///     A coroutine that is used to fire a weapon, will continue firing while the Firing property is true
+    /// </summary>
+    /// <param name="cords">The position of the weapon</param>
+    /// <returns>Delay for coroutine</returns>
     public IEnumerator FireRoutine(Vector3Int cords)
     {
         if (weaponCoroutineStatues[cords]) yield break;

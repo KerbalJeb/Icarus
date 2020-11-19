@@ -16,9 +16,9 @@ namespace TileSystem
         /// <value>
         ///     The Rotation of this tile
         /// </value>
-        public Directions Rotation;
+        public Direction Rotation;
 
-        public TileInstanceData(BasePart partType, Directions rotation = Directions.Up)
+        public TileInstanceData(BasePart partType, Direction rotation = Direction.Up)
         {
             Health   = partType.maxHealth;
             ID       = partType.id;
