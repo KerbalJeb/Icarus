@@ -34,18 +34,20 @@ public class Damage
     /// <summary>
     ///     Apply the damage to all tilemaps in range. Will penetrate multiple tiles if damage is high enough
     /// </summary>
-    public void ApplyDamage(TileManager[] exclude)
+    public Vector3 ApplyDamage(TileManager[] exclude)
     {
         var hits = Physics2D.LinecastAll(StartPos, EndPos);
         Array.Sort(hits, (h1, h2) => h1.distance.CompareTo(h2.distance));
         Debug.DrawLine(StartPos, EndPos, Color.green, 5f);
-        var done = false;
+        var     done   = false;
+        Vector2 hitPos = EndPos;
         foreach (RaycastHit2D hit in hits)
         {
             var tileManager = hit.transform.GetComponent<TileManager>();
             if (tileManager is null) continue;
             if (exclude.Contains(tileManager)) continue;
             Vector2 lineStart = hit.point - 0.5f * Direction;
+            if (hitPos == EndPos) hitPos = lineStart;
             Vector2 lineEnd = EndPos;
             Debug.DrawLine(lineStart, lineEnd, Color.red, 5f);
             var dmgToObject = 0f;
@@ -65,7 +67,9 @@ public class Damage
 
             tileManager.Rigidbody2D.AddForceAtPosition(Direction * dmgToObject * 1e-3f, lineStart);
 
-            if (done) return;
+            if (done) break;
         }
+
+        return hitPos;
     }
 }

@@ -13,21 +13,22 @@ public class ShipManager : MonoBehaviour
     /// <value>
     ///     The target to aim the weapons at
     /// </value>
-    public Transform target = null;
+    public Transform target;
 
     /// <value>
     ///     If true will load a ship from the path given in ShipData.Path
     /// </value>
-    public bool autoLoadFromShipData = false;
+    public bool autoLoadFromShipData;
 
     /// <value>
     ///     If physics should be enabled when the object if first created
     /// </value>
-    [SerializeField] private bool startWithPhysics = false;
+    [SerializeField] private bool startWithPhysics;
 
-    private MovementManager movementManager;
-    private TileManager     tileManager;
-    public  WeaponsManager  WeaponsManager { get; private set; }
+    private TileManager tileManager;
+
+    public MovementManager MovementManager { get; private set; }
+    public WeaponsManager  WeaponsManager  { get; private set; }
 
     /// <value>
     ///     Will enable or disable physics for this ship
@@ -47,7 +48,7 @@ public class ShipManager : MonoBehaviour
     {
         tileManager     = GetComponent<TileManager>();
         WeaponsManager  = new WeaponsManager(tileManager);
-        movementManager = new MovementManager(tileManager, transform);
+        MovementManager = new MovementManager(tileManager, transform);
     }
 
     private void Start()
@@ -63,7 +64,7 @@ public class ShipManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (PhysicsEnabled) movementManager.ApplyThrust();
+        if (PhysicsEnabled) MovementManager.ApplyThrust();
     }
 
     private void OnEnable()
@@ -87,7 +88,7 @@ public class ShipManager : MonoBehaviour
     private void SteerShip(InputAction.CallbackContext ctx)
     {
         var thrust = ctx.ReadValue<Vector3>();
-        movementManager.Steer(thrust);
+        MovementManager.Steer(thrust);
     }
 
     /// <summary>
@@ -95,7 +96,6 @@ public class ShipManager : MonoBehaviour
     /// </summary>
     private void UpdatePhysics()
     {
-        if (tileManager.PhysicsEnabled) movementManager.UpdatePhysics();
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ public class ShipManager : MonoBehaviour
     /// <param name="context">Needed for input system to work, but not used in function</param>
     private void Fire(InputAction.CallbackContext context)
     {
-        if (!PhysicsEnabled) return;
+        if (!PhysicsEnabled || InputManager.IsMouseOverClickableUI()) return;
         WeaponsManager.Fire();
     }
 }

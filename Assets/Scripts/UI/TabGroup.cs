@@ -8,18 +8,18 @@ using UnityEngine.UI;
 /// </summary>
 public class TabGroup : MonoBehaviour
 {
-    [SerializeField] private Color                         hoverColor      = Color.green;
-    [SerializeField] private Color                         selectedColor   = Color.white;
-    [SerializeField] private Color                         defaultColor    = Color.gray;
-    [SerializeField] private ScrollRect                    scrollRect      = null;
-    [SerializeField] private GameObject                    buttonTemplate  = null;
-    [SerializeField] private GameObject                    contentTemplate = null;
-    [SerializeField] private Transform                     viewPort        = null;
-    private readonly         List<TabButton>               tabButtons      = new List<TabButton>();
-    private readonly         Dictionary<string, TabButton> tabs            = new Dictionary<string, TabButton>();
+    [SerializeField] private Color                         hoverColor    = Color.green;
+    [SerializeField] private Color                         selectedColor = Color.white;
+    [SerializeField] private Color                         defaultColor  = Color.gray;
+    [SerializeField] private ScrollRect                    scrollRect;
+    [SerializeField] private GameObject                    buttonTemplate;
+    [SerializeField] private GameObject                    contentTemplate;
+    [SerializeField] private Transform                     viewPort;
+    private readonly         List<TabButton>               tabButtons = new List<TabButton>();
+    private readonly         Dictionary<string, TabButton> tabs       = new Dictionary<string, TabButton>();
 
 
-    private TabButton selected = null;
+    private TabButton selected;
 
 
     public void Subscribe(TabButton button)

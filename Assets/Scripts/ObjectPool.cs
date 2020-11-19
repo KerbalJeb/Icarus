@@ -43,9 +43,8 @@ public class ObjectPool : MonoBehaviour
     public GameObject GetObject()
     {
         for (var i = 0; i < numObjects; i++)
-        {
-            if (!pool[i].activeInHierarchy) return pool[i];
-        }
+            if (!pool[i].activeInHierarchy)
+                return pool[i];
 
         numObjects++;
         AddObject();

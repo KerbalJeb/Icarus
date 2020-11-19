@@ -11,7 +11,7 @@
    inkscape:export-xdpi="95.999992"
    inkscape:export-filename="C:\Users\Ben\Documents\ECE356\Icarus\Assets\Tiles\ShipTiles.png"
    sodipodi:docname="ShipTiles.svg"
-   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
    id="svg8"
    version="1.1"
    viewBox="0 0 541.86665 541.86662"
@@ -22,21 +22,21 @@
   <sodipodi:namedview
      inkscape:document-rotation="0"
      units="px"
-     inkscape:window-maximized="0"
-     inkscape:window-y="0"
-     inkscape:window-x="-7"
-     inkscape:window-height="1008"
-     inkscape:window-width="1278"
+     inkscape:window-maximized="1"
+     inkscape:window-y="-8"
+     inkscape:window-x="257"
+     inkscape:window-height="987"
+     inkscape:window-width="1680"
      fit-margin-bottom="0"
      fit-margin-right="0"
      fit-margin-left="0"
      fit-margin-top="0"
      showgrid="false"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g33"
      inkscape:document-units="px"
-     inkscape:cy="63.892688"
-     inkscape:cx="204.53638"
-     inkscape:zoom="5.6568543"
+     inkscape:cy="1693.4461"
+     inkscape:cx="709.52423"
+     inkscape:zoom="0.7071068"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -61,6 +61,9 @@
      inkscape:groupmode="layer"
      inkscape:label="Layer 1">
     <g
+       inkscape:export-ydpi="95.999992"
+       inkscape:export-xdpi="95.999992"
+       inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
        style="stroke-width:0.86816949"
        transform="matrix(1.1487649,0,0,1.1549411,0,-46.017502)"
        id="g872">
@@ -82,6 +85,9 @@
          style="opacity:1;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.2300649;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
     <g
+       inkscape:export-ydpi="95.999992"
+       inkscape:export-xdpi="95.999992"
+       inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
        id="g878"
        transform="matrix(1.1487649,0,0,1.1549411,16.933332,-46.017502)"
        style="stroke-width:0.86816949">
@@ -103,6 +109,9 @@
          ry="1.1142212" />
     </g>
     <g
+       inkscape:export-ydpi="95.999992"
+       inkscape:export-xdpi="95.999992"
+       inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
        id="g4619"
        transform="translate(-39.629104,-0.03307292)">
       <path
@@ -125,6 +134,9 @@
        transform="matrix(1.1487649,0,0,1.1549411,0,-62.950846)"
        style="stroke-width:0.86816949" />
     <g
+       inkscape:export-ydpi="95.999992"
+       inkscape:export-xdpi="95.999992"
+       inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
        id="g4659"
        transform="translate(17.098699)">
       <path
@@ -133,7 +145,7 @@
          inkscape:connector-curvature="0"
          id="rect824"
          d="m 206.375,1856 c -14.79088,0 -15,107.3388 -15,126.2441 v 58.1387 c 0,4.2196 4.46,7.6172 10,7.6172 14.66667,0 29.33333,0 44,0 5.54,0 10,-3.3976 10,-7.6172 v -58.1387 c 0,-18.9053 -0.20913,-126.2441 -15,-126.2441 -2.77,0 -5,2.23 -5,5 v 85.5586 c 0,18.1611 -0.44759,37.4414 -12,37.4414 -11.55241,0 -12,-19.2803 -12,-37.4414 V 1861 c 0,-2.77 -2.23,-5 -5,-5 z"
-         style="opacity:1;fill:#808080;fill-opacity:1;stroke:none;stroke-width:3.40960979;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="opacity:1;fill:#333333;fill-opacity:1;stroke:none;stroke-width:3.40960979;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <circle
          r="2.1166666"
          cy="288.53333"
@@ -142,6 +154,26 @@
          style="opacity:1;fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:0.90367347;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
     <g
+       inkscape:export-ydpi="95.999992"
+       inkscape:export-xdpi="95.999992"
+       inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
+       id="g27"
+       transform="matrix(1.1487649,0,0,1.1549411,50.799996,-46.017502)"
+       style="stroke-width:0.868169">
+      <rect
+         ry="1.3229166"
+         y="282.33835"
+         x="0"
+         height="14.661642"
+         width="14.740469"
+         id="rect23"
+         style="opacity:1;fill:#808080;fill-opacity:1;stroke:none;stroke-width:0.229703;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         rx="1.3229166" />
+    </g>
+    <g
+       inkscape:export-ydpi="95.999992"
+       inkscape:export-xdpi="95.999992"
+       inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
        id="g4673">
       <circle
          r="5.9531245"
@@ -155,6 +187,23 @@
          cx="59.266663"
          cy="288.53333"
          r="2.1166666" />
+    </g>
+    <g
+       id="g33"
+       transform="matrix(1.1487649,0,0,1.1549411,84.666662,-46.017502)"
+       style="stroke-width:0.868169">
+      <rect
+         inkscape:export-ydpi="95.999992"
+         inkscape:export-xdpi="95.999992"
+         inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
+         ry="0"
+         y="282.33835"
+         x="0"
+         height="14.661642"
+         width="14.740469"
+         id="rect29"
+         style="opacity:1;fill:#a05a2c;fill-opacity:1;stroke:none;stroke-width:0.229703;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         rx="0" />
     </g>
   </g>
 </svg>

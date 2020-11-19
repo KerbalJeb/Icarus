@@ -8,8 +8,6 @@ using UnityEngine.Tilemaps;
 
 namespace TileSystem
 {
-    public delegate void Notify();
-
     /// <summary>
     ///     Used to manage and update Unity tile maps and store tile data
     /// </summary>
@@ -20,6 +18,7 @@ namespace TileSystem
     /// </remarks>
     public class TileManager : MonoBehaviour
     {
+        // public        GameObject     comSprite;
         private const int minIslandSize = 3;
 
         private static readonly ReadOnlyCollection<Vector3Int> ConnectionRules = new ReadOnlyCollection<Vector3Int>(
@@ -33,14 +32,14 @@ namespace TileSystem
 
         public ObjectPool pool;
 
-        [SerializeField] private bool physics = false;
+        [SerializeField] private bool physics;
         public                   bool onTileMap;
 
         private readonly Dictionary<Vector3Int, TileInstanceData> tileData =
             new Dictionary<Vector3Int, TileInstanceData>();
 
         private Vector2 com;
-        private bool    com_updated;
+        private bool    comUpdated;
 
         private Grid  grid;
         private float mass;
@@ -52,7 +51,7 @@ namespace TileSystem
 
         public  TileSet   TileSet             { get; private set; }
         private BoundsInt Bounds              => tilemapLayers[0].cellBounds;
-        public  bool      PhysicsModelChanged { get; set; } = false;
+        public  bool      PhysicsModelChanged { get; set; }
 
         public bool PhysicsEnabled
         {
@@ -66,10 +65,8 @@ namespace TileSystem
 
         public void Awake()
         {
-            TileSet                  = TileSet.Instance;
-            Rigidbody2D              = GetComponent<Rigidbody2D>();
-            Rigidbody2D.centerOfMass = Vector2.zero;
-            Rigidbody2D.mass         = 0;
+            TileSet     = TileSet.Instance;
+            Rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
         private void FixedUpdate()
@@ -80,11 +77,11 @@ namespace TileSystem
                 PhysicsModelChanged = false;
             }
 
-            if (com_updated)
+            if (comUpdated)
             {
                 Rigidbody2D.mass         = mass;
                 Rigidbody2D.centerOfMass = com;
-                com_updated              = false;
+                comUpdated               = false;
             }
         }
 
@@ -122,7 +119,7 @@ namespace TileSystem
         /// <value>
         ///     Called everytime the physics model is updated (tile is destroyed)
         /// </value>
-        public event Notify UpdatePhysics;
+        public event Action UpdatePhysics;
 
         /// <summary>
         ///     Converts a world position to coordinates in the tilemap
@@ -317,9 +314,9 @@ namespace TileSystem
             }
 
             tileData.Clear();
-            mass        = 0;
-            com         = Vector2.zero;
-            com_updated = true;
+            mass       = 0;
+            com        = Vector2.zero;
+            comUpdated = true;
         }
 
         /// <summary>
@@ -419,9 +416,8 @@ namespace TileSystem
                 else
                 {
                     if (island.Count <= minIslandSize)
-                    {
-                        foreach (Vector3Int cord in island) RemoveTile(cord);
-                    }
+                        foreach (Vector3Int cord in island)
+                            RemoveTile(cord);
 
                     Transform  gridTransform = grid.transform;
                     GameObject obj           = pool.GetObject();
@@ -508,12 +504,14 @@ namespace TileSystem
             }
             else
             {
-                if (mass < Mathf.Epsilon) return;
+                if (mass - tileMass < Mathf.Epsilon) return;
                 com  -= tileMass * localPos / mass;
                 mass -= tileMass;
+                com  *= (mass + tileMass) / mass;
             }
 
-            com_updated = true;
+            // comSprite.transform.position = com;
+            comUpdated = true;
         }
 
         private void RecalculateCom()
@@ -528,7 +526,7 @@ namespace TileSystem
                 mass += tileMass;
             }
 
-            com_updated = true;
+            comUpdated = true;
         }
 
 

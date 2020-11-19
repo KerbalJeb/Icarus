@@ -9,7 +9,7 @@ namespace UI
     /// </summary>
     public class TileButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
     {
-        [SerializeField]  private Image        graphic = null;
+        [SerializeField]  private Image        graphic;
         [HideInInspector] public  TileSelector tileSelector;
         public                    Image        Image;
         [HideInInspector] public  string       tileID;

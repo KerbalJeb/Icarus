@@ -21,5 +21,8 @@ MonoBehaviour:
   layer: 0
   previewImg: {fileID: 2577598707902432233, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
   mass: 1
+  showInPartSelector: 1
   id: 2
   thrust: 100
+  exhaust: {fileID: 2590089389881105658, guid: 5e462db82ecca7b4aaf89dbbb23a7f77, type: 3}
+  exhaustPos: {x: 0, y: -1.2}

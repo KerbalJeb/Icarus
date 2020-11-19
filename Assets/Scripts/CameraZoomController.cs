@@ -13,8 +13,8 @@ public class CameraZoomController : MonoBehaviour
     public        float                    MaxFOV;
     private       float                    goalZoom;
     private       CinemachineVirtualCamera virtualCamera;
-    private       float                    zoomLevel = 0f;
-    private       float                    zoomVel   = 0f;
+    private       float                    zoomLevel;
+    private       float                    zoomVel;
 
     // Todo add panning (probably remove Cinemachine)
 

@@ -3,30 +3,34 @@ using System.Collections.Generic;
 using MathNet.Numerics.LinearAlgebra;
 using TileSystem;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 /// <summary>
 ///     Used to manage movement and calculate the flight model based on engine placement
 /// </summary>
 public class MovementManager
 {
-    private const    int         OutputStateDim = 3;
-    private readonly TileManager tileManager;
-    private readonly Transform   transform;
+    private const    int              OutputStateDim = 3;
+    private readonly List<GameObject> exhaustObjects = new List<GameObject>();
+    private readonly TileManager      tileManager;
+    private readonly Transform        transform;
 
 
-    private float[]            a;
-    private Vector2            com;
-    private Vector3            currentInput;
-    private Vector<float>      engineInputs;
-    private List<ThrustVector> engineVectors;
-    private float              goalRot = 0f;
-    private int                n;
-    private Vector3            netThrust;
-    private bool               physics = false;
-    private Rigidbody2D        rb2D;
-    private Matrix<float>      thrustMatrix;
+    private          float[]                     a;
+    private          Vector2                     com;
+    private          Vector3                     currentInput;
+    private readonly Dictionary<Vector3Int, int> engineIDs = new Dictionary<Vector3Int, int>();
+    private          Vector<float>               engineInputs;
+    private readonly List<ThrustVector>          engineVectors          = new List<ThrustVector>();
+    private readonly List<ParticleSystem>        exhaustParticleSystems = new List<ParticleSystem>();
+    private          float                       goalRot;
+    private          int                         n;
+    private          Vector3                     netThrust;
+    private          Rigidbody2D                 rb2D;
+    private          Matrix<float>               thrustMatrix;
 
-    private Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles;
+    private readonly Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles =
+        new Dictionary<Directions, (Vector3 netThrust, Vector<float> values)>();
 
 
     /// <summary>
@@ -44,18 +48,24 @@ public class MovementManager
 
     public void ApplyThrust()
     {
-        if (physics)
+        rb2D.AddTorque(netThrust.z);
+        rb2D.AddRelativeForce(netThrust);
+        if (currentInput.z == 0) StabilizeRotation();
+
+        for (var i = 0; i < n; i++)
         {
-            rb2D.AddTorque(netThrust.z);
-            rb2D.AddRelativeForce(netThrust);
-            if (currentInput.z == 0) StabilizeRotation();
-            for (var i = 0; i < n; i++)
+            float thrust = engineInputs[i];
+            if (thrust == 0)
             {
-                Vector3 start = engineVectors[i].Pos;
-                Vector3 end   = start + engineVectors[i].ThrustDir * (engineInputs[i] * -5f);
-                start = transform.TransformPoint(start);
-                end   = transform.TransformPoint(end);
-                Debug.DrawLine(start, end, Color.green);
+                exhaustParticleSystems[i].Stop();
+                exhaustParticleSystems[i].Clear();
+            }
+            else
+            {
+                ParticleSystem.MainModule main = exhaustParticleSystems[i].main;
+                main.startLifetime = thrust * 1f;
+
+                if (!exhaustParticleSystems[i].isPlaying) exhaustParticleSystems[i].Play();
             }
         }
     }
@@ -71,7 +81,7 @@ public class MovementManager
     {
         float   angularVelocityError = rb2D.angularVelocity;
         Vector3 thrust               = currentInput;
-        // Position Controler
+        // Position Controller
         if (position)
         {
             float rotationError = rb2D.rotation - goalRot;
@@ -84,36 +94,33 @@ public class MovementManager
         SetThrust(thrust);
     }
 
-    /// <summary>
-    ///     Gets the engine information from the TileManger and updates the flight model accordingly
-    /// </summary>
-    public void UpdatePhysics()
+
+    public void AddEngine(Vector3Int cord, EnginePart enginePart, GameObject exhaust, Directions rot)
     {
         if (rb2D == null) rb2D = tileManager.Rigidbody2D;
         com = rb2D.centerOfMass;
-        tileManager.GetTilesByVariant<EnginePart>(out var engines);
-        n              = engines.Count;
-        engineVectors  = new List<ThrustVector>();
-        thrustProfiles = new Dictionary<Directions, (Vector3 netThrust, Vector<float> values)>();
 
-        if (n < 1)
-        {
-            physics = false;
-            return;
-        }
+        ThrustVector thrustVector = GetThrustVector(cord, enginePart.thrust, rot);
+        var          particles    = exhaust.GetComponent<ParticleSystem>();
+        particles.Stop();
+        exhaustObjects.Add(exhaust);
+        exhaustParticleSystems.Add(particles);
+        engineVectors.Add(thrustVector);
 
+        engineIDs[cord] = n;
+        n++;
+
+        RebuildFlightModel();
+    }
+
+    private void RebuildFlightModel()
+    {
         a            = new float[n * m]; // Column Major form
         engineInputs = Vector<float>.Build.Dense(n);
 
         thrustMatrix = Matrix<float>.Build.Dense(m, n, a);
 
-        for (var i = 0; i < n; i++)
-        {
-            (Vector3Int cords, TileInstanceData data) = engines[i];
-            ThrustVector thrustVector = GetThrustVector(cords, data);
-            engineVectors.Add(thrustVector);
-            thrustMatrix.SetColumn(i, thrustVector.Data);
-        }
+        for (var i = 0; i < n; i++) thrustMatrix.SetColumn(i, engineVectors[i].Data);
 
         foreach (Directions value in (Directions[]) Enum.GetValues(typeof(Directions)))
         {
@@ -185,8 +192,18 @@ public class MovementManager
 
             thrustProfiles[value] = (dirNetThrust, engineVector);
         }
+    }
 
-        physics = true;
+    public void RemoveEngine(Vector3Int cord)
+    {
+        if (!engineIDs.ContainsKey(cord)) return;
+
+        int id = engineIDs[cord];
+        Object.Destroy(exhaustObjects[id]);
+        exhaustObjects.RemoveAt(id);
+        exhaustParticleSystems.RemoveAt(id);
+        n--;
+        RebuildFlightModel();
     }
 
     /// <summary>
@@ -198,8 +215,6 @@ public class MovementManager
     /// </param>
     public void Steer(Vector3 thrust)
     {
-        if (!physics) return;
-
         SetThrust(thrust);
         currentInput = thrust;
         if (thrust.z == 0) goalRot = rb2D.rotation;
@@ -250,16 +265,16 @@ public class MovementManager
     ///     Creates a new thrust vector from the engine data
     /// </summary>
     /// <param name="cords">The location of the engine</param>
-    /// <param name="data">The instance data for the engine</param>
+    /// <param name="thrustMag"></param>
+    /// <param name="rot"></param>
     /// <returns></returns>
-    private ThrustVector GetThrustVector(Vector3Int cords, TileInstanceData data)
+    private ThrustVector GetThrustVector(Vector3Int cords, float thrustMag, Directions rot)
     {
-        Vector2 dir       = TileInfo.Directions[data.Rotation];
-        float   thrustMag = ((EnginePart) tileManager.TileSet.TileVariants[data.ID]).thrust;
-        Vector2 thrust    = dir * thrustMag;
-        Vector2 pos       = tileManager.CordsToPosition(cords);
-        Vector2 posToCom  = pos - com;
-        float   toque     = (posToCom.x * dir.y - posToCom.y * dir.x) * thrustMag;
+        Vector2 dir      = TileInfo.Directions[rot];
+        Vector2 thrust   = dir * thrustMag;
+        Vector2 pos      = tileManager.CordsToPosition(cords);
+        Vector2 posToCom = pos - com;
+        float   toque    = (posToCom.x * dir.y - posToCom.y * dir.x) * thrustMag;
         return new ThrustVector(thrust.x, thrust.y, toque, pos);
     }
 

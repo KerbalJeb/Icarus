@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Analytics;
 using UnityEngine.Tilemaps;
 
 namespace TileSystem
@@ -19,6 +18,7 @@ namespace TileSystem
         public int      layer;
         public Sprite   previewImg;
         public float    mass;
+        public bool     showInPartSelector = true;
 
         [HideInInspector] public ushort id;
 
@@ -30,31 +30,22 @@ namespace TileSystem
 
         public virtual void SetTiles(Vector3Int[] cords, Tilemap tilemap, Directions[] directions)
         {
-            var tiles = new TileBase[cords.Length];
-            for (int i = 0; i < tiles.Length; i++)
-            {
-                tiles[i] = tile;
-            }
+            var tiles                                       = new TileBase[cords.Length];
+            for (var i = 0; i < tiles.Length; i++) tiles[i] = tile;
             tilemap.SetTiles(cords, tiles);
-            
-            for (int i = 0; i < tiles.Length; i++)
+
+            for (var i = 0; i < tiles.Length; i++)
             {
-                var dir = directions[i];
-                if (dir == Directions.Up)
-                {
-                    continue;
-                }
+                Directions dir = directions[i];
+                if (dir == Directions.Up) continue;
                 tilemap.SetTransformMatrix(cords[i], TileInfo.TransformMatrix[dir]);
             }
         }
 
         public virtual void RemoveTiles(Vector3Int[] cords, Tilemap tilemap)
         {
-            var tiles = new TileBase[cords.Length];
-            for (int i = 0; i < tiles.Length; i++)
-            {
-                tiles[i] = null;
-            }
+            var tiles                                       = new TileBase[cords.Length];
+            for (var i = 0; i < tiles.Length; i++) tiles[i] = null;
             tilemap.SetTiles(cords, tiles);
         }
 

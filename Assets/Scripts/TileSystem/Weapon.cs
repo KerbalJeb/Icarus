@@ -26,21 +26,15 @@ namespace TileSystem
             spriteRenderer.sortingOrder = layer + 1;
             tilemap.transform.parent.GetComponent<ShipManager>().WeaponsManager.AddWeapon(cord, this, gameObject);
         }
-        
+
         public override void SetTiles(Vector3Int[] cords, Tilemap tilemap, Directions[] directions)
         {
-            for (int i = 0; i < cords.Length; i++)
-            {
-                Instantiate(cords[i], tilemap, directions[i]);
-            }
+            for (var i = 0; i < cords.Length; i++) Instantiate(cords[i], tilemap, directions[i]);
         }
 
         public override void RemoveTiles(Vector3Int[] cords, Tilemap tilemap)
         {
-            foreach (Vector3Int cord in cords)
-            {
-                Remove(cord, tilemap);
-            }
+            foreach (Vector3Int cord in cords) Remove(cord, tilemap);
         }
 
         public override void Remove(Vector3Int cords, Tilemap tilemap)

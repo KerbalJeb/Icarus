@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8411940686085762701}
   - component: {fileID: 4933092724961279027}
+  - component: {fileID: 8679688337703126697}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: RailGunTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,3 +83,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8679688337703126697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523066076592527933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0124cef2d6f04ef7a377d99031991e64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trace: {fileID: 1597709556753201461, guid: f76d802796b7c0842b759fd0ea56ba00, type: 3}
+  hit: {fileID: 6660707445045970326, guid: 778a0c2342f4f9f499fb73651a18e4bc, type: 3}

@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2573c506ace14b6db63386923536592f, type: 3}
   m_Name: Rock
   m_EditorClassIdentifier: 
-  partName: Basic Armor
+  partName: Rock
   partID: rock1
   category: Hull
-  tile: {fileID: 11400000, guid: fb175a856da45af4482e596806ec1780, type: 2}
+  tile: {fileID: 11400000, guid: 544e74736808926409c753a2ed047fd4, type: 2}
   damageResistance: 1
   maxHealth: 25
   layer: 0
   previewImg: {fileID: 6903120917539983151, guid: 979b4f5c8c98a9b4fa864c8fc9fa70a4, type: 3}
   mass: 1
-  id: 0
+  showInPartSelector: 0
+  id: 3

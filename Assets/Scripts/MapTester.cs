@@ -42,8 +42,7 @@ public class MapTester : MonoBehaviour
     private static IEnumerable<Vector2Int> Square(int x, int y)
     {
         for (int i = -x; i < x; i++)
-        {
-            for (int j = -y; j < y; j++) yield return new Vector2Int(i, j);
-        }
+        for (int j = -y; j < y; j++)
+            yield return new Vector2Int(i, j);
     }
 }

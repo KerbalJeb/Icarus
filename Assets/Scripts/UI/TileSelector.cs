@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TileSystem;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace UI
 {
@@ -9,12 +11,13 @@ namespace UI
     /// </summary>
     public class TileSelector : MonoBehaviour
     {
-        [SerializeField] private TabGroup         tabGroup      = null;
-        [SerializeField] private ShipDesigner     shipDesigner  = null;
-        [SerializeField] private Color            hoverColor    = Color.green;
-        [SerializeField] private Color            selectedColor = Color.white;
-        [SerializeField] private Color            defaultColor  = Color.gray;
-        private readonly         List<TileButton> buttons       = new List<TileButton>();
+        [SerializeField] private TabGroup                            tabGroup;
+        [SerializeField] private ShipDesigner                        shipDesigner;
+        [SerializeField] private Color                               hoverColor    = Color.green;
+        [SerializeField] private Color                               selectedColor = Color.white;
+        [SerializeField] private Color                               defaultColor  = Color.gray;
+        private readonly         List<TileButton>                    buttons       = new List<TileButton>();
+        private                  Action<InputAction.CallbackContext> reset;
 
 
         private TileButton selected;
@@ -23,13 +26,14 @@ namespace UI
         private void Awake()
         {
             tileSet = TileSet.Instance;
+            reset   = context => ResetButtons();
         }
 
         private void OnEnable()
         {
             foreach (BasePart variant in tileSet.TileVariants)
             {
-                if (variant == null) continue;
+                if (variant == null || !variant.showInPartSelector) continue;
                 TabButton  tab    = tabGroup.AddTab(variant.category);
                 TileButton button = tab.AddTile(variant.previewImg, this);
                 button.tileID = variant.partID;
@@ -44,6 +48,13 @@ namespace UI
 
                 button.Image.color = defaultColor;
             }
+
+            InputManager.PlayerActions.Escape.performed += reset;
+        }
+
+        private void OnDisable()
+        {
+            InputManager.PlayerActions.Escape.performed -= reset;
         }
 
         public void OnButtonEnter(TileButton button)
@@ -64,7 +75,7 @@ namespace UI
             shipDesigner.CurrentTileID = selected.tileID;
         }
 
-        private void ResetButtons()
+        public void ResetButtons()
         {
             foreach (TileButton button in buttons) button.Image.color = defaultColor;
         }

@@ -14,8 +14,8 @@ public class WeaponsManager
 {
     private readonly TileManager tileManager;
 
-    private readonly Dictionary<Vector3Int, (Weapon weapon, GameObject gameObject)> weapons =
-        new Dictionary<Vector3Int, (Weapon, GameObject)>();
+    private readonly Dictionary<Vector3Int, (Weapon weapon, GameObject gameObject, WeaponFx fx)> weapons =
+        new Dictionary<Vector3Int, (Weapon weapon, GameObject gameObject, WeaponFx fx)>();
 
     /// <summary>
     ///     The constructor for the weapons manager
@@ -49,7 +49,7 @@ public class WeaponsManager
     /// <param name="turret">The turret GameObject</param>
     public void AddWeapon(Vector3Int cords, Weapon weapon, GameObject turret)
     {
-        weapons[cords] = (weapon, turret);
+        weapons[cords] = (weapon, turret, turret.GetComponent<WeaponFx>());
     }
 
     /// <summary>
@@ -73,12 +73,13 @@ public class WeaponsManager
     {
         foreach (var valueTuple in weapons)
         {
-            (Weapon w, GameObject o) = valueTuple.Value;
+            (Weapon w, GameObject o, WeaponFx fx) = valueTuple.Value;
             Quaternion dir      = o.transform.rotation;
             Vector3    startPos = o.transform.position;
             Vector3    endPos   = startPos + dir * Vector3.up * w.range;
             var        dmg      = new Damage(startPos, endPos, w.baseDamage);
-            dmg.ApplyDamage(new[] {tileManager});
+            Vector3    hitPos   = dmg.ApplyDamage(new[] {tileManager});
+            fx.ApplyFX(startPos, endPos, hitPos);
         }
     }
 }

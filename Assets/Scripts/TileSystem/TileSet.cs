@@ -10,7 +10,7 @@ namespace TileSystem
     public class TileSet
     {
         /// <value>
-        ///     The singleton instace
+        ///     The singleton instance
         /// </value>
         private static TileSet instance;
 
