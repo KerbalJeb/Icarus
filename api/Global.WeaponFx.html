@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Delegate Notify
+    <title>Class WeaponFx
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Delegate Notify
+    <meta name="title" content="Class WeaponFx
    ">
     <meta name="generator" content="docfx 2.44.0.0">
     
@@ -120,6 +120,9 @@
                             <a href="Global.RasterUtil.html" title="RasterUtil" class="">RasterUtil</a>
                           </li>
                           <li class="">
+                            <a href="Global.SceneLoader.html" title="SceneLoader" class="">SceneLoader</a>
+                          </li>
+                          <li class="">
                             <a href="Global.ShipData.html" title="ShipData" class="">ShipData</a>
                           </li>
                           <li class="">
@@ -130,6 +133,9 @@
                           </li>
                           <li class="">
                             <a href="Global.TabGroup.html" title="TabGroup" class="">TabGroup</a>
+                          </li>
+                          <li class="active">
+                            <a href="Global.WeaponFx.html" title="WeaponFx" class="active">WeaponFx</a>
                           </li>
                           <li class="">
                             <a href="Global.WeaponsManager.html" title="WeaponsManager" class="">WeaponsManager</a>
@@ -148,9 +154,6 @@
                           </li>
                           <li class="">
                             <a href="TileSystem.EnginePart.html" title="EnginePart" class="">EnginePart</a>
-                          </li>
-                          <li class="active">
-                            <a href="TileSystem.Notify.html" title="Notify" class="active">Notify</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileInfo.html" title="TileInfo" class="">TileInfo</a>
@@ -208,19 +211,113 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="TileSystem.Notify">
+            <article class="content wrap" id="_content" data-uid="Global.WeaponFx">
   
   
-  <h1 id="TileSystem_Notify" data-uid="TileSystem.Notify" class="text-break">Delegate Notify
+  <h1 id="Global_WeaponFx" data-uid="Global.WeaponFx" class="text-break">Class WeaponFx
   </h1>
   <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="TileSystem.html">TileSystem</a></h6>
-  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
-  <h5 id="TileSystem_Notify_syntax">Syntax</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public delegate void Notify();</code></pre>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">WeaponFx</span></div>
   </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Global.html">Global</a></h6>
+  <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
+  <h5 id="Global_WeaponFx_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class WeaponFx : MonoBehaviour</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  
+  
+  <h4 id="Global_WeaponFx_hit" data-uid="Global.WeaponFx.hit">hit</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameObject hit</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GameObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
+  <h4 id="Global_WeaponFx_trace" data-uid="Global.WeaponFx.trace">trace</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameObject trace</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">GameObject</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  
+  
+  <a id="Global_WeaponFx_ApplyFX_" data-uid="Global.WeaponFx.ApplyFX*"></a>
+  <h4 id="Global_WeaponFx_ApplyFX_Vector3_Vector3_Vector3_" data-uid="Global.WeaponFx.ApplyFX(Vector3,Vector3,Vector3)">ApplyFX(Vector3, Vector3, Vector3)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ApplyFX(Vector3 startPos, Vector3 endPos, Vector3 hitPos)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">startPos</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">endPos</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Vector3</span></td>
+        <td><span class="parametername">hitPos</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           

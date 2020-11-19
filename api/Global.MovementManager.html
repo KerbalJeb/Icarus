@@ -120,6 +120,9 @@
                             <a href="Global.RasterUtil.html" title="RasterUtil" class="">RasterUtil</a>
                           </li>
                           <li class="">
+                            <a href="Global.SceneLoader.html" title="SceneLoader" class="">SceneLoader</a>
+                          </li>
+                          <li class="">
                             <a href="Global.ShipData.html" title="ShipData" class="">ShipData</a>
                           </li>
                           <li class="">
@@ -130,6 +133,9 @@
                           </li>
                           <li class="">
                             <a href="Global.TabGroup.html" title="TabGroup" class="">TabGroup</a>
+                          </li>
+                          <li class="">
+                            <a href="Global.WeaponFx.html" title="WeaponFx" class="">WeaponFx</a>
                           </li>
                           <li class="">
                             <a href="Global.WeaponsManager.html" title="WeaponsManager" class="">WeaponsManager</a>
@@ -148,9 +154,6 @@
                           </li>
                           <li class="">
                             <a href="TileSystem.EnginePart.html" title="EnginePart" class="">EnginePart</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.Notify.html" title="Notify" class="">Notify</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileInfo.html" title="TileInfo" class="">TileInfo</a>
@@ -268,6 +271,48 @@
   </h3>
   
   
+  <a id="Global_MovementManager_AddEngine_" data-uid="Global.MovementManager.AddEngine*"></a>
+  <h4 id="Global_MovementManager_AddEngine_Vector3Int_TileSystem_EnginePart_GameObject_TileSystem_Directions_" data-uid="Global.MovementManager.AddEngine(Vector3Int,TileSystem.EnginePart,GameObject,TileSystem.Directions)">AddEngine(Vector3Int, EnginePart, GameObject, Directions)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddEngine(Vector3Int cord, EnginePart enginePart, GameObject exhaust, Directions rot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3Int</span></td>
+        <td><span class="parametername">cord</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="TileSystem.EnginePart.html">EnginePart</a></td>
+        <td><span class="parametername">enginePart</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">GameObject</span></td>
+        <td><span class="parametername">exhaust</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="TileSystem.Directions.html">Directions</a></td>
+        <td><span class="parametername">rot</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  
   <a id="Global_MovementManager_ApplyThrust_" data-uid="Global.MovementManager.ApplyThrust*"></a>
   <h4 id="Global_MovementManager_ApplyThrust" data-uid="Global.MovementManager.ApplyThrust">ApplyThrust()</h4>
   <div class="markdown level1 summary"></div>
@@ -276,6 +321,33 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public void ApplyThrust()</code></pre>
   </div>
+  
+  
+  <a id="Global_MovementManager_RemoveEngine_" data-uid="Global.MovementManager.RemoveEngine*"></a>
+  <h4 id="Global_MovementManager_RemoveEngine_Vector3Int_" data-uid="Global.MovementManager.RemoveEngine(Vector3Int)">RemoveEngine(Vector3Int)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveEngine(Vector3Int cord)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Vector3Int</span></td>
+        <td><span class="parametername">cord</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   
   
   <a id="Global_MovementManager_Steer_" data-uid="Global.MovementManager.Steer*"></a>
@@ -306,17 +378,6 @@ components of the vectors should be in the range [-1,1]</p>
       </tr>
     </tbody>
   </table>
-  
-  
-  <a id="Global_MovementManager_UpdatePhysics_" data-uid="Global.MovementManager.UpdatePhysics*"></a>
-  <h4 id="Global_MovementManager_UpdatePhysics" data-uid="Global.MovementManager.UpdatePhysics">UpdatePhysics()</h4>
-  <div class="markdown level1 summary"><p>Gets the engine information from the TileManger and updates the flight model accordingly</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void UpdatePhysics()</code></pre>
-  </div>
 </article>
           </div>
           

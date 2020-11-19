@@ -120,6 +120,9 @@
                             <a href="Global.RasterUtil.html" title="RasterUtil" class="">RasterUtil</a>
                           </li>
                           <li class="">
+                            <a href="Global.SceneLoader.html" title="SceneLoader" class="">SceneLoader</a>
+                          </li>
+                          <li class="">
                             <a href="Global.ShipData.html" title="ShipData" class="">ShipData</a>
                           </li>
                           <li class="">
@@ -130,6 +133,9 @@
                           </li>
                           <li class="">
                             <a href="Global.TabGroup.html" title="TabGroup" class="">TabGroup</a>
+                          </li>
+                          <li class="">
+                            <a href="Global.WeaponFx.html" title="WeaponFx" class="">WeaponFx</a>
                           </li>
                           <li class="">
                             <a href="Global.WeaponsManager.html" title="WeaponsManager" class="">WeaponsManager</a>
@@ -148,9 +154,6 @@
                           </li>
                           <li class="">
                             <a href="TileSystem.EnginePart.html" title="EnginePart" class="">EnginePart</a>
-                          </li>
-                          <li class="">
-                            <a href="TileSystem.Notify.html" title="Notify" class="">Notify</a>
                           </li>
                           <li class="">
                             <a href="TileSystem.TileInfo.html" title="TileInfo" class="">TileInfo</a>
@@ -1050,7 +1053,7 @@ and Y cords correspond to the X and Y position of the tile and Z is used for the
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public event Notify UpdatePhysics</code></pre>
+    <pre><code class="lang-csharp hljs">public event Action UpdatePhysics</code></pre>
   </div>
   <h5 class="eventType">Event Type</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1062,7 +1065,7 @@ and Y cords correspond to the X and Y position of the tile and Z is used for the
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="TileSystem.Notify.html">Notify</a></td>
+        <td><span class="xref">Action</span></td>
         <td><p>Called everytime the physics model is updated (tile is destroyed)</p>
 </td>
       </tr>
