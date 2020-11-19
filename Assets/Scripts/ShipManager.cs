@@ -70,14 +70,16 @@ public class ShipManager : MonoBehaviour
     private void OnEnable()
     {
         tileManager.UpdatePhysics                 += UpdatePhysics;
-        InputManager.PlayerActions.Fire.performed += Fire;
+        InputManager.PlayerActions.Fire.performed += StartFiring;
+        InputManager.PlayerActions.Fire.canceled  += StopFiring;
         InputManager.PlayerActions.Move.performed += SteerShip;
     }
 
     private void OnDisable()
     {
         tileManager.UpdatePhysics                 -= UpdatePhysics;
-        InputManager.PlayerActions.Fire.performed -= Fire;
+        InputManager.PlayerActions.Fire.performed -= StartFiring;
+        InputManager.PlayerActions.Fire.canceled  -= StopFiring;
         InputManager.PlayerActions.Move.performed -= SteerShip;
     }
 
@@ -102,9 +104,15 @@ public class ShipManager : MonoBehaviour
     ///     Fires all the weapons attached to the ship
     /// </summary>
     /// <param name="context">Needed for input system to work, but not used in function</param>
-    private void Fire(InputAction.CallbackContext context)
+    private void StartFiring(InputAction.CallbackContext context)
     {
         if (!PhysicsEnabled || InputManager.IsMouseOverClickableUI()) return;
-        WeaponsManager.Fire();
+        WeaponsManager.Firing = true;
+        foreach (Vector3Int pos in WeaponsManager.WeaponPos) StartCoroutine(WeaponsManager.FireRoutine(pos));
+    }
+
+    private void StopFiring(InputAction.CallbackContext context)
+    {
+        WeaponsManager.Firing = false;
     }
 }

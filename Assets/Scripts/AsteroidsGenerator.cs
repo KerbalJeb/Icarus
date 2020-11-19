@@ -37,8 +37,10 @@ public class AsteroidsGenerator
         var pointsList = new List<Vector3Int>();
 
         foreach (Vector3Int vector3Int in boundsInt.allPositionsWithin)
+        {
             if (InsideAsteroid(vector3Int))
                 pointsList.Add(vector3Int);
+        }
 
         points = pointsList.ToArray();
 

@@ -416,8 +416,10 @@ namespace TileSystem
                 else
                 {
                     if (island.Count <= minIslandSize)
+                    {
                         foreach (Vector3Int cord in island)
                             RemoveTile(cord);
+                    }
 
                     Transform  gridTransform = grid.transform;
                     GameObject obj           = pool.GetObject();

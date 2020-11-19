@@ -44,4 +44,13 @@ public static class RasterUtil
             }
         }
     }
+
+    public static Vector2 FindNearestPointOnLine(Vector2 origin, Vector2 direction, Vector2 point)
+    {
+        direction.Normalize();
+        Vector2 lhs = point - origin;
+
+        float dotP = Vector2.Dot(lhs, direction);
+        return origin + direction * dotP;
+    }
 }

@@ -92,6 +92,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "CancelPlace",
+                    "type": "Button",
+                    "id": "d6989afe-79b7-42d4-9b74-1de9991da788",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -345,6 +353,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "696f9b4c-045c-4421-ba95-b65cbe4798cd",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CancelPlace",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

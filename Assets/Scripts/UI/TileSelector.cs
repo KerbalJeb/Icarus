@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TileSystem;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace UI
 {
@@ -11,13 +9,12 @@ namespace UI
     /// </summary>
     public class TileSelector : MonoBehaviour
     {
-        [SerializeField] private TabGroup                            tabGroup;
-        [SerializeField] private ShipDesigner                        shipDesigner;
-        [SerializeField] private Color                               hoverColor    = Color.green;
-        [SerializeField] private Color                               selectedColor = Color.white;
-        [SerializeField] private Color                               defaultColor  = Color.gray;
-        private readonly         List<TileButton>                    buttons       = new List<TileButton>();
-        private                  Action<InputAction.CallbackContext> reset;
+        [SerializeField] private TabGroup         tabGroup;
+        [SerializeField] private ShipDesigner     shipDesigner;
+        [SerializeField] private Color            hoverColor    = Color.green;
+        [SerializeField] private Color            selectedColor = Color.white;
+        [SerializeField] private Color            defaultColor  = Color.gray;
+        private readonly         List<TileButton> buttons       = new List<TileButton>();
 
 
         private TileButton selected;
@@ -26,7 +23,6 @@ namespace UI
         private void Awake()
         {
             tileSet = TileSet.Instance;
-            reset   = context => ResetButtons();
         }
 
         private void OnEnable()
@@ -38,23 +34,8 @@ namespace UI
                 TileButton button = tab.AddTile(variant.previewImg, this);
                 button.tileID = variant.partID;
                 buttons.Add(button);
-
-                if (selected is null)
-                {
-                    selected             = button;
-                    selected.Image.color = selectedColor;
-                    continue;
-                }
-
                 button.Image.color = defaultColor;
             }
-
-            InputManager.PlayerActions.Escape.performed += reset;
-        }
-
-        private void OnDisable()
-        {
-            InputManager.PlayerActions.Escape.performed -= reset;
         }
 
         public void OnButtonEnter(TileButton button)

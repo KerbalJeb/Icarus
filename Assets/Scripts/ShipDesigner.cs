@@ -23,10 +23,9 @@ public class ShipDesigner : MonoBehaviour
     [SerializeField] private Color          addingColor   = Color.white;
     [SerializeField] private Color          removingColor = Color.white;
     [SerializeField] private Sprite         blankTile;
-    private                  bool           activelyPlacing;
-    private                  string         activeTileID = "default_hull";
+    [SerializeField] private TileSelector   tileSelector;
 
-
+    private string     activeTileID  = "default_hull";
     private string     currentTileID = "default_hull";
     private string     designName    = "Unnamed Ship";
     private Directions direction     = Directions.Up;
@@ -35,14 +34,17 @@ public class ShipDesigner : MonoBehaviour
     private string     shipSavePath;
     private TileSet    tileSet;
 
+    public bool ActivelyPlacingBlocks { get; private set; }
+
+
     public string CurrentTileID
     {
         get => currentTileID;
         set
         {
             ChangeMode(value != "null");
-            currentTileID   = value;
-            activelyPlacing = true;
+            currentTileID         = value;
+            ActivelyPlacingBlocks = true;
         }
     }
 
@@ -61,13 +63,13 @@ public class ShipDesigner : MonoBehaviour
         {
             tileManager.LoadFromJson(ShipData.ShipPath);
             designName = Path.GetFileName(ShipData.ShipPath);
-            designName.Remove(designName.Length - 5);
+            designName = designName.Remove(designName.Length - 5);
         }
     }
 
     private void Update()
     {
-        if (!activelyPlacing) return;
+        if (!ActivelyPlacingBlocks) return;
         Vector2Control mousePos = Mouse.current.position;
         Vector3        worldPos = cam.ScreenToWorldPoint(new Vector3(mousePos.x.ReadValue(), mousePos.y.ReadValue()));
         Vector3Int     cords    = tileManager.PositionToCords(worldPos);
@@ -98,6 +100,8 @@ public class ShipDesigner : MonoBehaviour
         InputManager.PlayerActions.RotateTileLeft.performed  += RotateLeft;
         InputManager.PlayerActions.RotateTileRight.performed += RotateRight;
         InputManager.PlayerActions.Escape.performed          += DisablePlacing;
+        InputManager.PlayerActions.CancelPlace.performed     += DisablePlacing;
+        tileSelector.ResetButtons();
     }
 
     private void OnDisable()
@@ -108,6 +112,7 @@ public class ShipDesigner : MonoBehaviour
         InputManager.PlayerActions.RotateTileLeft.performed  -= RotateLeft;
         InputManager.PlayerActions.RotateTileRight.performed -= RotateRight;
         InputManager.PlayerActions.Escape.performed          -= DisablePlacing;
+        InputManager.PlayerActions.CancelPlace.performed     -= DisablePlacing;
     }
 
     private void ChangeMode(bool adding)
@@ -206,12 +211,17 @@ public class ShipDesigner : MonoBehaviour
 
     private void DeleteBlocks(InputAction.CallbackContext context)
     {
-        ChangeMode(currentTileID == "null");
+        if (ActivelyPlacingBlocks)
+            ChangeMode(currentTileID == "null");
+        else
+            ChangeMode(false);
+        ActivelyPlacingBlocks = true;
     }
 
     private void DisablePlacing(InputAction.CallbackContext context)
     {
-        activelyPlacing   = false;
-        previewImg.sprite = null;
+        ActivelyPlacingBlocks = false;
+        previewImg.sprite     = null;
+        tileSelector.ResetButtons();
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using TileSystem;
 using UnityEngine;
@@ -12,10 +14,15 @@ using UnityEngine;
 /// </summary>
 public class WeaponsManager
 {
-    private readonly TileManager tileManager;
+    private readonly TileManager                  tileManager;
+    private readonly Dictionary<Vector3Int, bool> weaponCoroutineStatues = new Dictionary<Vector3Int, bool>();
+    private readonly List<Vector3Int>             weaponPos              = new List<Vector3Int>();
 
     private readonly Dictionary<Vector3Int, (Weapon weapon, GameObject gameObject, WeaponFx fx)> weapons =
         new Dictionary<Vector3Int, (Weapon weapon, GameObject gameObject, WeaponFx fx)>();
+
+    public bool Firing = false;
+
 
     /// <summary>
     ///     The constructor for the weapons manager
@@ -25,6 +32,8 @@ public class WeaponsManager
     {
         tileManager = manager;
     }
+
+    public ReadOnlyCollection<Vector3Int> WeaponPos => weaponPos.AsReadOnly();
 
     /// <summary>
     ///     Updates the rotations of the weapons turrets
@@ -49,7 +58,9 @@ public class WeaponsManager
     /// <param name="turret">The turret GameObject</param>
     public void AddWeapon(Vector3Int cords, Weapon weapon, GameObject turret)
     {
-        weapons[cords] = (weapon, turret, turret.GetComponent<WeaponFx>());
+        weapons[cords]                = (weapon, turret, turret.GetComponent<WeaponFx>());
+        weaponCoroutineStatues[cords] = false;
+        weaponPos.Add(cords);
     }
 
     /// <summary>
@@ -62,24 +73,29 @@ public class WeaponsManager
         {
             Object.Destroy(pair.Value.gameObject);
             weapons.Remove(cords);
+            weaponCoroutineStatues.Remove(cords);
+            weaponPos.Remove(cords);
             return;
         }
     }
 
-    /// <summary>
-    ///     Fires all weapons in the direction it is currently facing
-    /// </summary>
-    public void Fire()
+    public IEnumerator FireRoutine(Vector3Int cords)
     {
-        foreach (var valueTuple in weapons)
+        if (weaponCoroutineStatues[cords]) yield break;
+
+        (Weapon w, GameObject o, WeaponFx fx) = weapons[cords];
+        weaponCoroutineStatues[cords]         = true;
+        while (Firing)
         {
-            (Weapon w, GameObject o, WeaponFx fx) = valueTuple.Value;
             Quaternion dir      = o.transform.rotation;
             Vector3    startPos = o.transform.position;
             Vector3    endPos   = startPos + dir * Vector3.up * w.range;
             var        dmg      = new Damage(startPos, endPos, w.baseDamage);
-            Vector3    hitPos   = dmg.ApplyDamage(new[] {tileManager});
-            fx.ApplyFX(startPos, endPos, hitPos);
+            (Vector3 hitPos, Vector3 endHitPos) = dmg.ApplyDamage(new[] {tileManager});
+            fx.ApplyFX(startPos, endHitPos, hitPos);
+            yield return new WaitForSeconds(w.firePeriod);
         }
+
+        weaponCoroutineStatues[cords] = false;
     }
 }

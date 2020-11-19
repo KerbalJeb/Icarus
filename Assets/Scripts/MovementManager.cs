@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MathNet.Numerics.LinearAlgebra;
 using TileSystem;
 using UnityEngine;
@@ -10,27 +11,30 @@ using Object = UnityEngine.Object;
 /// </summary>
 public class MovementManager
 {
-    private const    int              OutputStateDim = 3;
-    private readonly List<GameObject> exhaustObjects = new List<GameObject>();
-    private readonly TileManager      tileManager;
-    private readonly Transform        transform;
-
-
-    private          float[]                     a;
-    private          Vector2                     com;
-    private          Vector3                     currentInput;
-    private readonly Dictionary<Vector3Int, int> engineIDs = new Dictionary<Vector3Int, int>();
-    private          Vector<float>               engineInputs;
+    private const    int                         OutputStateDim         = 3;
+    private readonly Dictionary<Vector3Int, int> engineIDs              = new Dictionary<Vector3Int, int>();
     private readonly List<ThrustVector>          engineVectors          = new List<ThrustVector>();
+    private readonly List<GameObject>            exhaustObjects         = new List<GameObject>();
     private readonly List<ParticleSystem>        exhaustParticleSystems = new List<ParticleSystem>();
-    private          float                       goalRot;
-    private          int                         n;
-    private          Vector3                     netThrust;
-    private          Rigidbody2D                 rb2D;
-    private          Matrix<float>               thrustMatrix;
 
     private readonly Dictionary<Directions, (Vector3 netThrust, Vector<float> values)> thrustProfiles =
         new Dictionary<Directions, (Vector3 netThrust, Vector<float> values)>();
+
+    private readonly TileManager tileManager;
+    private readonly Transform   transform;
+
+
+    private float[]       a;
+    private Vector2       com;
+    private Vector3       currentInput;
+    private Vector<float> engineInputs;
+    private float         goalRot;
+    private int           n;
+    private Vector3       netThrust;
+
+    private bool          physics;
+    private Rigidbody2D   rb2D;
+    private Matrix<float> thrustMatrix;
 
 
     /// <summary>
@@ -48,6 +52,7 @@ public class MovementManager
 
     public void ApplyThrust()
     {
+        if (!physics) return;
         rb2D.AddTorque(netThrust.z);
         rb2D.AddRelativeForce(netThrust);
         if (currentInput.z == 0) StabilizeRotation();
@@ -106,7 +111,6 @@ public class MovementManager
         exhaustObjects.Add(exhaust);
         exhaustParticleSystems.Add(particles);
         engineVectors.Add(thrustVector);
-
         engineIDs[cord] = n;
         n++;
 
@@ -115,7 +119,14 @@ public class MovementManager
 
     private void RebuildFlightModel()
     {
-        a            = new float[n * m]; // Column Major form
+        a = new float[n * m]; // Column Major form
+        if (n <= 0)
+        {
+            physics = false;
+            return;
+        }
+
+        physics      = true;
         engineInputs = Vector<float>.Build.Dense(n);
 
         thrustMatrix = Matrix<float>.Build.Dense(m, n, a);
@@ -203,6 +214,8 @@ public class MovementManager
         exhaustObjects.RemoveAt(id);
         exhaustParticleSystems.RemoveAt(id);
         n--;
+        var cords = engineIDs.Where(engineID => engineID.Value > id).Select(engineID => engineID.Key).ToArray();
+        foreach (Vector3Int i in cords) engineIDs[i]--;
         RebuildFlightModel();
     }
 

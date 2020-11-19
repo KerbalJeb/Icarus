@@ -10,7 +10,7 @@ namespace TileSystem
         public GameObject turretTemplate;
         public float      baseDamage = 500f;
         public float      range      = 50f;
-
+        public float      firePeriod = 1f;
 
         public override void Instantiate(Vector3Int cord, Tilemap tilemap, Directions direction)
         {

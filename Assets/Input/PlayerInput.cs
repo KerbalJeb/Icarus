@@ -114,6 +114,14 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""CancelPlace"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6989afe-79b7-42d4-9b74-1de9991da788"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -367,6 +375,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""696f9b4c-045c-4421-ba95-b65cbe4798cd"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CancelPlace"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -955,6 +974,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_RotateTileRight = m_Player.FindAction("RotateTileRight", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
+        m_Player_CancelPlace = m_Player.FindAction("CancelPlace", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1037,6 +1057,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RotateTileRight;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Escape;
+    private readonly InputAction m_Player_CancelPlace;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -1052,6 +1073,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @RotateTileRight => m_Wrapper.m_Player_RotateTileRight;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
+        public InputAction @CancelPlace => m_Wrapper.m_Player_CancelPlace;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1094,6 +1116,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Escape.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
                 @Escape.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
                 @Escape.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnEscape;
+                @CancelPlace.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancelPlace;
+                @CancelPlace.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancelPlace;
+                @CancelPlace.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCancelPlace;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1131,6 +1156,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Escape.started += instance.OnEscape;
                 @Escape.performed += instance.OnEscape;
                 @Escape.canceled += instance.OnEscape;
+                @CancelPlace.started += instance.OnCancelPlace;
+                @CancelPlace.performed += instance.OnCancelPlace;
+                @CancelPlace.canceled += instance.OnCancelPlace;
             }
         }
     }
@@ -1298,6 +1326,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnRotateTileRight(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
+        void OnCancelPlace(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
