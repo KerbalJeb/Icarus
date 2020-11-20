@@ -212,8 +212,9 @@ public class ShipDesigner : MonoBehaviour
     /// </summary>
     public void LoadShipTester()
     {
-        if (ShipData.ShipPath is null) return;
+        //to do: add pop-up prompting to save an unsaved ship to allow testing of ship
         TrySave(true);
+        if (ShipData.ShipPath is null) return;
         SceneManager.LoadScene("Scenes/ShipTest");
     }
 
