@@ -26,7 +26,14 @@ namespace UI
 
         public void OnDrag(PointerEventData eventData)
         {
-            rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+            if (eventData.position.x > 0 && eventData.position.x < Screen.width)
+            {
+                if (eventData.position.y > 0 && eventData.position.y < Screen.height)
+                {
+                    rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+                }
+                
+            }
         }
     }
 }
