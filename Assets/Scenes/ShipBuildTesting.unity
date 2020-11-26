@@ -1529,7 +1529,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 33002940}
   m_HandleRect: {fileID: 33002938}
   m_Direction: 2
-  m_Value: 1.0000441
+  m_Value: 1.0000427
   m_Size: 0.9687849
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -3844,6 +3844,7 @@ MonoBehaviour:
   nameConflictPopUp: {fileID: 1476506735}
   savePopUp: {fileID: 1312446879}
   shipError: {fileID: 389806656}
+  shipErrorText: {fileID: 2022959423}
   shipSelector: {fileID: 618696370}
   inputField: {fileID: 1550492880}
   previewImg: {fileID: 832154889}
@@ -6014,7 +6015,7 @@ GameObject:
   - component: {fileID: 2022959424}
   - component: {fileID: 2022959423}
   m_Layer: 0
-  m_Name: Msg (1)
+  m_Name: errorMsg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
