@@ -1166,6 +1166,19 @@ references:
   isSpec: "True"
   fullName: TileSystem.TileManager.Awake
   nameWithType: TileManager.Awake
+- uid: TileSystem.TileManager.CenterOfMass
+  name: CenterOfMass
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_CenterOfMass
+  commentId: P:TileSystem.TileManager.CenterOfMass
+  fullName: TileSystem.TileManager.CenterOfMass
+  nameWithType: TileManager.CenterOfMass
+- uid: TileSystem.TileManager.CenterOfMass*
+  name: CenterOfMass
+  href: api/TileSystem.TileManager.html#TileSystem_TileManager_CenterOfMass_
+  commentId: Overload:TileSystem.TileManager.CenterOfMass
+  isSpec: "True"
+  fullName: TileSystem.TileManager.CenterOfMass
+  nameWithType: TileManager.CenterOfMass
 - uid: TileSystem.TileManager.CordsToPosition(Vector3Int)
   name: CordsToPosition(Vector3Int)
   href: api/TileSystem.TileManager.html#TileSystem_TileManager_CordsToPosition_Vector3Int_
