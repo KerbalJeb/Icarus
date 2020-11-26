@@ -17,6 +17,7 @@ public class ShipDesigner : MonoBehaviour
     [SerializeField] private Camera         cam;
     [SerializeField] private PopUp          nameConflictPopUp;
     [SerializeField] private PopUp          savePopUp;
+    [SerializeField] private PopUp          shipError;
     [SerializeField] private TextList       shipSelector;
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private SpriteRenderer previewImg;
@@ -215,6 +216,12 @@ public class ShipDesigner : MonoBehaviour
         //to do: add pop-up prompting to save an unsaved ship to allow testing of ship
         TrySave(true);
         if (ShipData.ShipPath is null) return;
+        if (tileManager.FindIslands().Count > 1)
+        {
+            shipError.Open();
+            return;
+        }
+
         SceneManager.LoadScene("Scenes/ShipTest");
     }
 
