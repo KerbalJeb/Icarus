@@ -10,6 +10,8 @@ using UnityEngine;
 /// </summary>
 public class MapTester : MonoBehaviour
 {
+    [SerializeField] private int startSize = 50;
+
     /// <value>
     ///     The template to use for the tilemap
     /// </value>
@@ -30,7 +32,7 @@ public class MapTester : MonoBehaviour
     private void Start()
     {
         mapGenerator = new MapGenerator(0, tileBase);
-        mapGenerator.Generate(Square(10, 10), tilemap, transform, pool);
+        mapGenerator.Generate(Square(startSize, startSize), tilemap, transform, pool);
     }
 
     /// <summary>

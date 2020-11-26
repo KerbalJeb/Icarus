@@ -11,11 +11,12 @@ using Object = UnityEngine.Object;
 /// </summary>
 public class MovementManager
 {
-    private const    int                         OutputStateDim         = 3;
-    private readonly Dictionary<Vector3Int, int> engineIDs              = new Dictionary<Vector3Int, int>();
-    private readonly List<ThrustVector>          engineVectors          = new List<ThrustVector>();
-    private readonly List<GameObject>            exhaustObjects         = new List<GameObject>();
-    private readonly List<ParticleSystem>        exhaustParticleSystems = new List<ParticleSystem>();
+    private const    int                                          OutputStateDim = 3;
+    private readonly Dictionary<Vector3Int, int>                  engineIDs = new Dictionary<Vector3Int, int>();
+    private readonly List<(EnginePart part, Direction direction)> engines = new List<(EnginePart, Direction)>();
+    private readonly List<ThrustVector>                           engineVectors = new List<ThrustVector>();
+    private readonly List<GameObject>                             exhaustObjects = new List<GameObject>();
+    private readonly List<ParticleSystem>                         exhaustParticleSystems = new List<ParticleSystem>();
 
     private readonly Dictionary<Direction, (Vector3 netThrust, Vector<float> values)> thrustProfiles =
         new Dictionary<Direction, (Vector3 netThrust, Vector<float> values)>();
@@ -109,31 +110,38 @@ public class MovementManager
     /// <param name="rot">The rotation of the engine</param>
     public void AddEngine(Vector3Int cord, EnginePart enginePart, GameObject exhaust, Direction rot)
     {
-        if (rb2D == null) rb2D = tileManager.Rigidbody2D;
-        com = rb2D.centerOfMass;
-
-        ThrustVector thrustVector = GetThrustVector(cord, enginePart.thrust, rot);
-        var          particles    = exhaust.GetComponent<ParticleSystem>();
+        var particles = exhaust.GetComponent<ParticleSystem>();
         particles.Stop();
+        engines.Add((enginePart, rot));
         exhaustObjects.Add(exhaust);
         exhaustParticleSystems.Add(particles);
-        engineVectors.Add(thrustVector);
         engineIDs[cord] = n;
         n++;
-
-        RebuildFlightModel();
     }
 
-    private void RebuildFlightModel()
+    public void RebuildFlightModel()
     {
-        a = new float[n * m]; // Column Major form
+        if (rb2D == null) rb2D = tileManager.Rigidbody2D;
+        com = rb2D.centerOfMass;
+        a   = new float[n * m]; // Column Major form
         if (n <= 0)
         {
             physics = false;
             return;
         }
 
-        physics      = true;
+        physics = true;
+
+        var thrustThrustVectorArray = new ThrustVector[n];
+        engineVectors.Clear();
+
+        foreach (var engineID in engineIDs)
+        {
+            int        ID  = engineID.Value;
+            Vector3Int pos = engineID.Key;
+            engineVectors.Add(GetThrustVector(pos, engines[ID].part.thrust, engines[ID].direction));
+        }
+
         engineInputs = Vector<float>.Build.Dense(n);
 
         thrustMatrix = Matrix<float>.Build.Dense(m, n, a);
@@ -224,6 +232,7 @@ public class MovementManager
         Object.Destroy(exhaustObjects[id]);
         exhaustObjects.RemoveAt(id);
         exhaustParticleSystems.RemoveAt(id);
+        engines.RemoveAt(id);
         n--;
         var cords = engineIDs.Where(engineID => engineID.Value > id).Select(engineID => engineID.Key).ToArray();
         foreach (Vector3Int i in cords) engineIDs[i]--;

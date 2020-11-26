@@ -556,7 +556,7 @@ GameObject:
   - component: {fileID: 544279983}
   - component: {fileID: 544279982}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: MapGrid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,6 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec81499383b84e26b980e26fb897eed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startSize: 10
   tilemap: {fileID: 2540413421306311634, guid: 2efa00ba12971f849a1949be4baaea0d, type: 3}
   tileBase: {fileID: 11400000, guid: 92ee62c6a5f6d6844850870d1c34002e, type: 2}
   pool: {fileID: 968543462}

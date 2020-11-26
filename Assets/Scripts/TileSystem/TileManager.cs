@@ -559,6 +559,7 @@ namespace TileSystem
             }
 
             PhysicsModelChanged = true;
+            RecalculateCom();
         }
 
         [Serializable]

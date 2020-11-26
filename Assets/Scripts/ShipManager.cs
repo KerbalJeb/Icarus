@@ -105,6 +105,7 @@ public class ShipManager : MonoBehaviour
     /// </summary>
     private void UpdatePhysics()
     {
+        MovementManager.RebuildFlightModel();
     }
 
     /// <summary>
