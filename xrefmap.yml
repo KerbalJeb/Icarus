@@ -1509,6 +1509,19 @@ references:
   commentId: F:TileSystem.Weapon.baseDamage
   fullName: TileSystem.Weapon.baseDamage
   nameWithType: Weapon.baseDamage
+- uid: TileSystem.Weapon.Fire(Transform,WeaponFx,TileSystem.TileManager)
+  name: Fire(Transform, WeaponFx, TileManager)
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_Fire_Transform_WeaponFx_TileSystem_TileManager_
+  commentId: M:TileSystem.Weapon.Fire(Transform,WeaponFx,TileSystem.TileManager)
+  fullName: TileSystem.Weapon.Fire(Transform, WeaponFx, TileSystem.TileManager)
+  nameWithType: Weapon.Fire(Transform, WeaponFx, TileManager)
+- uid: TileSystem.Weapon.Fire*
+  name: Fire
+  href: api/TileSystem.Weapon.html#TileSystem_Weapon_Fire_
+  commentId: Overload:TileSystem.Weapon.Fire
+  isSpec: "True"
+  fullName: TileSystem.Weapon.Fire
+  nameWithType: Weapon.Fire
 - uid: TileSystem.Weapon.firePeriod
   name: firePeriod
   href: api/TileSystem.Weapon.html#TileSystem_Weapon_firePeriod
@@ -1616,6 +1629,19 @@ references:
   isSpec: "True"
   fullName: UI.DraggableUI.OnDrag
   nameWithType: DraggableUI.OnDrag
+- uid: UI.DraggableUI.OnPointerDown(PointerEventData)
+  name: OnPointerDown(PointerEventData)
+  href: api/UI.DraggableUI.html#UI_DraggableUI_OnPointerDown_PointerEventData_
+  commentId: M:UI.DraggableUI.OnPointerDown(PointerEventData)
+  fullName: UI.DraggableUI.OnPointerDown(PointerEventData)
+  nameWithType: DraggableUI.OnPointerDown(PointerEventData)
+- uid: UI.DraggableUI.OnPointerDown*
+  name: OnPointerDown
+  href: api/UI.DraggableUI.html#UI_DraggableUI_OnPointerDown_
+  commentId: Overload:UI.DraggableUI.OnPointerDown
+  isSpec: "True"
+  fullName: UI.DraggableUI.OnPointerDown
+  nameWithType: DraggableUI.OnPointerDown
 - uid: UI.FixedGridLayout
   name: FixedGridLayout
   href: api/UI.FixedGridLayout.html

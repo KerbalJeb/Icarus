@@ -227,12 +227,13 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><span class="xref">IDragHandler</span></div>
+    <div><span class="xref">IPointerDownHandler</span></div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="UI.html">UI</a></h6>
   <h6><strong>Assembly</strong>: cs.temp.dll.dll</h6>
   <h5 id="UI_DraggableUI_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class DraggableUI : MonoBehaviour, IDragHandler</code></pre>
+    <pre><code class="lang-csharp hljs">public class DraggableUI : MonoBehaviour, IDragHandler, IPointerDownHandler</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
@@ -263,9 +264,39 @@
       </tr>
     </tbody>
   </table>
+  
+  
+  <a id="UI_DraggableUI_OnPointerDown_" data-uid="UI.DraggableUI.OnPointerDown*"></a>
+  <h4 id="UI_DraggableUI_OnPointerDown_PointerEventData_" data-uid="UI.DraggableUI.OnPointerDown(PointerEventData)">OnPointerDown(PointerEventData)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnPointerDown(PointerEventData eventData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">PointerEventData</span></td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="implements">Implements</h3>
   <div>
       <span class="xref">IDragHandler</span>
+  </div>
+  <div>
+      <span class="xref">IPointerDownHandler</span>
   </div>
 </article>
           </div>
