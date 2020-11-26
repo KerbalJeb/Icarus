@@ -95,12 +95,7 @@ public class WeaponsManager
         weaponCoroutineStatues[cords]         = true;
         while (Firing)
         {
-            Quaternion dir      = o.transform.rotation;
-            Vector3    startPos = o.transform.position;
-            Vector3    endPos   = startPos + dir * Vector3.up * w.range;
-            var        dmg      = new Damage(startPos, endPos, w.baseDamage);
-            (Vector3 hitPos, Vector3 endHitPos) = dmg.ApplyDamage(new[] {tileManager});
-            fx.ApplyFX(startPos, endHitPos, hitPos);
+            w.Fire(o.transform, fx, tileManager);
             yield return new WaitForSeconds(w.firePeriod);
         }
 

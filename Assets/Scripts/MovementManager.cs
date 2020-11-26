@@ -236,7 +236,6 @@ public class MovementManager
         n--;
         var cords = engineIDs.Where(engineID => engineID.Value > id).Select(engineID => engineID.Key).ToArray();
         foreach (Vector3Int i in cords) engineIDs[i]--;
-        RebuildFlightModel();
     }
 
     /// <summary>
@@ -248,6 +247,7 @@ public class MovementManager
     /// </param>
     public void Steer(Vector3 thrust)
     {
+        if (rb2D == null || !physics) return;
         SetThrust(thrust);
         currentInput = thrust;
         if (thrust.z == 0) goalRot = rb2D.rotation;
@@ -262,6 +262,7 @@ public class MovementManager
     /// </param>
     private void SetThrust(Vector3 thrust)
     {
+        if (n <= 0 || !physics) return;
         var direction = GetRotations(thrust);
         engineInputs = Vector<float>.Build.Dense(n, 0);
         foreach ((Direction tileRotation, float mag) in direction)

@@ -84,5 +84,15 @@ namespace TileSystem
             var shipManager = tilemap.transform.parent.GetComponent<ShipManager>();
             shipManager.WeaponsManager.RemoveWeapon(cords);
         }
+
+        public void Fire(Transform transform, WeaponFx fx, TileManager tileManager)
+        {
+            Quaternion dir      = transform.rotation;
+            Vector3    startPos = transform.position;
+            Vector3    endPos   = startPos + dir * Vector3.up * range;
+            var        dmg      = new Damage(startPos, endPos, baseDamage);
+            (Vector3 hitPos, Vector3 endHitPos) = dmg.ApplyDamage(new[] {tileManager});
+            fx.ApplyFX(startPos, endHitPos, hitPos);
+        }
     }
 }

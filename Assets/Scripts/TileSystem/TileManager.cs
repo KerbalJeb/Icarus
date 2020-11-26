@@ -554,6 +554,12 @@ namespace TileSystem
             ResetTiles();
             foreach (SerializableTileData data in grid)
             {
+                if (!TileSet.Instance.VariantNameToID.ContainsKey(data.tileID))
+                {
+                    Debug.Log(data.tileID + "Not Found");
+                    continue;
+                }
+
                 BasePart basePart = TileSet.Instance.VariantNameToID[data.tileID];
                 SetTile(data.pos, basePart, data.dir);
             }

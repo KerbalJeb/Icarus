@@ -47,6 +47,12 @@ TextureImporter:
   - first:
       213: 7403916245691689920
     second: ShipTiles_8
+  - first:
+      213: -5388844204953033000
+    second: ShipTiles_6
+  - first:
+      213: 7476898605151408717
+    second: ShipTiles_7
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -142,7 +148,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -163,7 +169,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -184,7 +190,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -205,7 +211,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -232,8 +238,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2df83d70abdfc080800000000000000
-      internalID: -9164865234333532883
+      spriteID: 8d62ad53fbaf635b0800000000000000
+      internalID: -5388844204953033000
       vertices: []
       indices: 
       edges: []
@@ -247,14 +253,35 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f78d5eb063e9cd6c0800000000000000
-      internalID: -4117242004358440833
+      spriteID: d42d9a5caa743c760800000000000000
+      internalID: 7476898605151408717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShipTiles_8
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cb623b099effb660800000000000000
+      internalID: 7403916245691689920
       vertices: []
       indices: 
       edges: []

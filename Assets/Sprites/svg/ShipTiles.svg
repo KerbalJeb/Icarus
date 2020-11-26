@@ -1,48 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:export-ydpi="95.999992"
-   inkscape:export-xdpi="95.999992"
-   inkscape:export-filename="C:\Users\Ben\Documents\ECE356\Icarus\Assets\Tiles\ShipTiles.png"
-   sodipodi:docname="ShipTiles.svg"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
-   id="svg8"
-   version="1.1"
-   viewBox="0 0 541.86665 541.86662"
-   height="2048"
-   width="2048">
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:cc="http://creativecommons.org/ns#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:svg="http://www.w3.org/2000/svg"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    inkscape:export-ydpi="95.999992"
+    inkscape:export-xdpi="95.999992"
+    inkscape:export-filename="C:\Users\Ben\Documents\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
+    sodipodi:docname="ShipTiles.svg"
+    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+    id="svg8"
+    version="1.1"
+    viewBox="0 0 541.86665 541.86662"
+    height="2048"
+    width="2048">
   <defs
      id="defs2" />
-  <sodipodi:namedview
-     inkscape:document-rotation="0"
-     units="px"
-     inkscape:window-maximized="1"
-     inkscape:window-y="-8"
-     inkscape:window-x="257"
-     inkscape:window-height="987"
-     inkscape:window-width="1680"
-     fit-margin-bottom="0"
-     fit-margin-right="0"
-     fit-margin-left="0"
-     fit-margin-top="0"
-     showgrid="false"
-     inkscape:current-layer="g33"
-     inkscape:document-units="px"
-     inkscape:cy="1693.4461"
-     inkscape:cx="709.52423"
-     inkscape:zoom="0.7071068"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base" />
+    <sodipodi:namedview
+        inkscape:document-rotation="0"
+        units="px"
+        inkscape:window-maximized="1"
+        inkscape:window-y="-8"
+        inkscape:window-x="-8"
+        inkscape:window-height="1017"
+        inkscape:window-width="2560"
+        fit-margin-bottom="0"
+        fit-margin-right="0"
+        fit-margin-left="0"
+        fit-margin-top="0"
+        showgrid="false"
+        inkscape:current-layer="layer1"
+        inkscape:document-units="px"
+        inkscape:cy="71.363468"
+        inkscape:cx="214.42"
+        inkscape:zoom="2.8284272"
+        inkscape:pageshadow="2"
+        inkscape:pageopacity="0.0"
+        borderopacity="1.0"
+        bordercolor="#666666"
+        pagecolor="#ffffff"
+        id="base"
+        inkscape:snap-bbox="true"/>
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -109,36 +110,51 @@
          ry="1.1142212" />
     </g>
     <g
-       inkscape:export-ydpi="95.999992"
-       inkscape:export-xdpi="95.999992"
-       inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
-       id="g4619"
-       transform="translate(-39.629104,-0.03307292)">
-      <path
-         sodipodi:nodetypes="csssccccczcccccsssccc"
-         inkscape:connector-curvature="0"
-         id="path4559"
-         transform="matrix(0.26458332,0,0,0.26458332,0,-244.86664)"
-         d="m 277.7793,1984.125 v 27.1348 c 0,2.3765 2.44987,4.8652 4.65234,4.8652 h 7.86328 c 2.51568,0 3.4502,0.4784 1.75781,3.873 -1.6924,3.3947 -7.88936,15.548 -11.83398,23.3223 -1.99528,3.9321 -1.74227,4.8047 2.14453,4.8047 4.52046,-0.014 2.19759,-1.5743 8.00977,-1.8086 4.96238,0.091 3.99828,1.7266 8.44922,1.8086 4.35143,-0.012 7.21723,-2.4121 10.95703,-2.4121 3.7398,0 6.60559,2.3998 10.95703,2.4121 4.45093,-0.082 3.48684,-1.7172 8.44922,-1.8086 5.81218,0.2344 3.4893,1.7949 8.00976,1.8086 3.8868,0 4.13981,-0.8726 2.14453,-4.8047 -3.94462,-7.7743 -10.14158,-19.9276 -11.83398,-23.3223 -1.69239,-3.3947 -0.75787,-3.873 1.75781,-3.873 h 7.86328 c 2.20247,0 4.65235,-2.4887 4.65235,-4.8652 v -27.1348 h -32 z"
-         style="fill:#808080;stroke:none;stroke-width:0.55608493px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      <path
-         sodipodi:nodetypes="zssccccczcccccssz"
-         inkscape:connector-curvature="0"
-         id="path4605"
-         transform="matrix(0.26458332,0,0,0.26458332,0,-244.86664)"
-         d="m 309.7793,2010.9941 c -10.49313,0 -20.23242,1.677 -20.23242,4.3164 0,0.7766 0.29147,0.8145 0.74804,0.8145 2.53529,0 3.45021,0.4784 1.75781,3.873 -1.69239,3.3947 -7.88936,15.548 -11.83398,23.3223 -1.99528,3.9321 -1.74227,4.8047 2.14453,4.8047 4.52046,-0.014 2.19759,-1.5743 8.00977,-1.8086 4.96238,0.091 3.99828,1.7266 8.44922,1.8086 4.35144,-0.012 7.21723,-2.4121 10.95703,-2.4121 3.7398,0 6.60559,2.3998 10.95703,2.4121 4.45093,-0.082 3.48684,-1.7172 8.44922,-1.8086 5.81218,0.2344 3.4893,1.7949 8.00976,1.8086 3.8868,0 4.13981,-0.8726 2.14453,-4.8047 -3.94462,-7.7743 -10.14158,-19.9276 -11.83398,-23.3223 -1.69239,-3.3947 -0.77748,-3.873 1.75781,-3.873 0.45657,0 0.74805,-0.038 0.74805,-0.8145 0,-2.6395 -9.73929,-4.3164 -20.23242,-4.3164 z"
-         style="fill:#1a1a1a;stroke:none;stroke-width:0.55608493px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        id="g873"
+        transform="translate(-39.629104,-0.03307292)">
+        <path
+            sodipodi:nodetypes="csssccccczcccccsssccc"
+            inkscape:connector-curvature="0"
+            id="path4559"
+            d="m 277.7793,1984.125 v 27.1348 c 0,2.3765 2.44987,4.8652 4.65234,4.8652 h 7.86328 c 2.51568,0 3.4502,0.4784 1.75781,3.873 -1.6924,3.3947 -7.88936,15.548 -11.83398,23.3223 -1.99528,3.9321 -1.74227,4.8047 2.14453,4.8047 4.52046,-0.014 2.19759,-1.5743 8.00977,-1.8086 4.96238,0.091 3.99828,1.7266 8.44922,1.8086 4.35143,-0.012 7.21723,-2.4121 10.95703,-2.4121 3.7398,0 6.60559,2.3998 10.95703,2.4121 4.45093,-0.082 3.48684,-1.7172 8.44922,-1.8086 5.81218,0.2344 3.4893,1.7949 8.00976,1.8086 3.8868,0 4.13981,-0.8726 2.14453,-4.8047 -3.94462,-7.7743 -10.14158,-19.9276 -11.83398,-23.3223 -1.69239,-3.3947 -0.75787,-3.873 1.75781,-3.873 h 7.86328 c 2.20247,0 4.65235,-2.4887 4.65235,-4.8652 v -27.1348 h -32 z"
+            style="fill:#808080;stroke:none;stroke-width:0.55608493px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+            transform="matrix(0.26458332,0,0,0.26458332,0,-244.86664)"/>
+        <path
+            sodipodi:nodetypes="zssccccczcccccssz"
+            inkscape:connector-curvature="0"
+            id="path4605"
+            transform="matrix(0.26458332,0,0,0.26458332,0,-244.86664)"
+            d="m 309.7793,2010.9941 c -10.49313,0 -20.23242,1.677 -20.23242,4.3164 0,0.7766 0.29147,0.8145 0.74804,0.8145 2.53529,0 3.45021,0.4784 1.75781,3.873 -1.69239,3.3947 -7.88936,15.548 -11.83398,23.3223 -1.99528,3.9321 -1.74227,4.8047 2.14453,4.8047 4.52046,-0.014 2.19759,-1.5743 8.00977,-1.8086 4.96238,0.091 3.99828,1.7266 8.44922,1.8086 4.35144,-0.012 7.21723,-2.4121 10.95703,-2.4121 3.7398,0 6.60559,2.3998 10.95703,2.4121 4.45093,-0.082 3.48684,-1.7172 8.44922,-1.8086 5.81218,0.2344 3.4893,1.7949 8.00976,1.8086 3.8868,0 4.13981,-0.8726 2.14453,-4.8047 -3.94462,-7.7743 -10.14158,-19.9276 -11.83398,-23.3223 -1.69239,-3.3947 -0.77748,-3.873 1.75781,-3.873 0.45657,0 0.74805,-0.038 0.74805,-0.8145 0,-2.6395 -9.73929,-4.3164 -20.23242,-4.3164 z"
+            style="fill:#1a1a1a;stroke:none;stroke-width:0.55608493px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"/>
     </g>
-    <g
-       id="g4625"
-       transform="matrix(1.1487649,0,0,1.1549411,0,-62.950846)"
-       style="stroke-width:0.86816949" />
-    <g
-       inkscape:export-ydpi="95.999992"
-       inkscape:export-xdpi="95.999992"
-       inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
-       id="g4659"
-       transform="translate(17.098699)">
+      <g
+          transform="translate(28.104225,-0.03307292)"
+          id="g879">
+          <path
+              transform="matrix(0.26458332,0,0,0.26458332,0,-244.86664)"
+              style="fill:#808080;stroke:none;stroke-width:0.55608493px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+              d="m 277.7793,1984.125 v 27.1348 c 0,2.3765 2.44987,4.8652 4.65234,4.8652 h 7.86328 c 2.51568,0 3.4502,0.4784 1.75781,3.873 9.23291,15.104 30.34108,13.0362 35.45313,0 -1.69239,-3.3947 -0.75787,-3.873 1.75781,-3.873 h 7.86328 c 2.20247,0 4.65235,-2.4887 4.65235,-4.8652 v -27.1348 h -32 z"
+              id="path875"
+              inkscape:connector-curvature="0"
+              sodipodi:nodetypes="csssccsssccc"/>
+          <path
+              style="fill:#800000;fill-opacity:1;stroke:none;stroke-width:0.55608493px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+              d="m 309.7793,2010.9941 c -10.49313,0 -20.23242,1.677 -20.23242,4.3164 0,0.7766 0.29147,0.8145 0.74804,0.8145 2.53529,0 3.45021,0.4784 1.75781,3.873 -1.69239,3.3947 -7.88936,15.548 -11.83398,23.3223 -1.99528,3.9321 2.14453,4.8047 2.14453,4.8047 17.65065,-7.4159 35.77087,-9.2752 54.83203,0 0,0 4.13981,-0.8726 2.14453,-4.8047 -3.94462,-7.7743 -10.14158,-19.9276 -11.83398,-23.3223 -1.69239,-3.3947 -0.77748,-3.873 1.75781,-3.873 0.45657,0 0.74805,-0.038 0.74805,-0.8145 0,-2.6395 -9.73929,-4.3164 -20.23242,-4.3164 z"
+              transform="matrix(0.26458332,0,0,0.26458332,0,-244.86664)"
+              id="path877"
+              inkscape:connector-curvature="0"
+              sodipodi:nodetypes="zssccccccssz"/>
+      </g>
+      <g
+          id="g4625"
+          transform="matrix(1.1487649,0,0,1.1549411,0,-62.950846)"
+          style="stroke-width:0.86816949"/>
+      <g
+          inkscape:export-ydpi="95.999992"
+          inkscape:export-xdpi="95.999992"
+          inkscape:export-filename="D:\School\ECE356\Icarus\Assets\Resources\Tiles\Img\ShipTiles.png"
+          id="g4659"
+          transform="translate(17.098699)">
       <path
          transform="matrix(0.26458332,0,0,0.26458332,0,-244.86664)"
          sodipodi:nodetypes="sssccsssssssss"
