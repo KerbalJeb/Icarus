@@ -358,6 +358,19 @@ references:
   isSpec: "True"
   fullName: MovementManager.ApplyThrust
   nameWithType: MovementManager.ApplyThrust
+- uid: Global.MovementManager.RebuildFlightModel
+  name: RebuildFlightModel()
+  href: api/Global.MovementManager.html#Global_MovementManager_RebuildFlightModel
+  commentId: M:Global.MovementManager.RebuildFlightModel
+  fullName: MovementManager.RebuildFlightModel()
+  nameWithType: MovementManager.RebuildFlightModel()
+- uid: Global.MovementManager.RebuildFlightModel*
+  name: RebuildFlightModel
+  href: api/Global.MovementManager.html#Global_MovementManager_RebuildFlightModel_
+  commentId: Overload:Global.MovementManager.RebuildFlightModel
+  isSpec: "True"
+  fullName: MovementManager.RebuildFlightModel
+  nameWithType: MovementManager.RebuildFlightModel
 - uid: Global.MovementManager.RemoveEngine(Vector3Int)
   name: RemoveEngine(Vector3Int)
   href: api/Global.MovementManager.html#Global_MovementManager_RemoveEngine_Vector3Int_
