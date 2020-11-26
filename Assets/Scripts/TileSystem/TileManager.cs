@@ -38,8 +38,7 @@ namespace TileSystem
         private readonly Dictionary<Vector3Int, TileInstanceData> tileData =
             new Dictionary<Vector3Int, TileInstanceData>();
 
-        private Vector2 com;
-        private bool    comUpdated;
+        private bool comUpdated;
 
         private Grid  grid;
         private float mass;
@@ -52,6 +51,7 @@ namespace TileSystem
         public  TileSet   TileSet             { get; private set; }
         private BoundsInt Bounds              => tilemapLayers[0].cellBounds;
         public  bool      PhysicsModelChanged { get; set; }
+        public  Vector2   CenterOfMass        { get; private set; }
 
         public bool PhysicsEnabled
         {
@@ -80,7 +80,7 @@ namespace TileSystem
             if (comUpdated)
             {
                 Rigidbody2D.mass         = mass;
-                Rigidbody2D.centerOfMass = com;
+                Rigidbody2D.centerOfMass = CenterOfMass;
                 comUpdated               = false;
             }
         }
@@ -314,9 +314,9 @@ namespace TileSystem
             }
 
             tileData.Clear();
-            mass       = 0;
-            com        = Vector2.zero;
-            comUpdated = true;
+            mass         = 0;
+            CenterOfMass = Vector2.zero;
+            comUpdated   = true;
         }
 
         /// <summary>
@@ -501,15 +501,15 @@ namespace TileSystem
         {
             if (adding)
             {
-                com  =  (mass * com + localPos * tileMass) / (tileMass + mass);
-                mass += tileMass;
+                CenterOfMass =  (mass * CenterOfMass + localPos * tileMass) / (tileMass + mass);
+                mass         += tileMass;
             }
             else
             {
                 if (mass - tileMass < Mathf.Epsilon) return;
-                com  -= tileMass * localPos / mass;
-                mass -= tileMass;
-                com  *= (mass + tileMass) / mass;
+                CenterOfMass -= tileMass * localPos / mass;
+                mass         -= tileMass;
+                CenterOfMass *= (mass + tileMass) / mass;
             }
 
             // comSprite.transform.position = com;
@@ -518,14 +518,14 @@ namespace TileSystem
 
         private void RecalculateCom()
         {
-            mass = 0;
-            com  = Vector2.zero;
+            mass         = 0;
+            CenterOfMass = Vector2.zero;
             foreach (var data in tileData)
             {
                 Vector2 pos      = CordsToPosition(data.Key);
                 float   tileMass = TileSet.TileVariants[data.Value.ID].mass;
-                com  =  (mass * com + tileMass * pos) / (mass + tileMass);
-                mass += tileMass;
+                CenterOfMass =  (mass * CenterOfMass + tileMass * pos) / (mass + tileMass);
+                mass         += tileMass;
             }
 
             comUpdated = true;

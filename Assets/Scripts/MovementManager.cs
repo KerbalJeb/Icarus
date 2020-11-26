@@ -54,6 +54,7 @@ public class MovementManager
     public void ApplyThrust()
     {
         if (!physics) return;
+        if (rb2D == null) rb2D = tileManager.Rigidbody2D;
         rb2D.AddTorque(netThrust.z);
         rb2D.AddRelativeForce(netThrust);
         if (currentInput.z == 0) StabilizeRotation();
@@ -121,8 +122,7 @@ public class MovementManager
 
     public void RebuildFlightModel()
     {
-        if (rb2D == null) rb2D = tileManager.Rigidbody2D;
-        com = rb2D.centerOfMass;
+        com = tileManager.CenterOfMass;
         a   = new float[n * m]; // Column Major form
         if (n <= 0)
         {
@@ -132,7 +132,6 @@ public class MovementManager
 
         physics = true;
 
-        var thrustThrustVectorArray = new ThrustVector[n];
         engineVectors.Clear();
 
         foreach (var engineID in engineIDs)
